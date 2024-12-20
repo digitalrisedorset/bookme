@@ -1,0 +1,174 @@
+import styled from 'styled-components';
+
+interface StyleProps {
+    required?: boolean;
+}
+
+export const EventList = styled.section`
+    display: grid;
+    grid-row: 3;
+    grid-column: 2 / -1;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 40px;
+`
+
+interface EventProps {
+    incart: string
+}
+
+
+export const EventStyles = styled.div<EventProps>`
+    position: relative;
+    background-color: var(--red);
+    padding: 30px;
+    border-radius: 5px;
+    background-image: url('../images/card-booking-2.png') ;
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: top left;
+    .title {
+        display: block;
+        color: white;
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+        font-weight: normal;
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        height:50px;
+        width: 95%;
+        text-align: center;
+    }
+    .date {
+        position: relative;
+        z-index: 1;
+        color: white;
+        font-size: 1.1rem;
+        line-height: 2;
+        display: block;
+        padding-top: 1rem;
+        height: 100px;
+    }
+    .date:before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        opacity: .3;
+        z-index: -1;
+        background-color: var(--red);
+        border-radius: 10px;
+    }
+    .capacity {
+        color: white;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.9rem;
+        background: var(--darkgrey);
+        padding: 6px 10px;
+        border-radius: 5px;
+    }
+    .cart-qty {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background: #ffffff;
+        border-radius: 50%;
+        display: block;
+        padding: 10px 15px;
+        border: 1px solid var(--lightgrey);
+        background: ${(props) => props.incart === "true" && `red;`};
+    }
+    .add-to-cart {
+        display: inline-block;
+        font-size: 16px;
+        background-color: var(--black);
+        border: none;
+        cursor: pointer;
+        color: white;
+        padding: 8px 12px;
+        margin: 20px 0;
+        width: 60%;
+        visibility: ${(props) => props.incart === "true" && `hidden;`};
+        border-radius: 3px;
+    }
+    .add-to-cart:hover {
+        background-color: var(--darkgrey);
+    }
+    .in-cart {
+        visibility: ${(props) => props.incart === "false" && `hidden;`};
+        margin: 0 1rem;
+        text-align: center;
+        p {
+            position: absolute;
+            transform: skew(-20deg) rotate(-10deg);
+            top: 230px;
+            left: -5px;
+            margin-top: -3rem;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+            background: var(--red);
+            line-height: 1.3;
+            font-size: 4rem;
+            width: 102%;
+            color: white;
+            padding: 0 1rem;
+            z-index: 3;
+        }
+    }
+`
+
+export const ItemStyles = styled.div<StyleProps>`
+  background: #FEEBEB;
+    border-radius: 20px;
+    padding: 1rem;
+  border: 1px solid var(--offWhite);
+  box-shadow: var(--bs);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+    float: left;
+    margin: 5px;
+    width: 23%;
+    height: 170px;
+    .date {
+        margin: 10px 0;
+    }
+    .qty {
+        position: absolute;
+        top:5px;
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        right: 5px;
+        padding: 5px 10px;
+        overflow: hidden;
+        font-size: medium;
+        text-transform: lowercase;
+        border: 1px solid var(--offWhite);
+        box-shadow: var(--bs);
+        background: white;
+    }
+    .capacity {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        color: #383838;
+        font-size: 0.8rem;
+    }
+  p {
+    line-height: 2;
+    font-weight: 300;
+    flex-grow: 1;
+    padding: 0 3rem;
+    font-size: 1.5rem;
+  }
+    .add-to-cart {
+        border-radius: 5px;
+        padding: 10px;
+        position: absolute;
+        bottom: 1rem;
+        width: 50%;
+    }
+`;
