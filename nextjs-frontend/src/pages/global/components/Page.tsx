@@ -12,16 +12,14 @@ interface PageProps {
 
 const Page: React.FC<PageProps> = ({ children }: PageProps) => {
     return (
-        <div>
+        <MainStyles>
             <GlobalStyles />
-            <MainStyles>
-                <Header />
-                <Nav />
-                <Cart />
-                {children}
-                <Footer />
-            </MainStyles>
-        </div>
+            <Header />
+            <Nav />
+            <Cart />
+            {children}
+            <Footer />
+        </MainStyles>
     )
 }
 
