@@ -1,6 +1,5 @@
 import React from "react";
 import {GetEvents} from "@/pages/event/components/Dashboard/GetEvents";
-import {Pagination} from "@/pages/event/components/Dashboard/Pagination";
 
 interface ListingProps {
     page: number

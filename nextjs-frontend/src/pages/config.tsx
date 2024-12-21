@@ -18,15 +18,15 @@ export type configInfo = {
 
 export const config: configInfo = {
     keystone: {
-        graphqlEndpoint: (process.env.REACT_APP_KEYSTONE_HOST === undefined) ? 'http://localhost:3000/api/graphql' : `${process.env.REACT_APP_KEYSTONE_HOST}/api/graphql`,
+        graphqlEndpoint: (process.env.REACT_APP_KEYSTONE_HOST === undefined) ? 'https://bookme-keystone.digitalrisedorset.co.uk/api/graphql' : `${process.env.REACT_APP_KEYSTONE_HOST}/api/graphql`,
         headers: {
             'apollo-require-preflight': (process.env.REACT_REQUIRE_PREFLIGHT)? 'true': 'false'
         }
     },
     stripe: {
         public_key: 'pk_test_51PITSKRqZ4IliSNkzwsUtTnaHqBPaiUH2TtWE8kxK5w1LMiGO5kis8pPwf2Y4zgse2fTXLaIoRFApsNBQZhnkeOD00fjiL9r5a',
-        currency: process.env.NEXT_PUBLIC_CURRENCY,
-        locale: process.env.NEXT_PUBLIC_LOCALE
+        currency: (process.env.NEXT_PUBLIC_CURRENCY === undefined)? 'GBP':process.env.NEXT_PUBLIC_CURRENCY,
+        locale: (process.env.NEXT_PUBLIC_LOCALE === undefined)? 'en-gb':process.env.NEXT_PUBLIC_LOCALE
     },
     eventlisting: {
         perPage: 20

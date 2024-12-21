@@ -16,7 +16,7 @@ const CREATE_EVENT_MUTATION = gql`
 }
 `;
 
-export const useCreateEvent = (inputs: any) => {
+export const useCreateEvent = (inputs: string[]) => {
     inputs["venue"] = {
         "connect": {
             "id": "480735f3-00a2-4da6-b051-5be509bbbefe"

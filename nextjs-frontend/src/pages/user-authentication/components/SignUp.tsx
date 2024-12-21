@@ -13,7 +13,7 @@ export const SignUp: React.FC = () => {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault(); // stop the form from submitting
-    const res = await signup().catch(console.error);
+    await signup().catch(console.error);
     resetForm();
     // Send the email and password to the graphqlAPI
   }

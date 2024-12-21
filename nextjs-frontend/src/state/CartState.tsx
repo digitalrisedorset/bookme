@@ -1,6 +1,13 @@
 import { createContext, useContext, useState } from 'react';
 
-const LocalStateContext = createContext();
+interface CartState {
+    cartOpen: boolean,
+    toggleCart: () => void,
+    closeCart: () => void,
+    cartCount: number,
+    setCount: (count: number) => void }
+
+const LocalStateContext = createContext<CartState>({});
 const LocalStateProvider = LocalStateContext.Provider;
 
 function CartStateProvider({ children }) {
@@ -24,7 +31,7 @@ function CartStateProvider({ children }) {
     return <LocalStateProvider value={{ cartOpen, toggleCart, closeCart, cartCount, setCount }}>{children}</LocalStateProvider>
 }
 
-function useCart() {
+function useCart(): CartState {
     const all = useContext(LocalStateContext)
     return all
 }

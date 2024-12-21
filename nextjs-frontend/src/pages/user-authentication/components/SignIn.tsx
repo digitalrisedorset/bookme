@@ -2,19 +2,15 @@ import {Form} from '../../global/styles/Form';
 import {useForm} from '../../global/hooks/useForm';
 import {ErrorMessage} from '../../global/components/ErrorMessage';
 import {useLoginUser} from "../graphql/useLoginUser";
-import {useState} from "react";
-import {useUser} from "../hooks/useUser";
 import {useRouter} from "next/router";
 
 export const SignIn: React.FC = () => {
   const router = useRouter()
-  const [errorMessage, setErrorMessage] = useState<string>('')
   const { inputs, handleChange, resetForm } = useForm({
     email: '',
     password: '',
   });
   const setUserLogged = useLoginUser(inputs)
-  const user = useUser()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault(); // stop the form from submitting
@@ -22,7 +18,7 @@ export const SignIn: React.FC = () => {
     console.log('res login', res)
     resetForm();
     if (res !== undefined) {
-      setErrorMessage(res.message)
+      console.log('error when logging')
     } else {
       router.push({pathname: `/`});
     }

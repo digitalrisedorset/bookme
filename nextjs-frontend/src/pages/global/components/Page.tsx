@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {GlobalStyles} from "@/pages/global/styles/Global";
 import {MainStyles} from "@/pages/global/styles/MainStyles";
 import Header from "@/pages/global/components/Header";
@@ -10,10 +10,20 @@ interface PageProps {
     children: React.ReactNode
 }
 
-const Page: React.FC<PageProps> = ({ children }: PageProps) => {
+const Page: React.FC<PageProps> = ({ children, ...delegated }: PageProps) => {
+    const [hasMounted, setHasMounted] = useState(false);
+
+    useEffect(() => {
+        setHasMounted(true);
+    }, []);
+
+    if (!hasMounted) {
+        return null;
+    }
+
     return (
-        <MainStyles>
-            <GlobalStyles />
+    <MainStyles {...delegated}>
+        <GlobalStyles />
             <Header />
             <Nav />
             <Cart />

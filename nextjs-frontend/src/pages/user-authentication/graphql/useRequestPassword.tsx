@@ -1,7 +1,6 @@
 import gql from "graphql-tag";
 import {useMutation} from "@apollo/client";
 import {CURRENT_USER_QUERY} from "../hooks/useUser";
-import {formProps} from "../../types/form";
 
 const RESET_MUTATION = gql`
   mutation RedeemUserPasswordResetToken($email: String!, $password: String!, $token: String!) {
@@ -12,7 +11,7 @@ const RESET_MUTATION = gql`
   }
 `;
 
-export const useResetPassword = (inputs: formProps) => {
+export const useResetPassword = (inputs: string[]) => {
 
     const response = useMutation(
         RESET_MUTATION,

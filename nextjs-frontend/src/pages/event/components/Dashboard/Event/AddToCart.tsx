@@ -14,7 +14,7 @@ export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
 
     async function handleClick(e: React.FormEvent) {
         e.preventDefault(); // stop the form from submitting
-        const res = await addToCart().catch(console.error);
+        await addToCart().catch(console.error);
     }
 
     return (

@@ -10,7 +10,7 @@ interface ListingProps {
 }
 
 export const GetEvents: React.FC<ListingProps> = ({page}: ListingProps) => {
-    const { data, error, loading } = useEvents(page)
+    const { data, loading } = useEvents(page)
 
     if (loading) return <>Loading</>
 

@@ -1,4 +1,4 @@
-import {ApolloClient, ApolloLink, HttpLink, InMemoryCache } from "@apollo/client";
+import {ApolloClient, ApolloLink, InMemoryCache } from "@apollo/client";
 import {config} from "./config";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 

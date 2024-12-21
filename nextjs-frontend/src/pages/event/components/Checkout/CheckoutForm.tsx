@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {CheckoutFormStyles, SickButton} from "@/pages/event/styles/Checkout";
 import nProgress from 'nprogress';
 
@@ -10,19 +10,20 @@ import {
 import {useCheckout} from "@/pages/event/graphql/useCheckout";
 import {useCart} from "@/state/CartState";
 import {useRouter} from "next/router";
+import {Stripe} from "@stripe/stripe-js/dist/stripe-js/stripe";
 
 export const CheckoutForm: React.FC = () => {
-    const [error, setError] = useState();
-    const [loading, setLoading] = useState(false);
-    const stripe = useStripe();
+    const stripe = useStripe() as Stripe;
     const elements = useElements();
     const router = useRouter();
     const { closeCart } = useCart();
-    const [checkout, { error: graphQLError }] = useCheckout()
-    async function handleSubmit(e) {
+    const [checkout] = useCheckout()
+
+    if (stripe === null) return
+
+    async function handleSubmit(e: React.FormEvent) {
         // 1. Stop the form from submitting and turn the loader one
         e.preventDefault();
-        setLoading(true);
         console.log('We gotta do some work..');
         // 2. Start the page transition
         nProgress.start();
@@ -34,7 +35,6 @@ export const CheckoutForm: React.FC = () => {
         console.log(paymentMethod);
         // 4. Handle any errors from stripe
         if (error) {
-            setError(error);
             nProgress.done();
             return; // stops the checkout from happening
         }
@@ -57,7 +57,6 @@ export const CheckoutForm: React.FC = () => {
         closeCart();
 
         // 8. turn the loader off
-        setLoading(false);
         nProgress.done();
     }
 

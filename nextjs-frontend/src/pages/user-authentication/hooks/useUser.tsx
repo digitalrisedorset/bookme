@@ -1,4 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
+import {CartItem} from "@/pages/event/types/event";
 
 const CURRENT_USER_QUERY = gql`
   query {
@@ -30,20 +31,7 @@ interface UserInformation {
     id: string
     email: string
     name: string
-    cartItems: {
-        id: string
-        quantity: number
-        event: {
-            id: string
-            price: number
-            venue: {
-                name: string
-            }
-            eventType: {
-                name: string
-            }
-        }
-    }
+    cartItems: CartItem[]
 }
 
 export function useUser(): UserInformation | null {

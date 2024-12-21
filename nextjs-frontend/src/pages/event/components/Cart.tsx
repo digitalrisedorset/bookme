@@ -3,9 +3,9 @@ import {useUser} from "@/pages/user-authentication/hooks/useUser";
 import {CartStyles} from "@/pages/event/styles/CartStyles";
 import {useCart} from "@/state/CartState";
 import {CartItem} from "@/pages/event/components/Cart/CartItem";
-import {Checkout} from "@/pages/event/components/Checkout";
 import calcTotalPrice, {formatMoney} from "@/lib/price";
 import CloseButton from "@/pages/event/styles/CloseButton";
+import {Checkout} from "@/pages/event/components/Checkout";
 
 export const Cart: React.FC = () => {
     const user = useUser();
@@ -16,7 +16,7 @@ export const Cart: React.FC = () => {
     return (
         <CartStyles open={cartOpen}>
             <header>
-                <p>{user.name}'s Cart</p>
+                <p>{user.name}&apos;s Cart</p>
                 <CloseButton onClick={closeCart}>&times;</CloseButton>
             </header>
             <ul>
@@ -26,7 +26,7 @@ export const Cart: React.FC = () => {
             </ul>
             <footer>
                 <p>{formatMoney(calcTotalPrice(user.cartItems))}</p>
-                {/*<Checkout />*/}
+                <Checkout />
             </footer>
         </CartStyles>
     );

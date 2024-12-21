@@ -1,14 +1,14 @@
 import {createContext, useContext} from 'react';
 import {useImmer} from "use-immer";
 
-const LocalStateContext = createContext<any>({});
-const LocalStateProvider = LocalStateContext.Provider;
-
 interface DayFilterState {
     activeEventType: string,
     activeVenue: string,
     activeDay: string,
 }
+
+const LocalStateContext = createContext<DayFilterState>({});
+const LocalStateProvider = LocalStateContext.Provider;
 
 const initialState: DayFilterState = {
     activeDay: '',

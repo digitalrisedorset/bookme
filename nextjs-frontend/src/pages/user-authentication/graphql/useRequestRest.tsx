@@ -8,7 +8,7 @@ const REQUEST_RESET_MUTATION = gql`
   }
 `;
 
-export const useRequestReset = (inputs: any) => {
+export const useRequestReset = (inputs: string[]) => {
 
     const response = useMutation(
         REQUEST_RESET_MUTATION,

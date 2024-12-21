@@ -9,7 +9,7 @@ interface ListingProps {
 }
 
 export const Pagination: React.FC<ListingProps> = ({page}: ListingProps) => {
-    const { pageCount, count, error, loading, data } = usePagination();
+    const { pageCount, count, error, loading } = usePagination();
 
     if (loading) return 'Loading...';
     if (error) return <>error</>;
@@ -29,7 +29,7 @@ export const Pagination: React.FC<ListingProps> = ({page}: ListingProps) => {
             </p>
             <p>{count} Items Total</p>
             <Link href={`/events/${page + 1}`} aria-disabled={page === pageCount}>
-                >Next →
+                &gt;Next →
             </Link>
         </PaginationStyles>
     )

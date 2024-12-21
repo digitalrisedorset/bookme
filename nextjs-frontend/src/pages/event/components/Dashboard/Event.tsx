@@ -1,6 +1,5 @@
 import React from "react";
-import {Title} from "@/pages/global/styles/Title";
-import {EventStyles, ItemStyles} from "@/pages/global/styles/ItemStyles";
+import {EventStyles} from "@/pages/global/styles/ItemStyles";
 import {KeystoneEvent} from "@/pages/event/types/event";
 import {AddToCart} from "@/pages/event/components/Dashboard/Event/AddToCart";
 import {useUser} from "@/pages/user-authentication/hooks/useUser";
@@ -17,7 +16,7 @@ interface EventProps {
 export const Event: React.FC<EventProps> = ({event}: EventProps) => {
     const user = useUser()
 
-    const getEventTitle = (event: any) => {
+    const getEventTitle = (event: KeystoneEvent) => {
         return `${capitalise(event.day)} ${event.venue.name} ${event.eventType.name}`
     }
 
@@ -36,7 +35,7 @@ export const Event: React.FC<EventProps> = ({event}: EventProps) => {
             <Attendees capacity={event.maximumAttendees} registered={event.registeredAttendees}/>
             <EventCount count={getEventCartQty(user?.cartItems, event.id)}/>
             <div className="in-cart">
-                <p>You're in!</p>
+                <p>You&apos;re in!</p>
             </div>
             <AddToCart id={event.id}>Book Now</AddToCart>
             <span className="capacity">40 places left</span>

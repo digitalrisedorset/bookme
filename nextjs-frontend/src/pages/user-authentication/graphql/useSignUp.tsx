@@ -16,7 +16,7 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
-export const useSignUpUser = (inputs: any) => {
+export const useSignUpUser = (inputs: string[]) => {
     const response = useMutation(SIGNUP_MUTATION, {
         variables: inputs,
         // refectch the currently logged in user

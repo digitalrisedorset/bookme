@@ -4,7 +4,7 @@ export const getDays = () => {
     // Starting Monday not Sunday
     const first = current.getDate() - current.getDay() + 1;
     current.setDate(first);
-    for (var i = 0; i < 7; i++) {
+    for (let i = 0; i < 7; i++) {
         week.push({
             day: current.toLocaleString('en-GB', {  weekday: 'long' }).toLowerCase(),
             dayLabel: current.toLocaleString('en-GB', {  weekday: 'long' })
@@ -17,9 +17,9 @@ export const getDays = () => {
 
 export const getTime = (time: string) => {
     const date = new Date(time)
-    let min = date.getMinutes()
-    if (min < 10) {
-        min = "0" + min;
+    let min = date.getMinutes().toString()
+    if (min.length === 1) {
+        min = "0" + min.toString();
     }
     return `${date.getHours()}:${min}`
 }

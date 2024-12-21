@@ -1,7 +1,6 @@
 import {useMutation} from "@apollo/client";
 import {CURRENT_USER_QUERY} from "../hooks/useUser";
 import gql from "graphql-tag";
-import {formProps} from "../../types/form";
 
 const SIGNIN_MUTATION = gql`
   mutation AuthenticateUserWithPassword($email: String!, $password: String!) {
@@ -20,7 +19,7 @@ const SIGNIN_MUTATION = gql`
   }
 `;
 
-export const useLoginUser = (inputs: formProps) => {
+export const useLoginUser = (inputs: string[]) => {
     const [signin] = useMutation(SIGNIN_MUTATION, {
         variables: inputs,
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
@@ -28,9 +27,6 @@ export const useLoginUser = (inputs: formProps) => {
 
     const setUserLogged = async () => {
         const res = await signin(inputs);
-        if (res?.data?.authenticateUserWithPassword?.item) {
-            const user = res.data.authenticateUserWithPassword.item
-        }
 
         return (res?.data?.authenticateUserWithPassword.__typename === 'UserAuthenticationWithPasswordFailure')
             ? res?.data?.authenticateUserWithPassword

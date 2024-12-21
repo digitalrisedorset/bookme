@@ -35,7 +35,7 @@ export const FlashMessages: React.FC = () => {
                         <>
                             {messageType === 'error' && messages.map((msg, index) => {
                                 return (
-                                    <ErrorStyles>
+                                    <ErrorStyles key={index}>
                                         <div className="alert alert-error text-center floating-alert shadow-sm">
                                             {msg}
                                         </div>
@@ -45,7 +45,7 @@ export const FlashMessages: React.FC = () => {
 
                             {messageType === 'success' && messages.map((msg, index) => {
                                 return (
-                                    <SuccessStyles>
+                                    <SuccessStyles key={index}>
                                         <div className="alert alert-success text-center floating-alert shadow-sm">
                                             {msg}
                                         </div>

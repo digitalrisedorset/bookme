@@ -2,9 +2,10 @@ import React from "react";
 import {CartItemStyles} from "@/pages/event/styles/CartStyles";
 import {RemoveFromCart} from "@/pages/event/components/Cart/RemoveFromCart";
 import {formatMoney} from "@/lib/price";
+import {KeystoneCartItem} from "@/pages/event/types/event";
 
 interface ItemProps {
-    cartItem: any
+    cartItem: KeystoneCartItem
 }
 
 export const CartItem: React.FC<ItemProps> = ({cartItem}: ItemProps) => {

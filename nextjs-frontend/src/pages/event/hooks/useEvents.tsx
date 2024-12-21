@@ -1,6 +1,5 @@
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
-import {useEventFilterState} from "@/state/EventFilterProvider";
 import {config} from "@/pages/config";
 import {useFilter} from "@/pages/event/hooks/useFilter";
 

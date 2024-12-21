@@ -10,7 +10,7 @@ export const REMOVE_FROM_CART_MUTATION = gql`
   }
 `;
 
-export const useRemoveFromCart = (id: string) => {
+export const useRemoveFromCart = (id: string): [() => void, {loading: boolean}] => {
     const update = (cache, payload) => {
         cache.evict(cache.identify(payload.data.deleteCartItem));
     }
