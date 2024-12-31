@@ -10,18 +10,36 @@ export const IntroStyle = styled.div`
     .content {
         padding: 0 10% 30px;
     }
-    h4 {
+    h2 {
         font-size: 2rem;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
+        line-height: 2.5rem;
     }
     .general {
-        font-size: 1.1rem;
-        margin-bottom: 1rem;
+        font-size: 1.3rem;
+        margin-bottom: 3rem;
         color: var(--black);
         font-weight: bold;
+        padding: 0 15%;
+        line-height: 2rem;
     }
     .ethos {
-        font-size: 1rem;
+        font-size: 1.3rem;
+        line-height: 2rem;
+    }
+
+    @media (max-width: 600px) {
+        h2 {
+            font-size: 2.5rem;
+        }
+        .general {
+            font-size: 1.7rem;
+            line-height: 1.5;
+        }
+        .ethos {
+            font-size: 1.8rem;
+            line-height: 1.5;
+        }
     }
     
 `

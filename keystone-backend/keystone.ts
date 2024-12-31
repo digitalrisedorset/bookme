@@ -29,7 +29,7 @@ export default withAuth<TypeInfo<Session>>(
             url: getDatabaseConnection(),
             onConnect: async context => {
                 console.log('Connected to the database')
-                //await insertSeedData(context)
+                await insertSeedData(context)
             },
             //Optional advanced configuration
             //enableLogging: true,
@@ -40,7 +40,7 @@ export default withAuth<TypeInfo<Session>>(
             extendGraphqlSchema
         },
         ui: {
-            //isAccessAllowed: ()=> true,
+           /* isAccessAllowed: ()=> true,*/
             // only admins can view the AdminUI
             isAccessAllowed: (context) => {
                 return context.session?.data?.isAdmin ?? false

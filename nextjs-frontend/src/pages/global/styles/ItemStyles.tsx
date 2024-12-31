@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import exp from "node:constants";
 
 interface StyleProps {
     required?: boolean;
@@ -11,12 +12,133 @@ export const EventList = styled.section`
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
     padding: 40px;
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
+`
+
+export const WeekEventList = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    border: 1px solid #383838;
+    margin-top: 1rem;
+    h4 {
+        padding: 10px;
+        font-weight: bold;
+        background: var(--black);
+    }
+`
+
+export const EventDetail = styled.div`
+    width: 100%;
+    display: block;
+    position: relative;  
+    padding: 5px;
 `
 
 interface EventProps {
     incart: string
 }
 
+export const SingleEvent = styled.div`
+    position: relative;
+    width: 100%;
+    display: block;
+    border: 1px solid #ededed;
+    margin: 3px 0;
+    padding: 10px;
+    p {
+        text-align: left;
+        line-height: 1.3rem;
+    }
+    .hairdresser-selection {
+        position: relative;
+        display: block;
+        text-align: left;
+        line-height: 1.4rem;
+        label {
+            padding: 5px;
+        }
+    }
+    .view-detail {
+        position: absolute;
+        right: 5px;
+        bottom: 10px;
+        padding: 5px;
+    }
+    .add-to-cart {
+        position: absolute;
+        font-size: 12px;
+        background-color: var(--red);
+        border: none;
+        cursor: pointer;
+        color: white;
+        padding: 5px;
+        right: 10px;
+        visibility: ${(props) => props.incart === "true" && `hidden;`};
+        border-radius: 3px;
+    }
+    .add-to-cart:hover {
+        background-color: var(--darkgrey);
+    }
+`
+
+interface EventProps {
+    incart: string
+}
+
+interface EventStatusProps {
+    active: string
+}
+
+export const ViewEventStyle = styled.div<EventStatusProps>`
+    h5 {
+        font-size: 1.7rem;
+        padding: 10px;
+        background: var(--red);
+    }
+    .title {
+        margin: 1rem;
+    }
+    .date {
+        margin: 1rem;
+    }
+    .price {
+        text-align: left;
+        color: var(--black);
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+    .add-to-cart {
+        background-color: var(--red);
+    }
+`
+
+export const EventRow = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    width: 80%;
+    margin: 30px auto;
+    font-size: 1.2rem;
+    .label {
+        text-align: left;
+        font-weight: bold;
+    }
+    .title {
+        text-align: left;
+    }
+}
+`
+
+export const SelectStyle = styled.div`
+    text-align: left;
+    line-height: 1.8rem;
+    label {
+        padding: 0 10px;
+    }
+`
 
 export const EventStyles = styled.div<EventProps>`
     position: relative;
@@ -79,7 +201,7 @@ export const EventStyles = styled.div<EventProps>`
         display: block;
         padding: 10px 15px;
         border: 1px solid var(--lightgrey);
-        background: ${(props) => props.incart === "true" && `red;`};
+        background: ${(props) => props.incart === "true" && `var(--red);`};
     }
     .add-to-cart {
         display: inline-block;
@@ -115,6 +237,31 @@ export const EventStyles = styled.div<EventProps>`
             color: white;
             padding: 0 1rem;
             z-index: 3;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .in-cart {
+            p {
+                width: 80%;
+                left: 10%;
+                top: 65%;
+            }            
+        }
+        .add-to-cart {
+            font-size: 2rem;
+        }
+        .cart-qty {
+            font-size: 2rem;
+        }
+        .capacity {
+            font-size: 1.5rem;
+        }
+        .date {
+            font-size: 1.4rem;
+        }
+        .title {
+            font-size: 2rem;
         }
     }
 `
@@ -172,3 +319,43 @@ export const ItemStyles = styled.div<StyleProps>`
         width: 50%;
     }
 `;
+
+export const ViewButton = styled.div<EventProps>`
+     .in-cart {
+         visibility: ${(props) => props.incart === "false" && `hidden;`};
+         p {
+             top: 7px;
+             position: absolute;
+             transform: skew(-20deg) rotate(-10deg);
+             background: var(--red);
+             line-height: 1.3;
+             font-size: 1rem;
+             color: white;
+             padding: 0 5px;
+             margin: 0 0px 0 45px;
+             z-index: 3;
+         }
+    }
+`
+
+export const BookButton = styled.div<EventProps>`
+    position: relative;
+    width: 300px;
+    margin-left: 30%;
+     .in-cart {
+         visibility: ${(props) => props.incart === "false" && `hidden;`};
+         p {
+             top: 7px;
+             left: 0;
+             position: absolute;
+             transform: skew(-20deg) rotate(-10deg);
+             background: var(--red);
+             line-height: 1.3;
+             font-size: 2rem;
+             color: white;
+             padding: 0 5px;
+             margin: 0 0px 0 45px;
+             z-index: 3;
+         }
+    }
+`

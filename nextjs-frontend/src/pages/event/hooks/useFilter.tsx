@@ -1,27 +1,40 @@
 import {useEventFilterState} from "@/state/EventFilterProvider";
+import {getDayTimeEnd} from "@/lib/date";
 
 export const useFilter = () => {
     const {eventFilter} = useEventFilterState()
 
     const filter = {}
-    if (eventFilter.activeEventType !== '') {
-        filter['eventType'] = {
+    if (eventFilter.activeWeek === "") {
+        return filter
+    }
+
+
+    if (eventFilter.activeHaircutType !== '') {
+        filter['haircutType'] = {
             "name": {
-                "equals": eventFilter.activeEventType
+                "equals": eventFilter.activeHaircutType
             }
         }
     }
 
-    if (eventFilter.activeDay !== '') {
-        filter['day'] = {
-            "equals": eventFilter.activeDay
+    if (eventFilter.activeWeek !== "") {
+        const weekStart = eventFilter.activeWeek
+        const weekStartDate = new Date(weekStart)
+        const endWeek = getDayTimeEnd(new Date(weekStartDate.setDate(weekStartDate.getDate()+7)))
+
+        filter['startTime'] = {
+            "gte": weekStart
+        }
+        filter['endTime'] = {
+            "lte": endWeek
         }
     }
 
-    if (eventFilter.activeVenue !== '') {
-        filter['venue'] = {
+    if (eventFilter.activeHairdresser !== '') {
+        filter['hairdresser'] = {
             "name": {
-                "equals": eventFilter.activeVenue
+                "equals": eventFilter.activeHairdresser
             }
         }
     }

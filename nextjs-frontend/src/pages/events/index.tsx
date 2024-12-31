@@ -1,27 +1,36 @@
-import List from "@/pages/global/components/Event/List";
-import {VenueFilter} from "@/pages/venue/components/VenueFilter";
-import {EventTypeFilter} from "@/pages/event/components/Dashboard/EventTypeFilter";
-import {DayFilter} from "@/pages/event/components/Dashboard/DayFilter";
 import {EventFilterStyles, ListHeader} from "@/pages/event/styles/EventFilterStyles";
-import {useRouter} from "next/router";
-import {Pagination} from "@/pages/event/components/Dashboard/Pagination";
 import React from "react";
+import {HairdresserFilter} from "@/pages/hairdresser/components/HairdresserFilter";
+import {WeekFilter} from "@/pages/event/components/Dashboard/WeekFilter";
+import {GetWeekEvents} from "@/pages/event/components/Dashboard/GetWeekEvents";
+import {useEventFilterState} from "@/state/EventFilterProvider";
+import {InitFilter} from "@/pages/event/components/Dashboard/InitFilter";
+import {ResetPreferenceFilter} from "@/pages/event/components/Dashboard/EventPreference/ResetPreferenceFilter";
+import {PreferenceSummary} from "@/pages/event/components/Dashboard/EventPreference/PreferenceSummary";
 
 export default function Events() {
-    const { query } = useRouter();
-    const page = parseInt(query.page) || 1;
+    const {eventFilter} = useEventFilterState()
+
+    console.log('eventFilter', eventFilter)
 
     return (
         <>
-            <ListHeader>
-                <EventFilterStyles>
-                    <VenueFilter />
-                    <EventTypeFilter />
-                    <DayFilter />
-                </EventFilterStyles>
-                <Pagination page={page} />
-            </ListHeader>
-            <List page={page} />
+            {(eventFilter.activeWeek !== '' && eventFilter.activeHairdresser !== '') &&  (<>
+                <ListHeader>
+                    <EventFilterStyles>
+                        <WeekFilter/>
+                        <HairdresserFilter/>
+                        <ResetPreferenceFilter/>
+                    </EventFilterStyles>
+                    <PreferenceSummary />
+                    <GetWeekEvents/>
+                </ListHeader>
+            </>)
+            }
+            {(eventFilter.activeWeek === '' || eventFilter.activeHairdresser === '') &&  (<>
+                <InitFilter />
+            </>)
+            }
         </>
     )
 }

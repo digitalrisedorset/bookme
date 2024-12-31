@@ -6,13 +6,13 @@ const Intro: React.FC = () => {
     return (
         <IntroStyle>
             <div className="content">
-                <h4>Martial Arts for Adults & Children in Bournemouth & Poole</h4>
-                <p className="general">Welcome to the booking system of Dorset Karate club. </p>
-                <p className="ethos">Whether you are aiming to Black belt or just willing to train once a week, working on a schedule can
-                    develop your skills more efficiently and can bring your karate level faster to where you want to be.</p>
+                <h2>Booking System for the Maddison Hairdressing Salon</h2>
+                <p className="general">Select when and which hairdresser you want for your appointment. We bring our schedule for you to book in just over 3 clicks</p>
+                <p className="ethos">Whether you are aiming to get a straight cut with hassle free booking or a very generous time at your preferred place to get your hair done and a pampering time for your head to feel fully refreshed!,
+                    we are committed to deliver the best hairdressing experience you are looking for.</p>
             </div>
             <div className="illustration">
-                <Image className="logo" src="/images/vickyandall.jpeg" width="732" height="277" alt=""/>
+                <Image className="logo" src="/images/miaddison.jpg" width="732" height="277" alt=""/>
             </div>
         </IntroStyle>
     )

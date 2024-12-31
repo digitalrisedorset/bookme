@@ -1,13 +1,13 @@
 import React from "react";
-import {GetEvents} from "@/pages/event/components/Dashboard/GetEvents";
+import {GetWeekEvents} from "@/pages/event/components/Dashboard/GetWeekEvents";
 
 interface ListingProps {
     page: number
 }
 
-const List: React.FC<ListingProps> = ({page}: ListingProps) => {
+const List: React.FC<ListingProps> = () => {
     return (
-        <GetEvents page={page} />
+        <GetWeekEvents />
     )
 }
 

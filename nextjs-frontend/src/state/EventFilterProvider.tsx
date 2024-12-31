@@ -2,9 +2,18 @@ import {createContext, useContext} from 'react';
 import {useImmer} from "use-immer";
 
 interface DayFilterState {
-    activeEventType: string,
-    activeVenue: string,
+    activeHaircutType: string,
+    activeHairdresser: string,
     activeDay: string,
+    activeWeek: string
+}
+
+interface FilterState {
+    setActiveDay: (activeDay: string) => void,
+    setActiveHaircutType: (activeHaircutType: string) => void,
+    setActiveHairdresser: (activeHairdresser: string) => void,
+    setActiveWeek: (activeWeek: string) => void,
+    eventFilter: DayFilterState
 }
 
 const LocalStateContext = createContext<DayFilterState>({});
@@ -12,8 +21,9 @@ const LocalStateProvider = LocalStateContext.Provider;
 
 const initialState: DayFilterState = {
     activeDay: '',
-    activeVenue: '',
-    activeEventType: ''
+    activeHairdresser: '',
+    activeHaircutType: '',
+    activeWeek: ''
 }
 
 function EventFilterProvider({ children }) {
@@ -23,20 +33,33 @@ function EventFilterProvider({ children }) {
         setState(draft => { draft.activeDay = activeDay });
     }
 
-    const setActiveEventType = (activeEventType: string) => {
-        setState(draft => { draft.activeEventType = activeEventType });
+    const setActiveWeek = (activeWeek: string) => {
+        setState(draft => { draft.activeWeek = activeWeek });
     }
 
-    const setActiveVenue = (activeVenue: string) => {
-        setState(draft => { draft.activeVenue = activeVenue });
+    const setActiveHaircutType = (activeHaircutType: string) => {
+        setState(draft => { draft.activeHaircutType = activeHaircutType });
+    }
+
+    const setActiveHairdresser = (activeHairdresser: string) => {
+        setState(draft => { draft.activeHairdresser = activeHairdresser });
+    }
+
+    const resetFilter = () => {
+        setState(draft => {
+            draft.activeHairdresser = '',
+            draft.activeWeek = ''
+        });
     }
 
     return (
         <LocalStateProvider
             value={{
+                resetFilter,
                 setActiveDay,
-                setActiveEventType,
-                setActiveVenue,
+                setActiveHaircutType,
+                setActiveHairdresser,
+                setActiveWeek,
                 eventFilter: state
             }}
         >
@@ -49,7 +72,7 @@ function EventFilterProvider({ children }) {
 function useEventFilterState() {
     // We use a consumer here to access the local state
     const all = useContext(LocalStateContext);
-    return all;
+    return all as FilterState;
 }
 
 export { EventFilterProvider, useEventFilterState };

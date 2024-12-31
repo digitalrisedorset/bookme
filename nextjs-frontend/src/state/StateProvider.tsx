@@ -1,12 +1,15 @@
 import {CartStateProvider} from "@/state/CartState";
 import {EventFilterProvider} from "@/state/EventFilterProvider";
+import {EventStateProvider} from "@/state/EventState";
 
 export default function StateProvider({ children }: {
     children: React.ReactNode;
 }) {
     return <EventFilterProvider>
-            <CartStateProvider>
+            <EventStateProvider>
+                <CartStateProvider>
                     {children}
-            </CartStateProvider>
+                </CartStateProvider>
+            </EventStateProvider>
         </EventFilterProvider>;
 }

@@ -12,9 +12,13 @@ export const EventFilterStyles = styled.div`
     fieldset label {
 
     }
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
 `;
 
-export const ListHeader = styled.div`
+export const ListHeader = styled.section`
     grid-row: 2;
     width: 100%;
     padding: 20px 40px 0;
@@ -30,4 +34,15 @@ export const EmptyListingStyles = styled.div`
         font-weight: bold;
         font-size: 1.8rem;
     }
+`
+
+export const NoWorkingDayStyles = styled.div`
+    transform: skew(-30deg) rotate(-100deg);
+    background: var(--grey);
+    font-size: 1rem;
+    color: white;
+    width: 200px;
+    top: 150px;
+    left: 0px;
+    position: absolute;
 `

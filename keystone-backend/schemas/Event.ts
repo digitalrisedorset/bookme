@@ -6,7 +6,7 @@ export const Event = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['id', 'venue', 'eventType', 'startTime', 'endTime'],
+            initialColumns: ['id', 'hairdresser', 'day', 'startTime', 'endTime'],
         },
     },
     fields: {
@@ -59,15 +59,8 @@ export const Event = list({
         venue: relationship({
             ref: 'Venue.events',
         }),
-        maximumAttendees: integer({
-            defaultValue: 50,
-            isRequired: true,
-        }),
-        registeredAttendees: integer({
-            defaultValue: 0
-        }),
-        eventType: relationship({
-            ref: 'EventType.event',
+        hairdresser: relationship({
+            ref: 'Hairdresser.event',
         }),
         user: relationship({
             ref: 'User.events',

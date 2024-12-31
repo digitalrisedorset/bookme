@@ -13,7 +13,7 @@ export const Nav: React.FC = () => {
         <NavStyles>
             {user && (
                 <>
-                    <Link href="/account">Account</Link>
+                    {/*<Link href="/account">Account</Link>*/}
                     <Link href="/events">Events</Link>
                     <Link href="/orders">Orders</Link>
                     <SignOut/>

@@ -1,13 +1,14 @@
 /* eslint-disable */
 import type { Context } from '.keystone/types'
 import type {Session} from "../schema";
+import calculatePrice from "./calculatePrice";
 
 async function addToCart(
   root: any,
-  { eventId }: { eventId: string },
+  { eventId, shampoo, haircutId }: { eventId: string, shampoo: number, haircutId: string },
   context: Context
 ): Promise<CartItemCreateInput> {
-  console.log('addToCart', eventId)
+  console.log('addToCart', {eventId, shampoo, haircutId})
   // 1. Query the current user see if they are signed in
   const sesh = context.session as Session;
   if (!sesh.itemId) {
@@ -27,11 +28,6 @@ async function addToCart(
         `There are already ${existingCartItem.quantity}, increment by 1!`
     );
 
-    console.log('new quantity', {
-      id: existingCartItem.id,
-      quantity: existingCartItem.quantity + 1
-    })
-
     const record = await context.query.CartItem.updateOne({
       where: {id: existingCartItem.id},
       data: {quantity: existingCartItem.quantity + 1},
@@ -41,10 +37,15 @@ async function addToCart(
     return record
   }
 
+  const price = await calculatePrice(root, {haircutId, shampoo, eventId}, context)
+
   // 4. if it isnt, create a new cart item!
   const record = await context.query.CartItem.createOne({
     data: {
       event: { connect: { id: eventId}},
+      haircut: { connect: { id: haircutId}},
+      shampoo,
+      price,
       user: { connect: { id: sesh.itemId }},
     },
     query: 'id quantity'

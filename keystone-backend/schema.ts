@@ -4,13 +4,15 @@ import type { Lists } from '.keystone/types'
 import {User} from "./schemas/User";
 import {OutletHoliday} from "./schemas/OutletHoliday";
 import {Venue} from "./schemas/Venue";
-import {EventType} from "./schemas/EventType";
+import {HaircutType} from "./schemas/HaircutType";
 import {Event} from "./schemas/Event";
 import {CartItem} from "./schemas/CartItem";
 import addToCart from "./mutations/addToCart";
 import {Order} from "./schemas/Order";
 import {OrderItem} from "./schemas/OrderItem";
 import checkout from "./mutations/checkout";
+import {Hairdresser} from "./schemas/Hairdresser";
+import calculatePrice from "./mutations/calculatePrice";
 
 export type Session = {
     itemId: string
@@ -23,7 +25,8 @@ export const lists = {
     CartItem,
     OutletHoliday,
     Event,
-    EventType,
+    HaircutType,
+    Hairdresser,
     Venue,
     User,
     Order,
@@ -38,11 +41,21 @@ export function extendGraphqlSchema (baseSchema: GraphQLSchema) {
           """ Add an event to the cart of the logged-in user"""
           addToCart(
              eventId: ID! 
+             shampoo: Int
+             haircutId: ID!            
           ): CartItem
           """ Register a payment token and create the associated order"""
           checkout(
             token: String!
-          ): Order
+          ): Order        
+        }
+        type Query {
+          """ Calculate price for a haircut, shampoo and hairdresser seniority"""
+          calculatePrice(
+            haircutId: ID! 
+            shampoo: Int
+            eventId: ID! 
+          ): Int
         }
         `,
         resolvers: {
@@ -50,6 +63,9 @@ export function extendGraphqlSchema (baseSchema: GraphQLSchema) {
                 addToCart,
                 checkout
             },
+            Query: {
+                calculatePrice
+            }
         },
     })
 }

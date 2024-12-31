@@ -76,6 +76,21 @@ export const Form = styled.form`
         font-weight: normal;
         font-size: 1.6rem;
     }
+
+    @media (max-width: 600px) {
+        input,
+        textarea,
+        select {
+            width: 100%;
+            height: 50px;
+        }
+        label {
+            font-size: 1.5rem;
+        }
+        h2 {
+            font-size: 2rem;
+        }
+    }
 `;
 
 export const Label = styled.p`

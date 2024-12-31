@@ -12,6 +12,10 @@ export const MainStyles = styled.main`
     grid-template-columns: 80px 1fr;
     grid-template-rows: 60px 1fr 3fr;
     height: 100vh;
+
+    @media (max-width: 600px) {
+        grid-template-rows: 100px 1fr 3fr;
+    }
 `
 
 export const Section = styled.section`
@@ -21,4 +25,8 @@ export const Section = styled.section`
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     padding: 40px;
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
 `

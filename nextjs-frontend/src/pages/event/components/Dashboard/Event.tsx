@@ -17,7 +17,7 @@ export const Event: React.FC<EventProps> = ({event}: EventProps) => {
     const user = useUser()
 
     const getEventTitle = (event: KeystoneEvent) => {
-        return `${capitalise(event.day)} ${event.venue.name} ${event.eventType.name}`
+        return `${capitalise(event.day)}`
     }
 
     const isEventInCart = () => {
@@ -32,13 +32,11 @@ export const Event: React.FC<EventProps> = ({event}: EventProps) => {
         <EventStyles incart={isEventInCart()}>
             <span className="title">{getEventTitle(event)}</span>
             <span className="date">{getDate(event.startTime)}<br/>from {getTime(event.startTime)} to {getTime(event.endTime)}</span>
-            <Attendees capacity={event.maximumAttendees} registered={event.registeredAttendees}/>
             <EventCount count={getEventCartQty(user?.cartItems, event.id)}/>
             <div className="in-cart">
                 <p>You&apos;re in!</p>
             </div>
             <AddToCart id={event.id}>Book Now</AddToCart>
-            <span className="capacity">40 places left</span>
         </EventStyles>
     )
 }

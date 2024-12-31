@@ -6,7 +6,7 @@ export const Venue = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['name', 'capacity'],
+            initialColumns: ['name'],
         },
     },
     fields: {
@@ -21,14 +21,6 @@ export const Venue = list({
         events: relationship({
             ref: 'Event.venue',
             many: true,
-        }),
-        capacity: integer({
-            defaultValue: 50,
-            isRequired: true,
-        }),
-        /*eventType: relationship({
-            ref: 'EventType.event',
-            many: true,
-        }),*/
+        })
     }
 })

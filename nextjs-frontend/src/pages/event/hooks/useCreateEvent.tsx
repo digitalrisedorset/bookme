@@ -4,7 +4,7 @@ import {useMutation} from "@apollo/client";
 const CREATE_EVENT_MUTATION = gql`
   mutation CreateEvent($data: EventCreateInput!) {
   createEvent(data: $data) {
-    eventType {
+    haircutType {
       name
     }
     venue {

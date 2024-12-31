@@ -6,16 +6,14 @@ import {useFilter} from "@/pages/event/hooks/useFilter";
 const EVENTS_QUERY = gql`
     query Events($orderBy: [EventOrderByInput!]!, $where: EventWhereInput!, $skip: Int = 0, $take: Int) {
       events(orderBy: $orderBy, where: $where, skip: $skip, take: $take) {
-        id
-        maximumAttendees
-        registeredAttendees
+        id      
         startTime
         venue {
           name
         }
         status
-        endTime
-        eventType {
+        endTime       
+        hairdresser {
           name
         }
         day
@@ -23,22 +21,22 @@ const EVENTS_QUERY = gql`
     }
 `;
 
-export const useEvents = (page: number) => {
+export const useEvents = () => {
     const filter = useFilter()
 
     /**
      * {
-     *                 "eventType": {
+     *                 "haircutType": {
      *                     "name": {
-     *                         "equals": activeEventType
+     *                         "equals": activeHaircutType
      *                     }
      *                 },
      *                 "day": {
      *                     "equals": activeDay
      *                 },
-     *                 "venue": {
+     *                 "hairdresser": {
      *                     "name": {
-     *                         "equals": activeVenue
+     *                         "equals": activeHairdresser
      *                     }
      *                 }
      *             }
@@ -47,8 +45,6 @@ export const useEvents = (page: number) => {
         variables: {
             "where": filter,
             "orderBy": [{"startTime": "asc"}],
-            "skip": (page - 1) * config.eventlisting.perPage,
-            "take": config.eventlisting.perPage,
         }
     });
 

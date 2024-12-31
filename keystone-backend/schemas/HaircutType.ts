@@ -2,11 +2,11 @@ import {list} from "@keystone-6/core";
 import {allowAll} from "@keystone-6/core/access";
 import {integer, relationship, text} from "@keystone-6/core/fields";
 
-export const EventType = list({
+export const HaircutType = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['name', 'price'],
+            initialColumns: ['name', 'base_price'],
         },
     },
     fields: {
@@ -18,11 +18,11 @@ export const EventType = list({
                 isRequired: true,
             },
         }),
-        event: relationship({
-            ref: 'Event.eventType',
+        hairdresser: relationship({
+            ref: 'Hairdresser.haircutTypes',
             many: true,
         }),
-        price: integer({
+        base_price: integer({
             validation: {
                 isRequired: true,
             },

@@ -4,28 +4,8 @@ import type {KeystoneContext} from "@keystone-6/core/src/types";
 export class VenueCreator {
     data = [
         {
-            code: 'st_yves',
-            name: 'St Ives & St Leonard',
-            capacity: 20
-        }, {
-            code: 'hamworthy',
-            name: 'Hamworthy',
-            capacity: 40
-        },
-        {
-            code: 'poole',
-            name: 'Poole',
-            capacity: 30
-        },
-        {
-            code: 'bourne',
-            name: 'Bourne',
-            capacity: 50
-        },
-        {
-            code: 'muscliff',
-            name: 'Muscliff',
-            capacity: 20
+            code: 'maddison_poole',
+            name: 'Maddisons Hair design'
         }];
 
     private context
@@ -61,7 +41,7 @@ export class VenueCreator {
     findVenueByName = async (venueName: string) => {
         let venues = await this.context.query.Venue.findMany({
             where: { name: { "equals": venueName} },
-            query: 'id capacity',
+            query: 'id',
         })
 
         const [venue] = venues
@@ -81,8 +61,7 @@ export class VenueCreator {
             console.log(`👩 Adding new venue: ${venueInfo.name}`)
             await this.context.query.Venue.createOne({
                 data: {
-                    name: venueInfo.name,
-                    capacity: venueInfo.capacity
+                    name: venueInfo.name
                 },
                 query: 'id',
             })

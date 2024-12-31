@@ -4,6 +4,7 @@ import {formatMoney} from "@/lib/price";
 import OrderStyles from "@/pages/order/styles/OrderStyles";
 import Head from 'next/head';
 import {useRouter} from "next/router";
+import {Form} from "@/pages/global/styles/Form";
 
 export default function OrderPage() {
     const router = useRouter();
@@ -20,35 +21,45 @@ export default function OrderPage() {
             <Head>
                 <title>Sick Fits - {order.id}</title>
             </Head>
-            <p>
-                <span>Order Id: </span>
-                <span>{order.id}</span>
-            </p>
-            <p>
-                <span>Charge:</span>
-                <span>{order.charge}</span>
-            </p>
-            <p>
-                <span>Order Total:</span>
-                <span>{formatMoney(order.total)}</span>
-            </p>
-            <p>
-                <span>ItemCount:</span>
-                <span>{order.items.length}</span>
-            </p>
-            <div className="items">
-                {order.items.map((item) => (
-                    <div className="order-item" key={item.id}>
-                        <div className="item-details">
-                            <h2>{item.name}</h2>
-                            <p>Qty: {item.quantity}</p>
-                            <p>Each: {formatMoney(item.price)}</p>
-                            <p>Sub Total: {formatMoney(item.price * item.quantity)}</p>
-                            <p>{item.description}</p>
-                        </div>
+            <Form>
+                <h2>Sign Into Your Account</h2>
+                <ErrorMessage/>
+                <fieldset>
+                    <label htmlFor="order_reference">
+                        Order reference
+                    </label>
+                    <span>{order.id}</span>
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="transaction_reference">
+                        Transaction reference
+                    </label>
+                    <span>{order.charge}</span>
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="order_total">
+                        Order Total
+                    </label>
+                    <span>{formatMoney(order.total)}</span>
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="order_summary">
+                        Order Summary
+                    </label>
+                    <div className="items">
+                        {order.items.map((item) => (
+                            <div className="order-item" key={item.id}>
+                                <div className="item-details">
+                                    <h3>{item.name}</h3>
+                                    <p>Qty: {item.quantity}</p>
+                                    <p>Each: {formatMoney(item.price)}</p>
+                                    <p>Sub Total: {formatMoney(item.price * item.quantity)}</p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
+                </fieldset>
+            </Form>
         </OrderStyles>
     )
 }

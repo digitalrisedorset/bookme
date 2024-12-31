@@ -1,167 +1,100 @@
 import {EventProps} from "./types";
 import {VenueCreator} from "./events/venue";
-import {EventTypeCreator} from "./events/eventType";
+import {HaircutTypeCreator} from "./events/haircutType";
 import {DateFinder} from "./events/dateFinder";
 import type {KeystoneContext} from "@keystone-6/core/src/types";
+import {HairdresserCreator} from "./events/hairdresser";
+import {getEventPrice} from "../lib/price";
+import {getTime} from "../lib/date";
 
 export class EventCreator {
     data = [
         {
-            venue: 'bourne',
+            venue: 'maddison_poole',
             day: 'tuesday',
-            startTime: '17:45',
-            endTime: '19:00',
+            startTime: '9:00',
             status: 'open',
-            eventType: 'kyu'
+            hairdresser: 'linda',
+            duration: 30,
+            breakTime: 5
         },
         {
-            venue: 'bourne',
+            venue: 'maddison_poole',
+            day: 'wednesday',
+            startTime: '9:00',
+            status: 'open',
+            hairdresser: 'linda',
+            duration: 30,
+            breakTime: 5
+        },
+        {
+            venue: 'maddison_poole',
+            day: 'thursday',
+            startTime: '9:00',
+            status: 'open',
+            hairdresser: 'linda',
+            duration: 30,
+            breakTime: 5
+        },
+        {
+            venue: 'maddison_poole',
+            day: 'saturday',
+            startTime: '9:00',
+            status: 'open',
+            hairdresser: 'linda',
+            duration: 30,
+            breakTime: 5
+        },
+        {
+            venue: 'maddison_poole',
             day: 'tuesday',
-            startTime: '18:45',
-            endTime: '20:00',
+            startTime: '9:00',
             status: 'open',
-            eventType: 'adult'
+            hairdresser: 'paul',
+            duration: 30,
+            breakTime: 5
         },
         {
-            venue: 'winton',
+            venue: 'maddison_poole',
+            day: 'tuesday',
+            startTime: '9:00',
+            status: 'open',
+            hairdresser: 'paul',
+            duration: 30,
+            breakTime: 5
+        },
+        {
+            venue: 'maddison_poole',
             day: 'wednesday',
-            startTime: '17:15',
-            endTime: '18:00',
+            startTime: '9:00',
             status: 'open',
-            eventType: 'ninja'
+            hairdresser: 'paul',
+            duration: 30,
+            breakTime: 15
         },
         {
-            venue: 'winton',
-            day: 'wednesday',
-            startTime: '18:00',
-            endTime: '19:00',
-            status: 'open',
-            eventType: 'kyu'
-        },
-        {
-            venue: 'winton',
-            day: 'wednesday',
-            startTime: '18:00',
-            endTime: '19:00',
-            status: 'open',
-            eventType: 'adult'
-        },
-        {
-            venue: 'poole',
-            day: 'wednesday',
-            startTime: '17:00',
-            endTime: '17:45',
-            status: 'open',
-            eventType: 'ninja'
-        },
-        {
-            venue: 'poole',
-            day: 'wednesday',
-            startTime: '17:45',
-            endTime: '19:00',
-            status: 'open',
-            eventType: 'kyu'
-        },
-        {
-            venue: 'poole',
-            day: 'wednesday',
-            startTime: '17:00',
-            endTime: '16:00',
-            status: 'open',
-            eventType: 'adult'
-        },
-        {
-            venue: 'alderney',
+            venue: 'maddison_poole',
             day: 'thursday',
-            startTime: '16:30',
-            endTime: '17:15',
+            startTime: '9:00',
             status: 'open',
-            eventType: 'ninja'
+            hairdresser: 'paul',
+            duration: 30,
+            breakTime: 15
         },
         {
-            venue: 'alderney',
-            day: 'thursday',
-            startTime: '17:15',
-            endTime: '18:15',
-            status: 'open',
-            eventType: 'kyu'
-        },
-        {
-            venue: 'alderney',
-            day: 'thursday',
-            startTime: '18:15',
-            endTime: '19:15',
-            status: 'open',
-            eventType: 'kyu'
-        },
-        {
-            venue: 'muscliff',
+            venue: 'maddison_poole',
             day: 'saturday',
-            startTime: '09:15',
-            endTime: '10:00',
+            startTime: '9:00',
             status: 'open',
-            eventType: 'ninja'
-        },
-        {
-            venue: 'muscliff',
-            day: 'saturday',
-            startTime: '10:00',
-            endTime: '11:15',
-            status: 'open',
-            eventType: 'kyu'
-        },
-        {
-            venue: 'muscliff',
-            day: 'saturday',
-            startTime: '11:00',
-            endTime: '12:30',
-            status: 'open',
-            eventType: 'adult'
-        },
-        {
-            venue: 'hamworthy',
-            day: 'saturday',
-            startTime: '09:30',
-            endTime: '10:15',
-            status: 'open',
-            eventType: 'ninja'
-        },
-        {
-            venue: 'hamworthy',
-            day: 'saturday',
-            startTime: '10:15',
-            endTime: '11:15',
-            status: 'open',
-            eventType: 'kyu'
-        },
-        {
-            venue: 'hamworthy',
-            day: 'saturday',
-            startTime: '11:15',
-            endTime: '12:15',
-            status: 'open',
-            eventType: 'adult'
-        },
-        {
-            venue: 'st_yves',
-            day: 'friday',
-            startTime: '16:30',
-            endTime: '17:15',
-            status: 'open',
-            eventType: 'ninja'
-        },
-        {
-            venue: 'st_yves',
-            day: 'friday',
-            startTime: '17:15',
-            endTime: '18:15',
-            status: 'open',
-            eventType: 'kyu'
-        },
+            hairdresser: 'paul',
+            duration: 30,
+            breakTime: 15
+        }
     ];
 
     private venueCreator: VenueCreator
-    private eventTypeCreator: EventTypeCreator
+    private haircutTypeCreator: HaircutTypeCreator
+    private hairdresserCreator: HairdresserCreator
     private dateFinder: DateFinder
     private context
 
@@ -169,8 +102,10 @@ export class EventCreator {
         this.context = context
         this.venueCreator = new VenueCreator(context)
         this.venueCreator.createAllVenues()
-        this.eventTypeCreator = new EventTypeCreator(context)
-        this.eventTypeCreator.createAllEventTypes()
+        this.haircutTypeCreator = new HaircutTypeCreator(context)
+        this.haircutTypeCreator.createAllHaircutTypes()
+        this.hairdresserCreator = new HairdresserCreator(context)
+        this.hairdresserCreator.createAllHairdresser()
         this.dateFinder = new DateFinder()
     }
 
@@ -181,12 +116,11 @@ export class EventCreator {
     /*
     eg: 2025-12-17T07:54:37.760Z
      */
-    createEvent = async (venueId: string, capacity: number, eventTypeId: string, price: number, eventDate: string, day: string, startTime: string, endTime: string) => {
+    createEvent = async (venueId: string, hairdresserId: string, price: number, eventDate: string, day: string, startTime: string, endTime: string) => {
         console.log('create new event', {
             venueId,
-            eventTypeId,
+            hairdresserId,
             price,
-            capacity,
             eventDate,
             startTime,
             endTime
@@ -194,46 +128,84 @@ export class EventCreator {
 
         //const event = await this.findEventByKey(venue, eventType, eventDate)
 
-        if (venueId!== undefined && eventTypeId!== undefined) {
+        if (venueId!== undefined && hairdresserId!== undefined) {
             await this.context.query.Event.createOne({
                 data: {
                     day,
-                    maximumAttendees: capacity,
                     price,
                     startTime: this.concatDateTime(eventDate, startTime),
                     endTime: this.concatDateTime(eventDate, endTime),
                     venue: { connect: { id: venueId}},
-                    eventType: { connect: { id: eventTypeId}},
+                    hairdresser: { connect: { id: hairdresserId}}
                 },
                 query: 'id',
             })
         }
     }
 
+    deleteEvent = async (day: string) => {
+        const result = await this.context.query.Event.findMany({
+            data: {
+                day
+            },
+            query: 'id',
+        })
+
+        if (result?.length > 0) {
+            result.forEach(async (record: any) => {
+                console.log('delete event',record?.id)
+                await this.context.query.Event.deleteOne({where: { id: record?.id} })
+            })
+        }
+    }
+
     createEventForYear = async (event: EventProps) => {
         const venue = await this.venueCreator.getVenueByCode(event.venue)
-        const eventType = await this.eventTypeCreator.getEventTypeByCode(event.eventType)
+        const hairdresser = await this.hairdresserCreator.getHairdresserByCode(event.hairdresser)
 
         const eventDates = this.dateFinder.getDatesByDay(event.day, 2025)
 
         for (let i=0; i < eventDates.length; i++) {
-            console.log('event raw data', event)
-            this.createEvent(
-                venue?.id,
-                venue?.capacity,
-                eventType?.id,
-                eventType?.price,
-                eventDates[i],
-                event.day,
-                event.startTime,
-                event.endTime
-            )
+            console.log('event raw data', eventDates)
+            let startTime = 9
+            let endTime = startTime + (event.duration + event.breakTime) / 60
+
+            if (hairdresser?.id == '') continue
+
+            while (endTime < 17) {
+                this.createEvent(
+                    venue?.id,
+                    hairdresser?.id,
+                    getEventPrice(hairdresser),
+                    eventDates[i],
+                    event.day,
+                    getTime(startTime),
+                    getTime(endTime)
+                )
+
+                startTime = endTime
+                endTime = startTime + (event.duration + event.breakTime) / 60
+            }
+        }
+    }
+
+    deleteEventForYear = async (event: EventProps) => {
+        const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+        for (let i=0; i < days.length; i++) {
+            await this.deleteEvent(days[i])
         }
     }
 
     createAllEvents = async () => {
         for (const event: EventProps of this.data) {
            await this.createEventForYear(event)
+        }
+    }
+
+    deleteAllEvents = async () => {
+        for (const event: EventProps of this.data) {
+            await this.deleteEventForYear(event)
         }
     }
 }

@@ -1,5 +1,6 @@
 import stripeConfig from '../lib/stripe';
 import type { Context } from '.keystone/types'
+import {capitalise} from "../lib/string";
 
 interface Arguments {
     token: string
@@ -29,9 +30,16 @@ async function checkout(
       cartItems {
         id
         quantity
-        event {        
+        event {  
+          day      
           price          
-          id         
+          id  
+          venue {
+            name
+          }  
+          eventType {
+            name
+          }     
         }
       }
     `
@@ -62,8 +70,8 @@ async function checkout(
     // 4. Convert the cartItems to OrderItems
     const orderItems = cartItems.map(cartItem => {
         const orderItem = {
-            name: 'test',
-            description: 'test',
+            name: `${capitalise(cartItem.event.day)} ${cartItem.event.venue.name} ${cartItem.event.eventType.name}`,
+            description: `${capitalise(cartItem.event.day)} ${cartItem.event.venue.name} ${cartItem.event.eventType.name}`,
             price: cartItem.event.price,
             quantity: cartItem.quantity
         }

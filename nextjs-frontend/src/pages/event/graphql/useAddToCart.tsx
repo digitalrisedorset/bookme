@@ -1,18 +1,21 @@
 import gql from "graphql-tag";
 import {useMutation} from "@apollo/client";
 import {CURRENT_USER_QUERY} from "@/pages/user-authentication/hooks/useUser";
+import {useEventState} from "@/state/EventState";
 
 export const ADD_TO_CART_MUTATION = gql`
-  mutation ADD_TO_CART_MUTATION($id: ID!) {
-    addToCart(eventId: $id) {
+  mutation AddToCart($eventId: ID!, $haircutId: ID!, $shampoo: Int) {
+    addToCart(eventId: $eventId, haircutId: $haircutId, shampoo: $shampoo) {
       id
     }
   }
 `;
 
 export const useAddToCart = (id: string) => {
+    const {haircut, shampoo} = useEventState()
+
     const [addToCart, { loading }] = useMutation(ADD_TO_CART_MUTATION, {
-        variables: { id },
+        variables: { eventId: id, shampoo: (shampoo === true)?1:0, haircutId: haircut },
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
     });
 

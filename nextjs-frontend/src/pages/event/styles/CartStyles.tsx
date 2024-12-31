@@ -68,13 +68,13 @@ export const BigButton = styled.button`
   background: none;
   border: 0;
   &:hover {
-    color: red;
+    color: var(--red);
     cursor: pointer;
   }
 `;
 
 export const Dot = styled.div`
-  background: red;
+  background: var(--red);
   color: white;
   border-radius: 50%;
   padding: 0.5rem;
@@ -83,6 +83,10 @@ export const Dot = styled.div`
   margin-left: 1rem;
   font-feature-settings: 'tnum';
   font-variant-numeric: tabular-nums;
+
+  @media (max-width: 600px) {
+    padding: 1.4rem 1.6rem;
+  }
 `;
 
 export const AnimationStyles = styled.span`

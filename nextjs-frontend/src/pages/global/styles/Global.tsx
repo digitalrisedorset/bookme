@@ -22,16 +22,26 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        --red: #EF233C;
+        --red: #f77f00;
         --redlight: #D62828;
         --lightgrey: #EDF2F4;
         --mediumgrey: #495057;
         --grey: #495057;
-        --black: #2B2D42;
-        --darkgrey: #8D99AE;
+        --black: #01A487;
+        --darkgrey: #485C5B;
         --white: #F6F2DF;
         color: var(--grey);
         font-family: "Tenor Sans", sans-serif;
         font-weight: normal;
+    }
+    
+    button {
+        font-size: 1rem;
+        background-color: var(--black);
+        border: none;
+        cursor: pointer;
+        color: white;
+        padding: 10px;
+        border-radius: 3px;
     }
 `;

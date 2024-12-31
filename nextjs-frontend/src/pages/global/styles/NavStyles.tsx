@@ -27,6 +27,12 @@ const NavStyles = styled.menu`
     button span {
         position: absolute;
     }
+    @media (max-width: 600px) {
+        a, button {
+            font-size: 1.8rem;
+        }
+        
+    }
 `;
 
 

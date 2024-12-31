@@ -14,7 +14,7 @@ export const DayFilter: React.FC = () => {
     return (
         <Venue>
             <fieldset>
-                <Label>Training Day</Label>
+                <Label>Week Day</Label>
                 <select onChange={onDayChange} className="form-select">
                     <option value="">-</option>
                     {getDays().map((item) => {
