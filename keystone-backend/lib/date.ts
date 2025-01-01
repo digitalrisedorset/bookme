@@ -15,3 +15,12 @@ export const getTime = (time: number) => {
     console.log('getTime', time, hour + ":" + min)
     return hour + ":" + min;
 }
+
+export const getFormattedDate = (date: string) => {
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dt = new Date(date);
+
+    const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
+
+    return `${dt.toLocaleDateString("en-GB", options)} at ${padL(dt.getHours())}:${padL(dt.getMinutes())}`
+}

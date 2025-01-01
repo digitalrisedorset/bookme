@@ -19,8 +19,8 @@ export class DayGroupEventHandler {
         this.groupEvent.name = `${event.day} ${getTime(event.startTime)}`
         this.groupEvent.venue = event.venue
 
-        if (this.groupEvent.hairdresser[event.hairdresser.name]===undefined) {
-            this.groupEvent.hairdresser[event.hairdresser.name] = event.id
+        if (this.groupEvent.hairdresser[event.hairdresser.id]===undefined) {
+            this.groupEvent.hairdresser[event.hairdresser.id] = event.id
         }
     }
 
@@ -35,7 +35,7 @@ export const getGroupEventHairdresserInfo = (groupEvent: DayGroupEvent) => {
         if (!groupEvent.hairdresser.hasOwnProperty(hairdresser)) continue;
 
         info.push({
-            hairdresser,
+            hairdresserId: hairdresser,
             eventId: groupEvent.hairdresser[hairdresser]
         })
     }

@@ -5,16 +5,21 @@ import {WeekEventList, EventDetail} from "@/pages/global/styles/ItemStyles";
 import {NoDayEventList} from "@/pages/event/components/Dashboard/Event/NoDayEventList";
 import {DayEvent} from "@/pages/event/models/DayEvent";
 import {DayEventGroup} from "@/pages/event/components/Dashboard/DayEvent/DayEventGroup";
+import {useUser} from "@/pages/user-authentication/hooks/useUser";
 
 interface ListingProps {
     events: KeystoneEvent[]
 }
 
 export const WeekEvents: React.FC<ListingProps> = ({events}: ListingProps) => {
+    const user = useUser()
+
+    if (!user) return null
+
     return (<WeekEventList>
         {getDays().map((day: DaysType) => {
             const dayEventHandler = new DayEvent(day);
-            const dayEventList = dayEventHandler.getDayEvents(events)
+            const dayEventList = dayEventHandler.getDayEvents(events, user.hairdresser)
 
             return <EventDetail key={day.day}>
                 <h4>{day.dayLabel}</h4>

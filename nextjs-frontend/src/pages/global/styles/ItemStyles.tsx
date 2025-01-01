@@ -58,7 +58,7 @@ export const SingleEvent = styled.div`
         text-align: left;
         line-height: 1.4rem;
         label {
-            padding: 5px;
+            /*padding: 5px;*/
         }
     }
     .view-detail {

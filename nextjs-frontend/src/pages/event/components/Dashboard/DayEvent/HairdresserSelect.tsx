@@ -1,9 +1,9 @@
 import React from "react";
-import {DayGroupEvent} from "@/pages/event/types/event";
+import {DayGroupEvent, Hairdresser} from "@/pages/event/types/event";
 import {getGroupEventHairdresserInfo} from "@/pages/event/models/DayGroupEvent";
 import {useEventState} from "@/state/EventState";
 import {capitalise} from "@/lib/string";
-import {useEventFilterState} from "@/state/EventFilterProvider";
+import {useHairdressers} from "@/pages/hairdresser/hooks/useHairdressers";
 
 interface ListingProps {
     eventGroup: DayGroupEvent
@@ -11,12 +11,17 @@ interface ListingProps {
 
 export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingProps) => {
     const {toggleActiveEvent} = useEventState()
-    const {eventFilter} = useEventFilterState()
+    const {data, loading} = useHairdressers()
 
     const getKey = (startTime: string, hairdresser: string) => {
         const date = new Date(startTime).getTime()
 
         return `${date}-${hairdresser}`
+    }
+
+    const getHairdresserDetail = (hairdresserId: string) => {
+        const result = data?.hairdressers.filter((hairdresser: Hairdresser) => hairdresser.id === hairdresserId)
+        return result[0]
     }
 
     const handleSelect = (e: React.FormEvent) => {
@@ -25,11 +30,13 @@ export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingP
     }
 
     return <div className="hairdresser-selection">
-        {getGroupEventHairdresserInfo(eventGroup).map(({hairdresser, eventId}: { hairdresser: string, eventId: string }) => {
+        {getGroupEventHairdresserInfo(eventGroup).map(({hairdresserId, eventId}: { hairdresserId: string, eventId: string }) => {
+            const hairdresser = getHairdresserDetail(hairdresserId)
+
             return (
-                <div key={getKey(eventGroup.startTime, hairdresser)}>
+                <div key={getKey(eventGroup.startTime, hairdresserId)}>
                     {/*<input type="radio" name="hairdresser" value={eventId} onChange={handleSelect} />*/}
-                    {/*<label htmlFor="hairdresser">{capitalise(hairdresser)}</label>*/}
+                    <label htmlFor="hairdresser">{capitalise(hairdresser?.name)}</label>
                 </div>
             )
         })}

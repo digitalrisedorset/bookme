@@ -1,25 +1,31 @@
 import {useEventFilterState} from "@/state/EventFilterProvider";
 import {getDayTimeEnd} from "@/lib/date";
+import {useUser} from "@/pages/user-authentication/hooks/useUser";
 
 export const useFilter = () => {
-    const {eventFilter} = useEventFilterState()
+    const user = useUser()
 
     const filter = {}
-    if (eventFilter.activeWeek === "") {
+
+    if (!user) {
+        return filter
+    }
+
+    if (user.weekPreference === "") {
         return filter
     }
 
 
-    if (eventFilter.activeHaircutType !== '') {
-        filter['haircutType'] = {
-            "name": {
-                "equals": eventFilter.activeHaircutType
-            }
-        }
-    }
+    // if (user.haircutType !== '') {
+    //     filter['haircutType'] = {
+    //         "name": {
+    //             "equals": user.haircutType
+    //         }
+    //     }
+    // }
 
-    if (eventFilter.activeWeek !== "") {
-        const weekStart = eventFilter.activeWeek
+    if (user.weekPreference !== "") {
+        const weekStart = user.weekPreference
         const weekStartDate = new Date(weekStart)
         const endWeek = getDayTimeEnd(new Date(weekStartDate.setDate(weekStartDate.getDate()+7)))
 
@@ -31,12 +37,8 @@ export const useFilter = () => {
         }
     }
 
-    if (eventFilter.activeHairdresser !== '') {
-        filter['hairdresser'] = {
-            "name": {
-                "equals": eventFilter.activeHairdresser
-            }
-        }
+    if (user.hairdresser !== '') {
+        filter['hairdresser'] = { "id": { "equals": user.hairdresser.id } }
     }
 
     return filter

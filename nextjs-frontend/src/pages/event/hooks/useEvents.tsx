@@ -1,6 +1,5 @@
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
-import {config} from "@/pages/config";
 import {useFilter} from "@/pages/event/hooks/useFilter";
 
 const EVENTS_QUERY = gql`
@@ -14,6 +13,7 @@ const EVENTS_QUERY = gql`
         status
         endTime       
         hairdresser {
+          id
           name
         }
         day

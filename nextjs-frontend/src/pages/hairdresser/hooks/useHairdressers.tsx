@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 const HAIRDRESSER_QUERY = gql`
     query Hairdressers {
       hairdressers {
+        id
         name
       }
     }

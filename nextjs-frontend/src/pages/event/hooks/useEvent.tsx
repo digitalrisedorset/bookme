@@ -1,8 +1,5 @@
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
-import {config} from "@/pages/config";
-import {useFilter} from "@/pages/event/hooks/useFilter";
-import {useEventState} from "@/state/EventState";
 
 const EVENT_QUERY = gql`
     query Event($where: EventWhereUniqueInput!) {

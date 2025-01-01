@@ -1,6 +1,7 @@
 import stripeConfig from '../lib/stripe';
 import type { Context } from '.keystone/types'
 import {capitalise} from "../lib/string";
+import {getFormattedDate, getTime} from "../lib/date";
 
 interface Arguments {
     token: string
@@ -24,55 +25,54 @@ async function checkout(
     const user = await context.query.User.findOne({
         where: { id: userId },
         query: graphql`
-      id
-      name
-      email
-      cartItems {
-        id
-        quantity
-        event {  
-          day      
-          price          
-          id  
-          venue {
-            name
-          }  
-          eventType {
-            name
-          }     
-        }
-      }
+            id
+            email
+            name 
+            cartItems {
+              id
+              quantity   
+              price
+              haircut {
+                name
+              }
+              shampoo
+              event {
+                id
+                day
+                startTime              
+                hairdresser {
+                  id            
+                  name
+                }                       
+              }      
+            }             
     `
     });
-
-    console.log('creating an order 2', user)
 
     console.dir(user, { depth: null })
     // 2. calc the total price for their order
     const cartItems = user.cartItems.filter(cartItem => cartItem.event);
-    console.log('creating an order 3', cartItems)
     const amount = cartItems.reduce(function(tally: number, cartItem: CartItemCreateInput) {
-        return tally + cartItem.quantity * cartItem.event.price;
+        return tally + cartItem.quantity * cartItem.price;
     }, 0);
-    console.log('creating an order 4')
-    console.log(amount);
+
     // 3. create the charge with the stripe library
     const charge = await stripeConfig.paymentIntents.create({
         amount,
-        currency: 'USD',
+        currency: 'GBP',
         confirm: true,
         payment_method: token,
     }).catch(err => {
         console.log(err);
         throw new Error(err.message);
     });
-    console.log('charge', charge)
+
     // 4. Convert the cartItems to OrderItems
     const orderItems = cartItems.map(cartItem => {
         const orderItem = {
-            name: `${capitalise(cartItem.event.day)} ${cartItem.event.venue.name} ${cartItem.event.eventType.name}`,
-            description: `${capitalise(cartItem.event.day)} ${cartItem.event.venue.name} ${cartItem.event.eventType.name}`,
-            price: cartItem.event.price,
+            name: `${capitalise(cartItem.event.day)} ${cartItem.haircut.name}`,
+            description: `${getFormattedDate(cartItem.event.startTime)} with ${cartItem.event.hairdresser.name} for a ${cartItem.haircut.name}`,
+            price: cartItem.price,
             quantity: cartItem.quantity
         }
         return orderItem;
@@ -95,9 +95,8 @@ async function checkout(
         cartItemIds.push({id: user.cartItems[i].id})
     }
 
-    console.log('gonna create delete cartItems', cartItemIds)
     await context.query.CartItem.deleteMany({ where: cartItemIds });
-    console.log('deleted cartItems', cartItemIds)
+
     return order;
 }
 

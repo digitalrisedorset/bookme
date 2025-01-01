@@ -1,6 +1,6 @@
 import {list} from "@keystone-6/core";
-import {allowAll, denyAll} from "@keystone-6/core/access";
-import {calendarDay, checkbox, integer, password, relationship, text} from "@keystone-6/core/fields";
+import {allowAll} from "@keystone-6/core/access";
+import {relationship, text} from "@keystone-6/core/fields";
 import {isAdmin, isAdminOrSameUser} from "./User";
 
 export const Hairdresser = list({
@@ -35,6 +35,7 @@ export const Hairdresser = list({
         event: relationship({
             ref: 'Event.hairdresser',
             many: true,
-        })
+        }),
+        user: relationship({ ref: 'User.hairdresser' })
     }
 })

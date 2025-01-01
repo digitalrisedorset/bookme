@@ -1,20 +1,24 @@
 import {Venue} from "@/pages/venue/styles/Venue";
 import {Label} from "@/pages/global/styles/Form";
-import {useEventFilterState} from "@/state/EventFilterProvider";
 import {getWeeks} from "@/lib/date";
+import {useUser} from "@/pages/user-authentication/hooks/useUser";
+import {useWeekPreference} from "@/pages/user-authentication/graphql/useUserPreference";
+import {usePreferenceVariables} from "@/pages/user-authentication/hooks/usePreference";
 
 export const WeekFilter: React.FC = () => {
-    const {eventFilter, setActiveWeek} = useEventFilterState()
-
-    const onWeekChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setActiveWeek(e.target.value)
+    const user = useUser()
+    const [updateUserPreference] = useWeekPreference()
+    const onWeekChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+        await updateUserPreference({
+            variables: usePreferenceVariables(user?.id,{'weekPreference': e.target.value})
+        })
     };
 
     return (
         <Venue>
             <fieldset>
                 <Label>Week Filter</Label>
-                <select onChange={onWeekChange} className="form-select" value={eventFilter.activeWeek}>
+                <select onChange={onWeekChange} className="form-select" value={user?.weekPreference}>
                     <option value="">-</option>
                     {getWeeks().map((item) => {
                         return (<option key={item.weekStart} value={item.weekStart}>{item.weekLabel}</option>)

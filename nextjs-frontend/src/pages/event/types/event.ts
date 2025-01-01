@@ -45,3 +45,8 @@ export interface DayGroupEvent {
     haircutType: string[]
     hairdresser: string[]
 }
+
+export interface Hairdresser {
+    id: string
+    name: string
+}

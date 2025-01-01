@@ -19,10 +19,10 @@ export default function OrderPage() {
     return (
         <OrderStyles>
             <Head>
-                <title>Sick Fits - {order.id}</title>
+                <title>Your order - {order.id}</title>
             </Head>
             <Form>
-                <h2>Sign Into Your Account</h2>
+                <h2>Your order summary</h2>
                 <ErrorMessage/>
                 <fieldset>
                     <label htmlFor="order_reference">
@@ -51,9 +51,8 @@ export default function OrderPage() {
                             <div className="order-item" key={item.id}>
                                 <div className="item-details">
                                     <h3>{item.name}</h3>
-                                    <p>Qty: {item.quantity}</p>
-                                    <p>Each: {formatMoney(item.price)}</p>
-                                    <p>Sub Total: {formatMoney(item.price * item.quantity)}</p>
+                                    <p>{item.description}</p>
+                                    <p>Total: {formatMoney(item.price * item.quantity)}</p>
                                 </div>
                             </div>
                         ))}

@@ -10,7 +10,7 @@ import {Section} from "@/pages/order/styles/OrderStyles";
 
 function countItemsInAnOrder(order) {
     return order.items.map((orderItem) => (
-            <p key={orderItem.id}>{orderItem.quantity} booking to attend the event {orderItem.name} at {formatMoney(orderItem.price)} each</p>
+            <p key={orderItem.id}>Appointment {orderItem.name} at {formatMoney(orderItem.price)}</p>
         ));
 }
 

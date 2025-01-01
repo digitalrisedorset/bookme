@@ -4,6 +4,9 @@ import {Hairdresser} from "@/pages/hairdresser/styles/Hairdresser";
 import {KeystoneEvent} from "@/pages/event/types/event";
 import React from "react";
 import {capitalise} from "@/lib/string";
+import {useUser} from "@/pages/user-authentication/hooks/useUser";
+import {useWeekPreference} from "@/pages/user-authentication/graphql/useUserPreference";
+import {usePreferenceVariables} from "@/pages/user-authentication/hooks/usePreference";
 
 interface HairdresserSelectProps {
     event: KeystoneEvent
@@ -11,10 +14,13 @@ interface HairdresserSelectProps {
 
 export const HairdresserSelect: React.FC<HairdresserSelectProps> = ({event}: HairdresserSelectProps) => {
     const {data, loading} = useHairdressers()
+    const user = useUser()
+    const [updateUserPreference] = useWeekPreference()
 
-    const onHairdresserChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        e.preventDefault()
-
+    const onHairdresserChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+        await updateUserPreference({
+            variables: usePreferenceVariables(user?.id, {'hairdresser': e.target.value})
+        })
     };
 
     if (loading) return null

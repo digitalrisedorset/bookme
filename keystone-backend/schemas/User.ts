@@ -96,6 +96,16 @@ export const User = list({
             defaultValue: 0,
             isRequired: false,
         }),
+        hairdresser: relationship({
+            ref: 'Hairdresser.user',
+        }),
+        haircutType: relationship({
+            ref: 'HaircutType.user',
+        }),
+        weekPreference: text({
+            isFilterable: false,
+            isOrderable: false
+        }),
         cartItems: relationship({
             ref: 'CartItem.user',
             many: true,

@@ -1,4 +1,4 @@
-import {DayGroupEvent, DaysType, KeystoneEvent} from "@/pages/event/types/event";
+import {DayGroupEvent, DaysType, Hairdresser, KeystoneEvent} from "@/pages/event/types/event";
 import {DayGroupEventHandler} from "@/pages/event/models/DayGroupEvent";
 
 export class DayEvent {
@@ -8,8 +8,8 @@ export class DayEvent {
         this.day = day.day
     }
 
-    getDayEvents = (events: KeystoneEvent[]) => {
-        const dayEvents = events.filter((event: KeystoneEvent) => event.day === this.day)
+    getDayEvents = (events: KeystoneEvent[], hairdresser: Hairdresser) => {
+        const dayEvents = events.filter((event: KeystoneEvent) => event.day === this.day && event.hairdresser.id === hairdresser.id)
 
         const groupEventByTime = this.getStartTimeEvents(dayEvents)
 

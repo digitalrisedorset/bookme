@@ -27,5 +27,6 @@ export const HaircutType = list({
                 isRequired: true,
             },
         }),
+        user: relationship({ ref: 'User.haircutType' })
     }
 })

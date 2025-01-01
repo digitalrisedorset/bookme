@@ -1,13 +1,18 @@
-import {useEventFilterState} from "@/state/EventFilterProvider";
 import {getWeeks} from "@/lib/date";
 import {HairdresserSelectionStyle} from "@/pages/hairdresser/styles/Hairdresser";
 import React from "react";
+import {useWeekPreference} from "@/pages/user-authentication/graphql/useUserPreference";
+import {usePreferenceVariables} from "@/pages/user-authentication/hooks/usePreference";
+import {useUser} from "@/pages/user-authentication/hooks/useUser";
 
 export const WeekPreference: React.FC = () => {
-    const {setActiveWeek} = useEventFilterState()
+    const user = useUser()
+    const [updateUserPreference] = useWeekPreference()
 
-    const onWeekChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setActiveWeek(e.target.value)
+    const onWeekChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+        await updateUserPreference({
+            variables: usePreferenceVariables(user?.id, {'weekPreference': e.target.value})
+        })
     };
 
     return  <HairdresserSelectionStyle>

@@ -8,6 +8,15 @@ const CURRENT_USER_QUERY = gql`
         id
         email
         name    
+        hairdresser {
+          id
+          name
+        }
+        haircutType {
+          id
+          name
+        }
+        weekPreference
         cartItems {
           id
           quantity   
@@ -21,7 +30,8 @@ const CURRENT_USER_QUERY = gql`
             day
             startTime              
             hairdresser {
-                name
+              id            
+              name
             }                       
           }      
         }             

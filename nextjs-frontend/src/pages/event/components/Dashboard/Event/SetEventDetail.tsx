@@ -1,9 +1,7 @@
 import React from "react";
 import {DayGroupEvent} from "@/pages/event/types/event";
 import {useRouter} from "next/router";
-import {useEventState} from "@/state/EventState";
 import {getGroupEventHairdresserInfo} from "@/pages/event/models/DayGroupEvent";
-import {useEventFilterState} from "@/state/EventFilterProvider";
 import {useUser} from "@/pages/user-authentication/hooks/useUser";
 import {getEventCartQty} from "@/lib/cart";
 import {ViewButton} from "@/pages/global/styles/ItemStyles";
@@ -13,28 +11,31 @@ interface EventProps {
 }
 
 export const SetEventDetail: React.FC<EventProps> = ({eventGroup}: EventProps) => {
-    const {eventFilter} = useEventFilterState()
     const router = useRouter()
     const user = useUser()
 
+    if (!user) return null
+
     const isEventInCart = () => {
-        if (getEventCartQty(user?.cartItems, getEventId())>0) {
+        if (getEventCartQty(user?.cartItems, eventId)>0) {
             return "true"
         }
 
         return "false"
     }
 
-    const getEventId = () => {
+    const getEventId = (eventGroup: DayGroupEvent) => {
         const eventInfo = getGroupEventHairdresserInfo(eventGroup)
-        const match = eventInfo.filter(({hairdresser}: { hairdresser: string }) => eventFilter.activeHairdresser === hairdresser)//const [event] = events
+        const match = eventInfo.filter(({hairdresserId}: { hairdresserId: string }) => user?.hairdresser.id === hairdresserId)
 
         return match[0].eventId
     }
 
+    const eventId = getEventId(eventGroup)
+
     const viewDetail = (e: React.FormEvent) => {
         e.preventDefault();
-        router.push({pathname: `/set-haircut-detail/${getEventId()}`});
+        router.push({pathname: `/set-haircut-detail/${eventId}`});
     }
 
     return (

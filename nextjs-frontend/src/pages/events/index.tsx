@@ -3,19 +3,19 @@ import React from "react";
 import {HairdresserFilter} from "@/pages/hairdresser/components/HairdresserFilter";
 import {WeekFilter} from "@/pages/event/components/Dashboard/WeekFilter";
 import {GetWeekEvents} from "@/pages/event/components/Dashboard/GetWeekEvents";
-import {useEventFilterState} from "@/state/EventFilterProvider";
 import {InitFilter} from "@/pages/event/components/Dashboard/InitFilter";
 import {ResetPreferenceFilter} from "@/pages/event/components/Dashboard/EventPreference/ResetPreferenceFilter";
 import {PreferenceSummary} from "@/pages/event/components/Dashboard/EventPreference/PreferenceSummary";
+import {useUser} from "@/pages/user-authentication/hooks/useUser";
 
 export default function Events() {
-    const {eventFilter} = useEventFilterState()
+    const user = useUser()
 
-    console.log('eventFilter', eventFilter)
+    if (!user) return null
 
     return (
         <>
-            {(eventFilter.activeWeek !== '' && eventFilter.activeHairdresser !== '') &&  (<>
+            {(user.weekPreference !== '' && user.hairdresser !== '') &&  (<>
                 <ListHeader>
                     <EventFilterStyles>
                         <WeekFilter/>
@@ -27,7 +27,7 @@ export default function Events() {
                 </ListHeader>
             </>)
             }
-            {(eventFilter.activeWeek === '' || eventFilter.activeHairdresser === '') &&  (<>
+            {(user.weekPreference === '' || user.hairdresser === '') &&  (<>
                 <InitFilter />
             </>)
             }
