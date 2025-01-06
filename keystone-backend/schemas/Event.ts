@@ -62,6 +62,9 @@ export const Event = list({
         hairdresser: relationship({
             ref: 'Hairdresser.event',
         }),
+        orderItem: relationship({
+            ref: 'OrderItem.event',
+        }),
         user: relationship({
             ref: 'User.events',
             defaultValue: ({ context }) => ({

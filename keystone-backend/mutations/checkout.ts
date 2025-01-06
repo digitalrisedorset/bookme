@@ -73,7 +73,8 @@ async function checkout(
             name: `${capitalise(cartItem.event.day)} ${cartItem.haircut.name}`,
             description: `${getFormattedDate(cartItem.event.startTime)} with ${cartItem.event.hairdresser.name} for a ${cartItem.haircut.name}`,
             price: cartItem.price,
-            quantity: cartItem.quantity
+            quantity: cartItem.quantity,
+            event: { connect: { id: cartItem.event.id }}
         }
         return orderItem;
     })

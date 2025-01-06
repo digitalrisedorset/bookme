@@ -18,7 +18,7 @@ console.log(`database ${getDatabaseConnection()}`)
 export default withAuth<TypeInfo<Session>>(
     config<TypeInfo>({
         server: {
-            cors: { origin: [keystoneconfig.frontend.host], credentials: true },
+            cors: { origin: [keystoneconfig.frontend.host, keystoneconfig.backend.host], credentials: true },
             port: 3000,
             maxFileSize: 200 * 1024 * 1024,
             extendExpressApp: async (app, commonContext) => { /* ... */ },

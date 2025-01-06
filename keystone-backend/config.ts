@@ -8,6 +8,10 @@ export type configInfo = {
         host: string,
         port: number
     },
+    backend: {
+        host: string,
+        port: number
+    },
     database: {
         dbtype: DatabaseProvider,
         name: string,
@@ -27,7 +31,11 @@ export type configInfo = {
 const config: configInfo = {
     frontend: {
         host: (process.env.FRONTEND_HOST === undefined)?'localhost':process.env.FRONTEND_HOST,
-        port: (process.env.FRONTEND_HOST === undefined)?3001:Number(process.env.FRONTEND_PORT)
+        port: (process.env.FRONTEND_PORT === undefined)?3001:Number(process.env.FRONTEND_PORT)
+    },
+    backend: {
+        host: (process.env.BACKEND_HOST === undefined)?'localhost':process.env.BACKEND_HOST,
+        port: (process.env.BACKEND_PORT === undefined)?3002:Number(process.env.BACKEND_PORT)
     },
     database: {
         dbtype: (process.env.DB_TYPE === undefined)?'postgresql':process.env.DB_TYPE as DatabaseProvider,
