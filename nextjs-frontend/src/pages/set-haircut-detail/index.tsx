@@ -1,14 +1,14 @@
 import {useRouter} from "next/router";
 import React from "react";
-import {ViewEvent} from "@/pages/event/components/Dashboard/Event/ViewEvent";
+import {ViewGroupEvent} from "@/pages/event/components/Dashboard/Event/ViewGroupEvent";
 
 export default function Events() {
     const { query } = useRouter();
-    const eventId = query.eventId;
+    const eventIds = JSON.parse(decodeURIComponent(query.eventIds));
 
     return (
         <>
-            <ViewEvent eventId={eventId} />
+            <ViewGroupEvent eventIds={eventIds} />
         </>
     )
 }

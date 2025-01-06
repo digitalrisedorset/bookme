@@ -359,3 +359,26 @@ export const BookButton = styled.div<EventProps>`
          }
     }
 `
+
+export const ViewGroupEventStyle= styled.div<EventStatusProps>`
+    h5 {
+        font-size: 1.7rem;
+        padding: 10px;
+        background: var(--red);
+    }
+    .title {
+        margin: 1rem;
+    }
+    .date {
+        margin: 1rem;
+    }
+    .price {
+        text-align: left;
+        color: var(--black);
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+    .add-to-cart {
+        background-color: var(--red);
+    }
+`

@@ -8,8 +8,8 @@ export class DayEvent {
         this.day = day.day
     }
 
-    getDayEvents = (events: KeystoneEvent[], hairdresser: Hairdresser) => {
-        const dayEvents = events.filter((event: KeystoneEvent) => event.day === this.day && event.hairdresser.id === hairdresser.id)
+    getDayEvents = (events: KeystoneEvent[]) => {
+        const dayEvents = events.filter((event: KeystoneEvent) => event.day === this.day)
 
         const groupEventByTime = this.getStartTimeEvents(dayEvents)
 

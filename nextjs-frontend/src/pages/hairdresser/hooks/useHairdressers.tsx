@@ -6,6 +6,9 @@ const HAIRDRESSER_QUERY = gql`
       hairdressers {
         id
         name
+        haircutTypes {
+            id
+        }
       }
     }
 `;

@@ -1,9 +1,11 @@
-import {useEventFilterState} from "@/state/EventFilterProvider";
 import {getDayTimeEnd} from "@/lib/date";
 import {useUser} from "@/pages/user-authentication/hooks/useUser";
+import {useHairdressers} from "@/pages/hairdresser/hooks/useHairdressers";
+import {HaircutType, Hairdresser} from "@/pages/event/types/event";
 
 export const useFilter = () => {
     const user = useUser()
+    const {data} = useHairdressers()
 
     const filter = {}
 
@@ -38,8 +40,24 @@ export const useFilter = () => {
     }
 
     if (user.hairdresser !== '') {
-        filter['hairdresser'] = { "id": { "equals": user.hairdresser.id } }
+        filter['hairdresser'] = { "id": { "equals": user?.hairdresser?.id } }
+    }
+
+    if (user.haircutType !== '') {
+        const hairdresserIds = getHairdresserIdsForHaircut(user?.haircutType, data?.hairdressers)
+        filter['hairdresser'] = { "id": { "in": hairdresserIds } }
     }
 
     return filter
+}
+
+const getHairdresserIdsForHaircut = (haircutType: HaircutType, hairdressers: Hairdresser[]) => {
+    const isHairdresserDoingHaircut = (item: Hairdresser): Hairdresser[] => {
+        const match = item.haircutTypes.filter((haircut: HaircutType) => haircut.id === haircutType?.id)
+        return match?.length>0
+    }
+
+    return hairdressers?.filter((item: Hairdresser) => isHairdresserDoingHaircut(item)).map((item: Hairdresser) => {
+        return item.id
+    });
 }

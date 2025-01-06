@@ -17,25 +17,22 @@ export const SetEventDetail: React.FC<EventProps> = ({eventGroup}: EventProps) =
     if (!user) return null
 
     const isEventInCart = () => {
-        if (getEventCartQty(user?.cartItems, eventId)>0) {
+        if (getEventCartQty(user?.cartItems, getEventIds(eventGroup))>0) {
             return "true"
         }
 
         return "false"
     }
 
-    const getEventId = (eventGroup: DayGroupEvent) => {
+    const getEventIds = (eventGroup: DayGroupEvent) => {
         const eventInfo = getGroupEventHairdresserInfo(eventGroup)
-        const match = eventInfo.filter(({hairdresserId}: { hairdresserId: string }) => user?.hairdresser.id === hairdresserId)
-
-        return match[0].eventId
+        return eventInfo.map(({eventId}: { eventId: string }) => eventId)
     }
-
-    const eventId = getEventId(eventGroup)
 
     const viewDetail = (e: React.FormEvent) => {
         e.preventDefault();
-        router.push({pathname: `/set-haircut-detail/${eventId}`});
+        const eventIds = getEventIds(eventGroup)
+        router.push({pathname: `/set-haircut-detail/${encodeURIComponent(JSON.stringify(eventIds))}`});
     }
 
     return (

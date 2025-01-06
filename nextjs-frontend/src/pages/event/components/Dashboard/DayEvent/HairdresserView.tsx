@@ -9,8 +9,7 @@ interface ListingProps {
     eventGroup: DayGroupEvent
 }
 
-export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingProps) => {
-    const {toggleActiveEvent} = useEventState()
+export const HairdresserView: React.FC<ListingProps> = ({eventGroup}: ListingProps) => {
     const {data, loading} = useHairdressers()
 
     const getKey = (startTime: string, hairdresser: string) => {
@@ -24,17 +23,12 @@ export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingP
         return result[0]
     }
 
-    const handleSelect = (e: React.FormEvent) => {
-        toggleActiveEvent(e.target.value)
-    }
-
     return <div className="hairdresser-selection">
         {getGroupEventHairdresserInfo(eventGroup).map(({hairdresserId, eventId}: { hairdresserId: string, eventId: string }) => {
             const hairdresser = getHairdresserDetail(hairdresserId)
 
             return (
                 <div key={getKey(eventGroup.startTime, hairdresserId)}>
-                    <input type="radio" name="hairdresser" value={eventId} onChange={handleSelect} />
                     <label htmlFor="hairdresser">{capitalise(hairdresser?.name)}</label>
                 </div>
             )

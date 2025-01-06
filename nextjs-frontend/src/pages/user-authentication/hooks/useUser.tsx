@@ -7,7 +7,7 @@ const CURRENT_USER_QUERY = gql`
       ... on User {
         id
         email
-        name    
+        name  
         hairdresser {
           id
           name

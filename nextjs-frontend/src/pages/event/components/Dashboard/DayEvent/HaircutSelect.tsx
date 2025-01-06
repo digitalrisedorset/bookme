@@ -1,6 +1,7 @@
 import React from "react";
 import {SelectStyle} from "@/pages/global/styles/ItemStyles";
 import {useEventState} from "@/state/EventState";
+import {useEventPrice} from "@/pages/event/hooks/useEventPrice";
 
 type HaircutType = {
     name: string
@@ -11,7 +12,9 @@ interface HaircutProps {
 }
 
 export const HaircutSelect: React.FC<HaircutProps> = ({haircutTypes}: HaircutProps) => {
-    const { setHaircutEvent} = useEventState()
+    const { activeEvent, setHaircutEvent} = useEventState()
+
+    const price = useEventPrice(activeEvent)
 
     const handleSelect = (e: React.FormEvent) => {
         //e.preventDefault();

@@ -31,6 +31,11 @@ export interface DaysType {
     dayLabel: string
 }
 
+export interface HaircutType {
+    id: string
+    name: string
+}
+
 
 export interface WeeksType {
     weekStart: string
@@ -49,4 +54,5 @@ export interface DayGroupEvent {
 export interface Hairdresser {
     id: string
     name: string
+    haircutTypes: HaircutType[]
 }

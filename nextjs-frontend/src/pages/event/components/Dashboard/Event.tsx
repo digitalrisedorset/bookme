@@ -21,7 +21,7 @@ export const Event: React.FC<EventProps> = ({event}: EventProps) => {
     }
 
     const isEventInCart = () => {
-        if (getEventCartQty(user?.cartItems, event.id)>0) {
+        if (getEventCartQty(user?.cartItems, [event.id])>0) {
             return "true"
         }
 
@@ -32,7 +32,7 @@ export const Event: React.FC<EventProps> = ({event}: EventProps) => {
         <EventStyles incart={isEventInCart()}>
             <span className="title">{getEventTitle(event)}</span>
             <span className="date">{getDate(event.startTime)}<br/>from {getTime(event.startTime)} to {getTime(event.endTime)}</span>
-            <EventCount count={getEventCartQty(user?.cartItems, event.id)}/>
+            <EventCount count={getEventCartQty(user?.cartItems, [event.id])}/>
             <div className="in-cart">
                 <p>You&apos;re in!</p>
             </div>

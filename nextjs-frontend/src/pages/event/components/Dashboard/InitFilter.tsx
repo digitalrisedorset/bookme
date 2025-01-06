@@ -2,6 +2,7 @@ import React from "react";
 import {EventRow, ViewEventStyle} from "@/pages/global/styles/ItemStyles";
 import {HairdresserPreference} from "@/pages/hairdresser/components/HairdresserPreference";
 import {WeekPreference} from "@/pages/event/components/Dashboard/EventPreference/WeekFilter";
+import {HaircutTypePreference} from "@/pages/event/components/Dashboard/EventPreference/HaircutTypeReference";
 
 export const InitFilter: React.FC = () => {
     return (
@@ -12,8 +13,8 @@ export const InitFilter: React.FC = () => {
                 <WeekPreference />
             </EventRow>
             <EventRow>
-                <p className="label">Who do you want to be cut by?</p>
-                <HairdresserPreference />
+                <p className="label">What haircut type do you need?</p>
+                <HaircutTypePreference />
             </EventRow>
         </ViewEventStyle>
     )

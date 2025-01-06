@@ -1,6 +1,7 @@
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
 import {useEventState} from "@/state/EventState";
+import {useUser} from "@/pages/user-authentication/hooks/useUser";
 
 const EVENT_PRICE_QUERY = gql`
     query CalculatePrice($haircutId: ID!, $eventId: ID!, $shampoo: Int) {
@@ -8,11 +9,12 @@ const EVENT_PRICE_QUERY = gql`
     }
 `;
 
-export const useEventPrice = (eventId: string) => {
-    const {haircut, shampoo} = useEventState();
+export const useEventPrice = () => {
+    const {activeEvent, shampoo} = useEventState();
+    const user = useUser()
 
     const { data } = useQuery(EVENT_PRICE_QUERY, {
-        variables: { eventId, haircutId: haircut, shampoo: (shampoo === true)?1:0 }
+        variables: { eventId: activeEvent, haircutId: user?.haircutType.id, shampoo: (shampoo === true)?1:0 }
     });
 
     return data?.calculatePrice

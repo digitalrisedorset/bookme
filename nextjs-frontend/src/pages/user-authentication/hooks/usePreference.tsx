@@ -10,7 +10,7 @@ export const usePreferenceVariables = (userId: string, fields: any) => {
 
         if (index === 'haircutType') {
             if (fields[index] === null) {
-                data['haircutType'] = null
+                data['haircutType'] = {"disconnect": true}
             } else {
                 data['haircutType'] = {
                     "connect": {
@@ -22,7 +22,7 @@ export const usePreferenceVariables = (userId: string, fields: any) => {
 
         if (index === 'hairdresser') {
             if (fields[index] === null) {
-                data['hairdresser'] = null
+                data['hairdresser'] =  {"disconnect": true}
             } else {
                 data['hairdresser'] = {
                     "connect": {

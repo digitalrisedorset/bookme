@@ -13,7 +13,7 @@ export const ResetPreferenceFilter: React.FC = () => {
         await updateUserPreference({
             variables: usePreferenceVariables(user?.id, {
                 'weekPreference': '',
-                'hairdresser': null
+                'haircutType': null
             })
         })
     };

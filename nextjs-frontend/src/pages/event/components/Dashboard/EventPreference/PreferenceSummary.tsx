@@ -9,7 +9,7 @@ export const PreferenceSummary: React.FC = () => {
 
     return (
         <PreferenceSummaryStyle>
-            All our appointments with <strong>{capitalise(user?.hairdresser?.name)}</strong> in the week starting <strong>{getDate(user?.weekPreference)}</strong>
+            All our appointments with <strong>{capitalise(user?.haircutType?.name)}</strong> in the week starting <strong>{getDate(user?.weekPreference)}</strong>
         </PreferenceSummaryStyle>
     )
 }

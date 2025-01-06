@@ -1,14 +1,11 @@
 import {Venue} from "@/pages/venue/styles/Venue";
 import {Label} from "@/pages/global/styles/Form";
-import {useEventFilterState} from "@/state/EventFilterProvider";
 import {getDays} from "@/lib/date";
 
 export const DayFilter: React.FC = () => {
-    const {setActiveDay} = useEventFilterState()
 
     const onDayChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault()
-        setActiveDay(e.target.value)
     };
 
     return (
