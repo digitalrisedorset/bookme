@@ -1,4 +1,4 @@
-import {DaysType, WeeksType} from "@/pages/event/types/event";
+import {DaysType, WeeksType} from "@/components/event/types/event";
 
 export const getDays = (): DaysType[] => {
     const current = new Date()

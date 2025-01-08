@@ -8,7 +8,7 @@ async function calculatePrice(
   { haircutId, shampoo, eventId }: { haircutId: string, shampoo: number, eventId: string },
   context: Context
 ): Promise<Int> {
-  console.log('addToCart', {haircutId, shampoo, eventId})
+  console.log('calculate price', {haircutId, shampoo, eventId})
   // 1. Query the current user see if they are signed in
   const sesh = context.session as Session;
   if (!sesh.itemId) {

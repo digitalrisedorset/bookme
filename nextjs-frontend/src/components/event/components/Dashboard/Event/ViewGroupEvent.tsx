@@ -1,0 +1,71 @@
+import React, {useEffect} from "react";
+import {EventRow, ViewGroupEventStyle} from "@/components/global/styles/ItemStyles";
+import {getDate, getTime} from "@/lib/date";
+import {HaircutSelect} from "@/components/event/components/Dashboard/DayEvent/HaircutSelect";
+import {useEventGroup} from "@/components/event/hooks/useEventGroup";
+import {AddToCart} from "@/components/event/components/Dashboard/Event/AddToCart";
+import {ShampooSelect} from "@/components/event/components/Dashboard/Event/ShampooSelect";
+import {getEventTitle} from "@/lib/groupEvent";
+import {useEventPrice} from "@/components/event/hooks/useEventPrice";
+import {formatMoney} from "@/lib/price";
+import {GroupEventHandler} from "@/components/event/models/GroupEvent";
+import {WeekEvents} from "@/components/event/components/Dashboard/WeekEvents";
+import {NoEvent} from "@/components/event/components/Dashboard/NoEvent";
+import {useUser} from "@/components/user-authentication/hooks/useUser";
+import {HairdresserSelect} from "@/components/event/components/Dashboard/DayEvent/HairdresserSelect";
+import {useEventState} from "@/state/EventState";
+import {useEventDuration} from "@/components/event/hooks/useEventDuration";
+
+interface ViewGroupEventProps {
+    eventIds: string[]
+}
+
+export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGroupEventProps) => {
+    const { data, loading } = useEventGroup(eventIds)
+    const {eventState} = useEventState()
+    const user = useUser()
+    const price  = useEventPrice()
+    const endTime = useEventDuration()
+
+    if (!user) return null
+
+    if (loading || !data?.events) return <>Loading</>
+
+    const eventHandler = new GroupEventHandler(user)
+    const groupEvent = eventHandler.getGroupEvent(data.events)
+
+    return (
+        <ViewGroupEventStyle>
+            <h5>Let's set your appointment details</h5>
+            <EventRow>
+                <span className="label">Appointment</span>
+                <p className="title">{getEventTitle(groupEvent)}</p>
+            </EventRow>
+            <EventRow>
+                <span className="label">Date</span>
+                <span className="title">{getDate(groupEvent.startTime)}</span>
+            </EventRow>
+            <EventRow>
+                <span className="label">Haircut</span>
+                <span className="title">{groupEvent.haircutType}</span>
+            </EventRow>
+            <EventRow>
+                <span className="label">Hairdresser</span>
+                <HairdresserSelect eventGroup={groupEvent} />
+            </EventRow>
+            <EventRow>
+                <span className="label">Shampoo</span>
+                <ShampooSelect />
+            </EventRow>
+            <EventRow>
+                <span className="label">End Time</span>
+                <span className="title">{getTime(endTime)}</span>
+            </EventRow>
+            <EventRow>
+                <span className="label">Price</span>
+                <span className="price">{formatMoney(price)}</span>
+            </EventRow>
+            <AddToCart id={eventState.activeEventId}>Book Now</AddToCart>
+        </ViewGroupEventStyle>
+    )
+}

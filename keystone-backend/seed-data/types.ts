@@ -3,8 +3,15 @@ export type VenueProps = {
 }
 
 export type HaircutTypeProps = {
+    code: string
     name: string
-    base_price: number
+    category: HaircutTypeGroupCode
+    duration: number
+    price: number
+}
+
+export type HaircutTypeGroupProps = {
+    name: string
 }
 
 export type HairdresserProps = {
@@ -17,6 +24,8 @@ export type VenueCode = 'bourne' | 'poole' | 'winton' | 'muscliff' | 'hamworthy'
 export type WeekDay = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'
 
 export type HaircutTypeCode = 'apprentice' | 'junior' | 'senior'
+
+export type HaircutTypeGroupCode = 'children' | 'ladies' | 'treatment' | 'colour'
 
 export type HairdresserCode = 'carlos' | 'linda' | 'paul'
 

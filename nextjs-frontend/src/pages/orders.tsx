@@ -1,16 +1,19 @@
-import {useOrders} from "@/pages/order/graphql/useOrders";
-import {ErrorMessage} from "@/pages/global/components/ErrorMessage";
+import {useOrders} from "@/components/order/graphql/useOrders";
+import {ErrorMessage} from "@/components/global/components/ErrorMessage";
 import {formatMoney} from "@/lib/price";
-import {OrderItemStyles, OrderDl} from "@/pages/order/styles/OrderItemStyles";
+import {OrderItemStyles, OrderDl} from "@/components/order/styles/OrderItemStyles";
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
 import React from "react";
-import {Section} from "@/pages/order/styles/OrderStyles";
+import {Section} from "@/components/order/styles/OrderStyles";
 
 function countItemsInAnOrder(order) {
     return order.items.map((orderItem) => (
-            <p key={orderItem.id}>Appointment {orderItem.name} at {formatMoney(orderItem.price)}</p>
+        <div key={orderItem.id}>
+            <h3>Appointment {orderItem.name} at {formatMoney(orderItem.price)}</h3>
+            <p >{orderItem.description}</p>
+        </div>
         ));
 }
 
@@ -28,7 +31,7 @@ export default function OrderListPage() {
             </Head>
             <div>
                 <h2>You have {orders.length} orders!</h2>
-                <Image className="logo" src="/images/kick-children-e1726920146538.jpg" width="438" height="584" alt=""/>
+                <Image className="logo" src="/images/orderplaceholder.jpg" width="270" height="480" alt=""/>
             </div>
             <OrderDl>
                 {orders.map((order, index) => (

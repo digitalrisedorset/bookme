@@ -1,8 +1,8 @@
 import type { AppProps } from "next/app";
-import Page from "./global/components/Page";
-import '@/pages/global/styles/nprogress.css';
+import Page from "@/components/global/components/Page";
+import '@/components/global/styles/nprogress.css';
 import { ApolloProvider } from "@apollo/client";
-import { apolloClient } from './apolloclient'
+import { apolloClient } from '@/apolloclient'
 import StateProvider from "@/state/StateProvider";
 import NProgress from 'nprogress';
 import Router from 'next/router';

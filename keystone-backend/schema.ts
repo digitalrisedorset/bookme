@@ -13,6 +13,10 @@ import {OrderItem} from "./schemas/OrderItem";
 import checkout from "./mutations/checkout";
 import {Hairdresser} from "./schemas/Hairdresser";
 import calculatePrice from "./mutations/calculatePrice";
+import calculateEventDuration from "./mutations/calculateEventDuration"
+import {HaircutTypeGroup} from "./schemas/HaircutTypeGroup";
+import {HaircutTypeDuration} from "./schemas/HaircutTypeDuration";
+import {Holiday} from "./schemas/Holiday";
 
 export type Session = {
     itemId: string
@@ -26,7 +30,10 @@ export const lists = {
     OutletHoliday,
     Event,
     HaircutType,
+    HaircutTypeGroup,
+    HaircutTypeDuration,
     Hairdresser,
+    Holiday,
     Venue,
     User,
     Order,
@@ -56,6 +63,12 @@ export function extendGraphqlSchema (baseSchema: GraphQLSchema) {
             shampoo: Int
             eventId: ID! 
           ): Int
+          """ Calculate duration needed for a haircut, shampoo and hairdresser seniority"""
+          calculateEventDuration(
+            haircutId: ID! 
+            shampoo: Int
+            eventId: ID! 
+          ): String
         }
         `,
         resolvers: {
@@ -64,7 +77,8 @@ export function extendGraphqlSchema (baseSchema: GraphQLSchema) {
                 checkout
             },
             Query: {
-                calculatePrice
+                calculatePrice,
+                calculateEventDuration
             }
         },
     })

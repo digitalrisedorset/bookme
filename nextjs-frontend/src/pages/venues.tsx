@@ -1,4 +1,4 @@
-import List from "@/pages/global/components/Venue/List";
+import List from "@/components/global/components/Venue/List";
 
 export default function Venues() {
     return (

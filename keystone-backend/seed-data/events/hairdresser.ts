@@ -12,7 +12,20 @@ export class HairdresserCreator {
             code: 'linda',
             name: 'linda',
             level: 'junior',
-            haircut: ['lady_haircut', 'lady_haircut_die']
+            haircut: ['lady_haircut', 'lady_haircut_die', 'blow_dry', 'color_bar_roots',
+                'color_touch_plus', 'color_touch', 'cut_finish', 'full_highlights_long',
+                'full_highlights_short', 'half_head_long', 'olaplex', 'parting', 'toner'
+            ]
+        },
+        {
+            code: 'charlotte',
+            name: 'charlotte',
+            level: 'senior',
+            haircut: ['lady_haircut', 'lady_haircut_die', 'blow_dry', 'color_bar_roots',
+                'color_touch_plus', 'color_touch', 'cut_finish', 'full_highlights_long',
+                'full_highlights_short', 'half_head_long', 'olaplex', 'parting',
+                'permanent_colour_roots', 'permanent_colour_roots', 't_section_long', 'technical_finish'
+            ]
         },
         {
             code: 'paul',

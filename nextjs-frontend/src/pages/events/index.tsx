@@ -1,12 +1,13 @@
-import {EventFilterStyles, ListHeader} from "@/pages/event/styles/EventFilterStyles";
+import {EventFilterStyles, ListHeader} from "@/components/event/styles/EventFilterStyles";
 import React from "react";
-import {WeekFilter} from "@/pages/event/components/Dashboard/WeekFilter";
-import {GetWeekEvents} from "@/pages/event/components/Dashboard/GetWeekEvents";
-import {InitFilter} from "@/pages/event/components/Dashboard/InitFilter";
-import {ResetPreferenceFilter} from "@/pages/event/components/Dashboard/EventPreference/ResetPreferenceFilter";
-import {PreferenceSummary} from "@/pages/event/components/Dashboard/EventPreference/PreferenceSummary";
-import {useUser} from "@/pages/user-authentication/hooks/useUser";
-import {HaircutTypeFilter} from "@/pages/event/components/Dashboard/HaircutTypeFilter";
+import {WeekFilter} from "@/components/event/components/Dashboard/WeekFilter";
+import {GetWeekEvents} from "@/components/event/components/Dashboard/GetWeekEvents";
+import {InitFilter} from "@/components/event/components/Dashboard/InitFilter";
+import {ResetPreferenceFilter} from "@/components/event/components/Dashboard/EventPreference/ResetPreferenceFilter";
+import {PreferenceSummary} from "@/components/event/components/Dashboard/EventPreference/PreferenceSummary";
+import {useUser} from "@/components/user-authentication/hooks/useUser";
+import {HaircutTypeFilter} from "@/components/event/components/Dashboard/HaircutTypeFilter";
+import {HaircutTypeGroupFilter} from "@/components/event/components/Dashboard/HaircutTypeGroupFilter";
 
 export default function Events() {
     const user = useUser()
@@ -19,6 +20,7 @@ export default function Events() {
                 <ListHeader>
                     <EventFilterStyles>
                         <WeekFilter/>
+                        <HaircutTypeGroupFilter />
                         <HaircutTypeFilter />
                         <ResetPreferenceFilter/>
                     </EventFilterStyles>

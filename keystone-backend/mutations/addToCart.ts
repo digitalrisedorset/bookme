@@ -2,6 +2,7 @@
 import type { Context } from '.keystone/types'
 import type {Session} from "../schema";
 import calculatePrice from "./calculatePrice";
+import calculateEventDuration from "./calculateEventDuration";
 
 async function addToCart(
   root: any,
@@ -38,6 +39,18 @@ async function addToCart(
   }
 
   const price = await calculatePrice(root, {haircutId, shampoo, eventId}, context)
+  const endTime = await calculateEventDuration(root, {haircutId, shampoo, eventId}, context)
+
+  console.log('update event',endTime)
+
+  const event = await context.query.Event.updateOne({
+    where: {id: eventId},
+    data: {endTime},
+    query: 'id endTime'
+  })
+
+  console.log('update event 2',event)
+
 
   // 4. if it isnt, create a new cart item!
   const record = await context.query.CartItem.createOne({

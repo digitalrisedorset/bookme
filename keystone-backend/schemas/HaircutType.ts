@@ -6,17 +6,35 @@ export const HaircutType = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['name', 'base_price'],
+            initialColumns: ['name', 'base_price', 'group', 'duration', 'breakTime'],
         },
     },
     fields: {
         name: text({
             access: allowAll,
             isFilterable: true,
-            isOrderable: false,
+            isOrderable: true,
             validation: {
                 isRequired: true,
             },
+        }),
+        duration: integer({
+            validation: {
+                isRequired: true,
+            },
+        }),
+        breakTime: integer({
+            defaultValue: 5,
+            validation: {
+                isRequired: true,
+            },
+        }),
+        hairdresserDuration: relationship({
+            ref: 'HaircutTypeDuration.haircutType',
+            many: true,
+        }),
+        group: relationship({
+            ref: 'HaircutTypeGroup.haircuts',
         }),
         hairdresser: relationship({
             ref: 'Hairdresser.haircutTypes',

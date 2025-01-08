@@ -41,11 +41,6 @@ export const Event = list({
                 isRequired: true,
             },
         }),
-        price: integer({
-            validation: {
-                isRequired: true,
-            }
-        }),
         status: select({
             type: 'enum',
             options: [

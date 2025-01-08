@@ -1,4 +1,4 @@
-import {AccountDetail} from "@/pages/user-authentication/components/AccountDetail";
+import {AccountDetail} from "@/components/user-authentication/components/AccountDetail";
 
 export default function Account() {
     return (

@@ -102,6 +102,9 @@ export const User = list({
         haircutType: relationship({
             ref: 'HaircutType.user',
         }),
+        haircutTypeGroup: relationship({
+            ref: 'HaircutTypeGroup.user',
+        }),
         weekPreference: text({
             isFilterable: false,
             isOrderable: false

@@ -71,7 +71,7 @@ async function checkout(
     const orderItems = cartItems.map(cartItem => {
         const orderItem = {
             name: `${capitalise(cartItem.event.day)} ${cartItem.haircut.name}`,
-            description: `${getFormattedDate(cartItem.event.startTime)} with ${cartItem.event.hairdresser.name} for a ${cartItem.haircut.name}`,
+            description: `${getFormattedDate(cartItem.event.startTime)} with ${capitalise(cartItem.event.hairdresser.name)} for a ${cartItem.haircut.name}`,
             price: cartItem.price,
             quantity: cartItem.quantity,
             event: { connect: { id: cartItem.event.id }}

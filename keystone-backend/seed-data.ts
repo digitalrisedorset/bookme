@@ -1,11 +1,11 @@
-import {EventCreator} from './seed-data/events'
+import { EventCreator } from './seed-data/events'
 
-export async function insertSeedData (context) {
+export async function insertSeedData(context) {
     console.log(`🌱 Inserting seed data`)
 
     const eventCreator = new EventCreator(context)
     //eventCreator.deleteAllEvents()
-    //eventCreator.createAllEvents()
+    eventCreator.createAllEvents()
 
     console.log(`✅ Seed data inserted`)
 }

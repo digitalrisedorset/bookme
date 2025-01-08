@@ -28,12 +28,20 @@ export const Hairdresser = list({
                 isRequired: true,
             },
         }),
+        haircutTypeDurations: relationship({
+            ref: 'HaircutTypeDuration.hairdresser',
+            many: true,
+        }),
         haircutTypes: relationship({
             ref: 'HaircutType.hairdresser',
             many: true,
         }),
         event: relationship({
             ref: 'Event.hairdresser',
+            many: true,
+        }),
+        holidays: relationship({
+            ref: 'Holiday.staff',
             many: true,
         }),
         user: relationship({ ref: 'User.hairdresser' })

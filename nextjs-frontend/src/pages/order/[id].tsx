@@ -1,10 +1,10 @@
-import {useOrder} from "@/pages/order/graphql/useOrder";
-import {ErrorMessage} from "@/pages/global/components/ErrorMessage";
+import {useOrder} from "@/components/order/graphql/useOrder";
+import {ErrorMessage} from "@/components/global/components/ErrorMessage";
 import {formatMoney} from "@/lib/price";
-import OrderStyles from "@/pages/order/styles/OrderStyles";
+import OrderStyles from "@/components/order/styles/OrderStyles";
 import Head from 'next/head';
 import {useRouter} from "next/router";
-import {Form} from "@/pages/global/styles/Form";
+import {Form} from "@/components/global/styles/Form";
 
 export default function OrderPage() {
     const router = useRouter();
