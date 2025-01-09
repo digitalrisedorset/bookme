@@ -1,17 +1,25 @@
 import {DayGroupEvent, KeystoneEvent} from "@/components/event/types/event";
 import {getTime} from "@/lib/date";
+import {UserInformation} from "@/components/user-authentication/hooks/useUser";
+import {isEventInCart} from "@/lib/cart";
 
 export class DayGroupEventHandler {
     private groupEvent: DayGroupEvent = {}
 
-    constructor(time: string) {
+    private user: UserInformation = {}
+
+    constructor(time: string, user: UserInformation) {
         this.groupEvent = {
             name: '',
             day: '',
             venue: '',
             startTime: time,
-            hairdresser: []
+            hairdressers: [],
+            orderedEventId: null,
+            cartEvent: null,
+            eventIds: []
         }
+        this.user = user
     }
 
     addEvent = (event: KeystoneEvent) => {
@@ -19,9 +27,20 @@ export class DayGroupEventHandler {
         this.groupEvent.name = `${event.day} ${getTime(event.startTime)}`
         this.groupEvent.venue = event.venue
 
-        if (this.groupEvent.hairdresser[event.hairdresser.id]===undefined) {
-            this.groupEvent.hairdresser[event.hairdresser.id] = event.id
+        this.groupEvent.hairdressers.push({
+            hairdresserId: event.hairdresser.id,
+            eventId: event.id
+        })
+
+        if (event.orderItem?.event) {
+            this.groupEvent.orderedEventId = event.id
         }
+
+        if (isEventInCart(this.user?.cartItems, event.id)) {
+            this.groupEvent.cartEvent = event
+        }
+
+        this.groupEvent.eventIds.push(event.id)
     }
 
     getGroupEvent = () => {

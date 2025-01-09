@@ -39,6 +39,7 @@ export const EventDetail = styled.div`
 
 interface EventProps {
     incart: string
+    wasordered: string
 }
 
 export const SingleEvent = styled.div`
@@ -245,6 +246,25 @@ export const EventStyles = styled.div<EventProps>`
             padding: 0 1rem;
             z-index: 3;
         }
+        .ordered {
+            visibility: ${(props) => props.incart === "false" && `hidden;`};
+            margin: 0 1rem;
+            text-align: center;
+            p {
+                position: absolute;
+                transform: skew(-20deg) rotate(-10deg);
+                top: 230px;
+                left: -5px;
+                margin-top: -3rem;
+                text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+                background: var(--red);
+                line-height: 1.3;
+                font-size: 4rem;
+                width: 102%;
+                color: white;
+                padding: 0 1rem;
+                z-index: 3;
+            }
     }
 
     @media (max-width: 600px) {
@@ -342,6 +362,21 @@ export const ViewButton = styled.div<EventProps>`
              margin: 0 0px 0 45px;
              z-index: 3;
          }
+    }
+    .ordered {
+        visibility: ${(props) => props.wasordered === "false" && `hidden;`};
+        p {
+            top: 7px;
+            position: absolute;
+            transform: skew(-20deg) rotate(-10deg);
+            background: var(--red);
+            line-height: 1.3;
+            font-size: 1rem;
+            color: white;
+            padding: 0 5px;
+            margin: 0 0px 0 45px;
+            z-index: 3;
+        }
     }
 `
 

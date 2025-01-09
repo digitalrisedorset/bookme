@@ -1,5 +1,6 @@
-import {DayGroupEvent, DaysType, Hairdresser, KeystoneEvent} from "@/components/event/types/event";
+import {DayGroupEvent, DaysType, KeystoneEvent} from "@/components/event/types/event";
 import {DayGroupEventHandler} from "@/components/event/models/DayGroupEvent";
+import {UserInformation} from "@/components/user-authentication/hooks/useUser";
 
 export class DayEvent {
     private day
@@ -8,7 +9,7 @@ export class DayEvent {
         this.day = day.day
     }
 
-    getDayEvents = (events: KeystoneEvent[]) => {
+    getDayEvents = (events: KeystoneEvent[], user: UserInformation) => {
         const dayEvents = events.filter((event: KeystoneEvent) => event.day === this.day)
 
         const groupEventByTime = this.getStartTimeEvents(dayEvents)
@@ -19,15 +20,14 @@ export class DayEvent {
             if (!groupEventByTime.hasOwnProperty(time)) continue;
 
             let listEvents = groupEventByTime[time]
-            dayEventList.push(this.getDayGroupEvent(listEvents, time))
+            dayEventList.push(this.getDayGroupEvent(listEvents, time, user))
         }
-
 
         return dayEventList
     }
 
-    getDayGroupEvent = (listEvents: object, time: string): DayGroupEvent[] => {
-        const dayGroupEventHandler = new DayGroupEventHandler(time)
+    getDayGroupEvent = (listEvents: KeystoneEvent[], time: string, user: UserInformation): DayGroupEvent[] => {
+        const dayGroupEventHandler = new DayGroupEventHandler(time, user)
 
         for (let index in listEvents) {
             if (!listEvents.hasOwnProperty(index)) continue;
@@ -40,7 +40,7 @@ export class DayEvent {
 
     getStartTimeEvents = (events: KeystoneEvent[]) => {
         const getTimes = (times: [], event: KeystoneEvent) => {
-            let startTime = event.startTime//new Date(event.startTime).getTime()
+            let startTime = event.startTime
             if (times[startTime]===undefined) {
                 times[startTime] = []
             }

@@ -37,6 +37,8 @@ export const useFilter = () => {
         filter['endTime'] = {
             "lte": endWeek
         }
+    } else {
+
     }
 
     if (user.hairdresser !== '') {

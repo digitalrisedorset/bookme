@@ -19,7 +19,7 @@ export const WeekEvents: React.FC<ListingProps> = ({events}: ListingProps) => {
     return (<WeekEventList>
         {getDays().map((day: DaysType) => {
             const dayEventHandler = new DayEvent(day);
-            const dayEventList = dayEventHandler.getDayEvents(events)
+            const dayEventList = dayEventHandler.getDayEvents(events, user)
 
             return <EventDetail key={day.day}>
                 <h4>{day.dayLabel}</h4>

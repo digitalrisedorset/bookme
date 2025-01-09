@@ -17,6 +17,11 @@ const EVENTS_QUERY = gql`
           name
         }
         day
+        orderItem {
+          event {
+            id
+          }
+        }
       }
     }
 `;

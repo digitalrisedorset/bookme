@@ -1,5 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import {KeystoneCartItem} from "@/components/event/types/event";
+import {getDayTimeStart, getTime} from "@/lib/date";
 
 const CURRENT_USER_QUERY = gql`
   query {

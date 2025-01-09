@@ -1,9 +1,7 @@
 import React from "react";
 import {DayGroupEvent} from "@/components/event/types/event";
 import {useRouter} from "next/router";
-import {getGroupEventHairdresserInfo} from "@/components/event/models/DayGroupEvent";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
-import {getEventCartQty, getEventInCart} from "@/lib/cart";
 import {ViewButton} from "@/components/global/styles/ItemStyles";
 import {getTime} from "@/lib/date";
 
@@ -18,38 +16,35 @@ export const SetEventDetail: React.FC<EventProps> = ({eventGroup}: EventProps) =
     if (!user) return null
 
     const isEventInCart = () => {
-        if (getEventCartQty(user?.cartItems, getEventIds(eventGroup))>0) {
-            return "true"
-        }
-
-        return "false"
+        return eventGroup?.cartEvent !== null
     }
 
-    const getEventIds = (eventGroup: DayGroupEvent) => {
-        const eventInfo = getGroupEventHairdresserInfo(eventGroup)
-        return eventInfo.map(({eventId}: { eventId: string }) => eventId)
+    const isAvailable = () => {
+        return eventGroup?.cartEvent=== null && eventGroup?.orderedEventId === null
+    }
+
+    const wasOrdered = () => {
+        return eventGroup?.orderedEventId !== null
     }
 
     const viewDetail = (e: React.FormEvent) => {
         e.preventDefault();
-        const eventIds = getEventIds(eventGroup)
-        router.push({pathname: `/set-haircut-detail/${encodeURIComponent(JSON.stringify(eventIds))}`});
+        router.push({pathname: `/set-haircut-detail/${encodeURIComponent(JSON.stringify(eventGroup.eventIds))}`});
     }
 
-    const inCart = isEventInCart()
-    const eventInCart = getEventInCart(user?.cartItems, getEventIds(eventGroup))
-    console.log('eventInCart', eventInCart)
-
     return (
-        <ViewButton incart={inCart}>
+        <ViewButton incart={isEventInCart() ? "true" : "false"} wasordered={wasOrdered() ? "true" : "false"}>
             <div className="in-cart">
-                <p>You&apos;re in!</p>
+                <p>In Cart!</p>
             </div>
-            {(inCart==="false") &&<button className="view-detail" type="button" onClick={viewDetail}>
+            <div className="ordered">
+                <p>Booked!</p>
+            </div>
+            {isAvailable() && <button className="view-detail" type="button" onClick={viewDetail}>
                 View
             </button>}
-            {(inCart==="true") &&<>
-                <span className="timestamp">Finishing at {getTime(eventInCart?.event.endTime)}</span>
+            {isEventInCart() && <>
+                <span className="timestamp">Finishing at {getTime(eventGroup?.cartEvent?.endTime)}</span>
             </>}
         </ViewButton>
     )

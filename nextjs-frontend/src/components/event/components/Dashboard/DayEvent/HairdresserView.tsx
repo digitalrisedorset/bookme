@@ -24,8 +24,11 @@ export const HairdresserView: React.FC<ListingProps> = ({eventGroup}: ListingPro
     }
 
     return <div className="hairdresser-selection">
-        {getGroupEventHairdresserInfo(eventGroup).map(({hairdresserId, eventId}: { hairdresserId: string, eventId: string }) => {
+        {eventGroup.hairdressers.map(({eventId, hairdresserId}: { eventId: string, hairdresserId: string }) => {
             const hairdresser = getHairdresserDetail(hairdresserId)
+
+            if (eventGroup.cartEvent && eventGroup.cartEvent.id!== eventId) return null
+            if (eventGroup.orderedEventId === eventId) return null
 
             return (
                 <div key={getKey(eventGroup.startTime, hairdresserId)}>

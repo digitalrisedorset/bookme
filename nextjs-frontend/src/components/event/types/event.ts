@@ -5,9 +5,20 @@ export interface KeystoneEvent {
     day: string
     startTime: string
     endTime: string
-    venue: string
+    venue: { name: string }
     haircutType: string
-    hairdresser: string
+    hairdresser: HairdresserShare
+    orderItem: {event: { id:string }}
+}
+
+export interface Event {
+    id: string
+    price: number
+    venue: {
+        name: string
+    }
+    haircutType: HaircutType
+    hairdresser: Hairdresser
 }
 
 export interface KeystoneCartItem {
@@ -51,8 +62,15 @@ export interface DayGroupEvent {
     day: string
     startTime: string
     venue: string
-    haircutType: string[]
-    hairdresser: string[]
+    haircutType: Pick<HaircutType, 'id' | 'name'>
+    hairdressers: Pick<Hairdresser, 'id' | 'name'>[]
+    orderedEventId: string
+    cartEvent?: KeystoneEvent
+    eventIds: string[]
+}
+
+interface HairdresserShare {
+
 }
 
 export interface Hairdresser {
