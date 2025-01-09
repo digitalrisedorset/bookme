@@ -5,7 +5,7 @@ export async function insertSeedData(context) {
 
     const eventCreator = new EventCreator(context)
     //eventCreator.deleteAllEvents()
-    eventCreator.createAllEvents()
+    //eventCreator.createAllEvents()
 
     console.log(`✅ Seed data inserted`)
 }

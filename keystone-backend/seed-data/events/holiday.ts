@@ -12,7 +12,7 @@ export class HolidayValidator {
 
     findHolidaysByHairdresserId = async (id: string) => {
         let records = await this.context.query.Holiday.findMany({
-            where: { staff: { id: {"equals": id }} },
+            where: { staff: { id: {"equals": id }}, status: {"equals": "approved" } },
             query: 'id startDate endDate',
         })
 
