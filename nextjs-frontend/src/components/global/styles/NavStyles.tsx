@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const NavStyles = styled.menu`
-    background-color: var(--black);
+    background-color: var(--pastel);
     color: #fff;
     grid-column: 2 / -1;
     display: flex;

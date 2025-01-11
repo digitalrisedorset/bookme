@@ -27,6 +27,7 @@ export const WeekEventList = styled.div`
         padding: 10px;
         font-weight: bold;
         background: var(--black);
+        color: white;
     }
 `
 
@@ -422,6 +423,7 @@ export const ViewGroupEventStyle= styled.div<EventStatusProps>`
     }
     .add-to-cart {
         background-color: var(--red);
+        color: white;
     }
     .hairdresser-selection {
         position: relative;

@@ -31,7 +31,7 @@ export default function OrderListPage() {
             </Head>
             <div>
                 <h2>You have {orders.length} orders!</h2>
-                <Image className="logo" src="/images/orderplaceholder.jpg" width="270" height="480" alt=""/>
+                <Image className="logo" src="/images/orderplaceholder1.jpg" width="378" height="378" alt=""/>
             </div>
             <OrderDl>
                 {orders.map((order, index) => (

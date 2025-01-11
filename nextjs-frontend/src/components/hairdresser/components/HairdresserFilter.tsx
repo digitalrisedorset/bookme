@@ -14,7 +14,7 @@ export const HairdresserFilter: React.FC = () => {
 
     const onHairdresserChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         await updateUserPreference({
-            variables: usePreferenceVariables(user?.id, {'hairdresser': e.target.value})
+            variables: usePreferenceVariables(user?.id, {'hairdresser': e.target.value}),
         })
     };
 

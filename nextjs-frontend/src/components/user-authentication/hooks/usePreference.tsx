@@ -26,13 +26,9 @@ export const usePreferenceVariables = (userId: string, fields: any) => {
     }
 
     return {
-        "data": [
-            {
-                "where": {
-                    "id": userId
-                },
-                "data": data
-            }
-        ]
+        "data": data,
+        "where": {
+            "id": userId
+        },
     }
 }

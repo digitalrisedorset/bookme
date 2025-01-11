@@ -15,7 +15,7 @@ const Header: React.FC = () => {
     return (
         <HeaderStyles>
             <Link href="#" onClick={handleClick}>
-                <Image className="logo" src="/images/book3.png" width="80" height="77" alt=""/>
+                <Image className="logo" src="/images/book-purple.png" width="80" height="77" alt=""/>
             </Link>
         </HeaderStyles>)
     ;

@@ -3,10 +3,10 @@ import {useMutation} from "@apollo/client";
 import {CURRENT_USER_QUERY, useUser} from "../hooks/useUser";
 
 const UPDATE_USER_MUTATION = gql`
-    mutation UpdateUsers($data: [UserUpdateArgs!]!) {
-      updateUsers(data: $data) {
-        id
-      }
+    mutation UpdateUser($where: UserWhereUniqueInput!, $data: UserUpdateInput!) {
+        updateUser(where: $where, data: $data) {
+            id
+        }
     }
 `;
 

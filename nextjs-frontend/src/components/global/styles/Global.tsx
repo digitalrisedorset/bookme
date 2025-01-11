@@ -22,12 +22,14 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        --red: #f77f00;
+        --red: #333252;
         --redlight: #D62828;
         --lightgrey: #EDF2F4;
         --mediumgrey: #495057;
         --grey: #495057;
-        --black: #01A487;
+        --pastel: #C3B5D1;
+        --orange: #D29A78;
+        --black: #333252; /*#01A487;*/
         --darkgrey: #485C5B;
         --white: #F6F2DF;
         color: var(--grey);
@@ -37,10 +39,10 @@ export const GlobalStyles = createGlobalStyle`
     
     button {
         font-size: 1rem;
-        background-color: var(--black);
+        background-color: var(--pastel);
         border: none;
         cursor: pointer;
-        color: white;
+        color: var(--darkgrey);
         padding: 10px;
         border-radius: 3px;
     }
