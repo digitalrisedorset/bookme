@@ -3,12 +3,13 @@ import type { Context } from '.keystone/types'
 import type {Session} from "../schema";
 import calculatePrice from "./calculatePrice";
 import calculateEventDuration from "./calculateEventDuration";
+import updateEventAndRemoveOverlappingEvent from "./removeOverlappingEvent";
 
 async function addToCart(
   root: any,
   { eventId, shampoo, haircutId }: { eventId: string, shampoo: number, haircutId: string },
   context: Context
-): Promise<CartItemCreateInput> {
+): Promise<string> {
   console.log('addToCart', {eventId, shampoo, haircutId})
   // 1. Query the current user see if they are signed in
   const sesh = context.session as Session;
@@ -41,17 +42,6 @@ async function addToCart(
   const price = await calculatePrice(root, {haircutId, shampoo, eventId}, context)
   const endTime = await calculateEventDuration(root, {haircutId, shampoo, eventId}, context)
 
-  console.log('update event',endTime)
-
-  const event = await context.query.Event.updateOne({
-    where: {id: eventId},
-    data: {endTime},
-    query: 'id endTime'
-  })
-
-  console.log('update event 2',event)
-
-
   // 4. if it isnt, create a new cart item!
   const record = await context.query.CartItem.createOne({
     data: {
@@ -64,7 +54,9 @@ async function addToCart(
     query: 'id quantity'
   })
 
-  return record
+  const removeEventIds = await updateEventAndRemoveOverlappingEvent(root, {eventId, endTime}, context)
+
+  return removeEventIds
 }
 
 export default addToCart;

@@ -25,14 +25,6 @@ async function calculateEventDuration(
     query: 'id startTime hairdresser { level }'
   });
 
-  console.log('event duration 2', {
-    duration: haircut.duration,
-    break: haircut.breakTime,
-    start: event.startTime,
-    shampoo,
-    level: event.hairdresser.level
-  })
-
   return getEventEndTime(haircut.duration, haircut.breakTime, event.startTime, shampoo, event.hairdresser.level);
 }
 

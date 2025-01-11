@@ -31,24 +31,12 @@ export const User = list({
     },
     fields: {
         name: text({
-            access: {
-                // only the respective user, or an admin can read this field
-                read: isAdminOrSameUser,
-
-                // only admins can update this field
-                update: isAdmin,
-            },
+            access: allowAll,
             isFilterable: false,
             isOrderable: false
         }),
         email: text({
-            access: {
-                // only the respective user, or an admin can read this field
-                read: isAdminOrSameUser,
-
-                // only admins can update this field
-                update: isAdmin,
-            },
+            access: allowAll,
             isFilterable: false,
             isOrderable: false,
             isIndexed: 'unique',
@@ -77,13 +65,7 @@ export const User = list({
             },
         }),
         phone_number: text({
-            access: {
-                // only the respective user, or an admin can read this field
-                read: isAdminOrSameUser,
-
-                // only admins can update this field
-                update: isAdmin,
-            },
+            access: allowAll,
             isFilterable: false,
             isOrderable: false
         }),

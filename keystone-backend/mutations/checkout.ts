@@ -78,7 +78,7 @@ async function checkout(
         }
         return orderItem;
     })
-    console.log('gonna create the order')
+
     // 5. Create the order and return it
     const order = await context.query.Order.createOne({
         data: {

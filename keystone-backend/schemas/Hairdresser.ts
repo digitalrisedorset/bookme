@@ -12,13 +12,7 @@ export const Hairdresser = list({
     },
     fields: {
         name: text({
-            access: {
-                // only the respective user, or an admin can read this field
-                read: isAdminOrSameUser,
-
-                // only admins can update this field
-                update: isAdmin,
-            },
+            access: allowAll,
             isFilterable: true,
             isOrderable: false
         }),

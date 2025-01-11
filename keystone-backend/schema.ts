@@ -17,6 +17,7 @@ import calculateEventDuration from "./mutations/calculateEventDuration"
 import {HaircutTypeGroup} from "./schemas/HaircutTypeGroup";
 import {HaircutTypeDuration} from "./schemas/HaircutTypeDuration";
 import {Holiday} from "./schemas/Holiday";
+import updateEventAndRemoveOverlappingEvent from "./mutations/removeOverlappingEvent";
 
 export type Session = {
     itemId: string
@@ -50,11 +51,16 @@ export function extendGraphqlSchema (baseSchema: GraphQLSchema) {
              eventId: ID! 
              shampoo: Int
              haircutId: ID!            
-          ): CartItem
+          ): String
           """ Register a payment token and create the associated order"""
           checkout(
             token: String!
-          ): Order        
+          ): Order    
+          """ Remove events from the system that overlaps and have the same hairdresser assigned with an event id """
+          updateEventAndRemoveOverlappingEvent(           
+            eventId: ID! 
+            endTime: String
+          ): String    
         }
         type Query {
           """ Calculate price for a haircut, shampoo and hairdresser seniority"""
@@ -68,13 +74,14 @@ export function extendGraphqlSchema (baseSchema: GraphQLSchema) {
             haircutId: ID! 
             shampoo: Int
             eventId: ID! 
-          ): String
+          ): String        
         }
         `,
         resolvers: {
             Mutation: {
                 addToCart,
-                checkout
+                checkout,
+                updateEventAndRemoveOverlappingEvent
             },
             Query: {
                 calculatePrice,
