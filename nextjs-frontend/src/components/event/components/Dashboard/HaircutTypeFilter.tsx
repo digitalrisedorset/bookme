@@ -4,7 +4,7 @@ import {useHaircutTypes} from "@/components/event/hooks/useHaircutTypes";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
 import React from "react";
-import {usePreferenceVariables} from "@/components/user-authentication/hooks/usePreference";
+import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 
 export const HaircutTypeFilter: React.FC = () => {
     const {data} = useHaircutTypes()
@@ -13,7 +13,7 @@ export const HaircutTypeFilter: React.FC = () => {
 
     const onHaircutTypeChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         await updateUserPreference({
-            variables: usePreferenceVariables(user?.id, {'haircutType': e.target.value})
+            variables: getUserPreferenceVariables(user?.id, {'haircutType': e.target.value})
         })
     };
 

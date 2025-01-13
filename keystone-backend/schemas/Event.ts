@@ -1,6 +1,6 @@
 import {list} from "@keystone-6/core";
 import {allowAll} from "@keystone-6/core/access";
-import {integer, relationship, select, timestamp} from "@keystone-6/core/fields";
+import {relationship, select, timestamp} from "@keystone-6/core/fields";
 
 export const Event = list({
     access: allowAll,

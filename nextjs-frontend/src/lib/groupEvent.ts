@@ -1,4 +1,4 @@
-import {DayGroupEvent, KeystoneEvent} from "@/pages/event/types/event";
+import {DayGroupEvent} from "@/pages/event/types/event";
 import {capitalise} from "@/lib/string";
 import {getDate, getTime} from "@/lib/date";
 

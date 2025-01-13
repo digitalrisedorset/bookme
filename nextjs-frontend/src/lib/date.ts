@@ -68,8 +68,11 @@ export const getWeeks = (): WeeksType[] => {
 }
 
 export const getTime = (time: string) => {
+    if (time === undefined) return ''
+
     const date = new Date(time)
     let min = date.getMinutes().toString()
+
     if (min.length === 1) {
         min = "0" + min.toString();
     }

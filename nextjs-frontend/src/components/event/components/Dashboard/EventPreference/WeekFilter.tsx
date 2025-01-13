@@ -2,8 +2,8 @@ import {getWeeks} from "@/lib/date";
 import {HairdresserSelectionStyle} from "@/components/hairdresser/styles/Hairdresser";
 import React from "react";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
-import {usePreferenceVariables} from "@/components/user-authentication/hooks/usePreference";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
+import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 
 export const WeekPreference: React.FC = () => {
     const user = useUser()
@@ -11,7 +11,7 @@ export const WeekPreference: React.FC = () => {
 
     const onWeekChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         await updateUserPreference({
-            variables: usePreferenceVariables(user?.id, {'weekPreference': e.target.value})
+            variables: getUserPreferenceVariables(user?.id, {'weekPreference': e.target.value})
         })
     };
 

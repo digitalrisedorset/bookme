@@ -1,6 +1,7 @@
 import {list} from "@keystone-6/core";
 import {allowAll} from "@keystone-6/core/access";
-import {text, timestamp} from "@keystone-6/core/fields";
+import {relationship, text, timestamp} from "@keystone-6/core/fields";
+import {Venue} from "./Venue";
 
 export const OutletHoliday = list({
     access: allowAll,
@@ -33,6 +34,9 @@ export const OutletHoliday = list({
             validation: {
                 isRequired: true,
             },
+        }),
+        venue: relationship({
+            ref: 'Venue.holidays'
         })
     }
 })

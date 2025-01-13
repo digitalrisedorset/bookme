@@ -12,6 +12,7 @@ interface AddToCartProps {
 
 export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
     const user = useUser()
+    const {eventState} = useEventState()
     const {shampoo} = useEventState()
     const router = useRouter()
     const [addToCart, { loading }] = useAddToCart(id);
@@ -22,6 +23,14 @@ export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
         }
 
         return "false"
+    }
+
+    const isEventReady = () => {
+        if (loading | isEventInCart() | eventState.activeEventId==undefined) {
+            return false
+        }
+
+        return true
     }
 
     if (!user) return null;
@@ -41,7 +50,7 @@ export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
             <div className="in-cart">
                 <p>You&apos;re in!</p>
             </div>
-            <button className="add-to-cart" disabled={loading | isEventInCart()} type="button" onClick={handleClick}>
+            <button className="add-to-cart" disabled={!isEventReady()} type="button" onClick={handleClick}>
                 Book{loading && 'ing'} 🛒
             </button>
         </BookButton>

@@ -1,9 +1,7 @@
 import React from "react";
-import {DayGroupEvent, Hairdresser} from "@/components/event/types/event";
-import {getGroupEventHairdresserInfo} from "@/components/event/models/DayGroupEvent";
-import {useEventState} from "@/state/EventState";
+import {DayGroupEvent} from "@/components/event/types/event";
 import {capitalise} from "@/lib/string";
-import {useHairdressers} from "@/components/hairdresser/hooks/useHairdressers";
+import {getHairdresserDetail, useHairdressers} from "@/components/hairdresser/hooks/useHairdressers";
 
 interface ListingProps {
     eventGroup: DayGroupEvent
@@ -18,14 +16,9 @@ export const HairdresserView: React.FC<ListingProps> = ({eventGroup}: ListingPro
         return `${date}-${hairdresser}`
     }
 
-    const getHairdresserDetail = (hairdresserId: string) => {
-        const result = data?.hairdressers.filter((hairdresser: Hairdresser) => hairdresser.id === hairdresserId)
-        return result[0]
-    }
-
     return <div className="hairdresser-selection">
         {eventGroup.hairdressers.map(({eventId, hairdresserId}: { eventId: string, hairdresserId: string }) => {
-            const hairdresser = getHairdresserDetail(hairdresserId)
+            const hairdresser = getHairdresserDetail(data?.hairdressers, hairdresserId)
 
             if (eventGroup.cartEvent && eventGroup.cartEvent.id!== eventId) return null
             if (eventGroup.orderedEventId === eventId) return null

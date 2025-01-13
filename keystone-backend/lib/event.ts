@@ -20,5 +20,6 @@ export const getEventEndTime = (duration: number, breakTime: number, startTime: 
     const date = new Date(startTime)
     date.setMinutes (date.getMinutes() + time);
 
+    console.log('duration', date.toISOString())
     return date.toISOString()
 }

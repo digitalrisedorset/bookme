@@ -1,7 +1,6 @@
-import React, {useEffect} from "react";
+import React, {use} from "react";
 import {EventRow, ViewGroupEventStyle} from "@/components/global/styles/ItemStyles";
 import {getDate, getTime} from "@/lib/date";
-import {HaircutSelect} from "@/components/event/components/Dashboard/DayEvent/HaircutSelect";
 import {useEventGroup} from "@/components/event/hooks/useEventGroup";
 import {AddToCart} from "@/components/event/components/Dashboard/Event/AddToCart";
 import {ShampooSelect} from "@/components/event/components/Dashboard/Event/ShampooSelect";
@@ -9,8 +8,6 @@ import {getEventTitle} from "@/lib/groupEvent";
 import {useEventPrice} from "@/components/event/hooks/useEventPrice";
 import {formatMoney} from "@/lib/price";
 import {GroupEventHandler} from "@/components/event/models/GroupEvent";
-import {WeekEvents} from "@/components/event/components/Dashboard/WeekEvents";
-import {NoEvent} from "@/components/event/components/Dashboard/NoEvent";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {HairdresserSelect} from "@/components/event/components/Dashboard/DayEvent/HairdresserSelect";
 import {useEventState} from "@/state/EventState";
@@ -36,7 +33,7 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
 
     return (
         <ViewGroupEventStyle>
-            <h5>Let's set your appointment details</h5>
+            <h5>Let&apos;s set your appointment details</h5>
             <EventRow>
                 <span className="label">Appointment</span>
                 <p className="title">{getEventTitle(groupEvent)}</p>

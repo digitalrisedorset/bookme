@@ -3,8 +3,8 @@ import {Label} from "@/components/global/styles/Form";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
 import React from "react";
-import {usePreferenceVariables} from "@/components/user-authentication/hooks/usePreference";
 import {useHaircutTypeGroups} from "@/components/event/hooks/useHaircutTypeGroups";
+import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 
 export const HaircutTypeGroupFilter: React.FC = () => {
     const {data} = useHaircutTypeGroups()
@@ -13,7 +13,7 @@ export const HaircutTypeGroupFilter: React.FC = () => {
 
     const onHaircutTypeGroupChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         await updateUserPreference({
-            variables: usePreferenceVariables(user?.id, {'haircutTypeGroup': e.target.value})
+            variables: getUserPreferenceVariables(user?.id, {'haircutTypeGroup': e.target.value})
         })
     };
 

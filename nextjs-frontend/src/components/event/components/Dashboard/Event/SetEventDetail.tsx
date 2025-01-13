@@ -4,12 +4,14 @@ import {useRouter} from "next/router";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {ViewButton} from "@/components/global/styles/ItemStyles";
 import {getTime} from "@/lib/date";
+import {useEventState} from "@/state/EventState";
 
 interface EventProps {
     eventGroup: DayGroupEvent
 }
 
 export const SetEventDetail: React.FC<EventProps> = ({eventGroup}: EventProps) => {
+    const {resetActiveEvent} = useEventState()
     const router = useRouter()
     const user = useUser()
 
@@ -29,6 +31,7 @@ export const SetEventDetail: React.FC<EventProps> = ({eventGroup}: EventProps) =
 
     const viewDetail = (e: React.FormEvent) => {
         e.preventDefault();
+        resetActiveEvent()
         router.push({pathname: `/set-haircut-detail/${encodeURIComponent(JSON.stringify(eventGroup.eventIds))}`});
     }
 

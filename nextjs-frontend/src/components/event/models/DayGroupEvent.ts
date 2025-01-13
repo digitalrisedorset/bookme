@@ -50,7 +50,7 @@ export class DayGroupEventHandler {
 
 export const getGroupEventHairdresserInfo = (groupEvent: DayGroupEvent) => {
     const info = []
-    for (let hairdresser in groupEvent.hairdresser) {
+    for (const hairdresser in groupEvent.hairdresser) {
         if (!groupEvent.hairdresser.hasOwnProperty(hairdresser)) continue;
 
         info.push({

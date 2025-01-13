@@ -5,8 +5,8 @@ import { HaircutTypeGroupCreator } from "./events/haircutTypeGroup"
 import { DateFinder } from "./events/dateFinder";
 import type { KeystoneContext } from "@keystone-6/core/src/types";
 import { HairdresserCreator } from "./events/hairdresser";
-import { getTime } from "../lib/date";
-import { HolidayValidator } from "./events/holiday";
+import {getHour, getTime} from "../lib/date";
+import {HolidayHairdresserCreator, HolidayOutletCreator, HolidayValidator} from "./events/holiday";
 
 export class EventCreator {
     data = [
@@ -15,6 +15,7 @@ export class EventCreator {
             venue: 'maddison_poole',
             day: 'tuesday',
             startTime: '9:00',
+            endTime: '17:00',
             status: 'open',
             hairdresser: 'linda',
             duration: 30,
@@ -24,6 +25,7 @@ export class EventCreator {
             venue: 'maddison_poole',
             day: 'wednesday',
             startTime: '9:00',
+            endTime: '17:00',
             status: 'open',
             hairdresser: 'linda',
             duration: 30,
@@ -33,6 +35,7 @@ export class EventCreator {
             venue: 'maddison_poole',
             day: 'thursday',
             startTime: '9:00',
+            endTime: '17:00',
             status: 'open',
             hairdresser: 'linda',
             duration: 30,
@@ -42,6 +45,7 @@ export class EventCreator {
             venue: 'maddison_poole',
             day: 'saturday',
             startTime: '9:00',
+            endTime: '17:00',
             status: 'open',
             hairdresser: 'linda',
             duration: 30,
@@ -52,6 +56,7 @@ export class EventCreator {
             venue: 'maddison_poole',
             day: 'tuesday',
             startTime: '9:00',
+            endTime: '17:00',
             status: 'open',
             hairdresser: 'paul',
             duration: 30,
@@ -61,6 +66,7 @@ export class EventCreator {
             venue: 'maddison_poole',
             day: 'wednesday',
             startTime: '9:00',
+            endTime: '17:00',
             status: 'open',
             hairdresser: 'paul',
             duration: 30,
@@ -70,6 +76,7 @@ export class EventCreator {
             venue: 'maddison_poole',
             day: 'thursday',
             startTime: '9:00',
+            endTime: '17:00',
             status: 'open',
             hairdresser: 'paul',
             duration: 30,
@@ -79,6 +86,7 @@ export class EventCreator {
             venue: 'maddison_poole',
             day: 'saturday',
             startTime: '9:00',
+            endTime: '17:00',
             status: 'open',
             hairdresser: 'paul',
             duration: 30,
@@ -89,6 +97,7 @@ export class EventCreator {
             venue: 'maddison_poole',
             day: 'tuesday',
             startTime: '9:00',
+            endTime: '17:00',
             status: 'open',
             hairdresser: 'charlotte',
             duration: 30,
@@ -98,6 +107,7 @@ export class EventCreator {
             venue: 'maddison_poole',
             day: 'wednesday',
             startTime: '9:00',
+            endTime: '17:00',
             status: 'open',
             hairdresser: 'charlotte',
             duration: 30,
@@ -107,6 +117,7 @@ export class EventCreator {
             venue: 'maddison_poole',
             day: 'thursday',
             startTime: '9:00',
+            endTime: '17:00',
             status: 'open',
             hairdresser: 'charlotte',
             duration: 30,
@@ -116,6 +127,7 @@ export class EventCreator {
             venue: 'maddison_poole',
             day: 'saturday',
             startTime: '9:00',
+            endTime: '17:00',
             status: 'open',
             hairdresser: 'charlotte',
             duration: 30,
@@ -125,7 +137,8 @@ export class EventCreator {
         {
             venue: 'maddison_poole',
             day: 'tuesday',
-            startTime: '9:00',
+            startTime: '18:00',
+            endTime: '21:00',
             status: 'open',
             hairdresser: 'carlos',
             duration: 30,
@@ -133,8 +146,9 @@ export class EventCreator {
         },
         {
             venue: 'maddison_poole',
-            day: 'wednesday',
+            day: 'saturday',
             startTime: '9:00',
+            endTime: '12:00',
             status: 'open',
             hairdresser: 'carlos',
             duration: 30,
@@ -143,24 +157,30 @@ export class EventCreator {
     ];
 
     private venueCreator: VenueCreator
+    private venueHolidayCreator: HolidayOutletCreator
     private haircutTypeCreator: HaircutTypeCreator
     private haircutTypeGroupCreator: HaircutTypeGroupCreator
     private hairdresserCreator: HairdresserCreator
     private dateFinder: DateFinder
     private holidayValidator: HolidayValidator
+    private hairdresserHolidayCreator: HolidayHairdresserCreator
     private context
 
     constructor(context: KeystoneContext) {
         this.context = context
         this.venueCreator = new VenueCreator(context)
         this.venueCreator.createAllVenues()
+        this.venueHolidayCreator = new HolidayOutletCreator(context)
+        //this.venueHolidayCreator.createAllOutletHolidays()
         this.haircutTypeGroupCreator = new HaircutTypeGroupCreator(context)
         this.holidayValidator = new HolidayValidator(context)
         this.haircutTypeGroupCreator.createAllHaircutGroupTypes()
         this.haircutTypeCreator = new HaircutTypeCreator(context)
         this.haircutTypeCreator.createAllHaircutTypes()
         this.hairdresserCreator = new HairdresserCreator(context)
-        this.hairdresserCreator.createAllHairdresser()
+        //this.hairdresserCreator.createAllHairdresser()
+        this.hairdresserHolidayCreator = new HolidayHairdresserCreator(context)
+        //this.hairdresserHolidayCreator.createAllHairdresserHolidays()
         this.dateFinder = new DateFinder()
     }
 
@@ -180,6 +200,8 @@ export class EventCreator {
             const isVenueHoliday = await this.holidayValidator.isVenueOnHoliday(venueId, eventDate, startTime, endTime)
 
             if (isHairdresserHoliday || isVenueHoliday) return
+
+            //console.log('create event', hairdresserId, day, startTime)
 
             await this.context.query.Event.createOne({
                 data: {
@@ -222,7 +244,7 @@ export class EventCreator {
 
             if (hairdresser?.id == '') continue
 
-            while (endTime < 17) {
+            while (endTime < getHour(event.endTime, 17)) {
                 this.createEvent(
                     venue?.id,
                     hairdresser?.id,
@@ -248,6 +270,7 @@ export class EventCreator {
 
     createAllEvents = async () => {
         for (const event: EventProps of this.data) {
+            console.log('create event for hairdresser', event.hairdresser)
             await this.createEventForYear(event)
         }
     }

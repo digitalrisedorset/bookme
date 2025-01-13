@@ -4,6 +4,13 @@ import {ViewGroupEvent} from "@/components/event/components/Dashboard/Event/View
 
 export default function Events() {
     const { query } = useRouter();
+    const router = useRouter()
+
+    if (query.eventIds === undefined) {
+        router.push({pathname: '/events'});
+        return
+    }
+
     const eventIds = JSON.parse(decodeURIComponent(query.eventIds));
 
     return (

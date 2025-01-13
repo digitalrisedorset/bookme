@@ -1,4 +1,4 @@
-import {HaircutTypeCode, HaircutTypeProps} from "../types";
+import {HaircutTypeCode, HaircutTypeGroupCode, HaircutTypeProps} from "../types";
 import type {KeystoneContext} from "@keystone-6/core/src/types";
 import {HaircutTypeGroupCreator} from "./haircutTypeGroup";
 
@@ -180,8 +180,8 @@ export class HaircutTypeCreator {
             price: 25
         },
         {
-            code: 'men_haircut_die',
-            name: 'Men Haircut Die',
+            code: 'men_haircut_dye',
+            name: 'Men Haircut Dye',
             category: 'men',
             duration: 50,
             price: 35
@@ -219,8 +219,17 @@ export class HaircutTypeCreator {
         }
     }
 
+    getHaircutTypesByGroupId = async (groupId: string) => {
+        const haircuts = await this.context.query.HaircutType.findMany({
+            where: { group: { "id": { "equals": groupId}} },
+            query: 'id',
+        })
+
+        return haircuts
+    }
+
     findHaircutTypeByHaircutName = async (haircutName: string) => {
-        let haircuts = await this.context.query.HaircutType.findMany({
+        const haircuts = await this.context.query.HaircutType.findMany({
             where: { name: { "equals": haircutName} },
             query: 'id base_price',
         })

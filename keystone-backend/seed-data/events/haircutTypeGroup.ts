@@ -1,11 +1,8 @@
 import {
-    HaircutTypeCode,
-    HaircutTypeGroup,
     HaircutTypeGroupCode,
-    HaircutTypeGroupProps,
-    HaircutTypeProps
+    HaircutTypeGroupProps
 } from "../types";
-import type {KeystoneContext} from "@keystone-6/core/src/types";
+import type { KeystoneContext } from "@keystone-6/core/src/types";
 
 export class HaircutTypeGroupCreator {
     data = [
@@ -36,15 +33,16 @@ export class HaircutTypeGroupCreator {
         this.context = context
     }
 
-    getHaircutTypeGroupByCode = (code: HaircutTypeGroupCode): any => {
+    getHaircutTypeGroupByCode = async (code: HaircutTypeGroupCode): any => {
         const haircutTypeGroupName = this.findHaircutTypeGroupNameByCode(code)
+        const result = await this.findHaircutTypeGroupByHaircutName(haircutTypeGroupName)
 
-        return this.findHaircutTypeByHaircutName(haircutTypeGroupName)
+        return result
     }
 
     findHaircutTypeGroupNameByCode = (code: HaircutTypeGroupCode): string => {
         const haircutTypeGroupName = this.data.reduce((name, haircutTypeGroup) => {
-            return (haircutTypeGroup.code === code)?haircutTypeGroup.name: name
+            return (haircutTypeGroup.code === code) ? haircutTypeGroup.name : name
         }, '')
 
         return haircutTypeGroupName
@@ -60,10 +58,10 @@ export class HaircutTypeGroupCreator {
         }
     }
 
-    findHaircutTypeByHaircutName = async (haircutGroupName: string) => {
+    findHaircutTypeGroupByHaircutName = async (haircutGroupName: string) => {
         let haircutTypeGroups = await this.context.query.HaircutTypeGroup.findMany({
-            where: { name: { "equals": haircutGroupName} },
-            query: 'id',
+            where: { name: { "equals": haircutGroupName } },
+            query: 'id name',
         })
 
         const [haircutTypeGroup] = haircutTypeGroups
@@ -75,7 +73,7 @@ export class HaircutTypeGroupCreator {
 
     createHaircutTypeGroup = async (haircutTypeGroupData: HaircutTypeGroupProps) => {
         const haircutTypeGroupInfo = await this.findHaircutTypeGroupByCode(haircutTypeGroupData.code)
-        const haircutTypeGroup = await this.findHaircutTypeByHaircutName(haircutTypeGroupInfo.name)
+        const haircutTypeGroup = await this.findHaircutTypeGroupByHaircutName(haircutTypeGroupInfo.name)
 
         if (!haircutTypeGroup) {
             console.log(`👩 Adding new haircut type group: ${haircutTypeGroupInfo.name}`)

@@ -57,3 +57,10 @@ export const isoFormatDMY = (d: string) => {
 export const concatDateTime = (dateDay, dateTime) => {
     return dateDay.concat('T', dateTime, ':00.101Z')
 }
+
+export const getHour = (time: string, defaultTime: number) => {
+    if (time ===undefined) return defaultTime
+
+    var b = time.split(/:/);
+    return b[0]
+}

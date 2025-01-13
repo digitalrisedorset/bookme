@@ -1,5 +1,6 @@
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
+import {Hairdresser} from "@/components/event/types/event";
 
 const HAIRDRESSER_QUERY = gql`
     query Hairdressers {
@@ -20,4 +21,9 @@ export const useHairdressers = () => {
     });
 
     return hairdresserData
+}
+
+export const getHairdresserDetail = (hairdressers: Hairdresser[], hairdresserId: string) => {
+    const result = hairdressers.filter((hairdresser: Hairdresser) => hairdresser.id === hairdresserId)
+    return result[0]
 }

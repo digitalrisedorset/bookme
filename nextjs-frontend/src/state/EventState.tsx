@@ -1,4 +1,4 @@
-import {createContext, useContext, useState} from "react";
+import {createContext, useContext} from "react";
 import {useImmer} from "use-immer";
 
 interface EventInfoState {
@@ -30,6 +30,10 @@ function EventStateProvider({ children }) {
         setState(draft => { draft.activeEventId = id });
     }
 
+    const resetActiveEvent = () => {
+        setState(draft => { draft.activeEventId = undefined });
+    }
+
     const toggleShampooEvent = () => {
         setState(draft => { draft.shampoo = !draft.shampoo });
     }
@@ -38,7 +42,7 @@ function EventStateProvider({ children }) {
         setState(draft => { draft.haircutId = id });
     }
 
-    return <LocalStateProvider value={{ toggleActiveEvent, toggleShampooEvent,  setHaircutPreference, eventState: state}}>{children}</LocalStateProvider>
+    return <LocalStateProvider value={{ resetActiveEvent, toggleActiveEvent, toggleShampooEvent,  setHaircutPreference, eventState: state}}>{children}</LocalStateProvider>
 }
 
 function useEventState(): EventState {

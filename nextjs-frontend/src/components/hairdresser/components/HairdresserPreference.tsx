@@ -4,8 +4,8 @@ import {capitalise} from "@/lib/string";
 import {HairdresserSelectionStyle} from "@/components/hairdresser/styles/Hairdresser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
 import {Hairdresser} from "@/components/event/types/event";
-import {usePreferenceVariables} from "@/components/user-authentication/hooks/usePreference";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
+import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 
 export const HairdresserPreference: React.FC = () => {
     const {data, loading} = useHairdressers()
@@ -14,7 +14,7 @@ export const HairdresserPreference: React.FC = () => {
 
     const onHairdresserChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         await updateUserPreference({
-            variables: usePreferenceVariables(user?.id, {'hairdresser': e.target.value})
+            variables: getUserPreferenceVariables(user?.id, {'hairdresser': e.target.value})
         })
     };
 

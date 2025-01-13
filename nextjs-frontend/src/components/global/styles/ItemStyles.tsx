@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import exp from "node:constants";
 
 interface StyleProps {
     required?: boolean;
@@ -408,6 +407,7 @@ export const ViewGroupEventStyle= styled.div<EventStatusProps>`
         font-size: 1.7rem;
         padding: 10px;
         background: var(--red);
+        color: white;
     }
     .title, .hairdresser-selection, .price {
         margin: 1rem;
@@ -424,6 +424,9 @@ export const ViewGroupEventStyle= styled.div<EventStatusProps>`
     .add-to-cart {
         background-color: var(--red);
         color: white;
+        &[disabled] {
+            opacity: 0.5;
+        }
     }
     .hairdresser-selection {
         position: relative;

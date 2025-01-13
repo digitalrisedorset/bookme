@@ -4,7 +4,6 @@ import {KeystoneEvent} from "@/components/event/types/event";
 import {AddToCart} from "@/components/event/components/Dashboard/Event/AddToCart";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {EventCount} from "@/components/event/components/Dashboard/Event/EventCount";
-import {Attendees} from "@/components/event/components/Dashboard/Event/Attendees";
 import {getDate, getTime} from "@/lib/date";
 import {getEventCartQty} from "@/lib/cart";
 import {capitalise} from "@/lib/string";

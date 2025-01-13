@@ -16,10 +16,10 @@ export class DayEvent {
 
         const dayEventList = []
 
-        for (let time in groupEventByTime) {
+        for (const time in groupEventByTime) {
             if (!groupEventByTime.hasOwnProperty(time)) continue;
 
-            let listEvents = groupEventByTime[time]
+            const listEvents = groupEventByTime[time]
             dayEventList.push(this.getDayGroupEvent(listEvents, time, user))
         }
 
@@ -29,7 +29,7 @@ export class DayEvent {
     getDayGroupEvent = (listEvents: KeystoneEvent[], time: string, user: UserInformation): DayGroupEvent[] => {
         const dayGroupEventHandler = new DayGroupEventHandler(time, user)
 
-        for (let index in listEvents) {
+        for (const index in listEvents) {
             if (!listEvents.hasOwnProperty(index)) continue;
 
             dayGroupEventHandler.addEvent(listEvents[index])
@@ -40,7 +40,7 @@ export class DayEvent {
 
     getStartTimeEvents = (events: KeystoneEvent[]) => {
         const getTimes = (times: [], event: KeystoneEvent) => {
-            let startTime = event.startTime
+            const startTime = event.startTime
             if (times[startTime]===undefined) {
                 times[startTime] = []
             }

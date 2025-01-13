@@ -5,7 +5,7 @@ import {capitalise} from "@/lib/string";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
 import React from "react";
-import {usePreferenceVariables} from "@/components/user-authentication/hooks/usePreference";
+import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 
 export const HairdresserFilter: React.FC = () => {
     const {data} = useHairdressers()
@@ -14,7 +14,7 @@ export const HairdresserFilter: React.FC = () => {
 
     const onHairdresserChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         await updateUserPreference({
-            variables: usePreferenceVariables(user?.id, {'hairdresser': e.target.value}),
+            variables: getUserPreferenceVariables(user?.id, {'hairdresser': e.target.value}),
         })
     };
 

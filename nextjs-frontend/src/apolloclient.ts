@@ -1,4 +1,4 @@
-import {ApolloClient, ApolloLink, InMemoryCache } from "@apollo/client";
+import {ApolloClient, InMemoryCache } from "@apollo/client";
 import {config} from "./config";
 
 console.log('graphqlEndpoint', config.keystone.graphqlEndpoint)

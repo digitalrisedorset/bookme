@@ -15,8 +15,24 @@ export type HaircutTypeGroupProps = {
 }
 
 export type HairdresserProps = {
+    code: string
     name: string
     level: HaircutTypeCode
+    haircutSpeciality: HaircutTypeGroupCode[]
+}
+
+export type HairdresserHolidayProps = {
+    staff: string
+    startDate: string
+    endDate: string
+    status: string
+}
+
+export type OutletHolidaysProps = {
+    venue: string
+    name: string
+    startDate: string
+    endDate: string
 }
 
 export type VenueCode = 'bourne' | 'poole' | 'winton' | 'muscliff' | 'hamworthy'
@@ -35,6 +51,7 @@ export type EventProps = {
     venue: VenueCode,
     day: WeekDay,
     startTime: string,
+    endTime: string,
     duration: number,
     breakTime: number,
     status: EventStatus,

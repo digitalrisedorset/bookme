@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 import {useMutation} from "@apollo/client";
-import {CURRENT_USER_QUERY, useUser} from "../hooks/useUser";
+import {CURRENT_USER_QUERY} from "../hooks/useUser";
 
 const UPDATE_USER_MUTATION = gql`
     mutation UpdateUser($where: UserWhereUniqueInput!, $data: UserUpdateInput!) {

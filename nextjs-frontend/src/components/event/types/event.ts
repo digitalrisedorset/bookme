@@ -69,10 +69,6 @@ export interface DayGroupEvent {
     eventIds: string[]
 }
 
-interface HairdresserShare {
-
-}
-
 export interface Hairdresser {
     id: string
     name: string

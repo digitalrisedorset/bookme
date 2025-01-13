@@ -3,14 +3,14 @@ import {Label} from "@/components/global/styles/Form";
 import {getWeeks} from "@/lib/date";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
-import {usePreferenceVariables} from "@/components/user-authentication/hooks/usePreference";
+import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 
 export const WeekFilter: React.FC = () => {
     const user = useUser()
     const [updateUserPreference] = useWeekPreference()
     const onWeekChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         await updateUserPreference({
-            variables: usePreferenceVariables(user?.id,{'weekPreference': e.target.value})
+            variables: getUserPreferenceVariables(user?.id,{'weekPreference': e.target.value})
         })
     };
 

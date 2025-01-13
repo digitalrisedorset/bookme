@@ -1,7 +1,7 @@
-export const usePreferenceVariables = (userId: string, fields: any) => {
+export const getUserPreferenceVariables = (userId: string, fields: any) => {
     const data = {}
 
-    for (let index in fields) {
+    for (const index in fields) {
         if (!fields.hasOwnProperty(index)) continue;
 
         if (index === 'weekPreference') {

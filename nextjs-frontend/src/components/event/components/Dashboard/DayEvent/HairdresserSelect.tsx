@@ -10,7 +10,7 @@ interface ListingProps {
 }
 
 export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingProps) => {
-    const {eventState, toggleActiveEvent} = useEventState()
+    const {toggleActiveEvent} = useEventState()
     const {data, loading} = useHairdressers()
 
     const getKey = (startTime: string, hairdresser: string) => {

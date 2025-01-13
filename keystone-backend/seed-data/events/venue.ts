@@ -6,6 +6,10 @@ export class VenueCreator {
         {
             code: 'maddison_poole',
             name: 'Maddisons Hair design'
+        },
+        {
+            code: 'rachelle_bournemouth',
+            name: 'Rachelle Hair design'
         }];
 
     private context
@@ -41,7 +45,7 @@ export class VenueCreator {
     findVenueByName = async (venueName: string) => {
         let venues = await this.context.query.Venue.findMany({
             where: { name: { "equals": venueName} },
-            query: 'id',
+            query: 'id name',
         })
 
         const [venue] = venues
@@ -54,8 +58,6 @@ export class VenueCreator {
     createVenue = async (venueData: VenueProps) => {
         const venueInfo = await this.findVenueByCode(venueData.code)
         const venue = await this.findVenueByName(venueInfo.name)
-
-        console.log('venue', venueInfo)
 
         if (!venue) {
             console.log(`👩 Adding new venue: ${venueInfo.name}`)

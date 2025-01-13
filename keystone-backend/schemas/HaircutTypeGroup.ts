@@ -1,6 +1,6 @@
 import {list} from "@keystone-6/core";
 import {allowAll} from "@keystone-6/core/access";
-import {integer, relationship, text} from "@keystone-6/core/fields";
+import {relationship, text} from "@keystone-6/core/fields";
 
 export const HaircutTypeGroup = list({
     access: allowAll,

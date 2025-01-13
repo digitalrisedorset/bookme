@@ -2,7 +2,6 @@ import {useOrders} from "@/components/order/graphql/useOrders";
 import {ErrorMessage} from "@/components/global/components/ErrorMessage";
 import {formatMoney} from "@/lib/price";
 import {OrderItemStyles, OrderDl} from "@/components/order/styles/OrderItemStyles";
-import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
 import React from "react";

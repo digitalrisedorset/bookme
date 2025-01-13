@@ -3,9 +3,9 @@ import {capitalise} from "@/lib/string";
 import {HairdresserSelectionStyle} from "@/components/hairdresser/styles/Hairdresser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
 import {HaircutTypeGroup} from "@/components/event/types/event";
-import {usePreferenceVariables} from "@/components/user-authentication/hooks/usePreference";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useHaircutTypeGroups} from "@/components/event/hooks/useHaircutTypeGroups";
+import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 
 export const HaircutTypeGroupPreference: React.FC = () => {
     const {data, loading} = useHaircutTypeGroups()
@@ -14,7 +14,7 @@ export const HaircutTypeGroupPreference: React.FC = () => {
 
     const onHaircutGroupChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         await updateUserPreference({
-            variables: usePreferenceVariables(user?.id, {'haircutTypeGroup': e.target.value})
+            variables: getUserPreferenceVariables(user?.id, {'haircutTypeGroup': e.target.value})
         })
     };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import {EventRow, ViewEventStyle} from "@/components/global/styles/ItemStyles";
-import {getDate, getTime} from "@/lib/date";
+import {getDate} from "@/lib/date";
 import {HaircutSelect} from "@/components/event/components/Dashboard/DayEvent/HaircutSelect";
 import {useEvent} from "@/components/event/hooks/useEvent";
 import {AddToCart} from "@/components/event/components/Dashboard/Event/AddToCart";
@@ -25,7 +25,7 @@ export const ViewEvent: React.FC<ViewEventProps> = ({eventId}: ViewEventProps) =
 
     return (
         <ViewEventStyle>
-            <h5>Let's set your appointment details</h5>
+            <h5>Let&apos;s set your appointment details</h5>
             <EventRow>
                 <span className="label">Appointment</span>
                 <p className="title">{getEventTitle(event)}</p>
