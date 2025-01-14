@@ -7,7 +7,7 @@ export const OutletHoliday = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['name', 'startDate', 'endDate'],
+            initialColumns: ['name', 'startDate', 'endDate', 'venue'],
         },
     },
     fields: {

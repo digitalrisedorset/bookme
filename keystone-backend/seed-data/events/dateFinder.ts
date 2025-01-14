@@ -1,4 +1,5 @@
 import {WeekDay} from "../types";
+import {keystoneconfig} from '../../config'
 
 export class DateFinder {
     private weekDays: WeekDay[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
@@ -20,7 +21,7 @@ export class DateFinder {
             result.push(this.getDateWithoutTime(date))
         }
 
-        for (let i=0;i<500;i++) {
+        for (let i=0;i<keystoneconfig.hairdressing.scheduleWeekSpan * 7;i++) {
             date.setDate(date.getDate() + 1);
             dateDay = date.getDay()
             //console.log(`year date year sought: ${year}, date year: ${date.getFullYear()}`, date.toISOString())

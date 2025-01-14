@@ -1,4 +1,4 @@
-import { EventProps } from "./types";
+import {EventProps} from "./types";
 import { VenueCreator } from "./events/venue";
 import { HaircutTypeCreator } from "./events/haircutType";
 import { HaircutTypeGroupCreator } from "./events/haircutTypeGroup"
@@ -7,155 +7,9 @@ import type { KeystoneContext } from "@keystone-6/core/src/types";
 import { HairdresserCreator } from "./events/hairdresser";
 import {getHour, getTime} from "../lib/date";
 import {HolidayHairdresserCreator, HolidayOutletCreator, HolidayValidator} from "./events/holiday";
+import {event} from "./sample-data/hairdresser/event";
 
 export class EventCreator {
-    data = [
-        //linda
-        {
-            venue: 'maddison_poole',
-            day: 'tuesday',
-            startTime: '9:00',
-            endTime: '17:00',
-            status: 'open',
-            hairdresser: 'linda',
-            duration: 30,
-            breakTime: 5
-        },
-        {
-            venue: 'maddison_poole',
-            day: 'wednesday',
-            startTime: '9:00',
-            endTime: '17:00',
-            status: 'open',
-            hairdresser: 'linda',
-            duration: 30,
-            breakTime: 5
-        },
-        {
-            venue: 'maddison_poole',
-            day: 'thursday',
-            startTime: '9:00',
-            endTime: '17:00',
-            status: 'open',
-            hairdresser: 'linda',
-            duration: 30,
-            breakTime: 5
-        },
-        {
-            venue: 'maddison_poole',
-            day: 'saturday',
-            startTime: '9:00',
-            endTime: '17:00',
-            status: 'open',
-            hairdresser: 'linda',
-            duration: 30,
-            breakTime: 5
-        },
-        // paul
-        {
-            venue: 'maddison_poole',
-            day: 'tuesday',
-            startTime: '9:00',
-            endTime: '17:00',
-            status: 'open',
-            hairdresser: 'paul',
-            duration: 30,
-            breakTime: 5
-        },
-        {
-            venue: 'maddison_poole',
-            day: 'wednesday',
-            startTime: '9:00',
-            endTime: '17:00',
-            status: 'open',
-            hairdresser: 'paul',
-            duration: 30,
-            breakTime: 15
-        },
-        {
-            venue: 'maddison_poole',
-            day: 'thursday',
-            startTime: '9:00',
-            endTime: '17:00',
-            status: 'open',
-            hairdresser: 'paul',
-            duration: 30,
-            breakTime: 15
-        },
-        {
-            venue: 'maddison_poole',
-            day: 'saturday',
-            startTime: '9:00',
-            endTime: '17:00',
-            status: 'open',
-            hairdresser: 'paul',
-            duration: 30,
-            breakTime: 15
-        },
-        //charlotte
-        {
-            venue: 'maddison_poole',
-            day: 'tuesday',
-            startTime: '9:00',
-            endTime: '17:00',
-            status: 'open',
-            hairdresser: 'charlotte',
-            duration: 30,
-            breakTime: 5
-        },
-        {
-            venue: 'maddison_poole',
-            day: 'wednesday',
-            startTime: '9:00',
-            endTime: '17:00',
-            status: 'open',
-            hairdresser: 'charlotte',
-            duration: 30,
-            breakTime: 15
-        },
-        {
-            venue: 'maddison_poole',
-            day: 'thursday',
-            startTime: '9:00',
-            endTime: '17:00',
-            status: 'open',
-            hairdresser: 'charlotte',
-            duration: 30,
-            breakTime: 15
-        },
-        {
-            venue: 'maddison_poole',
-            day: 'saturday',
-            startTime: '9:00',
-            endTime: '17:00',
-            status: 'open',
-            hairdresser: 'charlotte',
-            duration: 30,
-            breakTime: 15
-        },
-        //carlos
-        {
-            venue: 'maddison_poole',
-            day: 'tuesday',
-            startTime: '18:00',
-            endTime: '21:00',
-            status: 'open',
-            hairdresser: 'carlos',
-            duration: 30,
-            breakTime: 5
-        },
-        {
-            venue: 'maddison_poole',
-            day: 'saturday',
-            startTime: '9:00',
-            endTime: '12:00',
-            status: 'open',
-            hairdresser: 'carlos',
-            duration: 30,
-            breakTime: 15
-        }
-    ];
-
     private venueCreator: VenueCreator
     private venueHolidayCreator: HolidayOutletCreator
     private haircutTypeCreator: HaircutTypeCreator
@@ -165,9 +19,11 @@ export class EventCreator {
     private holidayValidator: HolidayValidator
     private hairdresserHolidayCreator: HolidayHairdresserCreator
     private context
+    private data: EventProps[]
 
     constructor(context: KeystoneContext) {
         this.context = context
+        this.data = event
         this.venueCreator = new VenueCreator(context)
         this.venueCreator.createAllVenues()
         this.venueHolidayCreator = new HolidayOutletCreator(context)
@@ -176,9 +32,9 @@ export class EventCreator {
         this.holidayValidator = new HolidayValidator(context)
         this.haircutTypeGroupCreator.createAllHaircutGroupTypes()
         this.haircutTypeCreator = new HaircutTypeCreator(context)
-        this.haircutTypeCreator.createAllHaircutTypes()
+        //this.haircutTypeCreator.createAllHaircutTypes()
         this.hairdresserCreator = new HairdresserCreator(context)
-        //this.hairdresserCreator.createAllHairdresser()
+        this.hairdresserCreator.createAllHairdresser()
         this.hairdresserHolidayCreator = new HolidayHairdresserCreator(context)
         //this.hairdresserHolidayCreator.createAllHairdresserHolidays()
         this.dateFinder = new DateFinder()
@@ -187,8 +43,6 @@ export class EventCreator {
     concatDateTime = (dateDay, dateTime) => {
         return dateDay.concat('T', dateTime, ':00.101Z')
     }
-
-
 
     /*
     eg: 2025-12-17T07:54:37.760Z

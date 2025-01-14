@@ -1,21 +1,15 @@
 import {VenueCode, VenueProps} from "../types";
 import type {KeystoneContext} from "@keystone-6/core/src/types";
+import {venue} from "../sample-data/hairdresser/venue";
 
 export class VenueCreator {
-    data = [
-        {
-            code: 'maddison_poole',
-            name: 'Maddisons Hair design'
-        },
-        {
-            code: 'rachelle_bournemouth',
-            name: 'Rachelle Hair design'
-        }];
-
     private context
+
+    private data: VenueProps[]
 
     constructor(context: KeystoneContext) {
         this.context = context
+        this.data = venue
     }
 
     getVenueByCode = (code: VenueCode): string => {

@@ -3,50 +3,31 @@ import {HaircutTypeGroupCode, HairdresserCode, HairdresserProps} from "../types"
 import {HaircutTypeGroupCreator} from "./haircutTypeGroup";
 import {HaircutTypeCreator} from "./haircutType";
 import {flatten} from "../../lib/array";
+import {haircutTypeGroup} from "../sample-data/hairdresser/haircutType";
+import {hairdresser} from "../sample-data/hairdresser/hairdresser";
+import {VenueCreator} from "./venue";
 
 export class HairdresserCreator {
-    data = [
-        {
-            code: 'carlos',
-            name: 'carlos',
-            level: 'apprentice',
-            haircutSpeciality: ['children', 'men']
-        },
-        {
-            code: 'linda',
-            name: 'linda',
-            level: 'junior',
-            haircutSpeciality: ['ladies']
-        },
-        {
-            code: 'charlotte',
-            name: 'charlotte',
-            level: 'senior',
-            haircutSpeciality: ['treatment', 'colour']
-        },
-        {
-            code: 'paul',
-            name: 'paul',
-            level: 'senior',
-            haircutSpeciality: ['colour', 'men', 'ladies']
-        },
-        {
-            code: 'rachelle',
-            name: 'rachelle',
-            level: 'senior',
-            haircutSpeciality: ['colour', 'ladies', 'ladies']
-        }];
-
     private context
 
     private haircutTypeGroupCreator: HaircutTypeGroupCreator
 
     private haircutTypeCreator: HaircutTypeCreator
 
+    private data: HairdresserProps[]
+
+    private venueCreator: VenueCreator
+
     constructor(context: KeystoneContext) {
         this.context = context
+        this.data = hairdresser
         this.haircutTypeGroupCreator = new HaircutTypeGroupCreator(context)
         this.haircutTypeCreator = new HaircutTypeCreator(context)
+        this.venueCreator = new VenueCreator(context)
+    }
+
+    findVenueByCode = (code: string) => {
+        return this.venueCreator.getVenueByCode(code)
     }
 
     getHairdresserByCode = (code: HairdresserCode): any => {
@@ -127,6 +108,7 @@ export class HairdresserCreator {
     createHairdresser = async (hairdresserData: HairdresserProps) => {
         const hairdresserInfo = await this.findHairdresserByCode(hairdresserData.code)
         const hairdresser = await this.findHairdresserByHairdresserName(hairdresserInfo.name)
+        const venue = await this.findVenueByCode(hairdresserInfo.venue)
 
         if (!hairdresser) {
             console.log(`👩 Adding new hairdresser: ${hairdresserInfo.name}`, {
@@ -136,7 +118,8 @@ export class HairdresserCreator {
             const hairdresser = await this.context.query.Hairdresser.createOne({
                 data: {
                     name: hairdresserInfo.name,
-                    level: hairdresserInfo.level
+                    level: hairdresserInfo.level,
+                    venue: { connect: { id: venue.id}},
                 },
                 query: 'id',
             })

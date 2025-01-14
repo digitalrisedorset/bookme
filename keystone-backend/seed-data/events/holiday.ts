@@ -1,8 +1,11 @@
 import type {KeystoneContext} from "@keystone-6/core/src/types";
 import {isoFormatDMY} from "../../lib/date";
-import {HairdresserHolidayProps, OutletHolidaysProps, VenueProps} from "../types";
+import {HairdresserHolidayProps, OutletHolidaysProps} from "../types";
 import {VenueCreator} from "./venue";
 import {HairdresserCreator} from "./hairdresser";
+import { hairdresserHoliday} from "../sample-data/hairdresser/hairdresser";
+import {outletHoliday} from "../sample-data/hairdresser/venue";
+
 
 export class HolidayValidator {
 
@@ -80,27 +83,15 @@ export class HolidayValidator {
 }
 
 export class HolidayHairdresserCreator {
-    data = [
-        {
-            code: 'carlos',
-            startDate: '2025-01-15T13:00:00.101Z',
-            endDate: '2025-01-18T23:59:00.101Z',
-            status: 'open'
-        },
-        {
-            code: 'linda',
-            startDate: '2025-02-17T00:00:00.101Z',
-            endDate: '2025-02-22T23:59:00.101Z',
-            status: 'approved'
-        }
-    ]
-
     private context
 
     private hairdresserCreator: HairdresserCreator
 
+    private data: HairdresserHolidayProps[]
+
     constructor(context: KeystoneContext) {
         this.context = context
+        this.data = hairdresserHoliday
         this.hairdresserCreator = new HairdresserCreator(context)
     }
 
@@ -130,21 +121,15 @@ export class HolidayHairdresserCreator {
 }
 
 export class HolidayOutletCreator {
-    data = [
-        {
-            venue: 'rachelle_bournemouth',
-            name: 'March break',
-            startDate: '2025-03-03T00:00:00.101Z',
-            endDate: '2025-03-14T00:00:00.101Z'
-        }
-    ]
-
     private context
 
     private venueCreator: VenueCreator
 
+    private data: OutletHolidaysProps[]
+
     constructor(context: KeystoneContext) {
         this.context = context
+        this.data = outletHoliday
         this.venueCreator = new VenueCreator(context)
     }
 

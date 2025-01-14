@@ -79,9 +79,12 @@ async function checkout(
         return orderItem;
     })
 
+    const lastOrder = await context.query.Order.count()
+
     // 5. Create the order and return it
     const order = await context.query.Order.createOne({
         data: {
+            orderNumber: lastOrder + 1,
             total: charge.amount,
             charge: charge.id,
             items: { create: orderItems },

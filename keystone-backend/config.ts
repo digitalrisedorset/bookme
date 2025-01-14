@@ -25,6 +25,11 @@ export type configInfo = {
     },
     stripe: {
         secretKey: string
+    },
+    hairdressing: {
+        companyCode: string,
+        offerShampoo: boolean,
+        scheduleWeekSpan: number
     }
 }
 
@@ -50,6 +55,11 @@ const config: configInfo = {
     },
     stripe: {
         secretKey: (process.env.STRIPE_SECRET  === undefined)? 'sk_test_51PITSKRqZ4IliSNkAocVG9f9K8cCecrEEqJfdmFg3wzgjYN4F5JgidjcNo8JAZXpyLA0s3yRswWBen4l6anyKgzi008oZfNt8K':process.env.STRIPE_SECRET
+    },
+    hairdressing: {
+        companyCode: 'maddison',
+        offerShampoo: true,
+        scheduleWeekSpan: 14
     }
 }
 

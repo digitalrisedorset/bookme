@@ -52,6 +52,7 @@ export const Event = list({
             defaultValue: 'open'
         }),
         venue: relationship({
+            isFilterable: true,
             ref: 'Venue.events',
         }),
         hairdresser: relationship({

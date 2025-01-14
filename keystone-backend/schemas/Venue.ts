@@ -25,6 +25,18 @@ export const Venue = list({
         holidays: relationship({
             ref: 'OutletHoliday.venue',
             many: true,
-        })
+        }),
+        users: relationship({
+            ref: 'User.venue',
+            many: true,
+        }),
+        hairdressers: relationship({
+            ref: 'Hairdresser.venue',
+            many: true,
+        }),
+        haircutTypeGroups: relationship({
+            ref: 'HaircutTypeGroup.venue',
+            many: true,
+        }),
     }
 })

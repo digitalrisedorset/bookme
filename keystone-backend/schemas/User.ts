@@ -103,6 +103,9 @@ export const User = list({
             ref: 'Event.user',
             many: true,
         }),
+        venue: relationship({
+            ref: 'Venue.users',
+        }),
         orders: relationship({ ref: 'Order.user', many: true }),
         // a flag to indicate if this user is an admin
         //  should not be publicly visible

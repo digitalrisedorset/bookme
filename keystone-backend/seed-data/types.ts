@@ -11,7 +11,8 @@ export type HaircutTypeProps = {
 }
 
 export type HaircutTypeGroupProps = {
-    name: string
+    name: string,
+    venue: string
 }
 
 export type HairdresserProps = {
@@ -19,6 +20,7 @@ export type HairdresserProps = {
     name: string
     level: HaircutTypeCode
     haircutSpeciality: HaircutTypeGroupCode[]
+    venue: string
 }
 
 export type HairdresserHolidayProps = {

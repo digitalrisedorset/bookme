@@ -6,7 +6,7 @@ export const HaircutTypeGroup = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['name'],
+            initialColumns: ['name', 'haircuts', 'venue'],
         },
     },
     fields: {
@@ -22,6 +22,9 @@ export const HaircutTypeGroup = list({
             ref: 'HaircutType.group',
             many: true,
         }),
-        user: relationship({ ref: 'User.haircutTypeGroup' })
+        user: relationship({ ref: 'User.haircutTypeGroup' }),
+        venue: relationship({
+            ref: 'Venue.haircutTypeGroups',
+        }),
     }
 })

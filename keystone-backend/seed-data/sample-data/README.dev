@@ -1,0 +1,6 @@
+replace sample-data/hairdresser by sample-data/hairdresser
+then run seed-data script
+
+//this.venueHolidayCreator.createAllOutletHolidays()
+//this.haircutTypeCreator.createAllHaircutTypes()
+//this.hairdresserHolidayCreator.createAllHairdresserHolidays()

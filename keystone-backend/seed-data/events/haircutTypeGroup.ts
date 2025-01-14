@@ -3,34 +3,20 @@ import {
     HaircutTypeGroupProps
 } from "../types";
 import type { KeystoneContext } from "@keystone-6/core/src/types";
+import {haircutTypeGroup} from "../sample-data/hairdresser/haircutType";
+import {VenueCreator} from "./venue";
 
 export class HaircutTypeGroupCreator {
-    data = [
-        {
-            code: 'children',
-            name: 'Children'
-        },
-        {
-            code: 'ladies',
-            name: 'Ladies',
-        },
-        {
-            code: 'colour',
-            name: 'Colour'
-        },
-        {
-            code: 'treatment',
-            name: 'Treatment'
-        },
-        {
-            code: 'men',
-            name: 'Men'
-        }];
-
     private context
+
+    private data: HaircutTypeGroupProps[]
+
+    private venueCreator: VenueCreator
 
     constructor(context: KeystoneContext) {
         this.context = context
+        this.data = haircutTypeGroup
+        this.venueCreator = new VenueCreator(context)
     }
 
     getHaircutTypeGroupByCode = async (code: HaircutTypeGroupCode): any => {
@@ -58,6 +44,10 @@ export class HaircutTypeGroupCreator {
         }
     }
 
+    findVenueByCode = (code: string) => {
+        return this.venueCreator.getVenueByCode(code)
+    }
+
     findHaircutTypeGroupByHaircutName = async (haircutGroupName: string) => {
         let haircutTypeGroups = await this.context.query.HaircutTypeGroup.findMany({
             where: { name: { "equals": haircutGroupName } },
@@ -74,12 +64,16 @@ export class HaircutTypeGroupCreator {
     createHaircutTypeGroup = async (haircutTypeGroupData: HaircutTypeGroupProps) => {
         const haircutTypeGroupInfo = await this.findHaircutTypeGroupByCode(haircutTypeGroupData.code)
         const haircutTypeGroup = await this.findHaircutTypeGroupByHaircutName(haircutTypeGroupInfo.name)
+        const venue = await this.findVenueByCode(haircutTypeGroupInfo.venue)
+
+        console.log('haircutTypeGroupInfo', haircutTypeGroupInfo, venue)
 
         if (!haircutTypeGroup) {
             console.log(`👩 Adding new haircut type group: ${haircutTypeGroupInfo.name}`)
             await this.context.query.HaircutTypeGroup.createOne({
                 data: {
-                    name: haircutTypeGroupInfo.name
+                    name: haircutTypeGroupInfo.name,
+                    venue: { connect: { id: venue?.id}},
                 },
                 query: 'id',
             })

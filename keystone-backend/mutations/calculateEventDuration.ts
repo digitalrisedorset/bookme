@@ -9,6 +9,7 @@ async function calculateEventDuration(
   context: Context
 ): Promise<string> {
   console.log('event duration', {haircutId, shampoo, eventId})
+
   // 1. Query the current user see if they are signed in
   const sesh = context.session as Session;
   if (!sesh.itemId) {

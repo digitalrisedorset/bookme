@@ -7,7 +7,7 @@ export const Hairdresser = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['name', 'level', 'haircutTypes'],
+            initialColumns: ['name', 'level', 'haircutTypes', 'venue'],
         },
     },
     fields: {
@@ -38,6 +38,9 @@ export const Hairdresser = list({
             ref: 'Holiday.staff',
             many: true,
         }),
-        user: relationship({ ref: 'User.hairdresser' })
+        user: relationship({ ref: 'User.hairdresser' }),
+        venue: relationship({
+            ref: 'Venue.hairdressers',
+        }),
     }
 })
