@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import {StyleProps} from "@/components/global/styles/Global";
 
-const NavStyles = styled.menu`
-    background-color: var(--pastel);
+const NavStyles = styled.menu<StyleProps>`
+    background-color: var(--${(props: StyleProps): string => props.colors.navBgColour?props.colors.navBgColour:'#595f39' });
     color: #fff;
     grid-column: 2 / -1;
     display: flex;

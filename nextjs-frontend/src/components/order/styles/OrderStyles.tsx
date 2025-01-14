@@ -21,6 +21,12 @@ const OrderStyles = styled.div`
             grid-template-columns: 1fr 1fr;
             gap: 10%;
         }
+        .order-reference {
+            font-weight: bold;
+        }
+        .payment-reference {
+            font-size: small;
+        }
     }
 `;
 export default OrderStyles;

@@ -1,6 +1,11 @@
 import {createGlobalStyle} from "styled-components";
+import {ThemeColors} from "@/config";
 
-export const GlobalStyles = createGlobalStyle`
+export interface StyleProps {
+    colors: ThemeColors;
+}
+
+export const GlobalStyles = createGlobalStyle<StyleProps>`
     /*
     https://coolors.co/eae2b7
     MAIN COLOR: #E63946  hover: #2C3F7C
@@ -22,12 +27,12 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        --red: #333252;
+        --red: ${(props: StyleProps): string => props.colors.red?props.colors.red:'#595f39' };
         --redlight: #D62828;
         --lightgrey: #EDF2F4;
         --mediumgrey: #495057;
         --grey: #495057;
-        --pastel: #C3B5D1;
+        --pastel: ${(props: StyleProps): string => props.colors.pastel?props.colors.pastel:'#595f39' };
         --orange: #D29A78;
         --black: #333252; /*#01A487;*/
         --darkgrey: #485C5B;
@@ -42,7 +47,7 @@ export const GlobalStyles = createGlobalStyle`
         background-color: var(--pastel);
         border: none;
         cursor: pointer;
-        color: var(--darkgrey);
+        color: ${(props: StyleProps): string => props.colors.buttonColor?props.colors.buttonColor:'var(--darkgrey)' };
         padding: 10px;
         border-radius: 3px;
     }

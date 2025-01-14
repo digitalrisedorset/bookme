@@ -5,6 +5,7 @@ import OrderStyles from "@/components/order/styles/OrderStyles";
 import Head from 'next/head';
 import {useRouter} from "next/router";
 import {Form} from "@/components/global/styles/Form";
+import {getOrderNumber} from "@/lib/order";
 
 export default function OrderPage() {
     const router = useRouter();
@@ -19,7 +20,7 @@ export default function OrderPage() {
     return (
         <OrderStyles>
             <Head>
-                <title>Your order - {order.id}</title>
+                <title>Your order - {getOrderNumber(order.orderNumber)}</title>
             </Head>
             <Form>
                 <h2>Your order summary</h2>
@@ -28,13 +29,13 @@ export default function OrderPage() {
                     <label htmlFor="order_reference">
                         Order reference
                     </label>
-                    <span>{order.id}</span>
+                    <span className="order-reference">{getOrderNumber(order.orderNumber)}</span>
                 </fieldset>
                 <fieldset>
                     <label htmlFor="transaction_reference">
                         Transaction reference
                     </label>
-                    <span>{order.charge}</span>
+                    <span className="payment-reference">{order.charge}</span>
                 </fieldset>
                 <fieldset>
                     <label htmlFor="order_total">

@@ -12,6 +12,7 @@ import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {HairdresserSelect} from "@/components/event/components/Dashboard/DayEvent/HairdresserSelect";
 import {useEventState} from "@/state/EventState";
 import {useEventDuration} from "@/components/event/hooks/useEventDuration";
+import {useVenueConfigState} from "@/state/VenueConfigState";
 
 interface ViewGroupEventProps {
     eventIds: string[]
@@ -23,6 +24,9 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
     const user = useUser()
     const price  = useEventPrice()
     const endTime = useEventDuration()
+    const {config} = useVenueConfigState()
+
+    console.log('config', config)
 
     if (!user) return null
 
@@ -39,10 +43,6 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
                 <p className="title">{getEventTitle(groupEvent)}</p>
             </EventRow>
             <EventRow>
-                <span className="label">Date</span>
-                <span className="title">{getDate(groupEvent.startTime)}</span>
-            </EventRow>
-            <EventRow>
                 <span className="label">Haircut</span>
                 <span className="title">{groupEvent.haircutType}</span>
             </EventRow>
@@ -50,10 +50,10 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
                 <span className="label">Hairdresser</span>
                 <HairdresserSelect eventGroup={groupEvent} />
             </EventRow>
-            <EventRow>
+            {config.offerShampoo &&<EventRow>
                 <span className="label">Shampoo</span>
                 <ShampooSelect />
-            </EventRow>
+            </EventRow>}
             <EventRow>
                 <span className="label">End Time</span>
                 <span className="title">{getTime(endTime)}</span>

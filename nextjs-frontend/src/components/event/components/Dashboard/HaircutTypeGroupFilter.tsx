@@ -17,6 +17,8 @@ export const HaircutTypeGroupFilter: React.FC = () => {
         })
     };
 
+    if (data?.haircutTypeGroups.length === 1) return null
+
     return (
         <Venue>
             <fieldset>

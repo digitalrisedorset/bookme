@@ -6,6 +6,7 @@ export const USER_ORDERS_QUERY = gql`
   query Orders($where: OrderWhereInput!) {
   orders(where: $where) {
     id
+    orderNumber
       charge
       total
       user {

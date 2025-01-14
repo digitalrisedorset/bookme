@@ -2,10 +2,12 @@ import {getDayTimeEnd} from "@/lib/date";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useHairdressers} from "@/components/hairdresser/hooks/useHairdressers";
 import {HaircutType, Hairdresser} from "@/components/event/types/event";
+import {useVenueConfigState} from "@/state/VenueConfigState";
 
 export const useFilter = () => {
     const user = useUser()
     const {data} = useHairdressers()
+    const {config} = useVenueConfigState()
 
     const filter = {}
 
@@ -17,6 +19,11 @@ export const useFilter = () => {
         return filter
     }
 
+    filter['venue'] = {
+        "id": {
+            "equals": config.id
+        }
+    }
 
     // if (user.haircutType !== '') {
     //     filter['haircutType'] = {

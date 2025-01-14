@@ -5,6 +5,7 @@ const ORDER_QUERY = gql`
   query Order($where: OrderWhereUniqueInput!) {
     order(where: $where) {
       id
+      orderNumber
       charge
       total
       user {

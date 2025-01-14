@@ -4,13 +4,15 @@ import {useCart} from "@/state/CartState";
 import Link from "next/link";
 import {SignOut} from "@/components/user-authentication/components/SignOut";
 import {CartCount} from "@/components/event/components/CartCount";
+import {useVenueConfigState} from "@/state/VenueConfigState";
 
 export const Nav: React.FC = () => {
     const user = useUser();
     const { toggleCart } = useCart()
+    const {config} = useVenueConfigState()
 
     return (
-        <NavStyles>
+        <NavStyles colors={config.themeColors}>
             {user && (
                 <>
                     {/*<Link href="/account">Account</Link>*/}

@@ -6,6 +6,7 @@ import Head from "next/head";
 import Image from "next/image";
 import React from "react";
 import {Section} from "@/components/order/styles/OrderStyles";
+import {getOrderNumber} from "@/lib/order";
 
 function countItemsInAnOrder(order) {
     return order.items.map((orderItem) => (
@@ -35,7 +36,7 @@ export default function OrderListPage() {
             <OrderDl>
                 {orders.map((order, index) => (
                     <OrderItemStyles key={index}>
-                        <h2>Order {index + 1}</h2>
+                        <h2>Order {getOrderNumber(order.orderNumber)}</h2>
                         <div className="order-meta">
                             {countItemsInAnOrder(order)}
                             <h3>Total: {formatMoney(order.total)}</h3>
