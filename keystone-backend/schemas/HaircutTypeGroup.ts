@@ -18,6 +18,14 @@ export const HaircutTypeGroup = list({
                 isRequired: true,
             },
         }),
+        code: text({
+            access: allowAll,
+            isFilterable: true,
+            isOrderable: false,
+            validation: {
+                isRequired: true,
+            },
+        }),
         haircuts: relationship({
             ref: 'HaircutType.group',
             many: true,

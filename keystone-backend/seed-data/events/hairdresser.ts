@@ -3,8 +3,8 @@ import {HaircutTypeGroupCode, HairdresserCode, HairdresserProps} from "../types"
 import {HaircutTypeGroupCreator} from "./haircutTypeGroup";
 import {HaircutTypeCreator} from "./haircutType";
 import {flatten} from "../../lib/array";
-import {haircutTypeGroup} from "../sample-data/hairdresser/haircutType";
-import {hairdresser} from "../sample-data/hairdresser/hairdresser";
+import {haircutTypeGroup} from "../sample-data/haircutType";
+import {hairdresser} from "../sample-data/hairdresser";
 import {VenueCreator} from "./venue";
 
 export class HairdresserCreator {
@@ -75,36 +75,6 @@ export class HairdresserCreator {
         return groups
     }
 
-    getHaircutTypesByGroup = async (codes: HaircutTypeGroupCode[]): any => {
-        const result = await Promise.all(codes.reduce(async (prev: any, code: HaircutTypeGroupCode) => {
-            console.log('getHaircutTypesByGroup 1', code)
-            const haircutGroup = await this.haircutTypeGroupCreator.getHaircutTypeGroupByCode(code)
-
-            if (haircutGroup) {
-                console.log('getHaircutTypesByGroup 2', code)
-
-                // const haircutTypes = await this.context.query.HaircutType.findMany({
-                //     where: { group: { "id": { "equals": haircutGroup.id } }},
-                //     query: 'id',
-                // })
-                //
-                // console.log('getHaircutTypesByGroup 3', code)
-                //
-                // if (haircutTypes?.length >0) {
-                //     console.log('haircutTypes', haircutTypes.length)
-                //     const haircutTypesFlat = []
-                //     haircutTypesFlat.forEach((haircutType: any) => {
-                //         prev.push(haircutType)
-                //     })
-                // }
-
-                console.log('getHaircutTypesByGroup 4', code)
-            }
-        }, this))
-
-        return result
-    }
-
     createHairdresser = async (hairdresserData: HairdresserProps) => {
         const hairdresserInfo = await this.findHairdresserByCode(hairdresserData.code)
         const hairdresser = await this.findHairdresserByHairdresserName(hairdresserInfo.name)
@@ -118,6 +88,7 @@ export class HairdresserCreator {
             const hairdresser = await this.context.query.Hairdresser.createOne({
                 data: {
                     name: hairdresserInfo.name,
+                    email: `${hairdresserInfo.name.toLowerCase()}@${hairdresserInfo.venue}.com`,
                     level: hairdresserInfo.level,
                     venue: { connect: { id: venue.id}},
                 },
@@ -127,6 +98,7 @@ export class HairdresserCreator {
 
         if (hairdresser) {
             const haircutTypeGroups = await this.getHaircutTypesGroupByGroupCodes(hairdresserData.haircutSpeciality)
+
             const haircutTypes = flatten(await Promise.all(haircutTypeGroups.map(async (haircutTypeGroup: any) => {
                 return await this.haircutTypeCreator.getHaircutTypesByGroupId(haircutTypeGroup.id)
             }, this)))

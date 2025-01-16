@@ -3,8 +3,8 @@ import {isoFormatDMY} from "../../lib/date";
 import {HairdresserHolidayProps, OutletHolidaysProps} from "../types";
 import {VenueCreator} from "./venue";
 import {HairdresserCreator} from "./hairdresser";
-import { hairdresserHoliday} from "../sample-data/hairdresser/hairdresser";
-import {outletHoliday} from "../sample-data/hairdresser/venue";
+import { hairdresserHoliday} from "../sample-data/hairdresser";
+import {outletHoliday} from "../sample-data/venue";
 
 
 export class HolidayValidator {

@@ -2,7 +2,7 @@ import {Venue} from "@/components/venue/styles/Venue";
 import {Label} from "@/components/global/styles/Form";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
-import React from "react";
+import React, {useEffect} from "react";
 import {useHaircutTypeGroups} from "@/components/event/hooks/useHaircutTypeGroups";
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 
@@ -22,7 +22,7 @@ export const HaircutTypeGroupFilter: React.FC = () => {
     return (
         <Venue>
             <fieldset>
-                <Label>Haircut type</Label>
+                <Label>Appointment Type</Label>
                 <select onChange={onHaircutTypeGroupChange} className="form-select" value={user?.haircutTypeGroup?.id}>
                     <option value="">-</option>
                     {data?.haircutTypeGroups.map((item) => {

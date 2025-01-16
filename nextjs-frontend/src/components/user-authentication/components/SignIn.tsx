@@ -15,12 +15,15 @@ export const SignIn: React.FC = () => {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault(); // stop the form from submitting
     const res = await setUserLogged();
-    console.log('res login', res)
     resetForm();
-    if (res !== undefined) {
+    if (!res?.id) {
       console.log('error when logging')
     } else {
-      router.push({pathname: `/`});
+      if (res?.role?.isHairdresser) {
+        router.push({pathname: `/schedule`});
+      } else {
+        router.push({pathname: `/events`});
+      }
     }
   }
 

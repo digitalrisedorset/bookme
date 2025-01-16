@@ -1,6 +1,5 @@
 import {DaysType, WeeksType} from "@/components/event/types/event";
-import {config} from "@/config";
-import {useVenueConfigState} from "@/state/VenueConfigState";
+import {useConfig} from "@/components/venue/hooks/useConfig";
 
 export const getDays = (): DaysType[] => {
     const current = new Date()
@@ -53,7 +52,7 @@ export const getDateInNumberDays = (days: number) => {
 }
 
 export const getWeeks = (): WeeksType[] => {
-    const {config} = useVenueConfigState()
+    const config = useConfig()
     const current = new Date()
     const week = [];
     // Starting Monday not Sunday

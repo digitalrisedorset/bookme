@@ -2,6 +2,7 @@ import React from "react";
 import {DayGroupEvent} from "@/components/event/types/event";
 import {capitalise} from "@/lib/string";
 import {getHairdresserDetail, useHairdressers} from "@/components/hairdresser/hooks/useHairdressers";
+import {useConfig} from "@/components/venue/hooks/useConfig";
 
 interface ListingProps {
     eventGroup: DayGroupEvent
@@ -9,6 +10,7 @@ interface ListingProps {
 
 export const HairdresserView: React.FC<ListingProps> = ({eventGroup}: ListingProps) => {
     const {data, loading} = useHairdressers()
+    const config = useConfig()
 
     const getKey = (startTime: string, hairdresser: string) => {
         const date = new Date(startTime).getTime()
@@ -16,7 +18,7 @@ export const HairdresserView: React.FC<ListingProps> = ({eventGroup}: ListingPro
         return `${date}-${hairdresser}`
     }
 
-    if (eventGroup.hairdressers.length === 1) return null
+    if (!config.showHairdresserOnEvent)  return null
 
     return <div className="hairdresser-selection">
         {eventGroup.hairdressers.map(({eventId, hairdresserId}: { eventId: string, hairdresserId: string }) => {

@@ -6,7 +6,7 @@ export const Event = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['id', 'hairdresser', 'day', 'startTime', 'endTime'],
+            initialColumns: ['id', 'hairdresser', 'day', 'startTime', 'endTime', 'status'],
         },
     },
     fields: {
@@ -48,6 +48,7 @@ export const Event = list({
                 { label: 'Started', value: 'started' },
                 { label: 'Complete', value: 'complete' },
                 { label: 'Missed', value: 'missed' },
+                { label: 'WalkIn', value: 'walkin' },
             ],
             defaultValue: 'open'
         }),

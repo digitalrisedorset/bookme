@@ -1,6 +1,6 @@
 import {VenueCode, VenueProps} from "../types";
 import type {KeystoneContext} from "@keystone-6/core/src/types";
-import {venue} from "../sample-data/hairdresser/venue";
+import {venue} from "../sample-data/venue";
 
 export class VenueCreator {
     private context
@@ -57,7 +57,10 @@ export class VenueCreator {
             console.log(`👩 Adding new venue: ${venueInfo.name}`)
             await this.context.query.Venue.createOne({
                 data: {
-                    name: venueInfo.name
+                    code: venueData.code,
+                    name: venueInfo.name,
+                    orderPrefix: venueInfo.orderPrefix,
+                    orderPadding: venueInfo.orderPadding
                 },
                 query: 'id',
             })

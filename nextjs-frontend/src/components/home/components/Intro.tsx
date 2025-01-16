@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import {IntroStyle} from "@/components/home/styles/HomeStyles";
-import {useVenueConfigState} from "@/state/VenueConfigState";
+import {useConfig} from "@/components/venue/hooks/useConfig";
 
 const Intro: React.FC = () => {
-    const {config} = useVenueConfigState()
+    const config = useConfig()
 
     return (
         <IntroStyle>

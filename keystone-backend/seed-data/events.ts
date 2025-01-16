@@ -7,7 +7,8 @@ import type { KeystoneContext } from "@keystone-6/core/src/types";
 import { HairdresserCreator } from "./events/hairdresser";
 import {getHour, getTime} from "../lib/date";
 import {HolidayHairdresserCreator, HolidayOutletCreator, HolidayValidator} from "./events/holiday";
-import {event} from "./sample-data/hairdresser/event";
+import {event} from "./sample-data/event";
+import {CustomerCreator} from "./events/customer";
 
 export class EventCreator {
     private venueCreator: VenueCreator
@@ -18,6 +19,7 @@ export class EventCreator {
     private dateFinder: DateFinder
     private holidayValidator: HolidayValidator
     private hairdresserHolidayCreator: HolidayHairdresserCreator
+    private customerCreator: CustomerCreator
     private context
     private data: EventProps[]
 
@@ -32,12 +34,14 @@ export class EventCreator {
         this.holidayValidator = new HolidayValidator(context)
         this.haircutTypeGroupCreator.createAllHaircutGroupTypes()
         this.haircutTypeCreator = new HaircutTypeCreator(context)
-        //this.haircutTypeCreator.createAllHaircutTypes()
+        this.haircutTypeCreator.createAllHaircutTypes()
         this.hairdresserCreator = new HairdresserCreator(context)
         this.hairdresserCreator.createAllHairdresser()
         this.hairdresserHolidayCreator = new HolidayHairdresserCreator(context)
         //this.hairdresserHolidayCreator.createAllHairdresserHolidays()
         this.dateFinder = new DateFinder()
+        this.customerCreator = new CustomerCreator(context)
+        this.customerCreator.createAllCustomer()
     }
 
     concatDateTime = (dateDay, dateTime) => {

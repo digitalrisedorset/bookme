@@ -2,33 +2,37 @@ import NavStyles from "@/components/global/styles/NavStyles";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useCart} from "@/state/CartState";
 import Link from "next/link";
+import {HairddresserNav} from "@/components/global/components/Nav/HairddresserNav";
+import {CustomerNav} from "@/components/global/components/Nav/CustomerNav";
 import {SignOut} from "@/components/user-authentication/components/SignOut";
 import {CartCount} from "@/components/event/components/CartCount";
-import {useVenueConfigState} from "@/state/VenueConfigState";
+import VenueTitle from "@/components/venue/components/VenueTitle";
+import {useConfig} from "@/components/venue/hooks/useConfig";
 
 export const Nav: React.FC = () => {
     const user = useUser();
     const { toggleCart } = useCart()
-    const {config} = useVenueConfigState()
+    const config = useConfig()
 
     return (
-        <NavStyles colors={config.themeColors}>
+        <NavStyles colors={config?.themeColors}>
+            <VenueTitle />
             {user && (
                 <>
-                    {/*<Link href="/account">Account</Link>*/}
-                    <Link href="/events">Events</Link>
-                    <Link href="/orders">Orders</Link>
+                    <HairddresserNav />
+                    <CustomerNav />
                     <SignOut/>
-                    <button type="button" onClick={toggleCart}>
+                    {!user?.role?.isHairdresser && <button type="button" onClick={toggleCart}>
                         Cart
                         <CartCount count={user.cartItems.reduce(
                             (tally, cartItem) => tally + cartItem.quantity, 0
                         )}/>
-                    </button>
+                    </button>}
                 </>)}
             {!user && (
                 <>
                     <Link href="/signin">Sign In</Link>
+                    <Link href="/signup">Sign Up</Link>
                 </>
             )}
         </NavStyles>

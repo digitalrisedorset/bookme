@@ -1,5 +1,6 @@
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
+import {KeystoneEvent} from "@/components/event/types/event";
 
 const EVENT_QUERY = gql`
     query Event($where: EventWhereUniqueInput!) {
@@ -23,7 +24,7 @@ const EVENT_QUERY = gql`
     }
 `;
 
-export const useEvent = (eventId: string) => {
+export const useEvent = (eventId: string): KeystoneEvent => {
     const eventData = useQuery(EVENT_QUERY, {
         variables: {
             "where": { id: eventId },

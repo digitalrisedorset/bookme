@@ -14,6 +14,5 @@ export const DayEventGroup: React.FC<ListingProps> = ({eventGroup}: ListingProps
         <p>{getTime(eventGroup.startTime)}</p>
         <HairdresserView eventGroup={eventGroup}/>
         <SetEventDetail eventGroup={eventGroup}/>
-        {/*<span className="timestamp">{eventGroup?.orderedEventId}</span>*/}
     </SingleEvent>)
 }

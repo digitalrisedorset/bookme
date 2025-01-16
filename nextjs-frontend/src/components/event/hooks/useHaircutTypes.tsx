@@ -19,7 +19,7 @@ export const useHaircutTypes = () => {
             "where": {
                 "group": {
                     "id": {
-                        "equals": user?.haircutTypeGroup.id
+                        "equals": user?.haircutTypeGroup?.id
                     }
                 }
             },

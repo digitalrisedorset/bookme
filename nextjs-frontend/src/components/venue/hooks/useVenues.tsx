@@ -3,16 +3,17 @@ import gql from "graphql-tag";
 
 const VENUES_QUERY = gql`
     query Venues {
-  venues {
-    name
-  }
-}
+      venues {
+        id
+        name
+      }
+    }
 `;
 
-export const useEvents = () => {
+export const useVenues = () => {
     const venueData = useQuery(VENUES_QUERY, {
         variables: {},
-        fetchPolicy: 'no-cache'
+        fetchPolicy: "cache-and-network"
     });
 
     return venueData

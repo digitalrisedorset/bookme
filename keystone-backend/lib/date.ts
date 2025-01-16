@@ -1,3 +1,5 @@
+import {padL} from "./string";
+
 export const getTime = (time: number) => {
     let hours = Math.floor(time);
     let minutes = Math.floor((time - hours ) * 60);
@@ -36,8 +38,6 @@ export const getTimeFromISO = (time: string) => {
 export const getFormattedDate = (date: string) => {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const dt = new Date(date);
-
-    const padL = (nr, len = 2, chr = `0`) => `${nr}`.padStart(2, chr);
 
     return `${dt.toLocaleDateString("en-GB", options)} at ${padL(dt.getHours())}:${padL(dt.getMinutes())}`
 }

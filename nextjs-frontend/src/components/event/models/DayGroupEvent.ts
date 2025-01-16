@@ -13,6 +13,7 @@ export class DayGroupEventHandler {
             name: '',
             day: '',
             venue: '',
+            status: '',
             startTime: time,
             hairdressers: [],
             orderedEventId: null,

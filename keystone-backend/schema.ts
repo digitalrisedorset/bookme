@@ -18,6 +18,7 @@ import {HaircutTypeGroup} from "./schemas/HaircutTypeGroup";
 import {HaircutTypeDuration} from "./schemas/HaircutTypeDuration";
 import {Holiday} from "./schemas/Holiday";
 import updateEventAndRemoveOverlappingEvent from "./mutations/removeOverlappingEvent";
+import {Role} from "./schemas/Role";
 
 export type Session = {
     itemId: string
@@ -35,6 +36,7 @@ export const lists = {
     HaircutTypeDuration,
     Hairdresser,
     Holiday,
+    Role,
     Venue,
     User,
     Order,

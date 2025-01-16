@@ -2,6 +2,7 @@ import React from "react";
 import {useEvents} from "@/components/event/hooks/useEvents";
 import {NoEvent} from "@/components/event/components/Dashboard/NoEvent";
 import {WeekEvents} from "@/components/event/components/Dashboard/WeekEvents";
+import {Loading} from "@/components/global/components/Loading";
 
 interface ListingProps {
     page: number
@@ -9,6 +10,8 @@ interface ListingProps {
 
 export const GetWeekEvents: React.FC<ListingProps> = () => {
     const { data, loading } = useEvents()
+
+    if (loading) return <Loading />
 
     return <>
         {data?.events.length > 0 && <WeekEvents events={data?.events} />}

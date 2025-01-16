@@ -17,6 +17,7 @@ const OrderStyles = styled.div`
             font-size: 1.3rem;
         }
         .items {
+            width: 65%;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10%;

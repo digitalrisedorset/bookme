@@ -1,4 +1,5 @@
 export type VenueProps = {
+    code: string
     name: string
 }
 
@@ -15,9 +16,16 @@ export type HaircutTypeGroupProps = {
     venue: string
 }
 
+export type CustomerProps = {
+    name: string
+    email: string
+    venue: string
+}
+
 export type HairdresserProps = {
     code: string
     name: string
+    email: string
     level: HaircutTypeCode
     haircutSpeciality: HaircutTypeGroupCode[]
     venue: string

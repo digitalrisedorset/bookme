@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {BOOKED_EVENT, EventStatus, PAST_EVENT, PURCHASED_EVENT, WALKIN_EVENT} from "@/components/event/types/event";
 
 interface StyleProps {
     required?: boolean;
@@ -22,10 +23,11 @@ export const WeekEventList = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     border: 1px solid #383838;
     margin-top: 1rem;
+    min-height: 300px;
     h4 {
         padding: 10px;
         font-weight: bold;
-        background: var(--black);
+        background: var(--red);
         color: white;
     }
 `
@@ -38,8 +40,7 @@ export const EventDetail = styled.div`
 `
 
 interface EventProps {
-    incart: string
-    wasordered: string
+    status: EventStatus
 }
 
 export const SingleEvent = styled.div`
@@ -91,9 +92,60 @@ export const SingleEvent = styled.div`
     }
 `
 
-interface EventProps {
-    incart: string
-}
+export const SingleScheduleEvent = styled.div<EventProps>`
+    position: relative;
+    width: 100%;
+    display: block;
+    border: 1px solid #ededed;
+    background: ${(props) => props.status = PAST_EVENT && `var(--lightgrey);`};
+    margin: 3px 0;
+    padding: 10px;
+    p {
+        text-align: left;
+        line-height: 1.3rem;
+        color: ${(props) => props.status === PURCHASED_EVENT && `var(--red);`};
+    }
+    .view-detail {
+        position: absolute;
+        right: 5px;
+        bottom: 10px;
+        padding: 5px;
+    }
+    .walk-in {
+        visibility: ${(props) => props.status !== WALKIN_EVENT && `hidden;`};
+        margin: 0 1rem;
+        text-align: center;
+
+        p {
+            position: absolute;
+            transform: skew(-20deg) rotate(-10deg);
+            top: 10px;
+            left: 60px;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+            background: var(--red);
+            font-size:1rem;
+            color: white;
+            padding: 0 5px;
+            z-index: 3;
+        }
+    },
+    .past-event {
+        visibility: ${(props) => props.status !== PAST_EVENT && `hidden;`};
+        p {
+            top: 7px;
+            position: absolute;
+            transform: skew(-20deg) rotate(-10deg);
+            background: var(--darkgrey);
+            line-height: 1.3;
+            font-size: 1rem;
+            color: white;
+            padding: 0 5px;
+            margin: 0 0px 0 45px;
+            z-index: 3;
+        }
+    }
+`
+
 
 interface EventStatusProps {
     active: string
@@ -101,9 +153,10 @@ interface EventStatusProps {
 
 export const ViewEventStyle = styled.div<EventStatusProps>`
     h5 {
-        font-size: 1.7rem;
+        font-size: 1.5rem;
         padding: 10px;
         background: var(--red);
+        color: white;
     }
     .title {
         margin: 1rem;
@@ -209,7 +262,7 @@ export const EventStyles = styled.div<EventProps>`
         display: block;
         padding: 10px 15px;
         border: 1px solid var(--lightgrey);
-        background: ${(props) => props.incart === "true" && `var(--red);`};
+        background: ${(props) => props.status === BOOKED_EVENT && `var(--red);`};
     }
     .add-to-cart {
         display: inline-block;
@@ -221,14 +274,14 @@ export const EventStyles = styled.div<EventProps>`
         padding: 8px 12px;
         margin: 20px 0;
         width: 60%;
-        visibility: ${(props) => props.incart === "true" && `hidden;`};
+        visibility: ${(props) => props.status === BOOKED_EVENT && `hidden;`};
         border-radius: 3px;
     }
     .add-to-cart:hover {
         background-color: var(--darkgrey);
     }
     .in-cart {
-        visibility: ${(props) => props.incart === "false" && `hidden;`};
+        visibility: ${(props) => props.status !== BOOKED_EVENT && `hidden;`};
         margin: 0 1rem;
         text-align: center;
         p {
@@ -247,7 +300,7 @@ export const EventStyles = styled.div<EventProps>`
             z-index: 3;
         }
         .ordered {
-            visibility: ${(props) => props.incart === "false" && `hidden;`};
+            visibility: ${(props) => props.status !== BOOKED_EVENT && `hidden;`};
             margin: 0 1rem;
             text-align: center;
             p {
@@ -348,8 +401,8 @@ export const ItemStyles = styled.div<StyleProps>`
 `;
 
 export const ViewButton = styled.div<EventProps>`
-     .in-cart {
-         visibility: ${(props) => props.incart === "false" && `hidden;`};
+     .in-cart, .walk-in {
+         visibility: ${(props) => props.status !== BOOKED_EVENT && `hidden;`};
          p {
              top: 7px;
              position: absolute;
@@ -362,9 +415,24 @@ export const ViewButton = styled.div<EventProps>`
              margin: 0 0px 0 45px;
              z-index: 3;
          }
-    }
+    },
+    .past-event {
+        visibility: ${(props) => props.status !== PAST_EVENT && `hidden;`};
+        p {
+            top: 7px;
+            position: absolute;
+            transform: skew(-20deg) rotate(-10deg);
+            background: var(--darkgrey);
+            line-height: 1.3;
+            font-size: 1rem;
+            color: white;
+            padding: 0 5px;
+            margin: 0 0px 0 45px;
+            z-index: 3;
+        }
+    },
     .ordered {
-        visibility: ${(props) => props.wasordered === "false" && `hidden;`};
+        visibility: ${(props) => props.status !== PURCHASED_EVENT && `hidden;`};
         p {
             top: 7px;
             position: absolute;
@@ -385,7 +453,7 @@ export const BookButton = styled.div<EventProps>`
     width: 300px;
     margin-left: 30%;
      .in-cart {
-         visibility: ${(props) => props.incart === "false" && `hidden;`};
+         visibility: ${(props) => props.status !== BOOKED_EVENT && `hidden;`};
          p {
              top: 7px;
              left: 0;

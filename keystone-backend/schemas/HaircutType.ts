@@ -18,6 +18,14 @@ export const HaircutType = list({
                 isRequired: true,
             },
         }),
+        code: text({
+            access: allowAll,
+            isFilterable: true,
+            isOrderable: false,
+            validation: {
+                isRequired: true,
+            },
+        }),
         duration: integer({
             validation: {
                 isRequired: true,

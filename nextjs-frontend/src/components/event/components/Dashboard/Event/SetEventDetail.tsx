@@ -1,10 +1,12 @@
 import React from "react";
-import {DayGroupEvent} from "@/components/event/types/event";
+import {AVAILABLE, BOOKED_EVENT, DayGroupEvent} from "@/components/event/types/event";
 import {useRouter} from "next/router";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {ViewButton} from "@/components/global/styles/ItemStyles";
 import {getTime} from "@/lib/date";
 import {useEventState} from "@/state/EventState";
+import {eventStatus} from "@/lib/event";
+import {groupEventStatus} from "@/lib/groupEvent";
 
 interface EventProps {
     eventGroup: DayGroupEvent
@@ -17,17 +19,10 @@ export const SetEventDetail: React.FC<EventProps> = ({eventGroup}: EventProps) =
 
     if (!user) return null
 
-    const isEventInCart = () => {
-        return eventGroup?.cartEvent !== null
-    }
-
-    const isAvailable = () => {
-        return eventGroup?.cartEvent=== null && eventGroup?.orderedEventId === null
-    }
-
-    const wasOrdered = () => {
-        return eventGroup?.orderedEventId !== null
-    }
+    //
+    // const isAvailable = () => {
+    //     return eventGroup?.cartEvent=== null && eventGroup?.orderedEventId === null && !isPastEvent()
+    // }
 
     const viewDetail = (e: React.FormEvent) => {
         e.preventDefault();
@@ -36,17 +31,20 @@ export const SetEventDetail: React.FC<EventProps> = ({eventGroup}: EventProps) =
     }
 
     return (
-        <ViewButton incart={isEventInCart() ? "true" : "false"} wasordered={wasOrdered() ? "true" : "false"}>
+        <ViewButton status={groupEventStatus(eventGroup)}>
+            <div className="past-event">
+                <p>Done!</p>
+            </div>
             <div className="in-cart">
                 <p>In Cart!</p>
             </div>
             <div className="ordered">
                 <p>Booked!</p>
             </div>
-            {isAvailable() && <button className="view-detail" type="button" onClick={viewDetail}>
+            {groupEventStatus(eventGroup) === AVAILABLE && <button className="view-detail" type="button" onClick={viewDetail}>
                 View
             </button>}
-            {isEventInCart() && <>
+            {groupEventStatus(eventGroup) === BOOKED_EVENT && <>
                 <span className="timestamp">Finishing at {getTime(eventGroup?.cartEvent?.endTime)}</span>
             </>}
         </ViewButton>

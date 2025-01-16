@@ -5,6 +5,7 @@ import {getEventCartQty} from "@/lib/cart";
 import {BookButton} from "@/components/global/styles/ItemStyles";
 import {useEventState} from "@/state/EventState";
 import {useRouter} from "next/router";
+import {BOOKED_EVENT} from "@/components/event/types/event";
 
 interface AddToCartProps {
     id: string
@@ -19,10 +20,8 @@ export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
 
     const isEventInCart = () => {
         if ((id!=='') && getEventCartQty(user?.cartItems, [id])>0) {
-            return "true"
+            return BOOKED_EVENT
         }
-
-        return "false"
     }
 
     const isEventReady = () => {
@@ -46,7 +45,7 @@ export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
     }
 
     return (
-        <BookButton incart={isEventInCart()}>
+        <BookButton status={isEventInCart()}>
             <div className="in-cart">
                 <p>You&apos;re in!</p>
             </div>

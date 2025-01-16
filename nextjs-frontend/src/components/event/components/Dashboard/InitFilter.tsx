@@ -12,6 +12,8 @@ export const InitFilter: React.FC = () => {
     const user = useUser()
     const preferenceStep = getUserPreferenceStep(user)
 
+    console.log('preferenceStep', preferenceStep)
+
     return (
         <ViewEventStyle>
             <h5>Let&apos;s make this booking easy</h5>

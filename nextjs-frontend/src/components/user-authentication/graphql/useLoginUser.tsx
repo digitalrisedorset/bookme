@@ -10,6 +10,9 @@ const SIGNIN_MUTATION = gql`
           id
           email
           name   
+          role {
+             isHairdresser
+          }   
         }
       }
       ... on UserAuthenticationWithPasswordFailure {
@@ -30,7 +33,7 @@ export const useLoginUser = (inputs: string[]) => {
 
         return (res?.data?.authenticateUserWithPassword.__typename === 'UserAuthenticationWithPasswordFailure')
             ? res?.data?.authenticateUserWithPassword
-            : undefined
+            : res?.data?.authenticateUserWithPassword.item
     }
 
     return setUserLogged

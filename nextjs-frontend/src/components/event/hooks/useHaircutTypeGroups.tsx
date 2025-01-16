@@ -1,6 +1,6 @@
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
-import {useVenueConfigState} from "@/state/VenueConfigState";
+import {useVenue} from "@/components/venue/hooks/useVenue";
 
 const HAIRCUT_TYPE_GROUP_QUERY = gql`
     query HaircutTypeGroups($where: HaircutTypeGroupWhereInput!, $orderBy: [HaircutTypeGroupOrderByInput!]!) {
@@ -12,7 +12,7 @@ const HAIRCUT_TYPE_GROUP_QUERY = gql`
 `;
 
 export const useHaircutTypeGroups = () => {
-    const {config} = useVenueConfigState()
+    const venue = useVenue()
 
     const haircutTypeGroupsData = useQuery(HAIRCUT_TYPE_GROUP_QUERY, {
         variables: {
@@ -24,7 +24,7 @@ export const useHaircutTypeGroups = () => {
             "where": {
                 "venue": {
                     "id": {
-                        "equals": config.id
+                        "equals": venue?.id
                     }
                 }
             }

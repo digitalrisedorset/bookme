@@ -20,7 +20,7 @@ export const ResetPrefence = styled.div`
     button,
     input[type='submit'] {
         width: auto;
-        background: var(--black);
+        background: var(--mediumgrey);
         color: white;
         border: 0;
         font-size: 1.2rem;

@@ -7,7 +7,7 @@ export interface KeystoneEvent {
     endTime: string
     venue: { name: string }
     haircutType: string
-    hairdresser: HairdresserShare
+    hairdresser: Hairdresser
     orderItem: {event: { id:string }}
 }
 
@@ -74,3 +74,15 @@ export interface Hairdresser {
     name: string
     haircutTypes: HaircutType[]
 }
+
+export const WALKIN = 'walkin'
+
+export const AVAILABLE = 'open'
+
+export const PAST_EVENT = 'pastevent'
+export const WALKIN_EVENT = 'walkin'
+export const BOOKED_EVENT = 'incart'
+
+export const PURCHASED_EVENT = 'wasordered'
+
+export type EventStatus = 'open' | 'pastevent' | 'walkin' | 'wasordered' | (string & {})

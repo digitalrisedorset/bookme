@@ -1,0 +1,34 @@
+export const venue = [
+    {
+        code: 'paddington-hairdressing',
+        name: 'Paddington Hairdressing',
+        orderPrefix: 'PAD',
+        orderPadding: 5
+    },
+    {
+        code: 'rachelle-hairdressing',
+        name: 'Rachelle Hair design',
+        orderPrefix: 'RAC',
+        orderPadding: 5
+    },
+    {
+        code: 'blush-harry',
+        name: 'Blush Harry',
+        orderPrefix: 'HAR',
+        orderPadding: 7
+    }];
+
+export const outletHoliday = [
+    {
+        venue: 'rachelle-hairdressing',
+        name: 'March break',
+        startDate: '2025-03-03T00:00:00.101Z',
+        endDate: '2025-03-14T00:00:00.101Z'
+    },
+    {
+        venue: 'blush-harry',
+        name: 'February break',
+        startDate: '2025-02-03T00:00:00.101Z',
+        endDate: '2025-02-14T00:00:00.101Z'
+    }
+]

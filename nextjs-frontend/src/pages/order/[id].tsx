@@ -20,7 +20,7 @@ export default function OrderPage() {
     return (
         <OrderStyles>
             <Head>
-                <title>Your order - {getOrderNumber(order.orderNumber)}</title>
+                <title>Your order - {order.orderReference}</title>
             </Head>
             <Form>
                 <h2>Your order summary</h2>
@@ -29,7 +29,7 @@ export default function OrderPage() {
                     <label htmlFor="order_reference">
                         Order reference
                     </label>
-                    <span className="order-reference">{getOrderNumber(order.orderNumber)}</span>
+                    <span className="order-reference">{order.orderReference}</span>
                 </fieldset>
                 <fieldset>
                     <label htmlFor="transaction_reference">

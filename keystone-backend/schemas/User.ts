@@ -2,6 +2,7 @@ import {list} from "@keystone-6/core";
 import {allowAll, denyAll} from "@keystone-6/core/access";
 import {password, text, checkbox, select, relationship, calendarDay, integer} from "@keystone-6/core/fields";
 import type {Session} from "../schema";
+import {HaircutTypeGroup} from "./HaircutTypeGroup";
 
 export function isAdminOrSameUser ({ session }: { session?: Session }) {
     // you need to have a session to do this
@@ -26,13 +27,13 @@ export const User = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['name', 'phone_number', 'email'],
+            initialColumns: ['name', 'phone_number', 'email', 'role', 'venue'],
         },
     },
     fields: {
         name: text({
             access: allowAll,
-            isFilterable: false,
+            isFilterable: true,
             isOrderable: false
         }),
         email: text({
@@ -102,13 +103,20 @@ export const User = list({
         events: relationship({
             ref: 'Event.user',
             many: true,
+            ui: {
+                createView: { fieldMode: 'hidden' },
+                itemView: { fieldMode: 'hidden' },
+                listView: { fieldMode: 'hidden' },
+            },
         }),
         venue: relationship({
             ref: 'Venue.users',
         }),
         orders: relationship({ ref: 'Order.user', many: true }),
-        // a flag to indicate if this user is an admin
-        //  should not be publicly visible
+        role: relationship({
+            ref: 'Role.assignedTo',
+            access: allowAll,
+        }),
         isAdmin: checkbox({
             access: {
                 // only the respective user, or an admin can read this field
@@ -129,5 +137,21 @@ export const User = list({
                 },
             },
         }),
+    },
+    hooks: {
+        resolveInput: async ({ item, resolvedData, context }) => {
+            const venue = resolvedData?.venue?.connect?.id || item?.venueId;
+
+            const haircutTypeGroups = await context.query.HaircutTypeGroup.findMany({
+                where: { venue: { id: { "equals": venue} }},
+                query: 'id'
+            });
+
+            if (haircutTypeGroups.length === 1) {
+                resolvedData.haircutTypeGroup = { connect: { id: haircutTypeGroups[0].id} }
+            }
+
+            return resolvedData;
+        },
     }
 })

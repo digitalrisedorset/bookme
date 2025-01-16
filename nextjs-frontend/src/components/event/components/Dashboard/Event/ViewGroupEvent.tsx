@@ -12,7 +12,7 @@ import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {HairdresserSelect} from "@/components/event/components/Dashboard/DayEvent/HairdresserSelect";
 import {useEventState} from "@/state/EventState";
 import {useEventDuration} from "@/components/event/hooks/useEventDuration";
-import {useVenueConfigState} from "@/state/VenueConfigState";
+import {useConfig} from "@/components/venue/hooks/useConfig";
 
 interface ViewGroupEventProps {
     eventIds: string[]
@@ -24,9 +24,7 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
     const user = useUser()
     const price  = useEventPrice()
     const endTime = useEventDuration()
-    const {config} = useVenueConfigState()
-
-    console.log('config', config)
+    const config = useConfig()
 
     if (!user) return null
 

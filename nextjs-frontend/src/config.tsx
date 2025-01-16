@@ -9,7 +9,8 @@ export interface ThemeColors {
 export interface VenuePreference {
     id: string,
     code: string,
-    active: boolean,
+    route: string,
+    showHairdresserOnEvent: boolean,
     scheduleWeekSpan: number,
     offerShampoo: boolean,
     logo: string,
@@ -23,6 +24,11 @@ export interface VenuePreference {
             height: number,
         }
     },
+    order: {
+        img: {
+            src: string
+        }
+    }
     themeColors: ThemeColors
 }
 
@@ -42,9 +48,9 @@ export type configInfo = {
         perPage: number
     },
     venuePreference: {
-        flashHarry: VenuePreference,
+        blushharry: VenuePreference,
         rachelle: VenuePreference
-        maddison: VenuePreference
+        paddington: VenuePreference
     }
 }
 
@@ -64,21 +70,25 @@ export const config: configInfo = {
         perPage: 20
     },
     venuePreference: {
-        flashHarry: {
-            id: '30d125ca-e52c-47ff-b7c4-01b0a5e99542',
-            code: 'flash_harry',
-            active: true,
+        blushharry: {
+            code: 'blush-harry',
+            route: 'blushharry',
+            showHairdresserOnEvent: false,
             scheduleWeekSpan: 4,
             offerShampoo: false,
             logo: 'book-harry.png',
             intro: {
-                heading: "Booking System for Flash Harry's Barber Salon",
-                general: 'Select when and which time you want for your appointment. We bring our schedule for you to book in just over 3 clicks',
-                ethos: 'Whether you are aiming to get a straight cut with hassle free booking or a designed blade workout, we are committed to deliver the best hairdressing experience you are looking for.',
                 img: {
                     src: 'harry-barber.png',
                     width: 732,
                     height: 277,
+                }
+            },
+            order: {
+                img: {
+                    src: 'orderplaceholder-harry.jpg',
+                    width: 378,
+                    height: 378,
                 }
             },
             themeColors: {
@@ -91,21 +101,24 @@ export const config: configInfo = {
             }
         },
         rachelle: {
-            id: '79a1bc9b-8fb3-4a40-a82a-7802ff542a69',
-            code: 'rachelle_bournemouth',
-            active: false,
+            code: 'rachelle-hairdressing',
+            route: 'rachelle',
+            showHairdresserOnEvent: true,
             scheduleWeekSpan: 14,
             offerShampoo: true,
             logo: 'book-purple.png',
             intro: {
-                heading: "Booking System for Rachelle's Hairdressing Salon",
-                general: 'Select when and which hairdresser you want for your appointment. We bring our schedule for you to book in just over 3 clicks',
-                ethos: 'Whether you are aiming to get a straight cut with hassle free booking or a very generous time at your preferred place to get your hair done and a pampering time for your head to feel fully refreshed!,\n' +
-                    '                    we are committed to deliver the best hairdressing experience you are looking for.',
                 img: {
                     src: 'freelance-hairddresser.jpg',
                     width: 750,
                     height: 300,
+                }
+            },
+            order: {
+                img: {
+                    src: 'orderplaceholder1.jpg',
+                    width: 378,
+                    height: 378,
                 }
             },
             themeColors: {
@@ -117,23 +130,32 @@ export const config: configInfo = {
                 buttonColor: 'mediumgrey'
             }
         },
-        maddison: {
-            code: 'maddison',
+        paddington: {
+            code: 'paddington-hairdressing',
+            route: 'paddington',
+            showHairdresserOnEvent: true,
             scheduleWeekSpan: 14,
             offerShampoo: true,
-            logo: 'book-purple.png',
+            logo: 'book3.png',
             intro: {
                 img: {
-                    src: 'harry-barber.png',
-                    width: 750,
-                    height: 300,
+                    src: 'miaddison.jpg',
+                    width: 732,
+                    height: 277,
+                }
+            },
+            order: {
+                img: {
+                    src: 'orderplaceholder.jpg',
+                    width: 540,
+                    height: 960,
                 }
             },
             themeColors: {
-                red: '#333252',
+                red: '#f77f00',
                 pastel: '#C3B5D1',
-                headerBgColour: 'darkgrey',
-                navBgColour: 'lightgrey',
+                headerBgColour: 'mediumgrey',
+                navBgColour: 'green',
                 buttonBg: 'mediumgrey',
                 buttonColor: 'mediumgrey'
             }

@@ -16,7 +16,7 @@ interface EventState {
 
 const intialState: EventInfoState = {
     activeEventId: '',
-    shampoo: true,
+    shampoo: false,
     haircutId: ''
 }
 

@@ -5,7 +5,7 @@ import Header from "@/components/global/components/Header";
 import {Nav} from "@/components/global/components/Nav";
 import {Cart} from "@/components/event/components/Cart";
 import Footer from "@/components/global/components/Footer";
-import {useVenueConfigState} from "@/state/VenueConfigState";
+import {useConfig} from "@/components/venue/hooks/useConfig";
 
 interface PageProps {
     children: React.ReactNode
@@ -13,7 +13,7 @@ interface PageProps {
 
 const Page: React.FC<PageProps> = ({ children, ...delegated }: PageProps) => {
     const [hasMounted, setHasMounted] = useState(false);
-    const {config} = useVenueConfigState()
+    const config = useConfig()
 
     useEffect(() => {
         setHasMounted(true);
@@ -25,7 +25,7 @@ const Page: React.FC<PageProps> = ({ children, ...delegated }: PageProps) => {
 
     return (
     <MainStyles {...delegated}>
-        <GlobalStyles colors={config.themeColors} />
+        <GlobalStyles colors={config?.themeColors} />
             <Header />
             <Nav />
             <Cart />

@@ -26,6 +26,22 @@ export class DayEvent {
         return dayEventList
     }
 
+    getDaySchedule = (events: KeystoneEvent[]) => {
+        const dayEvents = events.filter((event: KeystoneEvent) => event.day === this.day)
+
+        const groupEventByTime = this.getStartTimeEvents(dayEvents)
+
+        const dayEventList = []
+
+        for (const time in groupEventByTime) {
+            if (!groupEventByTime.hasOwnProperty(time)) continue;
+
+            dayEventList.push(groupEventByTime[time][0])
+        }
+
+        return dayEventList
+    }
+
     getDayGroupEvent = (listEvents: KeystoneEvent[], time: string, user: UserInformation): DayGroupEvent[] => {
         const dayGroupEventHandler = new DayGroupEventHandler(time, user)
 

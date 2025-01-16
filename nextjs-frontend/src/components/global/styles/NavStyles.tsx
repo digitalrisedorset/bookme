@@ -2,14 +2,22 @@ import styled from 'styled-components';
 import {StyleProps} from "@/components/global/styles/Global";
 
 const NavStyles = styled.menu<StyleProps>`
-    background-color: var(--${(props: StyleProps): string => props.colors.navBgColour?props.colors.navBgColour:'#595f39' });
+    background-color: var(--${(props: StyleProps): string => props.colors?.navBgColour?props.colors?.navBgColour:'#595f39' });
     color: #fff;
     grid-column: 2 / -1;
     display: flex;
     gap: 20px;
     align-items: center;
     padding: 0 40px;
-
+    .venue-title {
+        position: absolute;
+        left: 50%;
+        color: white;
+        font-size: 1.7rem;
+        background-color: var(--red);
+        padding: 5px 20px;
+        border-radius: 7px;
+    }
     a, button {
         display: inline-block;
         font-size: 16px;

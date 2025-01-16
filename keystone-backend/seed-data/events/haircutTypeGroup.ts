@@ -3,7 +3,7 @@ import {
     HaircutTypeGroupProps
 } from "../types";
 import type { KeystoneContext } from "@keystone-6/core/src/types";
-import {haircutTypeGroup} from "../sample-data/hairdresser/haircutType";
+import {haircutTypeGroup} from "../sample-data/haircutType";
 import {VenueCreator} from "./venue";
 
 export class HaircutTypeGroupCreator {
@@ -20,10 +20,16 @@ export class HaircutTypeGroupCreator {
     }
 
     getHaircutTypeGroupByCode = async (code: HaircutTypeGroupCode): any => {
-        const haircutTypeGroupName = this.findHaircutTypeGroupNameByCode(code)
-        const result = await this.findHaircutTypeGroupByHaircutName(haircutTypeGroupName)
+        const haircutTypeGroups = await this.context.query.HaircutTypeGroup.findMany({
+            where: { code: { "equals": code } },
+            query: 'id name',
+        })
 
-        return result
+        const [haircutTypeGroup] = haircutTypeGroups
+
+        if (haircutTypeGroup) {
+            return haircutTypeGroup
+        }
     }
 
     findHaircutTypeGroupNameByCode = (code: HaircutTypeGroupCode): string => {
@@ -62,17 +68,15 @@ export class HaircutTypeGroupCreator {
     }
 
     createHaircutTypeGroup = async (haircutTypeGroupData: HaircutTypeGroupProps) => {
-        const haircutTypeGroupInfo = await this.findHaircutTypeGroupByCode(haircutTypeGroupData.code)
-        const haircutTypeGroup = await this.findHaircutTypeGroupByHaircutName(haircutTypeGroupInfo.name)
-        const venue = await this.findVenueByCode(haircutTypeGroupInfo.venue)
-
-        console.log('haircutTypeGroupInfo', haircutTypeGroupInfo, venue)
+        const haircutTypeGroup = await this.getHaircutTypeGroupByCode(haircutTypeGroupData.code)
+        const venue = await this.findVenueByCode(haircutTypeGroupData.venue)
 
         if (!haircutTypeGroup) {
-            console.log(`👩 Adding new haircut type group: ${haircutTypeGroupInfo.name}`)
+            console.log(`👩 Adding new haircut type group: ${haircutTypeGroupData.name}`)
             await this.context.query.HaircutTypeGroup.createOne({
                 data: {
-                    name: haircutTypeGroupInfo.name,
+                    code: haircutTypeGroupData.code,
+                    name: haircutTypeGroupData.name,
                     venue: { connect: { id: venue?.id}},
                 },
                 query: 'id',

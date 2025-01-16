@@ -1,19 +1,18 @@
 import {createContext, useContext} from "react";
 import {useImmer} from "use-immer";
-import {VenuePreference} from "@/config";
-import {venueConfig} from "@/lib/config";
+import {ACTIVE_VENUE_KEY} from "@/components/venue/types/venue";
 
 interface VenueConfigInfoState {
-    preference: VenuePreference,
+    activeVenue: string,
 }
 
 interface VenueConfigState {
-    config: VenuePreference,
-    setActiveVenue: (config: VenuePreference) => void
+    activeVenue: string,
+    setActiveVenue: (code: string) => void
 }
 
 const intialState: VenueConfigInfoState = {
-    preference: venueConfig()
+    activeVenue: (typeof localStorage !== 'undefined')? localStorage.getItem(ACTIVE_VENUE_KEY):''
 }
 
 const LocalStateContext = createContext<VenueConfigState>({});
@@ -22,11 +21,11 @@ const LocalStateProvider = LocalStateContext.Provider;
 function VenueConfigStateProvider({ children }) {
     const [state, setState] = useImmer<VenueConfigInfoState>(intialState);
 
-    const setActiveVenue = (config: VenuePreference) => {
-        setState(draft => { draft.preference = config });
+    const setActiveVenue = (code: string) => {
+        setState(draft => { draft.activeVenue = code });
     }
 
-    return <LocalStateProvider value={{ setActiveVenue, config: state.preference}}>{children}</LocalStateProvider>
+    return <LocalStateProvider value={{ setActiveVenue, activeVenue: state.activeVenue}}>{children}</LocalStateProvider>
 }
 
 function useVenueConfigState(): VenueConfigState {

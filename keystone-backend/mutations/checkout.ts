@@ -27,7 +27,7 @@ async function checkout(
         query: graphql`
             id
             email
-            name 
+            name              
             cartItems {
               id
               quantity   
@@ -43,13 +43,13 @@ async function checkout(
                 hairdresser {
                   id            
                   name
-                }                       
+                }                                  
               }      
             }             
     `
     });
 
-    console.dir(user, { depth: null })
+    //console.dir(user, { depth: null })
     // 2. calc the total price for their order
     const cartItems = user.cartItems.filter(cartItem => cartItem.event);
     const amount = cartItems.reduce(function(tally: number, cartItem: CartItemCreateInput) {
@@ -92,6 +92,7 @@ async function checkout(
         },
         resolveFields: false,
     });
+
     // 6. Clean up any old cart item
     //const cartItemIds = user.cartItems.map(cartItem => {{ id: cartItem.id}} );
     let cartItemIds = []

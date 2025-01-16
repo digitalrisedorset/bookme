@@ -7,6 +7,7 @@ import Image from "next/image";
 import React from "react";
 import {Section} from "@/components/order/styles/OrderStyles";
 import {getOrderNumber} from "@/lib/order";
+import {useConfig} from "@/components/venue/hooks/useConfig";
 
 function countItemsInAnOrder(order) {
     return order.items.map((orderItem) => (
@@ -19,6 +20,7 @@ function countItemsInAnOrder(order) {
 
 export default function OrderListPage() {
     const { data, error, loading } = useOrders();
+    const config = useConfig()
 
     if (loading) return <p>Loading...</p>;
     if (error) return <ErrorMessage error={error} />;
@@ -31,7 +33,7 @@ export default function OrderListPage() {
             </Head>
             <div>
                 <h2>You have {orders.length} orders!</h2>
-                <Image className="logo" src="/images/orderplaceholder1.jpg" width="378" height="378" alt=""/>
+                <Image className="logo" src={`/images/${config.order.img.src}`} width={config.order.img.width} height={config.order.img.height} alt=""/>
             </div>
             <OrderDl>
                 {orders.map((order, index) => (
