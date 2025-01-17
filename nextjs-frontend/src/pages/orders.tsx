@@ -8,6 +8,7 @@ import React from "react";
 import {Section} from "@/components/order/styles/OrderStyles";
 import {getOrderNumber} from "@/lib/order";
 import {useConfig} from "@/components/venue/hooks/useConfig";
+import {Loading} from "@/components/global/components/Loading";
 
 function countItemsInAnOrder(order) {
     return order.items.map((orderItem) => (
@@ -22,7 +23,7 @@ export default function OrderListPage() {
     const { data, error, loading } = useOrders();
     const config = useConfig()
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <Loading />
     if (error) return <ErrorMessage error={error} />;
     const { orders } = data;
 

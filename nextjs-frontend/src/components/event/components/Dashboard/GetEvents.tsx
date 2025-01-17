@@ -4,6 +4,7 @@ import {Event} from "@/components/event/components/Dashboard/Event";
 import {KeystoneEvent} from "@/components/event/types/event";
 import {EventList} from "@/components/global/styles/ItemStyles";
 import {NoEvent} from "@/components/event/components/Dashboard/NoEvent";
+import {Loading} from "@/components/global/components/Loading";
 
 interface ListingProps {
     page: number
@@ -12,7 +13,7 @@ interface ListingProps {
 export const GetEvents: React.FC<ListingProps> = () => {
     const { data, loading } = useEvents()
 
-    if (loading) return <>Loading</>
+    if (loading) return <Loading />
 
     return <EventList>
             {data?.events.length > 0 && data?.events.map(

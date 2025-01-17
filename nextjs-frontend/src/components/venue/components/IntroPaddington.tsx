@@ -3,7 +3,7 @@ import Image from "next/image";
 import {IntroStyle} from "@/components/home/styles/HomeStyles";
 import {useConfig} from "@/components/venue/hooks/useConfig";
 
-const IntroMadisson: React.FC = () => {
+const IntroPaddington: React.FC = () => {
     const config = useConfig()
 
     return (
@@ -23,4 +23,4 @@ const IntroMadisson: React.FC = () => {
     )
 }
 
-export default IntroMadisson
+export default IntroPaddington

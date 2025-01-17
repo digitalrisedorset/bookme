@@ -146,7 +146,7 @@ export const config: configInfo = {
             },
             order: {
                 img: {
-                    src: 'orderplaceholder.jpg',
+                    src: 'orderplaceholder-paddington.jpg',
                     width: 540,
                     height: 960,
                 }

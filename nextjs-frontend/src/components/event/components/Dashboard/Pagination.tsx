@@ -3,6 +3,7 @@ import {usePagination} from "@/components/event/hooks/usePagination";
 import PaginationStyles from "@/components/event/styles/PaginationStyles";
 import Head from "next/head";
 import Link from "next/link";
+import {Loading} from "@/components/global/components/Loading";
 
 interface ListingProps {
     page: number
@@ -11,7 +12,7 @@ interface ListingProps {
 export const Pagination: React.FC<ListingProps> = ({page}: ListingProps) => {
     const { pageCount, count, error, loading } = usePagination();
 
-    if (loading) return 'Loading...';
+    if (loading) return <Loading />
     if (error) return <>error</>;
 
     return (

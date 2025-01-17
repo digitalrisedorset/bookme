@@ -52,4 +52,14 @@ export const GlobalStyles = createGlobalStyle<StyleProps>`
         padding: 10px;
         border-radius: 3px;
     }
+    
+    .loading {
+        position: absolute;
+        left: 50%;
+        top: 50vh;
+    }
+    
+    .very-small {
+        font-size: 8px;
+    }
 `;

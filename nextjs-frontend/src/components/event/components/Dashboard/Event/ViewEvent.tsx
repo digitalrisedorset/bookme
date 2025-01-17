@@ -9,6 +9,7 @@ import {getEventTitle} from "@/lib/event";
 import {useEventPrice} from "@/components/event/hooks/useEventPrice";
 import {formatMoney} from "@/lib/price";
 import {useEventDuration} from "@/components/event/hooks/useEventDuration";
+import {Loading} from "@/components/global/components/Loading";
 
 interface ViewEventProps {
     eventId: string
@@ -19,7 +20,7 @@ export const ViewEvent: React.FC<ViewEventProps> = ({eventId}: ViewEventProps) =
     const price = useEventPrice()
     const endTime = useEventDuration()
 
-    if (loading) return <>Loading</>
+    if (loading) return <Loading />
 
     const {event} = data
 

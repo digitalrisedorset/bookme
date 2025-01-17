@@ -6,7 +6,7 @@ export default function Home() {
     const config = useConfig()
     const router = useRouter()
 
-    router.push({pathname: config.route})
+    router.push({pathname: config.route?? 'paddington'})
 
     return (
        <IntroRachelle />

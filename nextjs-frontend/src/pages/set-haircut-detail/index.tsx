@@ -14,8 +14,6 @@ export default function Events() {
     const eventIds = JSON.parse(decodeURIComponent(query.eventIds));
 
     return (
-        <>
-            <ViewGroupEvent eventIds={eventIds} />
-        </>
+        <ViewGroupEvent eventIds={eventIds} />
     )
 }

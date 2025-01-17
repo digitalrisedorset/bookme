@@ -19,7 +19,7 @@ const IntroRachelle: React.FC = () => {
                 </p>
             </div>
             <div className="illustration">
-                {/*<Image className="logo" src={`/images/${config?.intro?.img?.src}`} width={config?.intro?.img?.width} height={config?.intro?.img?.height} alt="Rachelle's Hairdresser freelancing"/>*/}
+                <Image className="logo" src={`/images/${config?.intro?.img?.src}`} width={config?.intro?.img?.width} height={config?.intro?.img?.height} alt="Rachelle's Hairdresser freelancing"/>
             </div>
         </IntroStyle>
     )

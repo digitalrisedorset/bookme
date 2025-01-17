@@ -13,6 +13,7 @@ import {HairdresserSelect} from "@/components/event/components/Dashboard/DayEven
 import {useEventState} from "@/state/EventState";
 import {useEventDuration} from "@/components/event/hooks/useEventDuration";
 import {useConfig} from "@/components/venue/hooks/useConfig";
+import {Loading} from "@/components/global/components/Loading";
 
 interface ViewGroupEventProps {
     eventIds: string[]
@@ -26,9 +27,9 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
     const endTime = useEventDuration()
     const config = useConfig()
 
-    if (!user) return null
+    if (loading) return <Loading />
 
-    if (loading || !data?.events) return <>Loading</>
+    if (!user) return null
 
     const eventHandler = new GroupEventHandler(user)
     const groupEvent = eventHandler.getGroupEvent(data.events)

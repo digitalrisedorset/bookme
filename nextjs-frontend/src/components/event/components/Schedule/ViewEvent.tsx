@@ -4,6 +4,7 @@ import {getEventTitle} from "@/lib/event";
 import {useSheduledEvent} from "@/components/event/hooks/useScheduledEvent";
 import {formatMoney} from "@/lib/price";
 import {getTime} from "@/lib/date";
+import {Loading} from "@/components/global/components/Loading";
 
 interface ViewEventProps {
     eventId: string
@@ -12,7 +13,7 @@ interface ViewEventProps {
 export const ViewEvent: React.FC<ViewEventProps> = ({eventId}: ViewEventProps) => {
     const { data, loading } = useSheduledEvent(eventId)
 
-    if (loading) return <>Loading</>
+    if (loading) return <Loading />
 
     const {event} = data
 

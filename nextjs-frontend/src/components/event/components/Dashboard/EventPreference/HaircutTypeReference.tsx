@@ -6,6 +6,7 @@ import {HaircutType} from "@/components/event/types/event";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useHaircutTypes} from "@/components/event/hooks/useHaircutTypes";
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
+import {Loading} from "@/components/global/components/Loading";
 
 export const HaircutTypePreference: React.FC = () => {
     const {data, loading} = useHaircutTypes()
@@ -18,7 +19,7 @@ export const HaircutTypePreference: React.FC = () => {
         })
     };
 
-    if (loading) return null
+    if (loading) return <Loading />
 
     return <HairdresserSelectionStyle>
         {data?.haircutTypes.map((haircut: HaircutType) => {

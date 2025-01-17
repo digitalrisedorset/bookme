@@ -6,6 +6,7 @@ import {HaircutTypeGroup} from "@/components/event/types/event";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useHaircutTypeGroups} from "@/components/event/hooks/useHaircutTypeGroups";
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
+import {Loading} from "@/components/global/components/Loading";
 
 export const HaircutTypeGroupPreference: React.FC = () => {
     const {data, loading} = useHaircutTypeGroups()
@@ -18,7 +19,7 @@ export const HaircutTypeGroupPreference: React.FC = () => {
         })
     };
 
-    if (loading) return null
+    if (loading) return <Loading />
 
     return <HairdresserSelectionStyle>
         {data?.haircutTypeGroups.map((haircutGroup: HaircutTypeGroup) => {

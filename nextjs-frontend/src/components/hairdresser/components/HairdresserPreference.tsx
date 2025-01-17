@@ -6,6 +6,7 @@ import {useWeekPreference} from "@/components/user-authentication/graphql/useUse
 import {Hairdresser} from "@/components/event/types/event";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
+import {Loading} from "@/components/global/components/Loading";
 
 export const HairdresserPreference: React.FC = () => {
     const {data, loading} = useHairdressers()
@@ -18,7 +19,7 @@ export const HairdresserPreference: React.FC = () => {
         })
     };
 
-    if (loading) return null
+    if (loading) return <Loading />
 
     return <HairdresserSelectionStyle>
         {data?.hairdressers.map((hairdresser: Hairdresser) => {

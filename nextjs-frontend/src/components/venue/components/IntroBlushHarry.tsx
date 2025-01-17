@@ -9,7 +9,7 @@ const IntroBlushHarry: React.FC = () => {
     return (
         <IntroStyle>
             <div className="content">
-                <h2>Booking System for Flash Harry&apos;s Barber Salon</h2>
+                <h2>Booking System for Blush Harry&apos;s Barber Salon</h2>
                 <p className="general">Select when and which time you want for your appointment.
                     We bring our schedule for you to book in just over 3 clicks
                 </p>

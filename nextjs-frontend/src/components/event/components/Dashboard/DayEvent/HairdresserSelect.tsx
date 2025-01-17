@@ -4,6 +4,7 @@ import {getGroupEventHairdresserInfo} from "@/components/event/models/DayGroupEv
 import {useEventState} from "@/state/EventState";
 import {capitalise} from "@/lib/string";
 import {useHairdressers} from "@/components/hairdresser/hooks/useHairdressers";
+import {Loading} from "@/components/global/components/Loading";
 
 interface ListingProps {
     eventGroup: DayGroupEvent
@@ -12,6 +13,8 @@ interface ListingProps {
 export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingProps) => {
     const {toggleActiveEvent} = useEventState()
     const {data, loading} = useHairdressers()
+
+    if (loading) return <Loading />
 
     const getKey = (startTime: string, hairdresser: string) => {
         const date = new Date(startTime).getTime()

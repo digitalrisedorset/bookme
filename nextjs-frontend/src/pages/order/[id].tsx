@@ -6,6 +6,8 @@ import Head from 'next/head';
 import {useRouter} from "next/router";
 import {Form} from "@/components/global/styles/Form";
 import {getOrderNumber} from "@/lib/order";
+import {Loading} from "@/components/global/components/Loading";
+import React from "react";
 
 export default function OrderPage() {
     const router = useRouter();
@@ -13,7 +15,7 @@ export default function OrderPage() {
 
     const { data, error, loading } = useOrder(orderId);
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <Loading />
     if (error) return <ErrorMessage error={error} />;
     const { order } = data;
 

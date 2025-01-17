@@ -97,7 +97,7 @@ export const SingleScheduleEvent = styled.div<EventProps>`
     width: 100%;
     display: block;
     border: 1px solid #ededed;
-    background: ${(props) => props.status = PAST_EVENT && `var(--lightgrey);`};
+    background: ${(props) => props.status === PAST_EVENT && `var(--lightgrey);`};
     margin: 3px 0;
     padding: 10px;
     p {
@@ -112,7 +112,7 @@ export const SingleScheduleEvent = styled.div<EventProps>`
         padding: 5px;
     }
     .walk-in {
-        visibility: ${(props) => props.status !== WALKIN_EVENT && `hidden;`};
+        visibility: ${(props) => (props.status !== WALKIN_EVENT) && `hidden`};
         margin: 0 1rem;
         text-align: center;
 
@@ -401,7 +401,7 @@ export const ItemStyles = styled.div<StyleProps>`
 `;
 
 export const ViewButton = styled.div<EventProps>`
-     .in-cart, .walk-in {
+     .in-cart {
          visibility: ${(props) => props.status !== BOOKED_EVENT && `hidden;`};
          p {
              top: 7px;

@@ -1,8 +1,8 @@
 import {useRouter} from "next/router";
-import IntroMadisson from "@/components/venue/components/IntroMadisson";
 import {isHairdresser} from "@/components/user-authentication/hooks/useUserRole";
 import {useEffect} from "react";
 import {ACTIVE_VENUE_KEY} from "@/components/venue/types/venue";
+import IntroPaddington from "@/components/venue/components/IntroPaddington";
 
 export default function Home() {
     const router = useRouter()
@@ -18,6 +18,6 @@ export default function Home() {
     // }
 
     return (
-        <IntroMadisson />
+        <IntroPaddington />
     );
 }
