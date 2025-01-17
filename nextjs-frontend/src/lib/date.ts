@@ -1,5 +1,4 @@
 import {DaysType, WeeksType} from "@/components/event/types/event";
-import {useConfig} from "@/components/venue/hooks/useConfig";
 
 export const getDays = (): DaysType[] => {
     const current = new Date()
@@ -51,14 +50,13 @@ export const getDateInNumberDays = (days: number) => {
     return current
 }
 
-export const getWeeks = (): WeeksType[] => {
-    const config = useConfig()
+export const getWeeks = (scheduleWeekSpan: number): WeeksType[] => {
     const current = new Date()
     const week = [];
     // Starting Monday not Sunday
     const first = current.getDate() - current.getDay() + 1;
     current.setDate(first);
-    for (let i = 0; i < config.scheduleWeekSpan; i++) {
+    for (let i = 0; i < scheduleWeekSpan; i++) {
         week.push({
             weekStart: getDayTimeStart(current),
             weekLabel: getWeekLabel(i)

@@ -1,12 +1,13 @@
 import {DayGroupEvent, KeystoneEvent} from "@/components/event/types/event";
 import {getTime} from "@/lib/date";
+import {UserInformation} from "@/components/user-authentication/hooks/useUser";
 
 export class GroupEventHandler {
     private groupEvent: DayGroupEvent = {}
 
-    private user: any
+    private user: UserInformation
 
-    constructor(user: any) {
+    constructor(user: UserInformation) {
         this.user = user
         this.groupEvent = {
             name: '',

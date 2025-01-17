@@ -12,7 +12,7 @@ export const ResetPreferenceFilter: React.FC = () => {
     const {data} = useHaircutTypeGroups()
 
     const resetFilter = async () => {
-        let preference = {
+        const preference = {
             'weekPreference': '',
             'haircutType': null
         }

@@ -1,4 +1,4 @@
-export const getUserPreferenceVariables = (userId: string, fields: any) => {
+export const getUserPreferenceVariables = (userId: string, fields: unknown) => {
     const data = {}
 
     for (const index in fields) {

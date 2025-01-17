@@ -3,6 +3,7 @@ import {DayGroupEvent} from "@/components/event/types/event";
 import {capitalise} from "@/lib/string";
 import {getHairdresserDetail, useHairdressers} from "@/components/hairdresser/hooks/useHairdressers";
 import {useConfig} from "@/components/venue/hooks/useConfig";
+import {Loading} from "@/components/global/components/Loading";
 
 interface ListingProps {
     eventGroup: DayGroupEvent
@@ -18,6 +19,7 @@ export const HairdresserView: React.FC<ListingProps> = ({eventGroup}: ListingPro
         return `${date}-${hairdresser}`
     }
 
+    if (loading) return <Loading />
     if (!config.showHairdresserOnEvent)  return null
 
     return <div className="hairdresser-selection">

@@ -10,7 +10,7 @@ const EVENT_DURATION_QUERY = gql`
 `;
 
 export const useEventDuration = () => {
-    const {eventState, shampoo} = useEventState();
+    const {eventState} = useEventState();
     const user = useUser()
 
     const { data } = useQuery(EVENT_DURATION_QUERY, {

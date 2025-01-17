@@ -1,5 +1,5 @@
 import React from "react";
-import {DaysType, KeystoneEvent} from "@/components/event/types/event";
+import {DayScheduleEvent, DaysType, KeystoneEvent} from "@/components/event/types/event";
 import {getDays} from "@/lib/date";
 import {WeekEventList, EventDetail} from "@/components/global/styles/ItemStyles";
 import {NoDayEventList} from "@/components/event/components/Dashboard/Event/NoDayEventList";
@@ -23,7 +23,7 @@ export const WeekEvents: React.FC<ListingProps> = ({events}: ListingProps) => {
 
             return <EventDetail key={day.day}>
                 <h4>{day.dayLabel}</h4>
-                {dayEventList.length>0 && dayEventList.map((event: any, index: string) => {
+                {dayEventList.length>0 && dayEventList.map((event: DayScheduleEvent, index: string) => {
                     return <DaySingleEvent key={index} event={event}/>
                 })}
                 {dayEventList.length===0 && <NoDayEventList key={day} />}

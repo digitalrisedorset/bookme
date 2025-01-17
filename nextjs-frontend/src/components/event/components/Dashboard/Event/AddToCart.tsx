@@ -6,7 +6,6 @@ import {BookButton} from "@/components/global/styles/ItemStyles";
 import {useEventState} from "@/state/EventState";
 import {useRouter} from "next/router";
 import {BOOKED_EVENT} from "@/components/event/types/event";
-import {Loading} from "@/components/global/components/Loading";
 
 interface AddToCartProps {
     id: string
@@ -15,7 +14,6 @@ interface AddToCartProps {
 export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
     const user = useUser()
     const {eventState} = useEventState()
-    const {shampoo} = useEventState()
     const router = useRouter()
     const [addToCart, { loading }] = useAddToCart(id);
 

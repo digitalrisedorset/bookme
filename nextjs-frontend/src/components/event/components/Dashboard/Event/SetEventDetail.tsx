@@ -5,7 +5,6 @@ import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {ViewButton} from "@/components/global/styles/ItemStyles";
 import {getTime} from "@/lib/date";
 import {useEventState} from "@/state/EventState";
-import {eventStatus} from "@/lib/event";
 import {groupEventStatus} from "@/lib/groupEvent";
 
 interface EventProps {
@@ -18,11 +17,6 @@ export const SetEventDetail: React.FC<EventProps> = ({eventGroup}: EventProps) =
     const user = useUser()
 
     if (!user) return null
-
-    //
-    // const isAvailable = () => {
-    //     return eventGroup?.cartEvent=== null && eventGroup?.orderedEventId === null && !isPastEvent()
-    // }
 
     const viewDetail = (e: React.FormEvent) => {
         e.preventDefault();

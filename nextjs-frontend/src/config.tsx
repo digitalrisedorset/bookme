@@ -48,6 +48,7 @@ export type configInfo = {
         perPage: number
     },
     venuePreference: {
+        defaultVenue: string,
         blushharry: VenuePreference,
         rachelle: VenuePreference
         paddington: VenuePreference
@@ -70,6 +71,7 @@ export const config: configInfo = {
         perPage: 20
     },
     venuePreference: {
+        defaultVenue: 'paddington-hairdressing',
         blushharry: {
             code: 'blush-harry',
             route: 'blushharry',

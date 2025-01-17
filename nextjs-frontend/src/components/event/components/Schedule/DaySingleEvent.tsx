@@ -1,12 +1,12 @@
 import React from "react";
-import {AVAILABLE, KeystoneEvent, PURCHASED_EVENT} from "@/components/event/types/event";
+import {AVAILABLE, DayScheduleEvent, PURCHASED_EVENT} from "@/components/event/types/event";
 import { SingleScheduleEvent, ViewButton} from "@/components/global/styles/ItemStyles";
 import {getTime} from "@/lib/date";
 import {useRouter} from "next/router";
 import {eventStatus} from "@/lib/event";
 
 interface ListingProps {
-    event: KeystoneEvent
+    event: DayScheduleEvent
 }
 
 export const DaySingleEvent: React.FC<ListingProps> = ({event}: ListingProps) => {

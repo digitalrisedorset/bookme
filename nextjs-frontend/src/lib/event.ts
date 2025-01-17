@@ -1,6 +1,5 @@
 import {
     AVAILABLE,
-    BOOKED_EVENT,
     EventStatus,
     KeystoneEvent,
     PAST_EVENT, PURCHASED_EVENT,

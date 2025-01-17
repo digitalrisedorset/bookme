@@ -42,7 +42,7 @@ export class DayEvent {
         return dayEventList
     }
 
-    getDayGroupEvent = (listEvents: KeystoneEvent[], time: string, user: UserInformation): DayGroupEvent[] => {
+    getDayGroupEvent = (listEvents: KeystoneEvent[], time: string, user: UserInformation): DayGroupEvent => {
         const dayGroupEventHandler = new DayGroupEventHandler(time, user)
 
         for (const index in listEvents) {

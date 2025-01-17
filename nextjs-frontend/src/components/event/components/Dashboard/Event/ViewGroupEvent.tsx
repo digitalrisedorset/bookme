@@ -1,6 +1,6 @@
-import React, {use} from "react";
+import React from "react";
 import {EventRow, ViewGroupEventStyle} from "@/components/global/styles/ItemStyles";
-import {getDate, getTime} from "@/lib/date";
+import {getTime} from "@/lib/date";
 import {useEventGroup} from "@/components/event/hooks/useEventGroup";
 import {AddToCart} from "@/components/event/components/Dashboard/Event/AddToCart";
 import {ShampooSelect} from "@/components/event/components/Dashboard/Event/ShampooSelect";

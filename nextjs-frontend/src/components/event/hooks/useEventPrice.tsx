@@ -10,7 +10,7 @@ const EVENT_PRICE_QUERY = gql`
 `;
 
 export const useEventPrice = () => {
-    const {eventState, shampoo} = useEventState();
+    const {eventState} = useEventState();
     const user = useUser()
 
     const { data } = useQuery(EVENT_PRICE_QUERY, {

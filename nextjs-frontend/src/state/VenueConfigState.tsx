@@ -1,6 +1,7 @@
 import {createContext, useContext} from "react";
 import {useImmer} from "use-immer";
 import {ACTIVE_VENUE_KEY} from "@/components/venue/types/venue";
+import {config} from "@/config"
 
 interface VenueConfigInfoState {
     activeVenue: string,
@@ -11,8 +12,21 @@ interface VenueConfigState {
     setActiveVenue: (code: string) => void
 }
 
+const readActiveVenue = () => {
+    let venue
+    if (typeof localStorage !== 'undefined') {
+        venue = localStorage.getItem(ACTIVE_VENUE_KEY)
+    }
+
+    if (venue === null) {
+        venue = config.venuePreference.defaultVenue
+    }
+
+    return venue
+}
+
 const intialState: VenueConfigInfoState = {
-    activeVenue: (typeof localStorage !== 'undefined')? localStorage.getItem(ACTIVE_VENUE_KEY):''
+    activeVenue: readActiveVenue()
 }
 
 const LocalStateContext = createContext<VenueConfigState>({});

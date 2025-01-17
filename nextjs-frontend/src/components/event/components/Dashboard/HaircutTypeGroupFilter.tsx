@@ -2,7 +2,7 @@ import {Venue} from "@/components/venue/styles/Venue";
 import {Label} from "@/components/global/styles/Form";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
-import React, {useEffect} from "react";
+import React from "react";
 import {useHaircutTypeGroups} from "@/components/event/hooks/useHaircutTypeGroups";
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 

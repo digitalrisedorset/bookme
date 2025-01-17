@@ -5,7 +5,6 @@ import OrderStyles from "@/components/order/styles/OrderStyles";
 import Head from 'next/head';
 import {useRouter} from "next/router";
 import {Form} from "@/components/global/styles/Form";
-import {getOrderNumber} from "@/lib/order";
 import {Loading} from "@/components/global/components/Loading";
 import React from "react";
 

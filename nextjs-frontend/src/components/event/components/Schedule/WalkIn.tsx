@@ -1,11 +1,9 @@
 import React from "react";
-import {useAddToCart} from "@/components/event/graphql/useAddToCart";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
-import {getEventCartQty} from "@/lib/cart";
 import {BookButton} from "@/components/global/styles/ItemStyles";
-import {useEventState} from "@/state/EventState";
 import {useRouter} from "next/router";
 import {useWalkIn} from "@/components/event/graphql/useWalkInEvent";
+import {Loading} from "@/components/global/components/Loading";
 
 interface WalkInProps {
     id: string
@@ -16,6 +14,7 @@ export const WalkIn: React.FC<WalkInProps> = ({id}: WalkInProps) => {
     const router = useRouter()
     const [updateEvent, { loading }] = useWalkIn(id)
 
+    if (loading) return <Loading />
     if (!user) return null;
 
     async function handleClick(e: React.FormEvent) {

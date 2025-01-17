@@ -1,6 +1,6 @@
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 
-export function isHairdresser(): Boolean | null {
+export function useIsHairdresser(): boolean {
     const user = useUser();
 
     return user?.role?.isHairdresser === true
