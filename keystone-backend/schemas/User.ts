@@ -147,7 +147,7 @@ export const User = list({
                 query: 'id'
             });
 
-            if (haircutTypeGroups.length === 1) {
+            if (haircutTypeGroups && haircutTypeGroups.length === 1) {
                 resolvedData.haircutTypeGroup = { connect: { id: haircutTypeGroups[0].id} }
             }
 
