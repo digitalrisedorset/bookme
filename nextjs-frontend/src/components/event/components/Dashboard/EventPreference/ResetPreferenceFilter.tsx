@@ -5,22 +5,25 @@ import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 import {useHaircutTypeGroups} from "@/components/event/hooks/useHaircutTypeGroups";
+import {EventPreferenceFilterType} from "@/components/event/types/event";
 
 export const ResetPreferenceFilter: React.FC = () => {
     const user = useUser()
     const [updateUserPreference] = useWeekPreference()
     const {data} = useHaircutTypeGroups()
 
+    if (user === null) return
+
     const resetFilter = async () => {
-        const preference = {
+        const preference: EventPreferenceFilterType = {
             'weekPreference': '',
             'haircutType': null
         }
         if (data?.haircutTypeGroups>1) {
-            preference['haircutTypeGroup'] = null
+            preference.haircutTypeGroup = null
         }
         await updateUserPreference({
-            variables: getUserPreferenceVariables(user?.id, preference)
+            variables: getUserPreferenceVariables(user.id, preference)
         })
     };
 

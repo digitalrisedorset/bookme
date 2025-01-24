@@ -10,7 +10,13 @@ import {
 import {useCheckout} from "@/components/event/graphql/useCheckout";
 import {useCart} from "@/state/CartState";
 import {useRouter} from "next/router";
-import {Stripe} from "@stripe/stripe-js/dist/stripe-js/stripe";
+import {Stripe, StripeError} from "@stripe/stripe-js/dist/stripe-js/stripe";
+import {PaymentMethod} from "@stripe/stripe-js";
+
+interface IPaymentMethod {
+    error?: StripeError | undefined;
+    paymentMethod?: PaymentMethod | undefined;
+}
 
 export const CheckoutForm: React.FC = () => {
     const stripe = useStripe() as Stripe;
@@ -27,10 +33,16 @@ export const CheckoutForm: React.FC = () => {
         console.log('We gotta do some work..');
         // 2. Start the page transition
         nProgress.start();
+
+        const cardElement = elements?.getElement(CardElement);
+        if (!cardElement) {
+            return;
+        }
+
         // 3. Create the payment method via stripe (Token comes back here if successful)
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error, paymentMethod }: IPaymentMethod = await stripe.createPaymentMethod({
             type: 'card',
-            card: elements.getElement(CardElement),
+            card: cardElement
         });
         console.log(paymentMethod);
         // 4. Handle any errors from stripe
@@ -39,9 +51,10 @@ export const CheckoutForm: React.FC = () => {
             return; // stops the checkout from happening
         }
         // 5. Send the token from step 3 to our keystone server, via a custom mutation!
+        // @ts-expect-error bypass stripe check as this is an old version of stripe
         const order = await checkout({
             variables: {
-                token: paymentMethod.id,
+                token: paymentMethod?.id,
             },
         });
         console.log(`Finished with the order!!`);

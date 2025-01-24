@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import {HaircutTypeGroup, KeystoneCartItem} from "@/components/event/types/event";
+import {HaircutType, HaircutTypeGroup, KeystoneCartItem} from "@/components/event/types/event";
 
 const CURRENT_USER_QUERY = gql`
   query {
@@ -52,6 +52,8 @@ export interface UserInformation {
     id: string
     email: string
     name: string
+    haircutType?: HaircutType
+    weekPreference: string
     cartItems: KeystoneCartItem[]
     haircutTypeGroup: HaircutTypeGroup
 }

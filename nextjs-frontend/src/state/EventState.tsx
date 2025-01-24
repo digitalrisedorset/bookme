@@ -8,10 +8,12 @@ interface EventInfoState {
 }
 
 interface EventState {
-    activeEventId: string,
-    shampoo: boolean,
-    haircutId: string,
+    eventState: EventInfoState,
     setActiveEvent: (id: string) => void
+    resetActiveEvent: () => void
+    toggleActiveEvent: (id: string) => void
+    toggleShampooEvent: () => void
+    setHaircutPreference: (id: string) => void
 }
 
 const intialState: EventInfoState = {

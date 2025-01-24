@@ -56,14 +56,20 @@ export interface DayGroupEvent {
     day: string
     startTime: string
     venue: string
-    haircutType: Pick<HaircutType, 'id' | 'name'>
-    hairdressers: Pick<Hairdresser, 'id' | 'name'>[]
+    haircutType?: string // Pick<HaircutType, 'id' | 'name'>
+    hairdressers: GroupEventHairdresserMap[] //Pick<Hairdresser, 'id' | 'name'>[]
     orderedEventId: string
     cartEvent?: KeystoneEvent
     eventIds: string[]
 }
 
+export interface GroupEventHairdresserMap {
+    eventId: string,
+    hairdresserId: string
+}
+
 export interface DayScheduleEvent {
+    id: string
     name: string
     day: string
     status: EventStatus
@@ -88,3 +94,11 @@ export const BOOKED_EVENT = 'incart'
 export const PURCHASED_EVENT = 'wasordered'
 
 export type EventStatus = 'open' | 'pastevent' | 'walkin' | 'wasordered' | (string & {})
+
+export type EventFilterType = 'haircutType' | 'haircutTypeGroup' | 'hairdresser' | 'weekPreference' | (string & {})
+
+export interface EventPreferenceFilterType {
+    haircutType: string | null
+    haircutTypeGroup?: string | null
+    weekPreference: string
+}

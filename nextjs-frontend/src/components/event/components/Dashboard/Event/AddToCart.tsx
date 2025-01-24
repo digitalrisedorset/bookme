@@ -9,6 +9,7 @@ import {BOOKED_EVENT} from "@/components/event/types/event";
 
 interface AddToCartProps {
     id: string
+    children: React.ReactNode
 }
 
 export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
@@ -17,14 +18,16 @@ export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
     const router = useRouter()
     const [addToCart, { loading }] = useAddToCart(id);
 
-    const isEventInCart = () => {
-        if ((id!=='') && getEventCartQty(user?.cartItems, [id])>0) {
+    const isEventInCart = (): string => {
+        if (user && (id!=='') && getEventCartQty(user.cartItems, [id])>0) {
             return BOOKED_EVENT
         }
+
+        return ''
     }
 
     const isEventReady = () => {
-        if (loading | isEventInCart() | eventState.activeEventId==undefined) {
+        if (loading===true || isEventInCart()!=='' || eventState.activeEventId==undefined) {
             return false
         }
 

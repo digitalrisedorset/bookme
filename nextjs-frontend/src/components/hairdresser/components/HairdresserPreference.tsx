@@ -13,9 +13,12 @@ export const HairdresserPreference: React.FC = () => {
     const user = useUser()
     const [updateUserPreference] = useWeekPreference()
 
-    const onHairdresserChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (user === null) return
+
+    const onHairdresserChange = async (e: React.MouseEvent<HTMLInputElement>) => {
+        const input = e.target as HTMLInputElement
         await updateUserPreference({
-            variables: getUserPreferenceVariables(user?.id, {'hairdresser': e.target.value})
+            variables: getUserPreferenceVariables(user.id, {'hairdresser': input.value})
         })
     };
 

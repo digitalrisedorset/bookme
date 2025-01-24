@@ -7,6 +7,7 @@ import {Loading} from "@/components/global/components/Loading";
 
 interface WalkInProps {
     id: string
+    children: React.ReactNode
 }
 
 export const WalkIn: React.FC<WalkInProps> = ({id}: WalkInProps) => {

@@ -15,12 +15,14 @@ interface EventProps {
 export const Event: React.FC<EventProps> = ({event}: EventProps) => {
     const user = useUser()
 
+    if (!user) return null
+
     const getEventTitle = (event: KeystoneEvent) => {
         return `${capitalise(event.day)}`
     }
 
     const isEventInCart = () => {
-        if (getEventCartQty(user?.cartItems, [event.id])>0) {
+        if (user && getEventCartQty(user.cartItems, [event.id])>0) {
             return "true"
         }
 
@@ -28,10 +30,10 @@ export const Event: React.FC<EventProps> = ({event}: EventProps) => {
     }
 
     return (
-        <EventStyles incart={isEventInCart()}>
+        <EventStyles status={isEventInCart()}>
             <span className="title">{getEventTitle(event)}</span>
             <span className="date">{getDate(event.startTime)}<br/>from {getTime(event.startTime)} to {getTime(event.endTime)}</span>
-            <EventCount count={getEventCartQty(user?.cartItems, [event.id])}/>
+            <EventCount count={getEventCartQty(user.cartItems, [event.id])}/>
             <div className="in-cart">
                 <p>You&apos;re in!</p>
             </div>

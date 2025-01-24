@@ -1,5 +1,5 @@
 import {
-    AVAILABLE,
+    AVAILABLE, DayScheduleEvent,
     EventStatus,
     KeystoneEvent,
     PAST_EVENT, PURCHASED_EVENT,
@@ -19,7 +19,7 @@ export const isPastEvent = (event: KeystoneEvent) => {
     return eventDate < date
 }
 
-export const eventStatus = (event: KeystoneEvent): EventStatus => {
+export const eventStatus = (event: KeystoneEvent | DayScheduleEvent): EventStatus => {
     if (isPastEvent(event)) {
         return PAST_EVENT
     }

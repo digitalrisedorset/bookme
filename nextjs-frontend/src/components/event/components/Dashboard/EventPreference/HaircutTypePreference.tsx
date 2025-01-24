@@ -13,9 +13,12 @@ export const HaircutTypePreference: React.FC = () => {
     const user = useUser()
     const [updateUserPreference] = useWeekPreference()
 
-    const onHairdresserChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (user?.id === undefined) return
+
+    const onHairdresserChange = async (e: React.MouseEvent<HTMLInputElement>) => {
+        const input = e.target as HTMLInputElement
         await updateUserPreference({
-            variables: getUserPreferenceVariables(user?.id, {'haircutType': e.target.value})
+            variables: getUserPreferenceVariables(user.id, {'haircutType': input.value})
         })
     };
 

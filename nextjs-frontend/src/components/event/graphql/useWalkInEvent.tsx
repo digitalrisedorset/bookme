@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import {useMutation} from "@apollo/client";
+import {MutationTuple, useMutation} from "@apollo/client";
 import {WALKIN} from "@/components/event/types/event";
 
 export const WALKIN_MUTATION = gql`
@@ -18,7 +18,7 @@ function update(cache, payload) {
     cache.gc();
 }
 
-export const useWalkIn = (id: string) => {
+export const useWalkIn = <TData, TVariables>(id: string): MutationTuple<TData, TVariables> => {
     const [updateEvent, { loading }] = useMutation(WALKIN_MUTATION, {
         variables: { where: { id: id }, data: { status: WALKIN} },
         update

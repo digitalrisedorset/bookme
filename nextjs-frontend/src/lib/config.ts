@@ -1,6 +1,6 @@
-import {config} from "@/config";
+import {config, VenuePreference} from "@/config";
 
-export const getVenue = (code: string) => {
+export const getVenue = (code: string): VenuePreference => {
     if (code === '') code = 'blush-harry'
 
     const enumValues = Object.values(config.venuePreference).filter((o) => o.code === code);

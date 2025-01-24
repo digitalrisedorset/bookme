@@ -39,7 +39,7 @@ export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingP
         return null
     }
 
-    const handleSelect = (e: React.FormEvent) => {
+    const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         toggleActiveEvent(e.target.value)
     }
 

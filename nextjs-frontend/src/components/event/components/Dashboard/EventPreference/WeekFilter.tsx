@@ -12,9 +12,12 @@ export const WeekPreference: React.FC = () => {
     const config = useConfig()
     const [updateUserPreference] = useWeekPreference()
 
-    const onWeekChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (user === null) return
+
+    const onWeekChange = async (e: React.MouseEvent<HTMLInputElement>) => {
+        const input = e.target as HTMLInputElement
         await updateUserPreference({
-            variables: getUserPreferenceVariables(user?.id, {'weekPreference': e.target.value})
+            variables: getUserPreferenceVariables(user.id, {'weekPreference': input.value})
         })
     };
 

@@ -40,7 +40,7 @@ export const EventDetail = styled.div`
 `
 
 interface EventProps {
-    status: EventStatus
+    status?: EventStatus
 }
 
 export const SingleEvent = styled.div`
@@ -148,7 +148,7 @@ export const SingleScheduleEvent = styled.div<EventProps>`
 
 
 interface EventStatusProps {
-    active: string
+    active?: string
 }
 
 export const ViewEventStyle = styled.div<EventStatusProps>`

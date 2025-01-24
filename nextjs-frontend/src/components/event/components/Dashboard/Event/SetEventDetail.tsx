@@ -39,7 +39,7 @@ export const SetEventDetail: React.FC<EventProps> = ({eventGroup}: EventProps) =
                 View
             </button>}
             {groupEventStatus(eventGroup) === BOOKED_EVENT && <>
-                <span className="timestamp">Finishing at {getTime(eventGroup?.cartEvent?.endTime)}</span>
+                <span className="timestamp">Finishing at {getTime(eventGroup?.cartEvent?.endTime || '')}</span>
             </>}
         </ViewButton>
     )

@@ -1,18 +1,19 @@
 import React from "react";
 import {EventRow, ViewEventStyle} from "@/components/global/styles/ItemStyles";
 import {WeekPreference} from "@/components/event/components/Dashboard/EventPreference/WeekFilter";
-import {HaircutTypePreference} from "@/components/event/components/Dashboard/EventPreference/HaircutTypeReference";
 import {
     HaircutTypeGroupPreference
 } from "@/components/event/components/Dashboard/EventPreference/HaircutTypeGroupReference";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {getUserPreferenceStep} from "@/lib/user";
+import {HaircutTypePreference} from "@/components/event/components/Dashboard/EventPreference/HaircutTypePreference";
 
 export const InitFilter: React.FC = () => {
     const user = useUser()
-    const preferenceStep = getUserPreferenceStep(user)
 
-    console.log('preferenceStep', preferenceStep)
+    if (user === null) return
+
+    const preferenceStep = getUserPreferenceStep(user)
 
     return (
         <ViewEventStyle>

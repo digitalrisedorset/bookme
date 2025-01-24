@@ -23,10 +23,10 @@ export const WeekEvents: React.FC<ListingProps> = ({events}: ListingProps) => {
 
             return <EventDetail key={day.day}>
                 <h4>{day.dayLabel}</h4>
-                {dayEventList.length>0 && dayEventList.map((event: DayScheduleEvent, index: string) => {
+                {dayEventList.length>0 && dayEventList.map((event: DayScheduleEvent, index: number) => {
                     return <DaySingleEvent key={index} event={event}/>
                 })}
-                {dayEventList.length===0 && <NoDayEventList key={day} />}
+                {dayEventList.length===0 && <NoDayEventList />}
             </EventDetail>
         })}
     </WeekEventList>)

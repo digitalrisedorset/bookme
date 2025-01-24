@@ -1,5 +1,5 @@
 import React from "react";
-import {DayGroupEvent} from "@/components/event/types/event";
+import {DayGroupEvent, GroupEventHairdresserMap} from "@/components/event/types/event";
 import {capitalise} from "@/lib/string";
 import {getHairdresserDetail, useHairdressers} from "@/components/hairdresser/hooks/useHairdressers";
 import {useConfig} from "@/components/venue/hooks/useConfig";
@@ -23,7 +23,7 @@ export const HairdresserView: React.FC<ListingProps> = ({eventGroup}: ListingPro
     if (!config.showHairdresserOnEvent)  return null
 
     return <div className="hairdresser-selection">
-        {eventGroup.hairdressers.map(({eventId, hairdresserId}: { eventId: string, hairdresserId: string }) => {
+        {eventGroup.hairdressers.map(({eventId, hairdresserId}: GroupEventHairdresserMap) => {
             const hairdresser = getHairdresserDetail(data?.hairdressers, hairdresserId)
 
             if (eventGroup.cartEvent && eventGroup.cartEvent.id!== eventId) return null

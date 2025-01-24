@@ -6,9 +6,9 @@ import {useEventState} from "@/state/EventState";
 export const ShampooSelect: React.FC = () => {
     const {eventState,toggleShampooEvent} = useEventState()
 
-    const handleSelect = (e: React.FormEvent) => {
+    const handleSelect = () => {
         //e.preventDefault();
-        toggleShampooEvent(e.target.value)
+        toggleShampooEvent()
     }
 
     return <SelectStyle>

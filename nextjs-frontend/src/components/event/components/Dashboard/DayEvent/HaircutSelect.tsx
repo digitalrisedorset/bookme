@@ -1,10 +1,8 @@
 import React from "react";
 import {SelectStyle} from "@/components/global/styles/ItemStyles";
 import {useEventState} from "@/state/EventState";
+import {HaircutType} from "@/components/event/types/event";
 
-type HaircutType = {
-    name: string
-}
 
 interface HaircutProps {
     haircutTypes: HaircutType[]
@@ -13,9 +11,10 @@ interface HaircutProps {
 export const HaircutSelect: React.FC<HaircutProps> = ({haircutTypes}: HaircutProps) => {
     const { setHaircutPreference} = useEventState()
 
-    const handleSelect = (e: React.FormEvent) => {
+    const handleSelect = (e: React.MouseEvent<HTMLInputElement>) => {
         //e.preventDefault();
-        setHaircutPreference(e.target.value)
+        const input = e.target as HTMLInputElement
+        setHaircutPreference(input.value)
     }
 
     return <SelectStyle>
