@@ -14,7 +14,7 @@ export const useEventPrice = () => {
     const user = useUser()
 
     const { data } = useQuery(EVENT_PRICE_QUERY, {
-        variables: { eventId: eventState.activeEventId, haircutId: user?.haircutType.id, shampoo: (eventState.shampoo === true)?1:0 }
+        variables: { eventId: eventState.activeEventId, haircutId: user?.haircutType?.id, shampoo: (eventState.shampoo === true)?1:0 }
     });
 
     return data?.calculatePrice

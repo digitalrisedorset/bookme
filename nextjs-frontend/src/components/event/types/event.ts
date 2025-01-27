@@ -102,3 +102,17 @@ export interface EventPreferenceFilterType {
     haircutTypeGroup?: string | null
     weekPreference: string
 }
+
+export interface EventScheduledFilterKeys {
+    venue?: { "id": { "equals": string } },
+    startTime?: { "gte": string },
+    endTime?: { "lte": string },
+    hairdresser?: { "id": { "equals": string } }
+}
+
+export interface EventFilterKeys {
+    venue?: { "id": { "equals": string } },
+    startTime?: { "gte": string },
+    endTime?: { "lte": string },
+    hairdresser?: { "id": { "in": string[] } }
+}

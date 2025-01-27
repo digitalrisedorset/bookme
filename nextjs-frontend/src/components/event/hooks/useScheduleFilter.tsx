@@ -1,14 +1,15 @@
 import {getDayTimeEnd} from "@/lib/date";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useVenue} from "@/components/venue/hooks/useVenue";
+import {EventScheduledFilterKeys} from "@/components/event/types/event";
 
 export const useScheduleFilter = () => {
     const user = useUser()
     const venue = useVenue()
 
-    const filter = {}
+    const filter: EventScheduledFilterKeys = {}
 
-    if (!user) {
+    if (user === undefined || user?.hairdresser === undefined) {
         return filter
     }
 
@@ -33,7 +34,7 @@ export const useScheduleFilter = () => {
 
     }
 
-    filter['hairdresser'] = { "id": { "equals": user?.hairdresser?.id } }
+    filter['hairdresser'] = { "id": { "equals": user.hairdresser.id } }
 
     return filter
 }

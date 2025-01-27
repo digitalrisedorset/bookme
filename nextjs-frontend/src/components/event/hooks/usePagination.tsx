@@ -1,6 +1,6 @@
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
-import {config} from "@/components/config";
+import {config} from "@/config";
 import {useFilter} from "@/components/event/hooks/useFilter";
 
 const PAGINATION_QUERY = gql`

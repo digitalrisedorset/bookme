@@ -1,7 +1,7 @@
 import {getDayTimeEnd} from "@/lib/date";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useHairdressers} from "@/components/hairdresser/hooks/useHairdressers";
-import {HaircutType, Hairdresser} from "@/components/event/types/event";
+import {EventFilterKeys, HaircutType, Hairdresser} from "@/components/event/types/event";
 import {useVenue} from "@/components/venue/hooks/useVenue";
 
 export const useFilter = () => {
@@ -9,12 +9,12 @@ export const useFilter = () => {
     const {data} = useHairdressers()
     const venue = useVenue()
 
-    const filter = {}
+    const filter: EventFilterKeys = {}
     // filter['status'] = {
     //     "equals": AVAILABLE
     // }
 
-    if (!user) {
+    if (user === undefined) {
         return filter
     }
 
@@ -39,11 +39,9 @@ export const useFilter = () => {
         filter['endTime'] = {
             "lte": endWeek
         }
-    } else {
-
     }
 
-    if (user.haircutType !== '') {
+    if (user.haircutType !== undefined) {
         const hairdresserIds = getHairdresserIdsForHaircut(user?.haircutType, data?.hairdressers)
         filter['hairdresser'] = { "id": { "in": hairdresserIds } }
     }
@@ -52,7 +50,9 @@ export const useFilter = () => {
 }
 
 const getHairdresserIdsForHaircut = (haircutType: HaircutType, hairdressers: Hairdresser[]) => {
-    const isHairdresserDoingHaircut = (item: Hairdresser): Hairdresser[] => {
+    const isHairdresserDoingHaircut = (item: Hairdresser): boolean => {
+        if (item?.haircutTypes === undefined) return false
+
         const match = item.haircutTypes.filter((haircut: HaircutType) => haircut.id === haircutType?.id)
         return match?.length>0
     }
