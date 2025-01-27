@@ -12,7 +12,7 @@ export const WeekPreference: React.FC = () => {
     const config = useConfig()
     const [updateUserPreference] = useWeekPreference()
 
-    if (user === null) return
+    if (user === undefined) return
 
     const onWeekChange = async (e: React.MouseEvent<HTMLInputElement>) => {
         const input = e.target as HTMLInputElement

@@ -1,0 +1,65 @@
+import {createGlobalStyle} from "styled-components";
+import {ThemeColors} from "@/config";
+
+export interface StyleProps {
+    colors: ThemeColors;
+}
+
+export const GlobalStyles = createGlobalStyle<StyleProps>`
+    /*
+    https://coolors.co/eae2b7
+    MAIN COLOR: #E63946  hover: #2C3F7C
+    GREY COLOR: #495057
+    ACCENT COLOR: #1D3557
+    
+    type-scale.com
+    SPACING STSTEM (px)
+    2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+    
+    FONT SYSTEM (px)
+    10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+    
+    strong: orange
+    second: blue
+    
+    */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        --red: ${(props: StyleProps): string => props.colors?.red?props.colors?.red:'#595f39' };
+        --redlight: #D62828;
+        --lightgrey: #EDF2F4;
+        --mediumgrey: #495057;
+        --grey: #495057;
+        --pastel: ${(props: StyleProps): string => props.colors?.pastel?props.colors?.pastel:'#595f39' };
+        --orange: #D29A78;
+        --black: #333252; /*#01A487;*/
+        --green: #01A487;
+        --darkgrey: #485C5B;
+        --white: #F6F2DF;
+        color: var(--grey);
+        font-family: "Tenor Sans", sans-serif;
+        font-weight: normal;
+    }
+    
+    button {
+        font-size: 1rem;
+        background-color: var(--pastel);
+        border: none;
+        cursor: pointer;
+        color: ${(props: StyleProps): string => props.colors.buttonColor?props.colors.buttonColor:'var(--darkgrey)' };
+        padding: 10px;
+        border-radius: 3px;
+    }
+    
+    .loading {
+        position: absolute;
+        left: 50%;
+        top: 50vh;
+    }
+    
+    .very-small {
+        font-size: 8px;
+    }
+`;

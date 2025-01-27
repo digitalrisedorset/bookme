@@ -58,7 +58,7 @@ export interface UserInformation {
     haircutTypeGroup: HaircutTypeGroup
 }
 
-export function useUser(): UserInformation | null {
+export function useUser(): UserInformation | undefined {
   const { data } = useQuery(CURRENT_USER_QUERY, {
       nextFetchPolicy: 'network-only',
       fetchPolicy: 'network-only'

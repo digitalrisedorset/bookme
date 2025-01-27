@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
-import {useMutation} from "@apollo/client";
+import {InMemoryCache, useMutation} from "@apollo/client";
 import {CURRENT_USER_QUERY} from "@/components/user-authentication/hooks/useUser";
+import {clearApolloCache} from "@/lib/cache";
 
 export const REMOVE_FROM_CART_MUTATION = gql`
   mutation DeleteCartItem($where: CartItemWhereUniqueInput!) {
@@ -11,11 +12,18 @@ export const REMOVE_FROM_CART_MUTATION = gql`
 `;
 
 export const useRemoveFromCart = (id: string): [() => void, {loading: boolean}] => {
-    const update = (cache, payload) => {
-        cache.evict(cache.identify(payload.data.deleteCartItem));
+    const update = (cache: InMemoryCache, payload: { data?: { deleteCartItem?: { id: string } } }) => {
+        const itemToDelete = payload?.data?.deleteCartItem;
+
+        if (itemToDelete) {
+            clearApolloCache(cache, itemToDelete.id)
+            cache.gc();
+        } else {
+            console.error("Invalid payload structure:", payload);
+        }
     }
 
-    const [removeFromCart, { loading }] = useMutation(REMOVE_FROM_CART_MUTATION, {
+    const result = useMutation(REMOVE_FROM_CART_MUTATION, {
         variables: { "where": { id }},
         update,
         optimisticResponse: {
@@ -27,5 +35,5 @@ export const useRemoveFromCart = (id: string): [() => void, {loading: boolean}] 
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
     });
 
-    return [removeFromCart, { loading }];
+    return result;
 }

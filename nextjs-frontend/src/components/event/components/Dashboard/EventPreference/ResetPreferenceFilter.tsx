@@ -12,7 +12,7 @@ export const ResetPreferenceFilter: React.FC = () => {
     const [updateUserPreference] = useWeekPreference()
     const {data} = useHaircutTypeGroups()
 
-    if (user === null) return
+    if (user === undefined) return
 
     const resetFilter = async () => {
         const preference: EventPreferenceFilterType = {

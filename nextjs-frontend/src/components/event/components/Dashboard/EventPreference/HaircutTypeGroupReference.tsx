@@ -13,7 +13,7 @@ export const HaircutTypeGroupPreference: React.FC = () => {
     const user = useUser()
     const [updateUserPreference] = useWeekPreference()
 
-    if (user === null) return
+    if (user === undefined) return
 
     const onHaircutGroupChange = async (e: React.MouseEvent<HTMLInputElement>) => {
         const input = e.target as HTMLInputElement

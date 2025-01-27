@@ -21,7 +21,7 @@ export const useCheckout = () => {
     const [checkout, { error: graphQLError }] = useMutation(
         CREATE_ORDER_MUTATION,
         {
-            refetchQueries: [{ query: CURRENT_USER_QUERY, USER_ORDERS_QUERY }],
+            refetchQueries: [{ query: CURRENT_USER_QUERY},{ query: USER_ORDERS_QUERY }],
         }
     );
 
