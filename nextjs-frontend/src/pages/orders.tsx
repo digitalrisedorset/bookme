@@ -1,52 +1,8 @@
-import {useOrders} from "@/components/order/graphql/useOrders";
-import {ErrorMessage} from "@/components/global/components/ErrorMessage";
-import {formatMoney} from "@/lib/price";
-import {OrderItemStyles, OrderDl} from "@/components/order/styles/OrderItemStyles";
-import Head from "next/head";
-import Image from "next/image";
 import React from "react";
-import {Section} from "@/components/order/styles/OrderStyles";
-import {getOrderNumber} from "@/lib/order";
-import {useConfig} from "@/components/venue/hooks/useConfig";
-import {Loading} from "@/components/global/components/Loading";
-
-function countItemsInAnOrder(order) {
-    return order.items.map((orderItem) => (
-        <div key={orderItem.id}>
-            <h3>Appointment {orderItem.name} at {formatMoney(orderItem.price)}</h3>
-            <p >{orderItem.description}</p>
-        </div>
-        ));
-}
+import {OrderList} from "@/components/order/components/OrderList";
 
 export default function OrderListPage() {
-    const { data, error, loading } = useOrders();
-    const config = useConfig()
-
-    if (loading) return <Loading />
-    if (error) return <ErrorMessage error={error} />;
-    const { orders } = data;
-
     return (
-        <Section>
-            <Head>
-                <title>Your Orders ({orders.length})</title>
-            </Head>
-            <div>
-                <h2>You have {orders.length} orders!</h2>
-                <Image className="logo" src={`/images/${config.order.img.src}`} width={config.order.img.width} height={config.order.img.height} alt=""/>
-            </div>
-            <OrderDl>
-                {orders.map((order, index) => (
-                    <OrderItemStyles key={index}>
-                        <h2>Order {getOrderNumber(order.orderNumber)}</h2>
-                        <div className="order-meta">
-                            {countItemsInAnOrder(order)}
-                            <h3>Total: {formatMoney(order.total)}</h3>
-                        </div>
-                    </OrderItemStyles>
-                ))}
-            </OrderDl>
-        </Section>
+        <OrderList />
     )
 }

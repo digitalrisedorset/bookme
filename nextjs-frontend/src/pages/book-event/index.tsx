@@ -1,6 +1,7 @@
 import {useRouter} from "next/router";
 import React from "react";
 import {ViewEventToBook} from "@/components/event/components/Schedule/ViewEventToBook";
+import {sanitiseString} from "@/lib/string";
 
 export default function Events() {
     const { query } = useRouter();
@@ -11,11 +12,11 @@ export default function Events() {
         return
     }
 
-    const eventId = query.eventId;
+    const eventId = sanitiseString(query.eventId);
+
+    if (!eventId) return
 
     return (
-        <>
-            <ViewEventToBook eventId={eventId} />
-        </>
+        <ViewEventToBook eventId={eventId} />
     )
 }
