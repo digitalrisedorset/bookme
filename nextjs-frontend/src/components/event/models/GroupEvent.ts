@@ -1,21 +1,15 @@
-import {DayGroupEvent, KeystoneEvent} from "@/components/event/types/event";
+import {DayGroupEvent, EMPTY_GROUP_EVENT, KeystoneEvent} from "@/components/event/types/event";
 import {getTime} from "@/lib/date";
 import {UserInformation} from "@/components/user-authentication/hooks/useUser";
 
 export class GroupEventHandler {
-    private groupEvent: DayGroupEvent = {}
+    private groupEvent: DayGroupEvent
 
     private user: UserInformation
 
     constructor(user: UserInformation) {
         this.user = user
-        this.groupEvent = {
-            name: '',
-            day: '',
-            venue: '',
-            startTime: '',
-            hairdresser: []
-        }
+        this.groupEvent = EMPTY_GROUP_EVENT
     }
 
     getGroupEvent = (events: KeystoneEvent[]) => {
@@ -27,13 +21,21 @@ export class GroupEventHandler {
     }
 
     addEvent = (event: KeystoneEvent) => {
+        if (this.user === undefined) {
+            console.warn('The user is not defined in class GroupEventHandler')
+            return
+        }
+
         this.groupEvent.day = event.day
         this.groupEvent.name = `${event.day} ${getTime(event.startTime)}`
         this.groupEvent.venue = event.venue
         this.groupEvent.startTime = event.startTime
 
-        this.groupEvent.haircutType = this.user.haircutType.name
+        this.groupEvent.haircutType = this.user?.haircutType?.name
 
-        this.groupEvent.hairdresser[event.hairdresser.id] = event.id
+        this.groupEvent.hairdressers.push({
+            hairdresserId: event.hairdresser.id,
+            eventId: event.id
+        })
     }
 }
