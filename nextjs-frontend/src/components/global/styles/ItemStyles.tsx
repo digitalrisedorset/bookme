@@ -43,7 +43,7 @@ interface EventProps {
     status?: EventStatus
 }
 
-export const SingleEvent = styled.div`
+export const SingleEvent = styled.div<EventProps>`
     position: relative;
     width: 100%;
     display: block;
@@ -78,7 +78,7 @@ export const SingleEvent = styled.div`
         color: white;
         padding: 5px;
         right: 10px;
-        visibility: ${(props) => props.incart === "true" && `hidden;`};
+        visibility: ${(props) => props.status === BOOKED_EVENT && `hidden;`};
         border-radius: 3px;
     }
     .add-to-cart:hover {

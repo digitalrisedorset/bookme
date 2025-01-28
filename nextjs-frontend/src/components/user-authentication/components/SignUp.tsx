@@ -1,6 +1,5 @@
 import {Form} from '../../global/styles/Form';
 import {useForm} from '../../global/hooks/useForm';
-import {ErrorMessage} from '../../global/components/ErrorMessage';
 import {useSignUpUser} from "../graphql/useSignUp";
 import {useRouter} from "next/router";
 import {useLoginUser} from "@/components/user-authentication/graphql/useLoginUser";
@@ -12,7 +11,7 @@ export const SignUp: React.FC = () => {
     name: '',
     password: '',
   });
-  const [signup, { data, error }] = useSignUpUser(inputs)
+  const [signup, { data }] = useSignUpUser(inputs)
   const setUserLogged = useLoginUser(inputs)
 
   async function handleSubmit(e: React.FormEvent) {
@@ -30,7 +29,6 @@ export const SignUp: React.FC = () => {
   return (
     <Form method="POST" onSubmit={handleSubmit}>
       <h2>Sign Up For an Account</h2>
-      <ErrorMessage error={error} />
       <fieldset>
         {data?.createUser && (
           <p>

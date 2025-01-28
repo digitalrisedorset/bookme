@@ -57,6 +57,9 @@ export interface UserInformation {
     weekPreference: string
     cartItems: KeystoneCartItem[]
     haircutTypeGroup: HaircutTypeGroup
+    role: {
+        isHairdresser: boolean
+    }
 }
 
 export function useUser(): UserInformation | undefined {

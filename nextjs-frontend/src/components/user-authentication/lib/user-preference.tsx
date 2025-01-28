@@ -1,11 +1,16 @@
-export const getUserPreferenceVariables = (userId: string, fields: unknown) => {
-    const data = {}
+import {EventPreferenceFilterType} from "@/components/event/types/event";
+import {graphQLVariables} from "@/components/user-authentication/types/user";
+
+export const getUserPreferenceVariables = (userId: string, fields: EventPreferenceFilterType) => {
+    const data: graphQLVariables = {}
 
     for (const index in fields) {
         if (!fields.hasOwnProperty(index)) continue;
+        const value = fields[index as keyof EventPreferenceFilterType];
+        if (value === undefined || value === null) continue
 
         if (index === 'weekPreference') {
-            data[index] = fields[index]
+            data[index] = value
         }
 
         switch (index) {
@@ -17,7 +22,7 @@ export const getUserPreferenceVariables = (userId: string, fields: unknown) => {
                 } else {
                     data[index] = {
                         "connect": {
-                            "id": fields[index]
+                            "id": value
                         }
                     }
                 }

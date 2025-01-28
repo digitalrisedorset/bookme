@@ -2,6 +2,8 @@ import gql from "graphql-tag";
 import {useMutation} from "@apollo/client";
 import {CURRENT_USER_QUERY} from "../hooks/useUser";
 import {useVenue} from "@/components/venue/hooks/useVenue";
+import {formProps} from "@/components/global/types/form";
+import {graphQLVariables} from "@/components/user-authentication/types/user";
 
 const SIGNUP_MUTATION = gql`
   mutation CreateUser($data: UserCreateInput!) {
@@ -13,10 +15,12 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
-export const useSignUpUser = (inputs: string[]) => {
+export const useSignUpUser = (inputs: formProps) => {
     const venue = useVenue()
 
-    inputs["venue"] = {
+    const variables: graphQLVariables = inputs
+
+    variables["venue"] = {
         "connect": {
             "id": venue?.id
         }
@@ -24,7 +28,7 @@ export const useSignUpUser = (inputs: string[]) => {
 
     const response = useMutation(SIGNUP_MUTATION, {
         variables: {
-            data: inputs
+            data: variables
         },
         // refectch the currently logged in user
         refetchQueries: [{ query: CURRENT_USER_QUERY }],

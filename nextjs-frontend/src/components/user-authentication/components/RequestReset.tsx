@@ -1,13 +1,13 @@
 import {Form} from '../../global/styles/Form';
 import {useForm} from '../../global/hooks/useForm';
-import {ErrorMessage} from '../../global/components/ErrorMessage';
 import {useRequestReset} from "../graphql/useRequestRest";
 
 export const RequestReset: React.FC = () => {
   const { inputs, handleChange, resetForm } = useForm({
     email: '',
+    token: ''
   });
-  const [requestreset, { data, error }] = useRequestReset(inputs)
+  const [requestreset, { data }] = useRequestReset(inputs)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault(); // stop the form from submitting
@@ -19,7 +19,6 @@ export const RequestReset: React.FC = () => {
   return (
     <Form method="POST" onSubmit={handleSubmit}>
       <h2>Request a Password Reset</h2>
-      <ErrorMessage error={error} />
       <fieldset>
         {data?.sendUserPasswordResetLink === true && (
           <p>Success! Check your email for a link!</p>

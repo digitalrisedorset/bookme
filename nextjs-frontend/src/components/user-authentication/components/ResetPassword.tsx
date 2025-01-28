@@ -1,4 +1,3 @@
-import {ErrorMessage} from '../../global/components/ErrorMessage';
 import {Form} from '../../global/styles/Form';
 import {useForm} from '../../global/hooks/useForm';
 import {useResetPassword} from "../graphql/useRequestPassword";
@@ -9,7 +8,7 @@ export const ResetPassword: React.FC = () => {
         password: '',
         token: ''
     });
-    const [resetpassword, { data, error }] = useResetPassword(inputs);
+    const [resetpassword, { data }] = useResetPassword(inputs);
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault(); // stop the form from submitting
@@ -22,7 +21,6 @@ export const ResetPassword: React.FC = () => {
     return (
         <Form method="POST" onSubmit={handleSubmit}>
             <h2>Reset your password</h2>
-            <ErrorMessage error={error} />
             <fieldset>
                 {data?.redeemUserPasswordResetToken?.code === 'TOKEN_REDEEMED' && (
                     <p>Success! Your password is now reset!</p>

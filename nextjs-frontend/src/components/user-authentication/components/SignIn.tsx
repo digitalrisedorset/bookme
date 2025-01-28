@@ -1,6 +1,5 @@
 import {Form} from '../../global/styles/Form';
 import {useForm} from '../../global/hooks/useForm';
-import {ErrorMessage} from '../../global/components/ErrorMessage';
 import {useLoginUser} from "../graphql/useLoginUser";
 import {useRouter} from "next/router";
 
@@ -30,7 +29,6 @@ export const SignIn: React.FC = () => {
   return (
       <Form method="POST" onSubmit={handleSubmit}>
         <h2>Sign Into Your Account</h2>
-        <ErrorMessage />
         <fieldset>
           <label htmlFor="email">
             Email

@@ -1,5 +1,5 @@
 import {  useState } from 'react';
-import {formProps} from "../../types/form";
+import {formProps} from "@/components/global/types/form";
 
 export const useForm = (initial: formProps) => {
   // create a state object for our inputs
