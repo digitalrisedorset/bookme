@@ -1,16 +1,25 @@
-import {DayGroupEvent, EMPTY_GROUP_EVENT, KeystoneEvent} from "@/components/event/types/event";
+import {DayGroupEvent, KeystoneEvent} from "@/components/event/types/event";
 import {getTime} from "@/lib/date";
 import {UserInformation} from "@/components/user-authentication/hooks/useUser";
 import {isEventInCart} from "@/lib/cart";
 
 export class DayGroupEventHandler {
-    private groupEvent: DayGroupEvent
+    private groupEvent: DayGroupEvent = {}
 
-    private user: UserInformation
+    private user: UserInformation = {}
 
     constructor(time: string, user: UserInformation) {
-        this.groupEvent = structuredClone(EMPTY_GROUP_EVENT)
-        this.groupEvent.startTime = time
+        this.groupEvent = {
+            name: '',
+            day: '',
+            venue: '',
+            status: '',
+            startTime: time,
+            hairdressers: [],
+            orderedEventId: null,
+            cartEvent: null,
+            eventIds: []
+        }
         this.user = user
     }
 
@@ -38,4 +47,18 @@ export class DayGroupEventHandler {
     getGroupEvent = () => {
         return this.groupEvent
     }
+}
+
+export const getGroupEventHairdresserInfo = (groupEvent: DayGroupEvent) => {
+    const info = []
+    for (const hairdresser in groupEvent.hairdresser) {
+        if (!groupEvent.hairdresser.hasOwnProperty(hairdresser)) continue;
+
+        info.push({
+            hairdresserId: hairdresser,
+            eventId: groupEvent.hairdresser[hairdresser]
+        })
+    }
+
+    return info
 }
