@@ -2,7 +2,7 @@ import {DayGroupEvent, DaysType, KeystoneEvent} from "@/components/event/types/e
 import {DayGroupEventHandler} from "@/components/event/models/DayGroupEvent";
 import {UserInformation} from "@/components/user-authentication/hooks/useUser";
 
-export class DayEvent {
+export class DayEventHandler {
     private day
 
     constructor(day: DaysType) {
@@ -54,17 +54,21 @@ export class DayEvent {
         return dayGroupEventHandler.getGroupEvent()
     }
 
-    getStartTimeEvents = (events: KeystoneEvent[]) => {
-        const getTimes = (times: [], event: KeystoneEvent) => {
-            const startTime = event.startTime
-            if (times[startTime]===undefined) {
-                times[startTime] = []
+    /**
+     * Organise the events into an array whose keys are the different times for all the events
+     * @param events
+     */
+    getStartTimeEvents = (events: KeystoneEvent[]): Record<string, KeystoneEvent[]> => {
+        const getTimes = (times: Record<string, KeystoneEvent[]>, event: KeystoneEvent) => {
+            const { startTime } = event;
+            if (!times[startTime]) {
+                times[startTime] = [];
             }
             times[startTime].push(event)
 
             return times
         }
 
-        return events.reduce(getTimes, [])
+        return events.reduce(getTimes, {})
     }
 }
