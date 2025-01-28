@@ -3,7 +3,6 @@ import {useMutation} from "@apollo/client";
 import {CURRENT_USER_QUERY, useUser} from "@/components/user-authentication/hooks/useUser";
 import {useEventState} from "@/state/EventState";
 import {InMemoryCache} from "@apollo/client/cache/inmemory/inMemoryCache";
-import {clearApolloCache} from "@/lib/cache";
 
 export const ADD_TO_CART_MUTATION = gql`
   mutation AddToCart($eventId: ID!, $haircutId: ID!, $shampoo: Int) {
@@ -18,7 +17,7 @@ function update(cache: InMemoryCache, payload: { data?: {addToCart: string } }) 
     }
 
     eventIds.forEach(eventId => {
-        clearApolloCache(cache, eventId)
+        cache.evict({id: `Event:${eventId}`});
     })
     cache.gc();
 }

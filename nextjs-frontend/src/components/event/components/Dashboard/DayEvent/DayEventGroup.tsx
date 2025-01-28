@@ -10,7 +10,7 @@ interface ListingProps {
 }
 
 export const DayEventGroup: React.FC<ListingProps> = ({eventGroup}: ListingProps) => {
-    return (<SingleEvent>
+    return (<SingleEvent status={eventGroup.status}>
         <p>{getTime(eventGroup.startTime)}</p>
         <HairdresserView eventGroup={eventGroup}/>
         <SetEventDetail eventGroup={eventGroup}/>

@@ -1,5 +1,5 @@
 import {getWeeks} from "@/lib/date";
-import {HairdresserSelectionStyle} from "@/components/hairdresser/styles/Hairdresser";
+import {HairdresserSelectionStyle} from "@/components/hairdresser/styles/HairdresserStyle";
 import React from "react";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
 import {useUser} from "@/components/user-authentication/hooks/useUser";

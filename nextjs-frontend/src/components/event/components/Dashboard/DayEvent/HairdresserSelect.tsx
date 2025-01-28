@@ -1,6 +1,5 @@
 import React from "react";
 import {DayGroupEvent, Hairdresser} from "@/components/event/types/event";
-import {getGroupEventHairdresserInfo} from "@/components/event/models/DayGroupEvent";
 import {useEventState} from "@/state/EventState";
 import {capitalise} from "@/lib/string";
 import {useHairdressers} from "@/components/hairdresser/hooks/useHairdressers";
@@ -27,10 +26,9 @@ export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingP
         return result[0]
     }
 
-    const groupEvents = getGroupEventHairdresserInfo(eventGroup)
     const eventSelected = () => {
-        if (groupEvents.length === 1) {
-            const firstEvent = groupEvents[0]
+        if (eventGroup.hairdressers.length === 1) {
+            const firstEvent = eventGroup.hairdressers[0]
             toggleActiveEvent(firstEvent.eventId)
 
             return firstEvent.eventId
@@ -44,7 +42,7 @@ export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingP
     }
 
     return <div className="hairdresser-selection">
-        {groupEvents.map(({hairdresserId, eventId}: { hairdresserId: string, eventId: string }) => {
+        {eventGroup.hairdressers.map(({hairdresserId, eventId}: { hairdresserId: string, eventId: string }) => {
             const hairdresser = getHairdresserDetail(hairdresserId)
 
             return (

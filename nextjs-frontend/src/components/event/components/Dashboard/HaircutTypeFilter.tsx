@@ -1,4 +1,4 @@
-import {Venue} from "@/components/venue/styles/Venue";
+import {VenueStyle} from "@/components/venue/styles/VenueStyle";
 import {Label} from "@/components/global/styles/Form";
 import {useHaircutTypes} from "@/components/event/hooks/useHaircutTypes";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
@@ -21,7 +21,7 @@ export const HaircutTypeFilter: React.FC = () => {
     };
 
     return (
-        <Venue>
+        <VenueStyle>
             <fieldset>
                 <Label>Haircut type</Label>
                 <select onChange={onHaircutTypeChange} className="form-select" value={user?.haircutType?.id}>
@@ -31,6 +31,6 @@ export const HaircutTypeFilter: React.FC = () => {
                     })}
                 </select>
             </fieldset>
-        </Venue>
+        </VenueStyle>
     )
 }

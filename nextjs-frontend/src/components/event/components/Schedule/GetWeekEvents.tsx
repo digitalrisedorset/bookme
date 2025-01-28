@@ -4,11 +4,7 @@ import {WeekEvents} from "@/components/event/components/Schedule/WeekEvents";
 import {useSchedule} from "@/components/event/hooks/useSchedule";
 import {Loading} from "@/components/global/components/Loading";
 
-interface ListingProps {
-    page: number
-}
-
-export const GetWeekEvents: React.FC<ListingProps> = () => {
+export const GetWeekEvents: React.FC = () => {
     const { data, loading } = useSchedule()
 
     if (loading) return <Loading />

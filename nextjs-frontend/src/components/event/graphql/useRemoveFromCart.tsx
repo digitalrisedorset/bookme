@@ -1,7 +1,6 @@
 import gql from "graphql-tag";
 import {InMemoryCache, useMutation} from "@apollo/client";
 import {CURRENT_USER_QUERY} from "@/components/user-authentication/hooks/useUser";
-import {clearApolloCache} from "@/lib/cache";
 
 export const REMOVE_FROM_CART_MUTATION = gql`
   mutation DeleteCartItem($where: CartItemWhereUniqueInput!) {
@@ -16,7 +15,7 @@ export const useRemoveFromCart = (id: string): [() => void, {loading: boolean}] 
         const itemToDelete = payload?.data?.deleteCartItem;
 
         if (itemToDelete) {
-            clearApolloCache(cache, itemToDelete.id)
+            cache.evict({id: `CartItem:${itemToDelete.id}`});
             cache.gc();
         } else {
             console.error("Invalid payload structure:", payload);

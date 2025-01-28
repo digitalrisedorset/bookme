@@ -1,4 +1,4 @@
-import {Venue} from "@/components/venue/styles/Venue";
+import {VenueStyle} from "@/components/venue/styles/VenueStyle";
 import {Label} from "@/components/global/styles/Form";
 import {getDays} from "@/lib/date";
 
@@ -9,7 +9,7 @@ export const DayFilter: React.FC = () => {
     };
 
     return (
-        <Venue>
+        <VenueStyle>
             <fieldset>
                 <Label>Week Day</Label>
                 <select onChange={onDayChange} className="form-select">
@@ -19,6 +19,6 @@ export const DayFilter: React.FC = () => {
                     })}
                 </select>
             </fieldset>
-        </Venue>
+        </VenueStyle>
     )
 }

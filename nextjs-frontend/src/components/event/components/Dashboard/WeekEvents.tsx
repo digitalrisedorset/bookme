@@ -3,7 +3,7 @@ import {DayGroupEvent, DaysType, KeystoneEvent} from "@/components/event/types/e
 import {getDays} from "@/lib/date";
 import {WeekEventList, EventDetail} from "@/components/global/styles/ItemStyles";
 import {NoDayEventList} from "@/components/event/components/Dashboard/Event/NoDayEventList";
-import {DayEvent} from "@/components/event/models/DayEvent";
+import {DayEventHandler} from "@/components/event/models/DayEventHandler";
 import {DayEventGroup} from "@/components/event/components/Dashboard/DayEvent/DayEventGroup";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 
@@ -18,7 +18,7 @@ export const WeekEvents: React.FC<ListingProps> = ({events}: ListingProps) => {
 
     return (<WeekEventList>
         {getDays().map((day: DaysType) => {
-            const dayEventHandler = new DayEvent(day);
+            const dayEventHandler = new DayEventHandler(day);
             const dayEventList = dayEventHandler.getDayEvents(events, user)
 
             return <EventDetail key={day.day}>

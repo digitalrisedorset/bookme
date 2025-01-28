@@ -1,7 +1,6 @@
 import gql from "graphql-tag";
 import {InMemoryCache, useMutation} from "@apollo/client";
 import {WALKIN} from "@/components/event/types/event";
-import {clearApolloCache} from "@/lib/cache";
 
 export const WALKIN_MUTATION = gql`
     mutation UpdateEvent($where: EventWhereUniqueInput!, $data: EventUpdateInput!) {
@@ -18,7 +17,7 @@ const update = (cache: InMemoryCache, payload: { data?: { addToCart: string } })
     }
 
     eventIds.forEach(eventId => {
-        clearApolloCache(cache, eventId)
+        cache.evict({id: `Event:${eventId}`});
     })
     cache.gc();
 }

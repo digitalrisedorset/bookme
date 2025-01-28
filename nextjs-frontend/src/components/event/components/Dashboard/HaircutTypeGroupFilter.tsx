@@ -1,4 +1,4 @@
-import {Venue} from "@/components/venue/styles/Venue";
+import {VenueStyle} from "@/components/venue/styles/VenueStyle";
 import {Label} from "@/components/global/styles/Form";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
@@ -23,7 +23,7 @@ export const HaircutTypeGroupFilter: React.FC = () => {
     if (data?.haircutTypeGroups.length === 1) return null
 
     return (
-        <Venue>
+        <VenueStyle>
             <fieldset>
                 <Label>Appointment Type</Label>
                 <select onChange={onHaircutTypeGroupChange} className="form-select" value={user?.haircutTypeGroup?.id}>
@@ -33,6 +33,6 @@ export const HaircutTypeGroupFilter: React.FC = () => {
                     })}
                 </select>
             </fieldset>
-        </Venue>
+        </VenueStyle>
     )
 }

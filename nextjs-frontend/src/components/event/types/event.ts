@@ -1,13 +1,23 @@
-export interface KeystoneEvent {
+import {Venue} from "@/components/venue/types/venue";
+
+export interface EventShare {
     id: string
     name: string
-    status: string
-    day: string
     startTime: string
+    status: EventStatus
     endTime: string
+    orderItem?: unknown
+    day: string
+}
+
+export interface KeystoneEvent extends EventShare {
     venue: { name: string }
     hairdresser: Hairdresser
     orderItem?: {event: { id:string }}
+}
+
+export interface DayScheduleEvent extends EventShare {
+    orderItem: {order: { user:{name:string} }}
 }
 
 export interface Event {
@@ -27,7 +37,7 @@ export interface KeystoneCartItem {
     haircut: {
         name: string
     }
-    shampoo
+    shampoo: boolean
     event: KeystoneEvent
 }
 
@@ -46,6 +56,8 @@ export interface HaircutTypeGroup {
     name: string
 }
 
+
+
 export interface WeeksType {
     weekStart: string
     weekLabel: string
@@ -54,27 +66,31 @@ export interface WeeksType {
 export interface DayGroupEvent {
     name: string
     day: string
+    status: EventStatus
     startTime: string
-    venue: string
+    venue: Pick<Venue, 'name'>
     haircutType?: string // Pick<HaircutType, 'id' | 'name'>
     hairdressers: GroupEventHairdresserMap[] //Pick<Hairdresser, 'id' | 'name'>[]
-    orderedEventId: string
-    cartEvent?: KeystoneEvent
+    orderedEventId: string | null
+    cartEvent: KeystoneEvent | null
     eventIds: string[]
+}
+
+export const EMPTY_GROUP_EVENT = {
+    name: '',
+    day: '',
+    venue: { name: ''},
+    status: '',
+    startTime: '',
+    hairdressers: [],
+    orderedEventId: null,
+    cartEvent: null,
+    eventIds: []
 }
 
 export interface GroupEventHairdresserMap {
     eventId: string,
     hairdresserId: string
-}
-
-export interface DayScheduleEvent {
-    id: string
-    name: string
-    day: string
-    status: EventStatus
-    startTime: string
-    orderItem: {order: { user:{name:string} }}
 }
 
 export interface Hairdresser {
@@ -98,9 +114,10 @@ export type EventStatus = 'open' | 'pastevent' | 'walkin' | 'wasordered' | (stri
 export type EventFilterType = 'haircutType' | 'haircutTypeGroup' | 'hairdresser' | 'weekPreference' | (string & {})
 
 export interface EventPreferenceFilterType {
-    haircutType: string | null
+    haircutType?: string | null
     haircutTypeGroup?: string | null
-    weekPreference: string
+    weekPreference?: string
+    hairdresser?: string
 }
 
 export interface EventScheduledFilterKeys {

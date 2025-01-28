@@ -1,6 +1,6 @@
 import React from "react";
 import {capitalise} from "@/lib/string";
-import {HairdresserSelectionStyle} from "@/components/hairdresser/styles/Hairdresser";
+import {HairdresserSelectionStyle} from "@/components/hairdresser/styles/HairdresserStyle";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
 import {HaircutType} from "@/components/event/types/event";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
