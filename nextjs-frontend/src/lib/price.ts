@@ -1,4 +1,4 @@
-import {KeystoneCartItem} from "@/pages/event/types/event";
+import {KeystoneCartItem} from "@/components/event/types/event";
 
 export const formatMoney = (amount: number = 0) => {
     const formatter = new Intl.NumberFormat("en-GB", {

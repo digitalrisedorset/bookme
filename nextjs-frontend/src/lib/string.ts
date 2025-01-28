@@ -3,3 +3,7 @@ export const capitalise = (str: string = '') => {
 
     return str[0].toUpperCase() + str.slice(1).toLowerCase()
 }
+
+export const sanitiseString = (value: unknown) => {
+    return typeof value === "string" ? value : undefined;
+}

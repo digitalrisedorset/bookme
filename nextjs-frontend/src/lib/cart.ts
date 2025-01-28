@@ -9,11 +9,11 @@ export const getEventCartQty = (cart: KeystoneCartItem[], eventIds: string[]): n
     return 0
 }
 
-export const isEventInCart = (cart: KeystoneCartItem[], eventId: string): number => {
+export const isEventInCart = (cart: KeystoneCartItem[], eventId: string): boolean => {
     const cartItem = cart?.filter((item: KeystoneCartItem) => item.event.id === eventId)
     if (cartItem && cartItem.length > 0) {
-        return cartItem[0]
+        return true
     }
 
-    return null
+    return false
 }

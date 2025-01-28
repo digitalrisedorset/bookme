@@ -1,7 +1,6 @@
 import {
-    AVAILABLE, DayScheduleEvent,
-    EventStatus,
-    KeystoneEvent,
+    AVAILABLE, EventShare,
+    EventStatus, KeystoneEvent,
     PAST_EVENT, PURCHASED_EVENT,
     WALKIN,
     WALKIN_EVENT
@@ -13,13 +12,13 @@ export const getEventTitle = (event: KeystoneEvent) => {
     return `${capitalise(event.day)} ${getDate(event.startTime)} with ${capitalise(event.hairdresser.name)} at ${getTime(event.startTime)}`
 }
 
-export const isPastEvent = (event: KeystoneEvent) => {
+export const isPastEvent = (event: EventShare) => {
     const date = new Date()
     const eventDate = new Date(event?.startTime)
     return eventDate < date
 }
 
-export const eventStatus = (event: KeystoneEvent | DayScheduleEvent): EventStatus => {
+export const eventStatus = (event: EventShare): EventStatus => {
     if (isPastEvent(event)) {
         return PAST_EVENT
     }
