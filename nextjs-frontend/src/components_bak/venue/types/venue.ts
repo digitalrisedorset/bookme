@@ -1,1 +1,0 @@
-export const ACTIVE_VENUE_KEY = 'active-venue'

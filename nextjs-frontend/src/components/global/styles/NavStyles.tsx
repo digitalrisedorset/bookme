@@ -9,13 +9,14 @@ const NavStyles = styled.menu<StyleProps>`
     gap: 20px;
     align-items: center;
     padding: 0 40px;
+    position: relative;
     .venue-title {
         position: absolute;
-        left: 50%;
+        left: 30%;
         color: white;
         font-size: 1.7rem;
         background-color: var(--red);
-        padding: 5px 20px;
+        padding: 10px 20px;
         border-radius: 7px;
     }
     a, button {

@@ -7,7 +7,7 @@ export interface ThemeColors {
     buttonColor: string
 }
 export interface VenuePreference {
-    id: string,
+    id?: string,
     code: string,
     route: string,
     showHairdresserOnEvent: boolean,
@@ -15,9 +15,6 @@ export interface VenuePreference {
     offerShampoo: boolean,
     logo: string,
     intro: {
-        heading: string,
-        general: string,
-        ethos: string,
         img: {
             src: string,
             width: number,
@@ -26,7 +23,9 @@ export interface VenuePreference {
     },
     order: {
         img: {
-            src: string
+            src: string,
+            width: number,
+            height: number,
         }
     }
     themeColors: ThemeColors
