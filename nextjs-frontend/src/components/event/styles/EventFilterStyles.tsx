@@ -15,6 +15,10 @@ export const EventFilterStyles = styled.div`
 
     @media (max-width: 600px) {
         grid-template-columns: 1fr;
+        div p {
+            font-size: 1.2rem;
+            height: 30px;
+        }
     }
 `;
 
@@ -22,6 +26,10 @@ export const ListHeader = styled.section`
     grid-row: 2;
     width: 100%;
     padding: 20px 40px 0;
+
+    @media (max-width: 600px) {
+        padding: 20px 10px 0;
+    }
 `
 
 export const EmptyListingStyles = styled.div`
@@ -45,4 +53,15 @@ export const NoWorkingDayStyles = styled.div`
     top: 150px;
     left: 0px;
     position: absolute;
+
+    @media (max-width: 600px) {
+        transform: skew(-30deg) rotate(0deg);
+        background: var(--grey);
+        font-size: 1rem;
+        color: white;
+        width: 200px;
+        top: 0px;
+        left: 0px;
+        position: relative;
+    }
 `

@@ -21,7 +21,7 @@ export const EventList = styled.section`
 export const WeekEventList = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    border: 1px solid #383838;
+    border: 1px solid var(--red);
     margin-top: 1rem;
     min-height: 300px;
     h4 {
@@ -30,6 +30,20 @@ export const WeekEventList = styled.div`
         background: var(--red);
         color: white;
     }
+
+    .accordion-title {
+        position: relative;
+        .set-active {
+            position: absolute;
+            right: 10px;
+            top:10px;
+            color:white;
+        }
+        
+    }
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
 `
 
 export const EventDetail = styled.div`
@@ -37,6 +51,21 @@ export const EventDetail = styled.div`
     display: block;
     position: relative;  
     padding: 5px;
+
+    @media (max-width: 600px) {
+        width:100%;
+    }
+`
+
+export const EventSummary = styled.div`
+    width: 100%;
+    display: block;
+    position: relative;  
+    padding: 5px;
+
+    @media (max-width: 600px) {
+        width:100%;
+    }
 `
 
 interface EventProps {
@@ -188,6 +217,10 @@ export const EventRow = styled.div`
     }
     .title {
         text-align: left;
+    }
+    @media (max-width: 600px) {
+        width: 95%;
+        font-size: 1rem;
     }
 }
 `
@@ -467,6 +500,10 @@ export const BookButton = styled.div<EventProps>`
              margin: 0 0px 0 45px;
              z-index: 3;
          }
+    }
+
+    @media (max-width: 600px) {
+        width: 200px;
     }
 `
 

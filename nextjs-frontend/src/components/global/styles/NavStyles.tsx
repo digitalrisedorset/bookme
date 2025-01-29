@@ -38,10 +38,18 @@ const NavStyles = styled.menu<StyleProps>`
         position: absolute;
     }
     @media (max-width: 600px) {
+        padding: 0 10px;
+        gap: 10px;
         a, button {
-            font-size: 1.8rem;
+            font-size: 1rem;
+            padding:4px
         }
-        
+        .venue-title {
+            font-size:1.0rem;
+            left:50%;
+            padding: 5px 5px;
+            visibility: hidden;
+        }        
     }
 `;
 

@@ -9,7 +9,17 @@ export class GroupEventHandler {
 
     constructor(user: UserInformation) {
         this.user = user
-        this.groupEvent = EMPTY_GROUP_EVENT
+        this.groupEvent = {
+            name: '',
+            day: '',
+            venue: { name: ''},
+            status: '',
+            startTime: '',
+            hairdressers: [],
+            orderedEventId: null,
+            cartEvent: null,
+            eventIds: []
+        }
     }
 
     getGroupEvent = (events: KeystoneEvent[]) => {

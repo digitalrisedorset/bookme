@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import Image from "next/image";
 import {OrderDl, OrderItemStyles} from "@/components/order/styles/OrderItemStyles";
 import {getOrderNumber} from "@/lib/order";
 import {formatMoney} from "@/lib/price";
@@ -10,6 +9,7 @@ import {useConfig} from "@/components/venue/hooks/useConfig";
 import {Loading} from "@/components/global/components/Loading";
 import {OrderItemsSummary} from "@/components/order/components/OrderList/OrderItemsSummary";
 import {KeystoneOrder} from "@/components/order/types/order";
+import {ImageResponsive} from "@/components/venue/components/Intro/ImageResponsive";
 
 export const OrderList: React.FC = () => {
     const { data, loading } = useOrders();
@@ -23,9 +23,9 @@ export const OrderList: React.FC = () => {
             <Head>
                 <title>Your Orders ({orders.length})</title>
             </Head>
-            <div>
+            <div className="side">
                 <h2>You have {orders.length} orders!</h2>
-                <Image className="logo" src={`/images/${config.order.img.src}`} width={config.order.img.width} height={config.order.img.height} alt=""/>
+                <ImageResponsive image={config.order} />
             </div>
             <OrderDl>
                 {orders.map((order: KeystoneOrder, index: number) => (

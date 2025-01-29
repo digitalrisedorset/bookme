@@ -27,17 +27,24 @@ export const IntroStyle = styled.div`
         font-size: 1.3rem;
         line-height: 2rem;
     }
+    .illustration {
+        padding-left: 15% !important;
+    }
 
     @media (max-width: 600px) {
         h2 {
-            font-size: 2.5rem;
+            font-size: 1.4rem;
+        }
+        .content {
+            padding: 0;
         }
         .general {
-            font-size: 1.7rem;
+            font-size: 1.1rem;
             line-height: 1.5;
+            padding:0;
         }
         .ethos {
-            font-size: 1.8rem;
+            font-size: 1.1rem;
             line-height: 1.5;
         }
     }

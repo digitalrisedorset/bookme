@@ -40,6 +40,10 @@ export const Section = styled.section`
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     padding: 40px;
+
+    .side {
+        margin: 20px;
+    }
     
     h2 {
         font-size: 2rem;
@@ -51,6 +55,7 @@ export const Section = styled.section`
     }
 
     @media (max-width: 600px) {
+        padding: 0px;
         grid-template-columns: 1fr;
         h2 {
             font-size: 3rem;

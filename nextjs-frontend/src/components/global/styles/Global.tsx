@@ -27,7 +27,7 @@ export const GlobalStyles = createGlobalStyle<StyleProps>`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        --red: ${(props: StyleProps): string => props.colors?.red?props.colors?.red:'#595f39' };
+        --red: ${(props: StyleProps): string => props.colors?.red?props.colors?.red:'#9580ad' };
         --redlight: #D62828;
         --lightgrey: #EDF2F4;
         --mediumgrey: #495057;
@@ -61,5 +61,11 @@ export const GlobalStyles = createGlobalStyle<StyleProps>`
     
     .very-small {
         font-size: 8px;
+    }
+
+    picture img {
+        max-width: 100%;
+        height: auto;
+        display: block; /* Prevent inline-block spacing issues */
     }
 `;

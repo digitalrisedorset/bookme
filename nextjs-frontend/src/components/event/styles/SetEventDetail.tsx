@@ -31,6 +31,13 @@ export const ResetPrefence = styled.div`
         border: 0;
         padding: 0;
     }
+    @media (max-width: 600px) {
+        fieldset {
+            p {
+                height: 0;
+            }
+        }
+    }
 `
 
 export const PreferenceSummaryStyle = styled.h4`

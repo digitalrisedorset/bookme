@@ -15,7 +15,7 @@ export const useRemoveFromCart = (id: string): [() => void, {loading: boolean}] 
         const itemToDelete = payload?.data?.deleteCartItem;
 
         if (itemToDelete) {
-            cache.evict({id: `CartItem:${itemToDelete.id}`});
+            cache.evict(cache.identify(itemToDelete));
             cache.gc();
         } else {
             console.error("Invalid payload structure:", payload);

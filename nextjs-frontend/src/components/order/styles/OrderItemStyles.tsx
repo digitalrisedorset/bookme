@@ -26,7 +26,6 @@ export const OrderItemStyles = styled.dd`
   .order-meta {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    display: grid;
     grid-gap: 1rem;
     text-align: center;
     & > * {
@@ -47,10 +46,20 @@ export const OrderItemStyles = styled.dd`
           margin-bottom: 1rem;
       }
   }
+
+    @media (max-width: 600px) {
+        h2 {
+            font-size: 1.7rem !important;
+        }
+    }
 `;
 
 export const OrderDl = styled.dl`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 4rem;
+
+    @media (max-width: 600px) {
+        grid-gap: 0rem;
+    }
 `;

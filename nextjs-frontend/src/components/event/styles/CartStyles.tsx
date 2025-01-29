@@ -80,19 +80,24 @@ export const Dot = styled.div`
   padding: 0.5rem;
   line-height: 2rem;
   min-width: 3rem;
-  margin-left: 1rem;
+  //margin-left: 1rem;
   font-feature-settings: 'tnum';
   font-variant-numeric: tabular-nums;
+  position: absolute;
 
   @media (max-width: 600px) {
-    padding: 1.4rem 1.6rem;
+    //padding: 1.4rem 1.6rem;
+    min-width: 1rem;
+    line-height: 1rem;
+    right: 1.7rem;
+    top: 10px;
   }
 `;
 
 export const AnimationStyles = styled.span`
-  position: relative;
+  //position: absolute;
   .count {
-    display: block;
-    position: relative;
+    //display: block;
+    //position: absolute;
   }
 `;

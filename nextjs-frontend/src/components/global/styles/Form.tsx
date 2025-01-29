@@ -78,17 +78,18 @@ export const Form = styled.form`
     }
 
     @media (max-width: 600px) {
+        padding: 10px;
         input,
         textarea,
         select {
             width: 100%;
-            height: 50px;
+            height: 40px;
         }
         label {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
         h2 {
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
     }
 `;

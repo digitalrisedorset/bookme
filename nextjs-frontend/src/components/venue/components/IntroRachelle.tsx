@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/image";
 import {IntroStyle} from "@/components/home/styles/HomeStyles";
+import {ImageResponsive} from "@/components/venue/components/Intro/ImageResponsive";
 import {useConfig} from "@/components/venue/hooks/useConfig";
 
 const IntroRachelle: React.FC = () => {
@@ -19,7 +19,7 @@ const IntroRachelle: React.FC = () => {
                 </p>
             </div>
             <div className="illustration">
-                <Image className="logo" src={`/images/${config?.intro?.img?.src}`} width={config?.intro?.img?.width} height={config?.intro?.img?.height} alt="Rachelle's Hairdresser freelancing"/>
+                <ImageResponsive image={config.intro}/>
             </div>
         </IntroStyle>
     )

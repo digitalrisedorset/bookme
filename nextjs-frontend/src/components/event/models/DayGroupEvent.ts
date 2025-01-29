@@ -9,7 +9,17 @@ export class DayGroupEventHandler {
     private user: UserInformation
 
     constructor(time: string, user: UserInformation) {
-        this.groupEvent = structuredClone(EMPTY_GROUP_EVENT)
+        this.groupEvent = {
+            name: '',
+            day: '',
+            venue: { name: ''},
+            status: '',
+            startTime: '',
+            hairdressers: [],
+            orderedEventId: null,
+            cartEvent: null,
+            eventIds: []
+        }
         this.groupEvent.startTime = time
         this.user = user
     }

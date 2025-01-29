@@ -1,3 +1,16 @@
+export interface ImageResponsiveType {
+    img: {
+        src: string,
+        width: number,
+        height: number,
+    },
+    largeImg: {
+        src: string,
+        width: number,
+        height: number,
+    }
+}
+
 export interface ThemeColors {
     red: string,
     pastel: string,
@@ -14,20 +27,8 @@ export interface VenuePreference {
     scheduleWeekSpan: number,
     offerShampoo: boolean,
     logo: string,
-    intro: {
-        img: {
-            src: string,
-            width: number,
-            height: number,
-        }
-    },
-    order: {
-        img: {
-            src: string,
-            width: number,
-            height: number,
-        }
-    }
+    intro: ImageResponsiveType,
+    order: ImageResponsiveType,
     themeColors: ThemeColors
 }
 
@@ -83,12 +84,22 @@ export const config: configInfo = {
                     src: 'harry-barber.png',
                     width: 732,
                     height: 277,
+                },
+                largeImg: {
+                    src: 'harry-barber.png',
+                    width: 750,
+                    height: 300,
                 }
             },
             order: {
                 img: {
                     src: 'orderplaceholder-harry.jpg',
                     width: 378,
+                    height: 378,
+                },
+                largeImg: {
+                    src: 'orderplaceholder-harry.jpg',
+                    width: 375,
                     height: 378,
                 }
             },
@@ -110,6 +121,11 @@ export const config: configInfo = {
             logo: 'book-purple.png',
             intro: {
                 img: {
+                    src: 'rachelle-beaudry-small.png',
+                    width: 375,
+                    height: 150,
+                },
+                largeImg: {
                     src: 'freelance-hairddresser.jpg',
                     width: 750,
                     height: 300,
@@ -117,13 +133,18 @@ export const config: configInfo = {
             },
             order: {
                 img: {
+                    src: 'orderplaceholder1-small.jpg',
+                    width: 300,
+                    height: 300,
+                },
+                largeImg: {
                     src: 'orderplaceholder1.jpg',
                     width: 378,
-                    height: 378,
+                    height: 200,
                 }
             },
             themeColors: {
-                red: '#333252',
+                red: '#9580ad',
                 pastel: '#C3B5D1',
                 headerBgColour: 'darkgrey',
                 navBgColour: 'lightgrey',
@@ -143,6 +164,11 @@ export const config: configInfo = {
                     src: 'miaddison.jpg',
                     width: 732,
                     height: 277,
+                },
+                largeImg: {
+                    src: 'miaddison.jpg',
+                    width: 750,
+                    height: 300,
                 }
             },
             order: {
@@ -150,6 +176,11 @@ export const config: configInfo = {
                     src: 'orderplaceholder-paddington.jpg',
                     width: 540,
                     height: 960,
+                },
+                largeImg: {
+                    src: 'orderplaceholder-paddington.jpg',
+                    width: 375,
+                    height: 220,
                 }
             },
             themeColors: {

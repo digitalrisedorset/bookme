@@ -15,6 +15,7 @@ export const MainStyles = styled.main`
 
     @media (max-width: 600px) {
         grid-template-rows: 100px 1fr 3fr;
+        width: 100%;
     }
 `
 
@@ -28,5 +29,6 @@ export const Section = styled.section`
 
     @media (max-width: 600px) {
         grid-template-columns: 1fr;
+        padding: 0px;
     }
 `
