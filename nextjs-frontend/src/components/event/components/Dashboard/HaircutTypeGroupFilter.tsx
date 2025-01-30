@@ -20,7 +20,7 @@ export const HaircutTypeGroupFilter: React.FC = () => {
         })
     };
 
-    if (data?.haircutTypeGroups.length === 1) return null
+    if (data?.venueHaircutTypeGroups.length === 1) return null
 
     return (
         <VenueStyle>
@@ -28,7 +28,7 @@ export const HaircutTypeGroupFilter: React.FC = () => {
                 <Label>Appointment Type</Label>
                 <select onChange={onHaircutTypeGroupChange} className="form-select" value={user?.haircutTypeGroup?.id}>
                     <option value="">-</option>
-                    {data?.haircutTypeGroups.map((item: HaircutTypeGroup) => {
+                    {data?.venueHaircutTypeGroups.map((item: HaircutTypeGroup) => {
                         return (<option key={item.name} value={item.id}>{item.name}</option>)
                     })}
                 </select>

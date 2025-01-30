@@ -29,7 +29,7 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
 
     if (loading) return <Loading />
 
-    if (!user || eventState.activeEventId===undefined) return null
+    if (!user) return null
 
     const eventHandler = new GroupEventHandler(user)
     const groupEvent = eventHandler.getGroupEvent(data.events)
@@ -61,7 +61,7 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
                 <span className="label">Price</span>
                 <span className="price">{formatMoney(price)}</span>
             </EventRow>
-            <AddToCart id={eventState.activeEventId}>Book Now</AddToCart>
+            <AddToCart id={eventState.activeEventId || ''}>Book Now</AddToCart>
         </ViewGroupEventStyle>
     )
 }

@@ -25,7 +25,7 @@ export const HaircutTypeGroupPreference: React.FC = () => {
     if (loading) return <Loading />
 
     return <HairdresserSelectionStyle>
-        {data?.haircutTypeGroups.map((haircutGroup: HaircutTypeGroup) => {
+        {data?.venueHaircutTypeGroups.map((haircutGroup: HaircutTypeGroup) => {
             return (
                 <div key={haircutGroup.id}>
                     <input type="radio" id={haircutGroup.name} name="hairdresser" value={haircutGroup.id} onClick={onHaircutGroupChange} />
