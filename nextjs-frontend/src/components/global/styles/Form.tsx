@@ -91,6 +91,11 @@ export const Form = styled.form`
         h2 {
             font-size: 1.5rem;
         }
+        button,
+        input[type='submit'] {
+            font-size: 1.5rem;
+            padding: 0.4rem 1rem;
+        }
     }
 `;
 

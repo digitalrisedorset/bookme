@@ -5,17 +5,18 @@ import {DayEventGroup} from "@/components/event/components/Dashboard/DayEvent/Da
 import {NoDayEventList} from "@/components/event/components/Dashboard/Event/NoDayEventList";
 import {DayEventHandler} from "@/components/event/models/DayEventHandler";
 import {EventDetail, EventSummary} from "@/components/global/styles/ItemStyles";
-import {NoEvent} from "@/components/event/components/Dashboard/NoEvent";
 
 interface AccordionProps {
     day: DaysType
     events: KeystoneEvent[]
 }
 
-export const Accordion: React.FC = ({ day, events }: AccordionProps) => {
+export const Accordion: React.FC<AccordionProps> = ({ day, events }: AccordionProps) => {
     const [isActive, setIsActive] = useState(false);
 
     const user = useUser()
+
+    if (user === undefined) return
 
     const dayEventHandler = new DayEventHandler(day);
     const dayEventList = dayEventHandler.getDayEvents(events, user)

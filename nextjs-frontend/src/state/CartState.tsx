@@ -1,39 +1,58 @@
-import { createContext, useContext, useState } from 'react';
+import {createContext, ReactNode, useContext} from 'react';
+import {useImmer} from "use-immer";
+
+interface CartInfoState {
+    cartOpen: boolean,
+    cartCount: number
+}
 
 interface CartState {
-    cartOpen: boolean,
+    cartState: CartInfoState,
     toggleCart: () => void,
     closeCart: () => void,
-    cartCount: number,
     setCount: (count: number) => void }
 
-const LocalStateContext = createContext<CartState>({});
+const initialState: CartInfoState = {
+    cartOpen: false,
+    cartCount: 0
+}
+
+const LocalStateContext = createContext<CartState | undefined>(undefined);
 const LocalStateProvider = LocalStateContext.Provider;
 
-function CartStateProvider({ children }) {
-    // This is our own custom provider! We will store data (state) and functionality (updaters) in here and anyone can access it via the consumer!
+interface CartStateProviderProps {
+    children: ReactNode;
+}
 
-    const [ cartOpen, setCartOpen] = useState(false)
-    const [ cartCount, setCartCount] = useState(0)
+const CartStateProvider: React.FC<CartStateProviderProps> = ({ children }) => {
+    const [state, setState] = useImmer<CartInfoState>(initialState);
 
     function toggleCart() {
-        setCartOpen(!cartOpen)
+        setState(draft => { draft.cartOpen = !draft.cartOpen });
     }
 
     const setCount = (count: number) => {
-        setCartCount(count)
+        setState(draft => { draft.cartCount = count });
     }
 
     function closeCart() {
-        setCartOpen(false)
+        setState(draft => { draft.cartOpen = false });
     }
 
-    return <LocalStateProvider value={{ cartOpen, toggleCart, closeCart, cartCount, setCount }}>{children}</LocalStateProvider>
+    return <LocalStateProvider value={{
+        cartState: state,
+        toggleCart,
+        closeCart,
+        setCount
+    }}>{children}</LocalStateProvider>
 }
 
 function useCart(): CartState {
-    const all = useContext(LocalStateContext)
-    return all
+    const context = useContext(LocalStateContext)
+    if (!context) {
+        throw new Error("useCart must be used within a LocalStateProvider");
+    }
+    return context;
 }
 
 export { CartStateProvider, useCart }

@@ -8,7 +8,8 @@ export interface ImageResponsiveType {
         src: string,
         width: number,
         height: number,
-    }
+    },
+    alt: string
 }
 
 export interface ThemeColors {
@@ -89,7 +90,8 @@ export const config: configInfo = {
                     src: 'harry-barber.png',
                     width: 750,
                     height: 300,
-                }
+                },
+                alt: 'Harry Barber'
             },
             order: {
                 img: {
@@ -101,7 +103,8 @@ export const config: configInfo = {
                     src: 'orderplaceholder-harry.jpg',
                     width: 375,
                     height: 378,
-                }
+                },
+                alt: 'View your order at Harry Barber'
             },
             themeColors: {
                 red: '#ED2532',
@@ -129,7 +132,8 @@ export const config: configInfo = {
                     src: 'freelance-hairddresser.jpg',
                     width: 750,
                     height: 300,
-                }
+                },
+                alt: 'Rachelle'
             },
             order: {
                 img: {
@@ -141,7 +145,8 @@ export const config: configInfo = {
                     src: 'orderplaceholder1.jpg',
                     width: 378,
                     height: 200,
-                }
+                },
+                alt: 'Rachelle'
             },
             themeColors: {
                 red: '#9580ad',
@@ -169,7 +174,8 @@ export const config: configInfo = {
                     src: 'miaddison.jpg',
                     width: 750,
                     height: 300,
-                }
+                },
+                alt: 'Paddington'
             },
             order: {
                 img: {
@@ -181,7 +187,8 @@ export const config: configInfo = {
                     src: 'orderplaceholder-paddington.jpg',
                     width: 375,
                     height: 220,
-                }
+                },
+                alt: 'Paddington'
             },
             themeColors: {
                 red: '#f77f00',

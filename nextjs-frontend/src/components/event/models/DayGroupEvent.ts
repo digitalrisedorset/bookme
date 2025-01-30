@@ -1,4 +1,4 @@
-import {DayGroupEvent, EMPTY_GROUP_EVENT, KeystoneEvent} from "@/components/event/types/event";
+import {DayGroupEvent, KeystoneEvent} from "@/components/event/types/event";
 import {getTime} from "@/lib/date";
 import {UserInformation} from "@/components/user-authentication/hooks/useUser";
 import {isEventInCart} from "@/lib/cart";

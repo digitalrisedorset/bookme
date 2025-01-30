@@ -5,7 +5,7 @@ interface ImageResponsiveProps {
     image: ImageResponsiveType
 }
 
-export const ImageResponsive: React.FC = ({image}: ImageResponsiveProps) => {
+export const ImageResponsive: React.FC<ImageResponsiveProps> = ({image}: ImageResponsiveProps) => {
     return (
         <picture>
             <source
@@ -18,7 +18,7 @@ export const ImageResponsive: React.FC = ({image}: ImageResponsiveProps) => {
                 srcSet={`/images/${image.largeImg.src} ${image.largeImg.width}w`}
                 sizes={`${image.largeImg.width}px`}
             />
-            <img src={`/images/${image.largeImg.src}`}/>
+            <img src={`/images/${image.largeImg.src}`} alt={image.alt}/>
         </picture>
     )
 }

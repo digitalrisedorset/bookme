@@ -9,12 +9,12 @@ import {Checkout} from "@/components/event/components/Checkout";
 
 export const Cart: React.FC = () => {
     const user = useUser();
-    const { cartOpen, closeCart } = useCart()
+    const { cartState, closeCart } = useCart()
 
     if (!user) return null;
 
     return (
-        <CartStyles open={cartOpen}>
+        <CartStyles open={cartState.cartOpen}>
             <header>
                 <p>{user.name}&apos;s Cart</p>
                 <CloseButton onClick={closeCart}>&times;</CloseButton>

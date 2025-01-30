@@ -61,6 +61,10 @@ export const CartStyles = styled.aside<CartProps>`
     list-style: none;
     overflow: scroll;
   }
+
+  @media (max-width: 600px) {
+    min-width: 300px;
+  }
 `;
 
 export const BigButton = styled.button`

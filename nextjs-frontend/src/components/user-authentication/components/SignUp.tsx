@@ -3,6 +3,8 @@ import {useForm} from '../../global/hooks/useForm';
 import {useSignUpUser} from "../graphql/useSignUp";
 import {useRouter} from "next/router";
 import {useLoginUser} from "@/components/user-authentication/graphql/useLoginUser";
+import {useFlashMessage} from "@/state/FlassMessageState";
+import {Feedback} from "@/components/global/components/Feedback";
 
 export const SignUp: React.FC = () => {
   const router = useRouter();
@@ -13,6 +15,7 @@ export const SignUp: React.FC = () => {
   });
   const [signup, { data }] = useSignUpUser(inputs)
   const setUserLogged = useLoginUser(inputs)
+  const {addSuccessMessage, addErrorMessage} = useFlashMessage()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault(); // stop the form from submitting
@@ -20,15 +23,19 @@ export const SignUp: React.FC = () => {
     resetForm();
     const res = await setUserLogged();
     // Send the email and password to the graphqlAPI
-    if (!res?.id) {
-      console.log('error when logging')
+    console.log('signup result', res)
+    if (res?.message) {
+      addErrorMessage('Something went wrong!')
+      console.log('error when logging', res?.message)
     } else {
+      addSuccessMessage('Ready to book your first appointment!')
       router.push({pathname: `/events`});
     }
   }
   return (
     <Form method="POST" onSubmit={handleSubmit}>
       <h2>Sign Up For an Account</h2>
+      <Feedback />
       <fieldset>
         {data?.createUser && (
           <p>

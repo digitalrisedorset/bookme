@@ -35,4 +35,8 @@ export const HairdresserSelectionStyle = styled.div`
     label {
         padding: 10px;
     }
+    @media (max-width: 600px) {
+        font-size: 1rem;
+        line-height: 1.4rem;
+    }
 `

@@ -29,7 +29,7 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
 
     if (loading) return <Loading />
 
-    if (!user) return null
+    if (!user || eventState.activeEventId===undefined) return null
 
     const eventHandler = new GroupEventHandler(user)
     const groupEvent = eventHandler.getGroupEvent(data.events)

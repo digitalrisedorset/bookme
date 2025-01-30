@@ -1,4 +1,4 @@
-import {createContext, useContext} from "react";
+import {createContext, ReactNode, useContext} from "react";
 import {useImmer} from "use-immer";
 import {ACTIVE_VENUE_KEY} from "@/components/venue/types/venue";
 import {config} from "@/config"
@@ -18,7 +18,7 @@ const readActiveVenue = () => {
         venue = localStorage.getItem(ACTIVE_VENUE_KEY)
     }
 
-    if (venue === null) {
+    if (venue === null || venue === undefined) {
         venue = config.venuePreference.defaultVenue
     }
 
@@ -29,22 +29,33 @@ const intialState: VenueConfigInfoState = {
     activeVenue: readActiveVenue()
 }
 
-const LocalStateContext = createContext<VenueConfigState>({});
+const LocalStateContext = createContext<VenueConfigState | undefined>(undefined);
 const LocalStateProvider = LocalStateContext.Provider;
 
-function VenueConfigStateProvider({ children }) {
+interface VenueConfigStateProviderProps {
+    children: ReactNode;
+}
+
+const VenueConfigStateProvider: React.FC<VenueConfigStateProviderProps> = ({ children }) => {
     const [state, setState] = useImmer<VenueConfigInfoState>(intialState);
 
     const setActiveVenue = (code: string) => {
         setState(draft => { draft.activeVenue = code });
     }
 
-    return <LocalStateProvider value={{ setActiveVenue, activeVenue: state.activeVenue}}>{children}</LocalStateProvider>
+    return <LocalStateProvider
+        value={{
+            setActiveVenue,
+            activeVenue: state.activeVenue
+        }}>{children}</LocalStateProvider>
 }
 
 function useVenueConfigState(): VenueConfigState {
-    const all = useContext(LocalStateContext)
-    return all
+    const context = useContext(LocalStateContext)
+    if (!context) {
+        throw new Error("useVenueConfigState must be used within a LocalStateProvider");
+    }
+    return context;
 }
 
 export { VenueConfigStateProvider, useVenueConfigState }

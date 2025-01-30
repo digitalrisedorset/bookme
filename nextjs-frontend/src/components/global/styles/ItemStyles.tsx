@@ -221,8 +221,8 @@ export const EventRow = styled.div`
     @media (max-width: 600px) {
         width: 95%;
         font-size: 1rem;
+        grid-template-columns: 1fr;
     }
-}
 `
 
 export const SelectStyle = styled.div`
