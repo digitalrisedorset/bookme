@@ -95,11 +95,20 @@ export class HolidayHairdresserCreator {
         this.hairdresserCreator = new HairdresserCreator(context)
     }
 
+    getHasVenueSomeHolidays = async (id: string) => {
+        let holidays = await this.context.query.Holiday.findMany({
+            where: { staff: { "id": { "equals": id}} },
+            query: 'id',
+        })
+
+        return parseInt(holidays?.length)
+    }
+
     createHairdresserHoliday = async (holidayData: HairdresserHolidayProps) => {
         const hairdresserInfo = await this.hairdresserCreator.getHairdresserByCode(holidayData.code)
+        const holidayAlreadyIn = await this.getHasVenueSomeHolidays(hairdresserInfo.id)
 
-
-        if (hairdresserInfo) {
+        if (hairdresserInfo && holidayAlreadyIn === 0) {
              console.log(`👩 Adding new holiday for hairdresser: ${hairdresserInfo.name}`)
             await this.context.query.Holiday.createOne({
                 data: {
@@ -137,10 +146,20 @@ export class HolidayOutletCreator {
         return this.venueCreator.getVenueByCode(code)
     }
 
+    getHasVenueSomeHolidays = async (id: string) => {
+        let venues = await this.context.query.OutletHoliday.findMany({
+            where: { venue: { "id": { "equals": id}} },
+            query: 'id',
+        })
+
+        return parseInt(venues?.length)
+    }
+
     createOutletHoliday = async (holidayData: OutletHolidaysProps) => {
         const venueInfo = await this.findVenueByCode(holidayData.venue)
+        const holidayAlreadyIn = await this.getHasVenueSomeHolidays(venueInfo.id)
 
-        if (venueInfo) {
+        if (venueInfo && holidayAlreadyIn === 0) {
             console.log(`👩 Adding new holiday for venue: ${venueInfo.name}`, venueInfo)
             await this.context.query.OutletHoliday.createOne({
                 data: {

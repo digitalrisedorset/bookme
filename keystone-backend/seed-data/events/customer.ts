@@ -62,7 +62,7 @@ export class CustomerCreator {
         const customer = await this.findCustomerByCustomerName(customerInfo.name)
         const venue = await this.findVenueByCode(customerInfo.venue)
 
-        if (!customer) {
+        if (!customer && venue) {
             console.log(`👩 Adding new customer: ${customerInfo.name}`)
             const customer = await this.context.query.User.createOne({
                 data: {

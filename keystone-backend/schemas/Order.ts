@@ -44,6 +44,11 @@ export const Order = list({
         resolveInput: async ({ item, resolvedData, context }) => {
             const orderNumber = resolvedData.orderNumber || item?.orderNumber;
 
+            if (context.query.User === undefined) {
+                console.log('No User exist, we cannot update the Order')
+                return resolvedData;
+            }
+
             const user = await context.query.User.findOne({
                 where: { id: resolvedData?.user?.connect?.id },
                 query: `venue {

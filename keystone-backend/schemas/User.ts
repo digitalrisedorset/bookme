@@ -2,7 +2,6 @@ import {list} from "@keystone-6/core";
 import {allowAll, denyAll} from "@keystone-6/core/access";
 import {password, text, checkbox, select, relationship, calendarDay, integer} from "@keystone-6/core/fields";
 import type {Session} from "../schema";
-import {HaircutTypeGroup} from "./HaircutTypeGroup";
 
 export function isAdminOrSameUser ({ session }: { session?: Session }) {
     // you need to have a session to do this
@@ -141,6 +140,16 @@ export const User = list({
     hooks: {
         resolveInput: async ({ item, resolvedData, context }) => {
             const venue = resolvedData?.venue?.connect?.id || item?.venueId;
+
+            if (venue === null) {
+                console.log('No venue exist for the the user')
+                return resolvedData;
+            }
+
+            if (context.query.HaircutTypeGroup === undefined) {
+                console.log('No haircutTypeGroup exist, we cannot update the user')
+                return resolvedData;
+            }
 
             const haircutTypeGroups = await context.query.HaircutTypeGroup.findMany({
                 where: { venue: { id: { "equals": venue} }},

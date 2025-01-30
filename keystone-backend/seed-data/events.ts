@@ -9,6 +9,14 @@ import {getHour, getTime} from "../lib/date";
 import {HolidayHairdresserCreator, HolidayOutletCreator, HolidayValidator} from "./events/holiday";
 import {event} from "./sample-data/event";
 import {CustomerCreator} from "./events/customer";
+import {
+    IMPORT_CUSTOMER,
+    IMPORT_HAIRCUT_TYPE,
+    IMPORT_VENUE,
+    IMPORT_VENUE_HAIRCUT_GROUP,
+    IMPORT_VENUE_HAIRDRESSER, IMPORT_VENUE_HAIRDRESSER_HOLIDAY,
+    IMPORT_VENUE_HOLIDAY
+} from "../seed-data";
 
 export class EventCreator {
     private venueCreator: VenueCreator
@@ -23,25 +31,41 @@ export class EventCreator {
     private context
     private data: EventProps[]
 
-    constructor(context: KeystoneContext) {
+    constructor(context: KeystoneContext, step: number) {
         this.context = context
         this.data = event
         this.venueCreator = new VenueCreator(context)
-        this.venueCreator.createAllVenues()
         this.venueHolidayCreator = new HolidayOutletCreator(context)
-        //this.venueHolidayCreator.createAllOutletHolidays()
         this.haircutTypeGroupCreator = new HaircutTypeGroupCreator(context)
         this.holidayValidator = new HolidayValidator(context)
-        this.haircutTypeGroupCreator.createAllHaircutGroupTypes()
         this.haircutTypeCreator = new HaircutTypeCreator(context)
-        this.haircutTypeCreator.createAllHaircutTypes()
         this.hairdresserCreator = new HairdresserCreator(context)
-        this.hairdresserCreator.createAllHairdresser()
         this.hairdresserHolidayCreator = new HolidayHairdresserCreator(context)
-        //this.hairdresserHolidayCreator.createAllHairdresserHolidays()
-        this.dateFinder = new DateFinder()
         this.customerCreator = new CustomerCreator(context)
-        this.customerCreator.createAllCustomer()
+        this.dateFinder = new DateFinder()
+        switch (step) {
+            case IMPORT_VENUE: console.log('Import Venues')
+                this.venueCreator.createAllVenues()
+                break;
+            case IMPORT_VENUE_HOLIDAY: console.log('Import Venues Holidays')
+                this.venueHolidayCreator.createAllOutletHolidays()
+                break;
+            case IMPORT_VENUE_HAIRCUT_GROUP: console.log('Import Venues Haircut Group')
+                this.haircutTypeGroupCreator.createAllHaircutGroupTypes()
+                break;
+            case IMPORT_HAIRCUT_TYPE: console.log('Import Venues Haircut Types')
+                this.haircutTypeCreator.createAllHaircutTypes()
+                break;
+            case IMPORT_VENUE_HAIRDRESSER: console.log('Import Venues Hairdresser')
+                this.hairdresserCreator.createAllHairdresser()
+                break;
+            case IMPORT_VENUE_HAIRDRESSER_HOLIDAY: console.log('Import Hairdresser Holidays')
+                this.hairdresserHolidayCreator.createAllHairdresserHolidays()
+                break;
+            case IMPORT_CUSTOMER: console.log('Import Venue Customers')
+                this.customerCreator.createAllCustomer()
+                break;
+        }
     }
 
     concatDateTime = (dateDay, dateTime) => {

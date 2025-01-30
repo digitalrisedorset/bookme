@@ -19,6 +19,7 @@ import {HaircutTypeDuration} from "./schemas/HaircutTypeDuration";
 import {Holiday} from "./schemas/Holiday";
 import updateEventAndRemoveOverlappingEvent from "./mutations/removeOverlappingEvent";
 import {Role} from "./schemas/Role";
+import venueHaircutTypeGroups from "./mutations/venueHaircutTypeGroups";
 
 export type Session = {
     itemId: string
@@ -76,7 +77,11 @@ export function extendGraphqlSchema (baseSchema: GraphQLSchema) {
             haircutId: ID! 
             shampoo: Int
             eventId: ID! 
-          ): String        
+          ): String      
+          """ Retrieve all HaircutTypeGroups that have some HaircutType assigned"""
+          venueHaircutTypeGroups(
+            venueId: ID!           
+          ): [HaircutTypeGroup!]        
         }
         `,
         resolvers: {
@@ -87,7 +92,8 @@ export function extendGraphqlSchema (baseSchema: GraphQLSchema) {
             },
             Query: {
                 calculatePrice,
-                calculateEventDuration
+                calculateEventDuration,
+                venueHaircutTypeGroups
             }
         },
     })

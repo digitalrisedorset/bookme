@@ -64,10 +64,20 @@ export const Hairdresser = list({
             const password = 'P1ssw0rd';
             const venue = resolvedData?.venue?.connect?.id || item?.venue?.connect?.id;
 
+            if (context.query.Role === undefined) {
+                console.log('No Role exist, we cannot update the Hairdresser')
+                return resolvedData;
+            }
+
             const roles = await context.query.Role.findMany({
                 where: { name: {"equals": "Hairdresser"}},
                 query: 'id'
             });
+
+            if (roles?.length === 0) {
+                console.log('No Role was created, we cannot update the Hairdresser')
+                return resolvedData;
+            }
 
             const [customerRole] = roles
 
