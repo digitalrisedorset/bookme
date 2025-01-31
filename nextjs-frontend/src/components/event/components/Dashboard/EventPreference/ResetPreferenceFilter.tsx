@@ -5,7 +5,7 @@ import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 import {useHaircutTypeGroups} from "@/components/event/hooks/useHaircutTypeGroups";
-import {EventPreferenceFilterType} from "@/components/event/types/event";
+import {EventPreferenceFilterType, PREFERENCE_RESET} from "@/components/event/types/event";
 
 export const ResetPreferenceFilter: React.FC = () => {
     const user = useUser()
@@ -17,10 +17,10 @@ export const ResetPreferenceFilter: React.FC = () => {
     const resetFilter = async () => {
         const preference: EventPreferenceFilterType = {
             'weekPreference': '',
-            'haircutType': null
+            'haircutType': PREFERENCE_RESET
         }
         if (data?.venueHaircutTypeGroups.length>1) {
-            preference.haircutTypeGroup = null
+            preference.haircutTypeGroup = PREFERENCE_RESET
         }
 
         await updateUserPreference({

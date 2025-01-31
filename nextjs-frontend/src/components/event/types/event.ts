@@ -107,6 +107,8 @@ export const PAST_EVENT = 'pastevent'
 export const WALKIN_EVENT = 'walkin'
 export const BOOKED_EVENT = 'incart'
 
+export const PREFERENCE_RESET = 'reset'
+
 export const PURCHASED_EVENT = 'wasordered'
 
 export type EventStatus = 'open' | 'pastevent' | 'walkin' | 'wasordered' | (string & {})
@@ -114,8 +116,8 @@ export type EventStatus = 'open' | 'pastevent' | 'walkin' | 'wasordered' | (stri
 export type EventFilterType = 'haircutType' | 'haircutTypeGroup' | 'hairdresser' | 'weekPreference' | (string & {})
 
 export interface EventPreferenceFilterType {
-    haircutType?: string | null
-    haircutTypeGroup?: string | null
+    haircutType?: string
+    haircutTypeGroup?: string
     weekPreference?: string
     hairdresser?: string
 }

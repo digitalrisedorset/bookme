@@ -1,4 +1,4 @@
-import {EventPreferenceFilterType} from "@/components/event/types/event";
+import {EventPreferenceFilterType, PREFERENCE_RESET} from "@/components/event/types/event";
 import {graphQLVariables} from "@/components/user-authentication/types/user";
 
 export const getUserPreferenceVariables = (userId: string, fields: EventPreferenceFilterType) => {
@@ -17,7 +17,7 @@ export const getUserPreferenceVariables = (userId: string, fields: EventPreferen
             case 'haircutType':
             case 'haircutTypeGroup':
             case 'hairdresser':
-                if (fields[index] === null) {
+                if (fields[index] === PREFERENCE_RESET) {
                     data[index] = {"disconnect": true}
                 } else {
                     data[index] = {
