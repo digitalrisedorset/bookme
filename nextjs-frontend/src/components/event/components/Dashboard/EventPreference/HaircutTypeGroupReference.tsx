@@ -7,6 +7,7 @@ import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useHaircutTypeGroups} from "@/components/event/hooks/useHaircutTypeGroups";
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 import {Loading} from "@/components/global/components/Loading";
+import {PreferenceChoice} from "@/components/event/styles/EventFilterStyles";
 
 export const HaircutTypeGroupPreference: React.FC = () => {
     const {data, loading} = useHaircutTypeGroups()
@@ -27,10 +28,10 @@ export const HaircutTypeGroupPreference: React.FC = () => {
     return <HairdresserSelectionStyle>
         {data?.venueHaircutTypeGroups.map((haircutGroup: HaircutTypeGroup) => {
             return (
-                <div key={haircutGroup.id}>
+                <PreferenceChoice key={haircutGroup.id}>
                     <input type="radio" id={haircutGroup.name} name="hairdresser" value={haircutGroup.id} onClick={onHaircutGroupChange} />
-                    <label htmlFor="hairdresser">{capitalise(haircutGroup.name)}</label>
-                </div>
+                    <label htmlFor={haircutGroup.name}>{capitalise(haircutGroup.name)}</label>
+                </PreferenceChoice>
             )
         })}
     </HairdresserSelectionStyle>

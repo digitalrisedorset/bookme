@@ -7,7 +7,7 @@ export const getUserPreferenceVariables = (userId: string, fields: EventPreferen
     for (const index in fields) {
         if (!fields.hasOwnProperty(index)) continue;
         const value = fields[index as keyof EventPreferenceFilterType];
-        if (value === undefined || value === null) continue
+        if (value === undefined) continue
 
         if (index === 'weekPreference') {
             data[index] = value

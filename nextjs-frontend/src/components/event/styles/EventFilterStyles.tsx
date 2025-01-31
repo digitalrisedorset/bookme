@@ -65,3 +65,13 @@ export const NoWorkingDayStyles = styled.div`
         position: relative;
     }
 `
+
+export const PreferenceChoice = styled.div`
+    border: 1px solid var(--mediumgrey);
+    background: var(--lightgrey);
+    margin: 5px 0;
+    padding: 5px;
+    input {
+        visibility: hidden;
+    }
+`

@@ -19,9 +19,10 @@ export const ResetPreferenceFilter: React.FC = () => {
             'weekPreference': '',
             'haircutType': null
         }
-        if (data?.haircutTypeGroups>1) {
+        if (data?.venueHaircutTypeGroups.length>1) {
             preference.haircutTypeGroup = null
         }
+
         await updateUserPreference({
             variables: getUserPreferenceVariables(user.id, preference)
         })

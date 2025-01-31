@@ -6,6 +6,7 @@ import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 import {useConfig} from "@/components/venue/hooks/useConfig";
 import {WeeksType} from "@/components/event/types/event";
+import {PreferenceChoice} from "@/components/event/styles/EventFilterStyles";
 
 export const WeekPreference: React.FC = () => {
     const user = useUser()
@@ -24,10 +25,10 @@ export const WeekPreference: React.FC = () => {
     return  <HairdresserSelectionStyle>
         {getWeeks(config.scheduleWeekSpan).map((item: WeeksType) => {
             return (
-                <div key={item.weekStart}>
+                <PreferenceChoice key={item.weekStart}>
                     <input type="radio" id={item.weekStart} name="week" value={item.weekStart} onClick={onWeekChange} />
-                    <label htmlFor="week">{item.weekLabel}</label>
-                </div>
+                    <label htmlFor={item.weekStart}>{item.weekLabel}</label>
+                </PreferenceChoice>
             )
         })}
     </HairdresserSelectionStyle>

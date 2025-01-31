@@ -11,5 +11,7 @@ export const getUserPreferenceStep = (user: UserInformation): UserPreference => 
         return 'HaircutType'
     }
 
+    console.log('user preference', user)
+
     return 'Week'
 }

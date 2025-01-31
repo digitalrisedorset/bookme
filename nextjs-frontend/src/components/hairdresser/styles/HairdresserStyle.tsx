@@ -26,6 +26,7 @@ export const HairdresserStyle = styled.div`
         padding: 0;
     }
 `;
+
 export const HairdresserSelectionStyle = styled.div`
     display: block;
     text-align: left;
