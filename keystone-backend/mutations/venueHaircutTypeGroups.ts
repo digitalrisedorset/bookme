@@ -7,7 +7,6 @@ async function venueHaircutTypeGroups(
     { venueId }: { venueId: string },
     context: Context
 ): Promise<[HaircutTypeGroup!]> {
-    console.log('read the hairtypegroup for the venue', {venueId})
     // 1. Query the current user see if they are signed in
     const sesh = context.session as Session;
     if (!sesh.itemId) {
