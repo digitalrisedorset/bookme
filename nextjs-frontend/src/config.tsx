@@ -53,6 +53,7 @@ export type configInfo = {
         blushharry: VenuePreference,
         rachelle: VenuePreference
         paddington: VenuePreference
+        doggiemadhouse: VenuePreference
     }
 }
 
