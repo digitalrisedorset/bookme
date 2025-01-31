@@ -107,8 +107,50 @@ export const config: configInfo = {
                 alt: 'View your order at Harry Barber'
             },
             themeColors: {
-                red: '#ED2532',
+                red: '##FFFFFF',
                 pastel: '#273969',
+                headerBgColour: 'lightgrey',
+                navBgColour: 'pastel',
+                buttonBg: 'mediumgrey',
+                buttonColor: 'white'
+            }
+        },
+        doggiemadhouse: {
+            code: 'doggie-madhouse',
+            route: 'doggiemadhouse',
+            showHairdresserOnEvent: false,
+            scheduleWeekSpan: 4,
+            offerShampoo: false,
+            logo: 'book-doggie.png',
+            intro: {
+                img: {
+                    src: 'doggie-madhouse.jpg',
+                    width: 375,
+                    height: 150,
+                },
+                largeImg: {
+                    src: 'doggie-madhouse.jpg',
+                    width: 750,
+                    height: 300,
+                },
+                alt: 'Harry Barber'
+            },
+            order: {
+                img: {
+                    src: 'orderplaceholder-harry.jpg',
+                    width: 378,
+                    height: 378,
+                },
+                largeImg: {
+                    src: 'orderplaceholder-harry.jpg',
+                    width: 375,
+                    height: 378,
+                },
+                alt: 'View your order at Harry Barber'
+            },
+            themeColors: {
+                red: '#d29979',
+                pastel: '#33A7E1',
                 headerBgColour: 'lightgrey',
                 navBgColour: 'pastel',
                 buttonBg: 'mediumgrey',

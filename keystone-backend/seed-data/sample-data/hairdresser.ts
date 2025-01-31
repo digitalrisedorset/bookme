@@ -28,6 +28,28 @@ export const hairdresser = [
         haircutSpeciality: ['paddington_colour', 'paddington_ladies'],
         venue: 'paddington-hairdressing',
     },
+    // Doggie Mad House
+    {
+        code: 'estelle',
+        name: 'Estelle',
+        level: 'senior',
+        haircutSpeciality: ['doggie_madhouse_grooming', 'doggie_madhouse_single_service'],
+        venue: 'doggie-madhouse',
+    },
+    {
+        code: 'michael',
+        name: 'Michael',
+        level: 'senior',
+        haircutSpeciality: ['doggie_madhouse_grooming'],
+        venue: 'doggie-madhouse',
+    },
+    {
+        code: 'laura',
+        name: 'Laura',
+        level: 'junior',
+        haircutSpeciality: ['doggie_madhouse_single_service'],
+        venue: 'doggie-madhouse',
+    },
     // Rachelle
     {
         code: 'rachelle',

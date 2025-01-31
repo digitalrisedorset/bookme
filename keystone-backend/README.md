@@ -12,3 +12,6 @@ auth.ts
 
 # launch keystone
 npx keystone dev
+
+# seed-data
+npx keystone dev --seed-data-step 1

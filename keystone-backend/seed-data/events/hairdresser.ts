@@ -3,7 +3,6 @@ import {HaircutTypeGroupCode, HairdresserCode, HairdresserProps} from "../types"
 import {HaircutTypeGroupCreator} from "./haircutTypeGroup";
 import {HaircutTypeCreator} from "./haircutType";
 import {flatten} from "../../lib/array";
-import {haircutTypeGroup} from "../sample-data/haircutType";
 import {hairdresser} from "../sample-data/hairdresser";
 import {VenueCreator} from "./venue";
 

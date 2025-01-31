@@ -1,52 +1,3 @@
-export const haircutTypeGroup = [
-    // Maddison
-    {
-        code: 'paddington_children',
-        name: 'Children',
-        venue: 'paddington-hairdressing',
-    },
-    {
-        code: 'paddington_ladies',
-        name: 'Ladies',
-        venue: 'paddington-hairdressing',
-    },
-    {
-        code: 'paddington_colour',
-        name: 'Colour',
-        venue: 'paddington-hairdressing',
-    },
-    // Rachelle
-    {
-        code: 'rachelle_children',
-        name: 'Children',
-        venue: 'rachelle-hairdressing',
-    },
-    {
-        code: 'rachelle_ladies',
-        name: 'Ladies',
-        venue: 'rachelle-hairdressing',
-    },
-    {
-        code: 'rachelle_colour',
-        name: 'Colour',
-        venue: 'rachelle-hairdressing',
-    },
-    {
-        code: 'rachelle_treatment',
-        name: 'Treatment',
-        venue: 'rachelle-hairdressing',
-    },
-    {
-        code: 'rachelle_men',
-        name: 'Men',
-        venue: 'rachelle-hairdressing',
-    },
-    {
-        code: 'blushharry_walkin',
-        name: 'Walk-In',
-        venue: 'blush-harry',
-    }];
-
 export const haircutType = [
     // Madisson
     {
@@ -302,6 +253,71 @@ export const haircutType = [
         duration: 50,
         price: 35
     },
+    // Doggie Mad House
+    {
+        code: 'doggie_madhouse_fullclip_scissor',
+        name: 'Full Clip/Scissor Groom',
+        category: 'doggie_madhouse_grooming',
+        duration: 50,
+        price: 35
+    },
+    {
+        code: 'doggie_madhouse_fullhand_strip',
+        name: 'Full Hand Strip',
+        category: 'doggie_madhouse_grooming',
+        duration: 50,
+        price: 35
+    },
+    {
+        code: 'doggie_madhouse_maintenance_groom',
+        name: 'Maintenance G|room',
+        category: 'doggie_madhouse_grooming',
+        duration: 50,
+        price: 35
+    },
+    {
+        code: 'doggie_madhouse_puppy',
+        name: 'Puppy Package',
+        category: 'doggie_madhouse_grooming',
+        duration: 120,
+        price: 70
+    },
+    {
+        code: 'doggie_madhouse_deshed_treatment',
+        name: 'Deshed Treatment',
+        category: 'doggie_madhouse_single_service',
+        duration: 50,
+        price: 35
+    },
+    {
+        code: 'doggie_madhouse_fullhand_bath_brush',
+        name: 'Bath & Brush out',
+        category: 'doggie_madhouse_single_service',
+        duration: 50,
+        price: 35
+    },
+    {
+        code: 'doggie_madhouse_teeth_cleaning',
+        name: 'Teeth Cleaning',
+        category: 'doggie_madhouse_single_service',
+        duration: 20,
+        price: 20
+    },
+    {
+        code: 'doggie_madhouse_nail_trim',
+        name: 'Nail Trim and Pad Clean and Clear',
+        category: 'doggie_madhouse_single_service',
+        duration: 35,
+        price: 35
+    },
+    {
+        code: 'doggie_madhouse_ear_clean',
+        name: 'Ear clean',
+        category: 'doggie_madhouse_single_service',
+        duration: 20,
+        price: 27
+    },
+    // Blush Harry
     {
         code: 'blushharry_410_years',
         name: '4-12 Years',

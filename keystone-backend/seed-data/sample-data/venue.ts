@@ -6,6 +6,12 @@ export const venue = [
         orderPadding: 5
     },
     {
+        code: 'doggie-madhouse',
+        name: 'Doggie Madhouse Groomer',
+        orderPrefix: 'DOG',
+        orderPadding: 5
+    },
+    {
         code: 'rachelle-hairdressing',
         name: 'Rachelle Hair design',
         orderPrefix: 'RAC',
@@ -21,6 +27,12 @@ export const venue = [
 export const outletHoliday = [
     {
         venue: 'rachelle-hairdressing',
+        name: 'March break',
+        startDate: '2025-03-03T00:00:00.101Z',
+        endDate: '2025-03-14T00:00:00.101Z'
+    },
+    {
+        venue: 'doggie-madhouse',
         name: 'March break',
         startDate: '2025-03-03T00:00:00.101Z',
         endDate: '2025-03-14T00:00:00.101Z'

@@ -3,7 +3,7 @@ import {
     HaircutTypeGroupProps
 } from "../types";
 import type { KeystoneContext } from "@keystone-6/core/src/types";
-import {haircutTypeGroup} from "../sample-data/haircutType";
+import {haircutTypeGroup} from "../sample-data/haircutTypeGroup";
 import {VenueCreator} from "./venue";
 
 export class HaircutTypeGroupCreator {

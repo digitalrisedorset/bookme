@@ -10,6 +10,22 @@ export const customer = [
         name: 'Shain',
         venue: 'paddington-hairdressing',
     },
+    // Doggie Mad House
+    {
+        code: 'ruby',
+        name: 'Ruby',
+        venue: 'doggie-madhouse',
+    },
+    {
+        code: 'laurence',
+        name: 'Laurence',
+        venue: 'doggie-madhouse',
+    },
+    {
+        code: 'roland',
+        name: 'Roland',
+        venue: 'doggie-madhouse',
+    },
     // Rachelle
     {
         code: 'lyndon',

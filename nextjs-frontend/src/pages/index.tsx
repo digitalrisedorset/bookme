@@ -2,6 +2,7 @@ import IntroRachelle from "@/components/venue/components/IntroRachelle";
 import {useConfig} from "@/components/venue/hooks/useConfig";
 import IntroPaddington from "@/components/venue/components/IntroPaddington";
 import IntroBlushHarry from "@/components/venue/components/IntroBlushHarry";
+import IntroDoggieMadhouse from "@/components/venue/components/IntroDoggieMadhouse";
 
 export default function Home() {
     const config = useConfig()
@@ -11,6 +12,7 @@ export default function Home() {
             {config.route === 'rachelle' &&<IntroRachelle />}
             {config.route === 'paddington' &&<IntroPaddington />}
             {config.route === 'blushharry' &&<IntroBlushHarry />}
+            {config.route === 'doggiemadhouse' &&<IntroDoggieMadhouse />}
         </>
     );
 }

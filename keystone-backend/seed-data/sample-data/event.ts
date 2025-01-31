@@ -306,4 +306,64 @@ export const event = [
         duration: 15,
         breakTime: 3
     },
+    {
+        venue: 'doggie-madhouse',
+        day: 'saturday',
+        startTime: '9:00',
+        endTime: '19:00',
+        status: 'open',
+        hairdresser: 'estelle',
+        duration: 30,
+        breakTime: 5
+    },
+    {
+        venue: 'doggie-madhouse',
+        day: 'monday',
+        startTime: '9:00',
+        endTime: '19:00',
+        status: 'open',
+        hairdresser: 'estelle',
+        duration: 30,
+        breakTime: 5
+    },
+    {
+        venue: 'doggie-madhouse',
+        day: 'tuesday',
+        startTime: '12:00',
+        endTime: '19:00',
+        status: 'open',
+        hairdresser: 'michael',
+        duration: 30,
+        breakTime: 5
+    },
+    {
+        venue: 'doggie-madhouse',
+        day: 'monday',
+        startTime: '13:00',
+        endTime: '17:00',
+        status: 'open',
+        hairdresser: 'michael',
+        duration: 30,
+        breakTime: 5
+    },
+    {
+        venue: 'doggie-madhouse',
+        day: 'wednesday',
+        startTime: '8:00',
+        endTime: '14:00',
+        status: 'open',
+        hairdresser: 'laura',
+        duration: 30,
+        breakTime: 5
+    },
+    {
+        venue: 'doggie-madhouse',
+        day: 'thursday',
+        startTime: '7:00',
+        endTime: '15:00',
+        status: 'open',
+        hairdresser: 'laura',
+        duration: 30,
+        breakTime: 5
+    },
 ];
