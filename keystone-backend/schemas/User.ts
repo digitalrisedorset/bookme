@@ -37,7 +37,7 @@ export const User = list({
         }),
         email: text({
             access: allowAll,
-            isFilterable: false,
+            isFilterable: true,
             isOrderable: false,
             isIndexed: 'unique',
             validation: {

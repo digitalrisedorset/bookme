@@ -1,13 +1,12 @@
 import {list} from "@keystone-6/core";
 import {allowAll} from "@keystone-6/core/access";
 import {relationship, text} from "@keystone-6/core/fields";
-import {padL} from "../lib/string";
 
 export const Hairdresser = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['name', 'level', 'haircutTypes', 'venue'],
+            initialColumns: ['name', 'level', 'haircutTypes', 'venue', 'user'],
         },
     },
     fields: {
@@ -18,7 +17,7 @@ export const Hairdresser = list({
         }),
         email: text({
             access: allowAll,
-            isFilterable: false,
+            isFilterable: true,
             isOrderable: false,
             /*isIndexed: 'unique',*/
             validation: {
