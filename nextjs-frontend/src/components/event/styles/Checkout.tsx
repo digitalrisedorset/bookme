@@ -15,6 +15,9 @@ export const SickButton = styled.button`
   &[disabled] {
     opacity: 0.5;
   }
+    @media (max-width: 600px) {
+        font-size: 1rem;
+    }
 `;
 
 export const CheckoutFormStyles = styled.form`

@@ -64,6 +64,12 @@ export const CartStyles = styled.aside<CartProps>`
 
   @media (max-width: 600px) {
     min-width: 300px;
+    footer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      font-size: 2rem;
+      font-weight: 600;
+    }
   }
 `;
 

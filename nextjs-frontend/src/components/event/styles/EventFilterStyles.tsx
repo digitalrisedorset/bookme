@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {EventStatus, OPTION_SELECTED} from "@/components/event/types/event";
 
 export const EventFilterStyles = styled.div`
   display: grid;
@@ -66,8 +67,13 @@ export const NoWorkingDayStyles = styled.div`
     }
 `
 
-export const PreferenceChoice = styled.div`
-    border: 1px solid var(--mediumgrey);
+interface PreferenceProps {
+    selected?: 'yes' | 'no'
+}
+
+export const PreferenceChoice = styled.div<PreferenceProps>`
+    /*border: 1px solid var(--mediumgrey);*/
+    border: ${(props) => props.selected === OPTION_SELECTED && `1px solid var(--red);`};
     background: var(--lightgrey);
     margin: 5px 0;
     padding: 5px;

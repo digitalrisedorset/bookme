@@ -226,11 +226,12 @@ export const EventRow = styled.div`
 `
 
 export const SelectStyle = styled.div`
+    position: relative;
+    display: block;
     text-align: left;
-    line-height: 1.8rem;
-    margin: 1rem;
+    line-height: 1.4rem;
     label {
-        padding: 0 10px;
+        padding: 5px;
     }
 `
 

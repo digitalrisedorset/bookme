@@ -1,25 +1,21 @@
-import React, {useEffect} from "react";
-import {DayGroupEvent, Hairdresser} from "@/components/event/types/event";
+import React from "react";
+import {DayGroupEvent, Hairdresser, OPTION_SELECTED} from "@/components/event/types/event";
 import {useEventState} from "@/state/EventState";
 import {capitalise} from "@/lib/string";
 import {useHairdressers} from "@/components/hairdresser/hooks/useHairdressers";
 import {Loading} from "@/components/global/components/Loading";
+import {Radio} from "@/components/global/components/Preference/Radio";
+import {SelectStyle} from "@/components/global/styles/ItemStyles";
 
 interface ListingProps {
     eventGroup: DayGroupEvent
 }
 
 export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingProps) => {
-    const {activeEventId, toggleActiveEvent} = useEventState()
+    const {eventState, toggleActiveEvent} = useEventState()
     const {data, loading} = useHairdressers()
 
     if (loading) return <Loading />
-
-    const getKey = (startTime: string, hairdresser: string) => {
-        const date = new Date(startTime).getTime()
-
-        return `${date}-${hairdresser}`
-    }
 
     const getHairdresserDetail = (hairdresserId: string) => {
         const result = data?.hairdressers.filter((hairdresser: Hairdresser) => hairdresser.id === hairdresserId)
@@ -27,26 +23,37 @@ export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingP
     }
 
     const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
         toggleActiveEvent(e.target.value)
     }
 
-    useEffect(() => {
-        if (eventGroup.hairdressers.length === 1) {
-            const firstEvent = eventGroup.hairdressers[0]
-            toggleActiveEvent(firstEvent.eventId)
-        }
-    }, [eventGroup.hairdressers.length, toggleActiveEvent]);
+    const getSelectedStatus = (eventId: string) => {
+        return (eventState.activeEventId === eventId)?OPTION_SELECTED: ''
+    }
 
-    return <div className="hairdresser-selection">
+    const updateSelect = () => {
+        if (eventGroup.hairdressers.length === 1) {
+            const firstMap = eventGroup.hairdressers[0]
+            toggleActiveEvent(firstMap.eventId)
+        }
+    }
+
+    updateSelect()
+
+    return <SelectStyle>
         {eventGroup.hairdressers.map(({hairdresserId, eventId}: { hairdresserId: string, eventId: string }) => {
             const hairdresser = getHairdresserDetail(hairdresserId)
 
             return (
-                <div key={getKey(eventGroup.startTime, hairdresserId)}>
-                    <input type="radio" name="hairdresser" value={eventId} defaultChecked={activeEventId === eventId} onChange={handleSelect} />
-                    <label htmlFor="hairdresser">{capitalise(hairdresser?.name)}</label>
-                </div>
+                <Radio selected={getSelectedStatus(eventId)}
+                       id={`hairdresser-${eventId}`}
+                       name="hairdresser"
+                       value={eventId}
+                       checked={eventState.activeEventId === eventId}
+                       onChange={handleSelect}
+                       label={capitalise(hairdresser?.name)}
+                />
             )
         })}
-    </div>
+    </SelectStyle>
 }

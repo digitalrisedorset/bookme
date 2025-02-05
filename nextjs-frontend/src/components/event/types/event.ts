@@ -115,6 +115,8 @@ export type EventStatus = 'open' | 'pastevent' | 'walkin' | 'wasordered' | (stri
 
 export type EventFilterType = 'haircutType' | 'haircutTypeGroup' | 'hairdresser' | 'weekPreference' | (string & {})
 
+export const OPTION_SELECTED = 'checked'
+
 export interface EventPreferenceFilterType {
     haircutType?: string
     haircutTypeGroup?: string
