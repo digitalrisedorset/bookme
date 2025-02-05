@@ -10,6 +10,12 @@ export const customer = [
         name: 'Shain',
         venue: 'paddington-hairdressing',
     },
+    // Date Mate
+    {
+        code: 'juliette',
+        name: 'Juliette',
+        venue: 'date-mate',
+    },
     // Doggie Mad House
     {
         code: 'ruby',

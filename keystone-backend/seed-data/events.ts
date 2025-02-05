@@ -15,7 +15,7 @@ import {
     IMPORT_VENUE,
     IMPORT_VENUE_HAIRCUT_GROUP,
     IMPORT_VENUE_HAIRDRESSER, IMPORT_VENUE_HAIRDRESSER_HOLIDAY,
-    IMPORT_VENUE_HOLIDAY
+    IMPORT_VENUE_HOLIDAY, REPAIR_HAIRDRESSER
 } from "../seed-data";
 
 export class EventCreator {
@@ -65,6 +65,9 @@ export class EventCreator {
             case IMPORT_CUSTOMER: console.log('Import Venue Customers')
                 this.customerCreator.createAllCustomer()
                 break;
+            case REPAIR_HAIRDRESSER: console.log('Repair Hairdresser without User')
+                this.hairdresserCreator.repairHairdresser()
+                break;
         }
     }
 
@@ -82,8 +85,6 @@ export class EventCreator {
             const isVenueHoliday = await this.holidayValidator.isVenueOnHoliday(venueId, eventDate, startTime, endTime)
 
             if (isHairdresserHoliday || isVenueHoliday) return
-
-            //console.log('create event', hairdresserId, day, startTime)
 
             await this.context.query.Event.createOne({
                 data: {

@@ -5,6 +5,7 @@ import {HaircutTypeCreator} from "./haircutType";
 import {flatten} from "../../lib/array";
 import {hairdresser} from "../sample-data/hairdresser";
 import {VenueCreator} from "./venue";
+import {HairdresserRepair} from "./Hairdresser/repair";
 
 export class HairdresserCreator {
     private context
@@ -17,12 +18,15 @@ export class HairdresserCreator {
 
     private venueCreator: VenueCreator
 
+    private hairdresserRepair: HairdresserRepair
+
     constructor(context: KeystoneContext) {
         this.context = context
         this.data = hairdresser
         this.haircutTypeGroupCreator = new HaircutTypeGroupCreator(context)
         this.haircutTypeCreator = new HaircutTypeCreator(context)
         this.venueCreator = new VenueCreator(context)
+        this.hairdresserRepair = new HairdresserRepair(context)
     }
 
     findVenueByCode = (code: string) => {
@@ -44,12 +48,12 @@ export class HairdresserCreator {
     }
 
     findHairdresserByCode = (code: HairdresserCode): string => {
-        const haircutType = this.data.filter((haircutType) => {
+        const hairdresserData = this.data.filter((haircutType) => {
             if (haircutType.code === code) return haircutType
         })
 
-        if (haircutType) {
-            return haircutType[0]
+        if (hairdresserData) {
+            return hairdresserData[0]
         }
     }
 
@@ -74,6 +78,10 @@ export class HairdresserCreator {
         return groups
     }
 
+    buildEmail = (hairdresserData: HairdresserProps) => {
+        return `${hairdresserData.name.toLowerCase()}@${hairdresserData.venue}.com`
+    }
+
     createHairdresser = async (hairdresserData: HairdresserProps) => {
         const hairdresserInfo = await this.findHairdresserByCode(hairdresserData.code)
         const hairdresser = await this.findHairdresserByHairdresserName(hairdresserInfo.name)
@@ -87,7 +95,7 @@ export class HairdresserCreator {
             const hairdresser = await this.context.query.Hairdresser.createOne({
                 data: {
                     name: hairdresserInfo.name,
-                    email: `${hairdresserInfo.name.toLowerCase()}@${hairdresserInfo.venue}.com`,
+                    email: this.buildEmail(hairdresserInfo),
                     level: hairdresserInfo.level,
                     venue: { connect: { id: venue.id}},
                 },
@@ -117,6 +125,12 @@ export class HairdresserCreator {
     createAllHairdresser = async () => {
         for (const hairdresser: HairdresserProps of this.data) {
             await this.createHairdresser(hairdresser)
+        }
+    }
+
+    repairHairdresser = async () => {
+        for (const hairdresser: HairdresserProps of this.data) {
+            await this.hairdresserRepair.repair(hairdresser.name, hairdresser.venue)
         }
     }
 }

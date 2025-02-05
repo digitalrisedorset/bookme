@@ -22,7 +22,14 @@ export const venue = [
         name: 'Blush Harry',
         orderPrefix: 'HAR',
         orderPadding: 7
-    }];
+    },
+    {
+        code: 'date-mate',
+        name: 'Date Mate',
+        orderPrefix: 'DAT',
+        orderPadding: 6
+    },
+];
 
 export const outletHoliday = [
     {

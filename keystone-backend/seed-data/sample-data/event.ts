@@ -1,4 +1,35 @@
 export const event = [
+    //Romeo
+    {
+        venue: 'date-mate',
+        day: 'tuesday',
+        startTime: '9:00',
+        endTime: '14:00',
+        status: 'open',
+        hairdresser: 'romeo',
+        duration: 20,
+        breakTime: 5
+    },
+    {
+        venue: 'date-mate',
+        day: 'friday',
+        startTime: '15:00',
+        endTime: '23:00',
+        status: 'open',
+        hairdresser: 'romeo',
+        duration: 40,
+        breakTime: 5
+    },
+    {
+        venue: 'date-mate',
+        day: 'saturday',
+        startTime: '18:00',
+        endTime: '19:00',
+        status: 'open',
+        hairdresser: 'romeo',
+        duration: 40,
+        breakTime: 5
+    },
     //stephanie
     {
         venue: 'rachelle-hairdressing',

@@ -1,4 +1,10 @@
 export const haircutTypeGroup = [
+    // Date Mate
+    {
+        code: 'datemate_valentine',
+        name: 'Valentine',
+        venue: 'date-mate',
+    },
     // Maddison
     {
         code: 'paddington_children',

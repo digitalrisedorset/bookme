@@ -9,6 +9,7 @@ export const IMPORT_VENUE_HAIRDRESSER_HOLIDAY = 6
 export const IMPORT_CUSTOMER = 7
 const IMPORT_DELETE_EVENT = 8
 const IMPORT_CREATE_EVENT = 9
+export const REPAIR_HAIRDRESSER = 10
 
 export async function insertSeedData(context) {
     console.log(`🌱 Inserting seed data`)

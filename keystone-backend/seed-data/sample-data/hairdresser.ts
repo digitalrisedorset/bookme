@@ -1,4 +1,12 @@
 export const hairdresser = [
+    // Date Mate
+    {
+        code: 'romeo',
+        name: 'Romeo',
+        level: 'senior',
+        haircutSpeciality: ['datemate_valentine'],
+        venue: 'date-mate',
+    },
     // Madisson
     {
         code: 'carlos',

@@ -1,4 +1,26 @@
 export const haircutType = [
+    // Date Mate
+    {
+        code: 'datemate_casual_coffee',
+        name: 'Casual Coffee',
+        category: 'datemate_valentine',
+        duration: 30,
+        price: 12
+    },
+    {
+        code: 'datemate_fancy_dinner',
+        name: 'Fancy Dinner',
+        category: 'datemate_valentine',
+        duration: 60,
+        price: 40
+    },
+    {
+        code: 'datemate_surprise_adventure',
+        name: 'Surprise Adventure',
+        category: 'datemate_valentine',
+        duration: 360,
+        price: 100
+    },
     // Madisson
     {
         code: 'paddington_1215_years',
