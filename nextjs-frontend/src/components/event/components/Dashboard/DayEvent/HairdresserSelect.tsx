@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {DayGroupEvent, Hairdresser} from "@/components/event/types/event";
 import {useEventState} from "@/state/EventState";
 import {capitalise} from "@/lib/string";
@@ -10,7 +10,7 @@ interface ListingProps {
 }
 
 export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingProps) => {
-    const {toggleActiveEvent} = useEventState()
+    const {activeEventId, toggleActiveEvent} = useEventState()
     const {data, loading} = useHairdressers()
 
     if (loading) return <Loading />
@@ -26,20 +26,16 @@ export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingP
         return result[0]
     }
 
-    const eventSelected = () => {
-        if (eventGroup.hairdressers.length === 1) {
-            const firstEvent = eventGroup.hairdressers[0]
-            toggleActiveEvent(firstEvent.eventId)
-
-            return firstEvent.eventId
-        }
-
-        return null
-    }
-
     const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         toggleActiveEvent(e.target.value)
     }
+
+    useEffect(() => {
+        if (eventGroup.hairdressers.length === 1) {
+            const firstEvent = eventGroup.hairdressers[0]
+            toggleActiveEvent(firstEvent.eventId)
+        }
+    }, [eventGroup.hairdressers.length, toggleActiveEvent]);
 
     return <div className="hairdresser-selection">
         {eventGroup.hairdressers.map(({hairdresserId, eventId}: { hairdresserId: string, eventId: string }) => {
@@ -47,7 +43,7 @@ export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingP
 
             return (
                 <div key={getKey(eventGroup.startTime, hairdresserId)}>
-                    <input type="radio" name="hairdresser" value={eventId} defaultChecked={eventSelected() === eventId} onChange={handleSelect} />
+                    <input type="radio" name="hairdresser" value={eventId} defaultChecked={activeEventId === eventId} onChange={handleSelect} />
                     <label htmlFor="hairdresser">{capitalise(hairdresser?.name)}</label>
                 </div>
             )
