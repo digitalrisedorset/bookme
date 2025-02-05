@@ -7,8 +7,7 @@ import {useFlashMessage} from "@/state/FlassMessageState";
 import {Feedback} from "@/components/global/components/Feedback";
 import {tr} from "@/lib/translate";
 import {useVenueConfigState} from "@/state/VenueConfigState";
-import {register} from "@/components/user-authentication/actions/register";
-import {useState} from "react";
+import {ChangeEvent, useState} from "react";
 
 export const SignUp: React.FC = () => {
   const router = useRouter();
@@ -17,9 +16,9 @@ export const SignUp: React.FC = () => {
     name: '',
     password: '',
   });
-  const [confirmPassword, setConfirmPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [signup, { data }] = useSignUpUser(inputs)
-  const [setUserLogged] = useLoginUser(inputs)
+  const setUserLogged = useLoginUser(inputs)
   const {addSuccessMessage, addErrorMessage} = useFlashMessage()
   const {activeVenue} = useVenueConfigState()
 
@@ -31,7 +30,7 @@ export const SignUp: React.FC = () => {
       return
     }
 
-    await register(inputs, signup)
+    await signup().catch(console.error);
     resetForm();
     const res = await setUserLogged();
     // Send the email and password to the graphqlAPI
@@ -83,7 +82,7 @@ export const SignUp: React.FC = () => {
               required
               type="password"
               name="password"
-              minLength="6"
+              minLength={6}
               placeholder="Password"
               autoComplete="password"
               value={inputs.password}
@@ -99,7 +98,7 @@ export const SignUp: React.FC = () => {
               placeholder="Confirm Password"
               autoComplete="password"
               value={confirmPassword}
-              onChange={(e: string) => setConfirmPassword(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
           />
         </label>
         <button type="submit">Sign Up!</button>

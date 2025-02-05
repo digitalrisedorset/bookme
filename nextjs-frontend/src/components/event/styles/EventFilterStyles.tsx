@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {EventStatus, OPTION_SELECTED} from "@/components/event/types/event";
+import {OPTION_SELECTED} from "@/components/event/types/event";
 
 export const EventFilterStyles = styled.div`
   display: grid;
@@ -68,7 +68,7 @@ export const NoWorkingDayStyles = styled.div`
 `
 
 interface PreferenceProps {
-    selected?: 'yes' | 'no'
+    selected?: 'checked' | ''
 }
 
 export const PreferenceChoice = styled.div<PreferenceProps>`

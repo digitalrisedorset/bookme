@@ -4,7 +4,6 @@ import {useLoginUser} from "../graphql/useLoginUser";
 import {useRouter} from "next/router";
 import {Feedback} from "@/components/global/components/Feedback";
 import {useFlashMessage} from "@/state/FlassMessageState";
-import {loginUser} from "@/components/user-authentication/actions/login";
 
 export const SignIn: React.FC = () => {
   const router = useRouter()
@@ -12,12 +11,12 @@ export const SignIn: React.FC = () => {
     email: '',
     password: '',
   });
-  const [signIn] = useLoginUser(inputs)
+  const setUserLogged = useLoginUser(inputs)
   const {addSuccessMessage, addErrorMessage} = useFlashMessage()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault(); // stop the form from submitting
-    const res = await loginUser(inputs, signIn);
+    const res = await setUserLogged()
 
     resetForm();
     if (!res.name) {

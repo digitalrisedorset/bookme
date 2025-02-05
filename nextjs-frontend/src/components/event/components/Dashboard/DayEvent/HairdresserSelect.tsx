@@ -1,5 +1,5 @@
 import React from "react";
-import {DayGroupEvent, Hairdresser, OPTION_SELECTED} from "@/components/event/types/event";
+import {DayGroupEvent, Hairdresser} from "@/components/event/types/event";
 import {useEventState} from "@/state/EventState";
 import {capitalise} from "@/lib/string";
 import {useHairdressers} from "@/components/hairdresser/hooks/useHairdressers";
@@ -27,10 +27,6 @@ export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingP
         toggleActiveEvent(e.target.value)
     }
 
-    const getSelectedStatus = (eventId: string) => {
-        return (eventState.activeEventId === eventId)?OPTION_SELECTED: ''
-    }
-
     const updateSelect = () => {
         if (eventGroup.hairdressers.length === 1) {
             const firstMap = eventGroup.hairdressers[0]
@@ -45,7 +41,7 @@ export const HairdresserSelect: React.FC<ListingProps> = ({eventGroup}: ListingP
             const hairdresser = getHairdresserDetail(hairdresserId)
 
             return (
-                <Radio selected={getSelectedStatus(eventId)}
+                <Radio key={`hairdresser-${eventId}`}
                        id={`hairdresser-${eventId}`}
                        name="hairdresser"
                        value={eventId}
