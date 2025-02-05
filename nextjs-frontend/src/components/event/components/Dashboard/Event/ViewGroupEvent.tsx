@@ -14,6 +14,8 @@ import {useEventState} from "@/state/EventState";
 import {useEventDuration} from "@/components/event/hooks/useEventDuration";
 import {useConfig} from "@/components/venue/hooks/useConfig";
 import {Loading} from "@/components/global/components/Loading";
+import {tr} from "@/lib/translate";
+import {useVenueConfigState} from "@/state/VenueConfigState";
 
 interface ViewGroupEventProps {
     eventIds: string[]
@@ -26,6 +28,7 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
     const price  = useEventPrice()
     const endTime = useEventDuration()
     const config = useConfig()
+    const {activeVenue} = useVenueConfigState()
 
     if (loading) return <Loading />
 
@@ -36,17 +39,17 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
 
     return (
         <ViewGroupEventStyle>
-            <h5>Let&apos;s set your appointment details</h5>
+            <h5>Let&apos;s set your {tr('appointment', activeVenue)} details</h5>
             <EventRow>
                 <span className="label">Appointment</span>
                 <p className="title">{getEventTitle(groupEvent)}</p>
             </EventRow>
             <EventRow>
-                <span className="label">Haircut</span>
+                <span className="label">{tr('Haircut', activeVenue)}</span>
                 <span className="title">{groupEvent.haircutType}</span>
             </EventRow>
             <EventRow>
-                <span className="label">Hairdresser</span>
+                <span className="label">{tr('Hairdresser', activeVenue)}</span>
                 <HairdresserSelect eventGroup={groupEvent} />
             </EventRow>
             {config.offerShampoo &&<EventRow>

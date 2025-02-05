@@ -5,6 +5,9 @@ import {useRouter} from "next/router";
 import {useLoginUser} from "@/components/user-authentication/graphql/useLoginUser";
 import {useFlashMessage} from "@/state/FlassMessageState";
 import {Feedback} from "@/components/global/components/Feedback";
+import {tr} from "@/lib/translate";
+import {useVenueConfigState} from "@/state/VenueConfigState";
+import {register} from "@/components/user-authentication/actions/register";
 
 export const SignUp: React.FC = () => {
   const router = useRouter();
@@ -12,14 +15,22 @@ export const SignUp: React.FC = () => {
     email: '',
     name: '',
     password: '',
+    confirmPassword: ''
   });
   const [signup, { data }] = useSignUpUser(inputs)
-  const setUserLogged = useLoginUser(inputs)
+  const [setUserLogged] = useLoginUser(inputs)
   const {addSuccessMessage, addErrorMessage} = useFlashMessage()
+  const {activeVenue} = useVenueConfigState()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault(); // stop the form from submitting
-    await signup().catch(console.error);
+
+    if (inputs.password !== inputs.confirmPassword) {
+      addErrorMessage('Password and Confirm Password do not match')
+      return
+    }
+
+    await register(inputs, signup)
     resetForm();
     const res = await setUserLogged();
     // Send the email and password to the graphqlAPI
@@ -28,7 +39,7 @@ export const SignUp: React.FC = () => {
       addErrorMessage('Something went wrong!')
       console.log('error when logging', res?.message)
     } else {
-      addSuccessMessage('Ready to book your first appointment!')
+      addSuccessMessage(`Ready to book your first ${tr('appointment', activeVenue)}!`)
       router.push({pathname: `/events`});
     }
   }
@@ -38,44 +49,57 @@ export const SignUp: React.FC = () => {
       <Feedback />
       <fieldset>
         {data?.createUser && (
-          <p>
-            Signed up with {data.createUser.email} - Please Go Head and Sign in!
-          </p>
+            <p>
+              Signed up with {data.createUser.email} - Please Go Head and Sign in!
+            </p>
         )}
         <label htmlFor="name">
           Your Name
           <input
-            required
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            autoComplete="name"
-            value={inputs.name}
-            onChange={handleChange}
+              required
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              autoComplete="name"
+              value={inputs.name}
+              onChange={handleChange}
           />
         </label>
         <label htmlFor="email">
           Email
           <input
-            required
-            type="email"
-            name="email"
-            placeholder="Your Email Address"
-            autoComplete="email"
-            value={inputs.email}
-            onChange={handleChange}
+              required
+              type="email"
+              name="email"
+              placeholder="Your Email Address"
+              autoComplete="email"
+              value={inputs.email}
+              onChange={handleChange}
           />
         </label>
         <label htmlFor="password">
           Password
           <input
-            required
-            type="password"
-            name="password"
-            placeholder="Password"
-            autoComplete="password"
-            value={inputs.password}
-            onChange={handleChange}
+              required
+              type="password"
+              name="password"
+              minLength="6"
+              placeholder="Password"
+              autoComplete="password"
+              value={inputs.password}
+              onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="confirmPassword">
+          Confirm Password
+          <input
+              required
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              autoComplete="password"
+              value={inputs.confirmPassword}
+              onChange={handleChange}
           />
         </label>
         <button type="submit">Sign Up!</button>

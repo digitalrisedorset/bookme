@@ -5,7 +5,7 @@ import {useVenue} from "@/components/venue/hooks/useVenue";
 import {formProps} from "@/components/global/types/form";
 import {graphQLVariables} from "@/components/user-authentication/types/user";
 
-const SIGNUP_MUTATION = gql`
+export const SIGNUP_MUTATION = gql`
   mutation CreateUser($data: UserCreateInput!) {
     createUser(data: $data) {
       id

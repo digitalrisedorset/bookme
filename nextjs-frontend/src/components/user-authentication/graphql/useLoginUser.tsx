@@ -24,18 +24,10 @@ const SIGNIN_MUTATION = gql`
 `;
 
 export const useLoginUser = (inputs: formProps) => {
-    const [signin] = useMutation(SIGNIN_MUTATION, {
+    const response = useMutation(SIGNIN_MUTATION, {
         variables: inputs,
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
     });
 
-    const setUserLogged = async () => {
-        const res = await signin(inputs);
-
-        return (res?.data?.authenticateUserWithPassword.__typename === 'UserAuthenticationWithPasswordFailure')
-            ? res?.data?.authenticateUserWithPassword
-            : res?.data?.authenticateUserWithPassword.item
-    }
-
-    return setUserLogged
+    return response;
 }
