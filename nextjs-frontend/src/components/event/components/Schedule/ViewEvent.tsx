@@ -5,6 +5,8 @@ import {useSheduledEvent} from "@/components/event/hooks/useScheduledEvent";
 import {formatMoney} from "@/lib/price";
 import {getTime} from "@/lib/date";
 import {Loading} from "@/components/global/components/Loading";
+import {tr} from "@/lib/translate";
+import {useVenueConfigState} from "@/state/VenueConfigState";
 
 interface ViewEventProps {
     eventId: string
@@ -12,6 +14,7 @@ interface ViewEventProps {
 
 export const ViewEvent: React.FC<ViewEventProps> = ({eventId}: ViewEventProps) => {
     const { data, loading } = useSheduledEvent(eventId)
+    const {activeVenue} = useVenueConfigState()
 
     if (loading) return <Loading />
 
@@ -19,7 +22,7 @@ export const ViewEvent: React.FC<ViewEventProps> = ({eventId}: ViewEventProps) =
 
     return (
         <ViewEventStyle>
-            <h5>Your scheduled appointment details</h5>
+            <h5>Your scheduled {tr('appointment', activeVenue)} details</h5>
             <EventRow>
                 <span className="label">Appointment</span>
                 <p className="title">{getEventTitle(event)}</p>

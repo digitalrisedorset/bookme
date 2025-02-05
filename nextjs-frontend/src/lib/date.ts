@@ -1,4 +1,5 @@
 import {DaysType, WeeksType} from "@/components/event/types/event";
+import {tr} from "@/lib/translate";
 
 export const getDays = (): DaysType[] => {
     const current = new Date()

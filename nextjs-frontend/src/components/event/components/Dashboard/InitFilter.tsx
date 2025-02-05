@@ -7,9 +7,12 @@ import {
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {getUserPreferenceStep} from "@/lib/user";
 import {HaircutTypePreference} from "@/components/event/components/Dashboard/EventPreference/HaircutTypePreference";
+import {tr} from "@/lib/translate";
+import {useVenueConfigState} from "@/state/VenueConfigState";
 
 export const InitFilter: React.FC = () => {
     const user = useUser()
+    const {activeVenue} = useVenueConfigState()
 
     if (user === undefined) return
 
@@ -27,7 +30,7 @@ export const InitFilter: React.FC = () => {
                 <HaircutTypeGroupPreference />
             </EventRow>}
             {preferenceStep==='HaircutType' &&<EventRow>
-                <p className="label">What haircut type do you need?</p>
+                <p className="label">{tr('What haircut type do you need?', activeVenue)}</p>
                 <HaircutTypePreference />
             </EventRow>}
         </ViewEventStyle>

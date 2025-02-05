@@ -5,6 +5,8 @@ import {DayEventGroup} from "@/components/event/components/Dashboard/DayEvent/Da
 import {NoDayEventList} from "@/components/event/components/Dashboard/Event/NoDayEventList";
 import {DayEventHandler} from "@/components/event/models/DayEventHandler";
 import {EventDetail, EventSummary} from "@/components/global/styles/ItemStyles";
+import {tr} from "@/lib/translate";
+import {useVenueConfigState} from "@/state/VenueConfigState";
 
 interface AccordionProps {
     day: DaysType
@@ -13,6 +15,7 @@ interface AccordionProps {
 
 export const Accordion: React.FC<AccordionProps> = ({ day, events }: AccordionProps) => {
     const [isActive, setIsActive] = useState(false);
+    const {activeVenue} = useVenueConfigState()
 
     const user = useUser()
 
@@ -27,7 +30,7 @@ export const Accordion: React.FC<AccordionProps> = ({ day, events }: AccordionPr
                 <div className="set-active">{isActive ? '-' : '+'}</div>
             </div>
             {!isActive && <EventSummary>
-                {dayEventList.length>0 && <>{dayEventList.length} appointments available</>}
+                {dayEventList.length>0 && <>{dayEventList.length} {tr('appointment', activeVenue)}s available</>}
                 {dayEventList.length===0 && <NoDayEventList />}
             </EventSummary>}
             {isActive && <EventDetail>

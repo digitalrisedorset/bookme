@@ -25,6 +25,7 @@ export interface VenuePreference {
     code: string,
     route: string,
     showHairdresserOnEvent: boolean,
+    timeBase: 'week' | 'day',
     scheduleWeekSpan: number,
     offerShampoo: boolean,
     logo: string,
@@ -50,10 +51,11 @@ export type configInfo = {
     },
     venuePreference: {
         defaultVenue: string,
-        blushharry: VenuePreference,
+        blushharry: VenuePreference
         rachelle: VenuePreference
         paddington: VenuePreference
         doggiemadhouse: VenuePreference
+        datemate: VenuePreference
     }
 }
 
@@ -78,6 +80,7 @@ export const config: configInfo = {
             code: 'blush-harry',
             route: 'blushharry',
             showHairdresserOnEvent: false,
+            timeBase: 'week',
             scheduleWeekSpan: 4,
             offerShampoo: false,
             logo: 'book-harry.png',
@@ -120,7 +123,8 @@ export const config: configInfo = {
             code: 'doggie-madhouse',
             route: 'doggiemadhouse',
             showHairdresserOnEvent: false,
-            scheduleWeekSpan: 4,
+            timeBase: 'week',
+            scheduleWeekSpan: 14,
             offerShampoo: false,
             logo: 'book-doggie.png',
             intro: {
@@ -158,10 +162,54 @@ export const config: configInfo = {
                 buttonColor: 'white'
             }
         },
+        datemate: {
+            code: 'date-mate',
+            route: 'datemate',
+            showHairdresserOnEvent: false,
+            timeBase: 'day',
+            scheduleWeekSpan: 2,
+            offerShampoo: false,
+            logo: 'date-mate-logo.png',
+            intro: {
+                img: {
+                    src: 'date-mate-intro.png',
+                    width: 375,
+                    height: 150,
+                },
+                largeImg: {
+                    src: 'date-mate-intro-large.png',
+                    width: 750,
+                    height: 300,
+                },
+                alt: 'Date Mate Ready to make your Valentine Day more fun'
+            },
+            order: {
+                img: {
+                    src: 'orderplaceholder-harry.jpg',
+                    width: 378,
+                    height: 378,
+                },
+                largeImg: {
+                    src: 'orderplaceholder-harry.jpg',
+                    width: 375,
+                    height: 378,
+                },
+                alt: 'View your order at Harry Barber'
+            },
+            themeColors: {
+                red: '#FF4F8B',
+                pastel: '#99507F',
+                headerBgColour: 'lightgrey',
+                navBgColour: 'pastel',
+                buttonBg: 'mediumgrey',
+                buttonColor: 'white'
+            }
+        },
         rachelle: {
             code: 'rachelle-hairdressing',
             route: 'rachelle',
             showHairdresserOnEvent: true,
+            timeBase: 'week',
             scheduleWeekSpan: 14,
             offerShampoo: true,
             logo: 'book-purple.png',
@@ -204,6 +252,7 @@ export const config: configInfo = {
             code: 'paddington-hairdressing',
             route: 'paddington',
             showHairdresserOnEvent: true,
+            timeBase: 'week',
             scheduleWeekSpan: 14,
             offerShampoo: true,
             logo: 'book3.png',

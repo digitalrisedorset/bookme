@@ -6,11 +6,13 @@ import {useWeekPreference} from "@/components/user-authentication/graphql/useUse
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 import {useConfig} from "@/components/venue/hooks/useConfig";
 import {WeeksType} from "@/components/event/types/event";
+import {useVenueConfigState} from "@/state/VenueConfigState";
 
 export const WeekFilter: React.FC = () => {
     const user = useUser()
     const config = useConfig()
     const [updateUserPreference] = useWeekPreference()
+    const {activeVenue} = useVenueConfigState()
 
     if (user?.id === undefined) return
     const onWeekChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -25,7 +27,7 @@ export const WeekFilter: React.FC = () => {
                 <Label>Week Filter</Label>
                 <select onChange={onWeekChange} className="form-select" value={user.weekPreference}>
                     <option value="">-</option>
-                    {getWeeks(config.scheduleWeekSpan).map((item: WeeksType) => {
+                    {getWeeks(config.scheduleWeekSpan, activeVenue).map((item: WeeksType) => {
                         return (<option key={item.weekStart} value={item.weekStart}>{item.weekLabel}</option>)
                     })}
                 </select>
