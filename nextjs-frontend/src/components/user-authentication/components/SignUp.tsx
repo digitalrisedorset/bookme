@@ -8,6 +8,7 @@ import {Feedback} from "@/components/global/components/Feedback";
 import {tr} from "@/lib/translate";
 import {useVenueConfigState} from "@/state/VenueConfigState";
 import {register} from "@/components/user-authentication/actions/register";
+import {useState} from "react";
 
 export const SignUp: React.FC = () => {
   const router = useRouter();
@@ -15,8 +16,8 @@ export const SignUp: React.FC = () => {
     email: '',
     name: '',
     password: '',
-    confirmPassword: ''
   });
+  const [confirmPassword, setConfirmPassword] = useState();
   const [signup, { data }] = useSignUpUser(inputs)
   const [setUserLogged] = useLoginUser(inputs)
   const {addSuccessMessage, addErrorMessage} = useFlashMessage()
@@ -25,7 +26,7 @@ export const SignUp: React.FC = () => {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault(); // stop the form from submitting
 
-    if (inputs.password !== inputs.confirmPassword) {
+    if (inputs.password !== confirmPassword) {
       addErrorMessage('Password and Confirm Password do not match')
       return
     }
@@ -34,7 +35,6 @@ export const SignUp: React.FC = () => {
     resetForm();
     const res = await setUserLogged();
     // Send the email and password to the graphqlAPI
-    console.log('signup result', res)
     if (res?.message) {
       addErrorMessage('Something went wrong!')
       console.log('error when logging', res?.message)
@@ -98,8 +98,8 @@ export const SignUp: React.FC = () => {
               name="confirmPassword"
               placeholder="Confirm Password"
               autoComplete="password"
-              value={inputs.confirmPassword}
-              onChange={handleChange}
+              value={confirmPassword}
+              onChange={(e: string) => setConfirmPassword(e.target.value)}
           />
         </label>
         <button type="submit">Sign Up!</button>
