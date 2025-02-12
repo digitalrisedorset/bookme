@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import {CheckoutFormStyles, SickButton} from "@/components/event/styles/Checkout";
 import nProgress from 'nprogress';
 
 import {
-    CardElement,
+    CardElement, CardNumberElement,
     useElements,
     useStripe,
 } from '@stripe/react-stripe-js';
@@ -24,6 +24,32 @@ export const CheckoutForm: React.FC = () => {
     const router = useRouter();
     const { closeCart } = useCart();
     const [checkout] = useCheckout()
+
+    const [width] = useState(window.innerWidth);
+
+    const StripeElementsStyles = {
+        iconStyle: 'solid',
+        style: {
+            base: {
+                iconColor: 'black',
+                color: 'black',
+                fontWeight: 300,
+                fontFamily: "'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif",
+                fontSize: (width<600)? '12px': '18px',
+                fontSmoothing: 'antialiased',
+                ':-webkit-autofill': {
+                    color: '#fce883',
+                },
+                '::placeholder': {
+                    color: 'lightgrey',
+                },
+            },
+            invalid: {
+                iconColor: 'red',
+                color: 'red',
+            },
+        },
+    }
 
     if (stripe === null) return
 
@@ -74,7 +100,7 @@ export const CheckoutForm: React.FC = () => {
     }
 
     return (<CheckoutFormStyles onSubmit={handleSubmit}>
-        <CardElement />
+        <CardElement options={StripeElementsStyles} />
         <SickButton>Check Out Now</SickButton>
     </CheckoutFormStyles>)
 }

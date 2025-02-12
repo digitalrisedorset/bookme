@@ -42,6 +42,7 @@ export type configInfo = {
         }
     },
     stripe: {
+        secret_key: string,
         public_key: string,
         currency: string,
         locale: string
@@ -67,6 +68,7 @@ export const config: configInfo = {
         }
     },
     stripe: {
+        secret_key: 'sk_test_51PITSKRqZ4IliSNkAocVG9f9K8cCecrEEqJfdmFg3wzgjYN4F5JgidjcNo8JAZXpyLA0s3yRswWBen4l6anyKgzi008oZfNt8K',
         public_key: 'pk_test_51PITSKRqZ4IliSNkzwsUtTnaHqBPaiUH2TtWE8kxK5w1LMiGO5kis8pPwf2Y4zgse2fTXLaIoRFApsNBQZhnkeOD00fjiL9r5a',
         currency: (process.env.NEXT_PUBLIC_CURRENCY === undefined)? 'GBP':process.env.NEXT_PUBLIC_CURRENCY,
         locale: (process.env.NEXT_PUBLIC_LOCALE === undefined)? 'en-gb':process.env.NEXT_PUBLIC_LOCALE

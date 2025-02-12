@@ -2,11 +2,14 @@ import {Form} from '../../global/styles/Form';
 import {useForm} from '../../global/hooks/useForm';
 import {useResetPassword} from "../graphql/useRequestPassword";
 
-export const ResetPassword: React.FC = () => {
+interface TokenProps {
+    token: string
+}
+
+export const ResetPassword: React.FC<TokenProps> = ({token}: TokenProps) => {
     const { inputs, handleChange} = useForm({
         email: '',
-        password: '',
-        token: ''
+        password: ''
     });
     const [resetpassword, { data }] = useResetPassword(inputs);
 
@@ -58,7 +61,7 @@ export const ResetPassword: React.FC = () => {
                         name="token"
                         placeholder="Token"
                         autoComplete="token"
-                        value={inputs.token}
+                        value={token}
                         onChange={handleChange}
                     />
                 </label>
