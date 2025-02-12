@@ -1,6 +1,6 @@
 import {list} from "@keystone-6/core";
 import {allowAll, denyAll} from "@keystone-6/core/access";
-import {password, text, checkbox, select, relationship, calendarDay, integer} from "@keystone-6/core/fields";
+import {password, text, checkbox, relationship, calendarDay, integer} from "@keystone-6/core/fields";
 import type {Session} from "../schema";
 
 export function isAdminOrSameUser ({ session }: { session?: Session }) {

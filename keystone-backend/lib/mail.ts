@@ -1,13 +1,6 @@
-import { createTransport, getTestMessageUrl } from 'nodemailer';
-
-const transport = createTransport({
-  host: process.env.MAIL_HOST,
-  port: process.env.MAIL_PORT,
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
-});
+import { getTestMessageUrl } from 'nodemailer';
+import {awsTransporter} from "./awsmail";
+import {keystoneconfig} from "../config";
 
 function makeANiceEmail(text: string) {
   return `
@@ -18,10 +11,10 @@ function makeANiceEmail(text: string) {
       line-height: 2;
       font-size: 20px;
     ">
-      <h2>Hello There!</h2>
+      <h2>Hi,</h2>
       <p>${text}</p>
 
-      <p>😘, Wes Bos</p>
+      <p>Herve</p>
     </div>
   `;
 }
@@ -47,14 +40,15 @@ export async function sendPasswordResetEmail(
   to: string
 ): Promise<void> {
   // email the user a token
-  const info = (await transport.sendMail({
+  const info = (await awsTransporter.sendMail({
     to,
-    from: 'wes@wesbos.com',
+    from: "herve@digitalrisedorset.co.uk",
     subject: 'Your password reset token!',
     html: makeANiceEmail(`Your Password Reset Token is here!
-      <a href="${process.env.FRONTEND_URL}/reset?token=${resetToken}">Click Here to reset</a>
+      <a href="${keystoneconfig.frontend.host}/reset?token=${resetToken}">Click Here to reset</a>
     `),
   })) as MailResponse;
+
   if(process.env.MAIL_USER.includes('ethereal.email')) {
     console.log(`💌 Message Sent!  Preview it at ${getTestMessageUrl(info)}`);
 

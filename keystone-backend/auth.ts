@@ -1,4 +1,5 @@
 import { createAuth } from '@keystone-6/auth';
+import {sendPasswordResetEmail} from "./lib/mail";
 
 // withAuth is a function we can use to wrap our base configuration
 export const { withAuth } = createAuth({
@@ -28,7 +29,7 @@ export const { withAuth } = createAuth({
     },
     passwordResetLink: {
         async sendToken(args) {
-            console.log(args)
+            await sendPasswordResetEmail(args.token, args.identity);
         }
     },
 

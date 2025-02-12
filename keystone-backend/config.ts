@@ -26,6 +26,11 @@ export type configInfo = {
     stripe: {
         secretKey: string
     },
+    aws: {
+       accessId: string,
+       secretAccess: string,
+       region: string
+    },
     hairdressing: {
         companyCode: string,
         offerShampoo: boolean,
@@ -55,6 +60,11 @@ const config: configInfo = {
     },
     stripe: {
         secretKey: (process.env.STRIPE_SECRET  === undefined)? 'sk_test_51PITSKRqZ4IliSNkAocVG9f9K8cCecrEEqJfdmFg3wzgjYN4F5JgidjcNo8JAZXpyLA0s3yRswWBen4l6anyKgzi008oZfNt8K':process.env.STRIPE_SECRET
+    },
+    aws: {
+        accessId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccess: process.env.AWS_SECRET_ACCESS_KEY,
+        region: process.env.AWS_REGION,
     },
     hairdressing: {
         companyCode: 'maddison',
