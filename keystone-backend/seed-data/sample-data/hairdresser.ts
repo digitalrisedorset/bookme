@@ -7,6 +7,14 @@ export const hairdresser = [
         haircutSpeciality: ['datemate_valentine'],
         venue: 'date-mate',
     },
+    // Poole Ruby
+    {
+        code: 'tom',
+        name: 'Tom',
+        level: 'senior',
+        haircutSpeciality: ['poole_rugby_junior'],
+        venue: 'poole-rugby',
+    },
     // Madisson
     {
         code: 'carlos',

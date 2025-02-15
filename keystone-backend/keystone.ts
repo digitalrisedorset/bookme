@@ -10,6 +10,9 @@ import {insertSeedData} from './seed-data'
 const sessionConfig = {
     maxAge: 60 * 60, // How long they stay signed in?
     secret: keystoneconfig.session.cookieSecret,
+    secure: true,
+    path: '/',
+    sameSite: 'lax',
 };
 
 console.log(`Keystone frontend: ${keystoneconfig.frontend.host}`)

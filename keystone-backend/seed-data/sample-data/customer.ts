@@ -16,6 +16,12 @@ export const customer = [
         name: 'Juliette',
         venue: 'date-mate',
     },
+    // Date Mate
+    {
+        code: 'chloe',
+        name: 'Chloe',
+        venue: 'poole-rugby',
+    },
     // Doggie Mad House
     {
         code: 'ruby',

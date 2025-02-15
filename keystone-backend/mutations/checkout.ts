@@ -1,7 +1,9 @@
 import stripeConfig from '../lib/stripe';
 import type { Context } from '.keystone/types'
-import {capitalise} from "../lib/string";
-import {getFormattedDate, getTime} from "../lib/date";
+import {sendEmail} from "../lib/mail";
+import formatMoney from "../lib/formatMoney";
+import {orderReference} from "../lib/order";
+import {itemDescription, itemName} from "../lib/cartItem";
 
 interface Arguments {
     token: string
@@ -27,7 +29,11 @@ async function checkout(
         query: graphql`
             id
             email
-            name              
+            name    
+            venue {               
+                orderPrefix
+                orderPadding
+            }          
             cartItems {
               id
               quantity   
@@ -70,8 +76,8 @@ async function checkout(
     // 4. Convert the cartItems to OrderItems
     const orderItems = cartItems.map(cartItem => {
         const orderItem = {
-            name: `${capitalise(cartItem.event.day)} ${cartItem.haircut.name}`,
-            description: `${getFormattedDate(cartItem.event.startTime)} with ${capitalise(cartItem.event.hairdresser.name)} for a ${cartItem.haircut.name}`,
+            name: itemName(cartItem), //`${capitalise(cartItem.event.day)} ${cartItem.haircut.name}`,
+            description: itemDescription(cartItem),//`${getFormattedDate(cartItem.event.startTime)} with ${capitalise(cartItem.event.hairdresser.name)} for a ${cartItem.haircut.name}`,
             price: cartItem.price,
             quantity: cartItem.quantity,
             event: { connect: { id: cartItem.event.id }}
@@ -101,6 +107,15 @@ async function checkout(
     }
 
     await context.query.CartItem.deleteMany({ where: cartItemIds });
+
+    const orderSummary = cartItems.reduce((summary, cartItem) => {
+        return summary + `<p>${itemDescription(cartItem)}</p>`
+    }, '');
+
+    await sendEmail(user.email, 'Your order has been received!', `<h2>Your order - ${orderReference(user?.venue, lastOrder + 1)}</h2>
+     <p>Order Total: ${formatMoney(charge.amount)}</p>      
+     ${orderSummary}            
+    `)
 
     return order;
 }

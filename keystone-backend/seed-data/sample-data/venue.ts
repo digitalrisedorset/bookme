@@ -29,6 +29,12 @@ export const venue = [
         orderPrefix: 'DAT',
         orderPadding: 6
     },
+    {
+        code: 'poole-rugby',
+        name: 'Poole Rugby',
+        orderPrefix: 'POO',
+        orderPadding: 5
+    },
 ];
 
 export const outletHoliday = [
@@ -49,5 +55,11 @@ export const outletHoliday = [
         name: 'February break',
         startDate: '2025-02-03T00:00:00.101Z',
         endDate: '2025-02-14T00:00:00.101Z'
-    }
+    },
+    {
+        venue: 'poole-rugby',
+        name: 'March break',
+        startDate: '2025-03-03T00:00:00.101Z',
+        endDate: '2025-03-14T00:00:00.101Z'
+    },
 ]

@@ -5,7 +5,7 @@ import { HaircutTypeGroupCreator } from "./events/haircutTypeGroup"
 import { DateFinder } from "./events/dateFinder";
 import type { KeystoneContext } from "@keystone-6/core/src/types";
 import { HairdresserCreator } from "./events/hairdresser";
-import {getHour, getTime} from "../lib/date";
+import {getHour, getMinutes, getTime, getTimeFromMinutes} from "../lib/date";
 import {HolidayHairdresserCreator, HolidayOutletCreator, HolidayValidator} from "./events/holiday";
 import {event} from "./sample-data/event";
 import {CustomerCreator} from "./events/customer";
@@ -121,25 +121,27 @@ export class EventCreator {
 
         const eventDates = this.dateFinder.getDatesByDay(event.day, 2025)
 
-        for (let i = 0; i < eventDates.length; i++) {
-            let startTime = 9
-            let endTime = startTime + (event.duration + event.breakTime) / 60
+         for (let i = 0; i < eventDates.length; i++) {
+             // start time = 7:00
+             let startTimeMinutes = getMinutes(event.startTime) * 60
+             // end time = 7:23
+             let endTimeMinutes = (startTimeMinutes + event.duration + event.breakTime)
 
-            if (hairdresser?.id == '') continue
+             if (hairdresser?.id == '') continue
 
-            while (endTime < getHour(event.endTime, 17)) {
+             while (endTimeMinutes <= getHour(event.endTime, 17) * 60) {
                 this.createEvent(
                     venue?.id,
                     hairdresser?.id,
                     eventDates[i],
                     event.day,
-                    getTime(startTime),
-                    getTime(endTime)
+                    getTimeFromMinutes(startTimeMinutes),
+                    getTimeFromMinutes(endTimeMinutes)
                 )
 
-                startTime = endTime
-                endTime = startTime + (event.duration + event.breakTime) / 60
-            }
+                startTimeMinutes = endTimeMinutes
+                endTimeMinutes = (startTimeMinutes + event.duration + event.breakTime)
+             }
         }
     }
 
@@ -155,6 +157,7 @@ export class EventCreator {
         for (const event: EventProps of this.data) {
             console.log('create event for hairdresser', event.hairdresser)
             await this.createEventForYear(event)
+            //break
         }
     }
 

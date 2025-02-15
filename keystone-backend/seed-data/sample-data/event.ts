@@ -30,6 +30,27 @@ export const event = [
         duration: 40,
         breakTime: 5
     },
+    //Tom
+    {
+        venue: 'poole-rugby',
+        day: 'wednesday',
+        startTime: '18:00',
+        endTime: '19:00',
+        status: 'open',
+        hairdresser: 'tom',
+        duration: 60,
+        breakTime: 0
+    },
+    {
+        venue: 'poole-rugby',
+        day: 'sunday',
+        startTime: '10:00',
+        endTime: '12:00',
+        status: 'open',
+        hairdresser: 'tom',
+        duration: 120,
+        breakTime: 0
+    },
     //stephanie
     {
         venue: 'rachelle-hairdressing',

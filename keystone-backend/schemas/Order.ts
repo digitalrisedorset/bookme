@@ -2,6 +2,7 @@ import {list} from "@keystone-6/core";
 import {allowAll} from "@keystone-6/core/access";
 import {integer, relationship, text, timestamp} from "@keystone-6/core/fields";
 import {padL} from "../lib/string";
+import {orderReference} from "../lib/order";
 
 export const Order = list({
     access: allowAll,
@@ -58,7 +59,7 @@ export const Order = list({
                 }`
             });
 
-            resolvedData['orderReference'] = `${user?.venue.orderPrefix}${padL(orderNumber, user?.venue.orderPadding)}`
+            resolvedData['orderReference'] = orderReference(user?.venue, orderNumber) //`${user?.venue.orderPrefix}${padL(orderNumber, user?.venue.orderPadding)}`
             resolvedData['venue'] = { connect: { id: user.venue.id} }
 
             return resolvedData;

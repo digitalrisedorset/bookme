@@ -5,6 +5,12 @@ export const haircutTypeGroup = [
         name: 'Valentine',
         venue: 'date-mate',
     },
+    // Poole Ruby
+    {
+        code: 'poole_rugby_junior',
+        name: 'Poole Rugby',
+        venue: 'poole-rugby',
+    },
     // Maddison
     {
         code: 'paddington_children',

@@ -21,6 +21,35 @@ export const haircutType = [
         duration: 360,
         price: 100
     },
+    // Poole Ruby
+    {
+        code: 'poole_training',
+        name: 'Poole Training',
+        category: 'poole_rugby_junior',
+        duration: 60,
+        price: 0
+    },
+    {
+        code: 'poole_competition',
+        name: 'Poole Competition',
+        category: 'poole_rugby_junior',
+        duration: 120,
+        price: 0
+    },
+    {
+        code: 'poole_social',
+        name: 'Poole Social',
+        category: 'poole_rugby_junior',
+        duration: 60,
+        price: 0
+    },
+    {
+        code: 'poole_tournament',
+        name: 'Poole Tournament',
+        category: 'poole_rugby_junior',
+        duration: 360,
+        price: 0
+    },
     // Madisson
     {
         code: 'paddington_1215_years',
