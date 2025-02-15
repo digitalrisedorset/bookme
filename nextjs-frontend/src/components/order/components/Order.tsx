@@ -33,12 +33,6 @@ export const Order: React.FC<OrderProps> = ({orderId}: OrderProps) => {
                     <span className="order-reference">{order.orderReference}</span>
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="transaction_reference">
-                        Transaction reference
-                    </label>
-                    <span className="payment-reference">{order.charge}</span>
-                </fieldset>
-                <fieldset>
                     <label htmlFor="order_total">
                         Order Total
                     </label>

@@ -1,4 +1,4 @@
-import {UserDetails} from "./userDetails";
+import {UserDetails} from "./UserDetails";
 import {GridStyles} from "../styles/Grid";
 
 export const AccountDetail: React.FC = () => {

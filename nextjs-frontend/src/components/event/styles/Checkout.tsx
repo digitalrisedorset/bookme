@@ -27,4 +27,9 @@ export const CheckoutFormStyles = styled.form`
   padding: 1rem;
   display: grid;
   grid-gap: 1rem;
+    margin-top:1rem;
+    p {
+        font-size: 1rem;
+    }
 `;
+

@@ -3,7 +3,7 @@ import {CheckoutFormStyles, SickButton} from "@/components/event/styles/Checkout
 import nProgress from 'nprogress';
 
 import {
-    CardElement, CardNumberElement,
+    CardElement,
     useElements,
     useStripe,
 } from '@stripe/react-stripe-js';
@@ -28,7 +28,6 @@ export const CheckoutForm: React.FC = () => {
     const [width] = useState(window.innerWidth);
 
     const StripeElementsStyles = {
-        iconStyle: 'solid',
         style: {
             base: {
                 iconColor: 'black',
@@ -41,7 +40,7 @@ export const CheckoutForm: React.FC = () => {
                     color: '#fce883',
                 },
                 '::placeholder': {
-                    color: 'lightgrey',
+                    color: 'grey',
                 },
             },
             invalid: {
@@ -56,7 +55,7 @@ export const CheckoutForm: React.FC = () => {
     async function handleSubmit(e: React.FormEvent) {
         // 1. Stop the form from submitting and turn the loader one
         e.preventDefault();
-        console.log('We gotta do some work..');
+
         // 2. Start the page transition
         nProgress.start();
 
@@ -70,7 +69,7 @@ export const CheckoutForm: React.FC = () => {
             type: 'card',
             card: cardElement
         });
-        console.log(paymentMethod);
+
         // 4. Handle any errors from stripe
         if (error) {
             nProgress.done();
@@ -83,8 +82,7 @@ export const CheckoutForm: React.FC = () => {
                 token: paymentMethod?.id,
             },
         });
-        console.log(`Finished with the order!!`);
-        console.log(order);
+
         // 6. Change the page to view the order
         router.push({
             pathname: `/order/[id]`,
@@ -100,7 +98,8 @@ export const CheckoutForm: React.FC = () => {
     }
 
     return (<CheckoutFormStyles onSubmit={handleSubmit}>
+        <p>Enter your card details below</p>
         <CardElement options={StripeElementsStyles} />
-        <SickButton>Check Out Now</SickButton>
+        <SickButton>Submit</SickButton>
     </CheckoutFormStyles>)
 }

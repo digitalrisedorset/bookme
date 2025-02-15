@@ -43,9 +43,9 @@ export const Form = styled.form`
       border-radius: 5px;
     color: white;
     border: 0;
-    font-size: 2rem;
+    font-size: 1.3rem;
     font-weight: 200;
-    padding: 0.5rem 1.2rem;
+    padding: 0.5rem 1.4rem;
   }
   fieldset {
       border: 0;
