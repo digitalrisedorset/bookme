@@ -4,7 +4,7 @@ import {getDate, getTime} from "@/lib/date";
 import {AVAILABLE, EventStatus, WALKIN} from "@/components/event/types/event";
 
 export const getEventTitle = (event: DayGroupEvent) => {
-    return `${capitalise(event.day)} ${getDate(event.startTime)} for ${capitalise(event.haircutType)} at ${getTime(event.startTime)}`
+    return `${capitalise(event.day)} ${getDate(event.startTime)} for ${capitalise(event.eventType)} at ${getTime(event.startTime)}`
 }
 
 export const isPastEvent = (eventGroup: DayGroupEvent) => {

@@ -1,34 +1,35 @@
 import {VenueStyle} from "@/components/venue/styles/VenueStyle";
 import {Label} from "@/components/global/styles/Form";
+import {useEventTypes} from "@/components/event/hooks/useEventTypes";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
 import React from "react";
-import {useHaircutTypeGroups} from "@/components/event/hooks/useHaircutTypeGroups";
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
-import {HaircutTypeGroup} from "@/components/event/types/event";
+import {EventType} from "@/components/event/types/event";
+import {tr} from "@/lib/translate";
+import {useVenueConfigState} from "@/state/VenueConfigState";
 
-export const HaircutTypeGroupFilter: React.FC = () => {
-    const {data} = useHaircutTypeGroups()
+export const EventTypeFilter: React.FC = () => {
+    const {data} = useEventTypes()
     const user = useUser()
     const [updateUserPreference] = useWeekPreference()
+    const {activeVenue} = useVenueConfigState()
 
     if (user?.id === undefined) return
 
-    const onHaircutTypeGroupChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const onEventTypeChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         await updateUserPreference({
-            variables: getUserPreferenceVariables(user.id, {'haircutTypeGroup': e.target.value})
+            variables: getUserPreferenceVariables(user.id, {'eventType': e.target.value})
         })
     };
-
-    if (data?.venueHaircutTypeGroups.length === 1) return null
 
     return (
         <VenueStyle>
             <fieldset>
-                <Label>Appointment Type</Label>
-                <select onChange={onHaircutTypeGroupChange} className="form-select" value={user?.haircutTypeGroup?.id}>
+                <Label>{tr('EventType', activeVenue)}</Label>
+                <select onChange={onEventTypeChange} className="form-select" value={user?.eventType?.id}>
                     <option value="">-</option>
-                    {data?.venueHaircutTypeGroups.map((item: HaircutTypeGroup) => {
+                    {data?.eventTypes.map((item: EventType) => {
                         return (<option key={item.name} value={item.id}>{item.name}</option>)
                     })}
                 </select>

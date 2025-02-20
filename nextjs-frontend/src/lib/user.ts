@@ -1,14 +1,14 @@
 import {UserInformation} from "@/components/user-authentication/hooks/useUser";
 
-export type UserPreference = 'HaircutGroup' | 'HaircutType' | 'Week' | (string & {})
+export type UserPreference = 'EventTypeGroup' | 'EventType' | 'Week' | (string & {})
 
 export const getUserPreferenceStep = (user: UserInformation): UserPreference => {
-    if (user?.haircutTypeGroup === null) {
-        return 'HaircutGroup'
+    if (user?.eventTypeGroup === null) {
+        return 'EventTypeGroup'
     }
 
-    if (user?.haircutType === null) {
-        return 'HaircutType'
+    if (user?.eventType === null) {
+        return 'EventType'
     }
 
     return 'Week'

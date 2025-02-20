@@ -1,8 +1,8 @@
 import Link from "next/link";
-import {useIsHairdresser} from "@/components/user-authentication/hooks/useUserRole";
+import {useIsEventHost} from "@/components/user-authentication/hooks/useUserRole";
 
 export const CustomerNav: React.FC = () => {
-    if (useIsHairdresser()) return null
+    if (useIsEventHost()) return null
 
     return (
         <>

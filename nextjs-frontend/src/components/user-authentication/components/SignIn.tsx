@@ -24,7 +24,7 @@ export const SignIn: React.FC = () => {
       console.log('error when logging')
     } else {
       addSuccessMessage(`Welcome ${res.name}!`)
-      if (res?.role?.isHairdresser) {
+      if (res?.role?.isEventHost) {
         router.push({pathname: `/schedule`});
       } else {
         router.push({pathname: `/events`});

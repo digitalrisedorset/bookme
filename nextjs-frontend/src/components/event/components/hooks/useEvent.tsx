@@ -11,9 +11,9 @@ const EVENT_QUERY = gql`
         }
         status
         endTime       
-        hairdresser {
+        eventHost {
           name
-          haircutTypes {
+          eventTypes {
             id
             name
           }

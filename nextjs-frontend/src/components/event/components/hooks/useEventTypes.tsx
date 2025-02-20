@@ -3,23 +3,23 @@ import gql from "graphql-tag";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 
 const HAIRCUT_TYPE_QUERY = gql`
-    query HaircutTypes($where: HaircutTypeWhereInput!, $orderBy: [HaircutTypeOrderByInput!]!) {
-      haircutTypes(where: $where, orderBy: $orderBy) {
+    query EventTypes($where: EventTypeWhereInput!, $orderBy: [EventTypeOrderByInput!]!) {
+      eventTypes(where: $where, orderBy: $orderBy) {
         id
         name
       }
     }
 `;
 
-export const useHaircutTypes = () => {
+export const useEventTypes = () => {
     const user = useUser()
 
-    const haircutTypesData = useQuery(HAIRCUT_TYPE_QUERY, {
+    const eventTypesData = useQuery(HAIRCUT_TYPE_QUERY, {
         variables: {
             "where": {
                 "group": {
                     "id": {
-                        "equals": user?.haircutTypeGroup?.id
+                        "equals": user?.eventTypeGroup?.id
                     }
                 }
             },
@@ -32,5 +32,5 @@ export const useHaircutTypes = () => {
         fetchPolicy: 'no-cache'
     });
 
-    return haircutTypesData
+    return eventTypesData
 }

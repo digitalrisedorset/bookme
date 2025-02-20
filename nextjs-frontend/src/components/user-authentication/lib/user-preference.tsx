@@ -14,9 +14,9 @@ export const getUserPreferenceVariables = (userId: string, fields: EventPreferen
         }
 
         switch (index) {
-            case 'haircutType':
-            case 'haircutTypeGroup':
-            case 'hairdresser':
+            case 'eventType':
+            case 'eventTypeGroup':
+            case 'eventHost':
                 if (fields[index] === PREFERENCE_RESET) {
                     data[index] = {"disconnect": true}
                 } else {

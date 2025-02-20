@@ -1,7 +1,7 @@
-import {useIsHairdresser} from "@/components/user-authentication/hooks/useUserRole";
+import {useIsEventHost} from "@/components/user-authentication/hooks/useUserRole";
 
 export const HairddresserNav: React.FC = () => {
-    if (!useIsHairdresser()) return null
+    if (!useIsEventHost()) return null
 
     return (
         <>

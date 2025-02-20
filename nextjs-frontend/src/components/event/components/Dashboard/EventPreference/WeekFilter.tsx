@@ -1,5 +1,5 @@
 import {getWeeks} from "@/lib/date";
-import {HairdresserSelectionStyle} from "@/components/hairdresser/styles/HairdresserStyle";
+import {EventHostSelectionStyle} from "@/components/eventHost/styles/EventHostStyle";
 import React from "react";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
@@ -22,7 +22,7 @@ export const WeekPreference: React.FC = () => {
         })
     };
 
-    return  <HairdresserSelectionStyle>
+    return  <EventHostSelectionStyle>
         {getWeeks(config.scheduleWeekSpan).map((item: WeeksType) => {
             return (
                 <PreferenceChoice key={item.weekStart}>
@@ -31,5 +31,5 @@ export const WeekPreference: React.FC = () => {
                 </PreferenceChoice>
             )
         })}
-    </HairdresserSelectionStyle>
+    </EventHostSelectionStyle>
 }

@@ -16,7 +16,7 @@ export const CartItem: React.FC<ItemProps> = ({cartItem}: ItemProps) => {
         <CartItemStyles>
             <div>
                 <h3>{getEventTitle(cartItem.event)}</h3>
-                <span className="haircut">{cartItem.haircut.name}</span>
+                <span className="eventType">{cartItem.eventType.name}</span>
                 <p>
                     <em>
                         {cartItem.quantity} x {formatMoney(cartItem.price)} each = {formatMoney(cartItem.price * cartItem.quantity)}

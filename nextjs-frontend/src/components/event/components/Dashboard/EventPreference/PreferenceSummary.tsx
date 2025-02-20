@@ -14,7 +14,7 @@ export const PreferenceSummary: React.FC = () => {
 
     return (
         <PreferenceSummaryStyle>
-            All our {tr('appointment', activeVenue)}s for <strong>{capitalise(user.haircutType?.name)}</strong> in the week starting <strong>{getDate(user.weekPreference)}</strong>
+            All our {tr('appointment', activeVenue)}s for <strong>{capitalise(user.eventType?.name)}</strong> in the week starting <strong>{getDate(user.weekPreference)}</strong>
         </PreferenceSummaryStyle>
     )
 }

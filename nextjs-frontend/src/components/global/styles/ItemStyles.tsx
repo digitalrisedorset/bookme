@@ -83,7 +83,7 @@ export const SingleEvent = styled.div<EventProps>`
         text-align: left;
         line-height: 1.3rem;
     }
-    .hairdresser-selection {
+    .eventHost-selection {
         position: relative;
         display: block;
         text-align: left;
@@ -515,7 +515,7 @@ export const ViewGroupEventStyle= styled.div<EventStatusProps>`
         background: var(--red);
         color: white;
     }
-    .title, .hairdresser-selection, .price {
+    .title, .eventHost-selection, .price {
         margin: 1rem;
     }
     .date {
@@ -534,7 +534,7 @@ export const ViewGroupEventStyle= styled.div<EventStatusProps>`
             opacity: 0.5;
         }
     }
-    .hairdresser-selection {
+    .eventHost-selection {
         position: relative;
         display: block;
         text-align: left;

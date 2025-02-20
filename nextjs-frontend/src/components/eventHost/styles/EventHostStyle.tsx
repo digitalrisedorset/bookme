@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Hairdresser = styled.div`
+export const EventHostStyle = styled.div`
     font-size: 1.5rem;
     font-weight: 600;
     select,
@@ -26,7 +26,8 @@ export const Hairdresser = styled.div`
         padding: 0;
     }
 `;
-export const HairdresserSelectionStyle = styled.div`
+
+export const EventHostSelectionStyle = styled.div`
     display: block;
     text-align: left;
     line-height: 2rem;
@@ -34,5 +35,9 @@ export const HairdresserSelectionStyle = styled.div`
     margin: 1rem;
     label {
         padding: 10px;
+    }
+    @media (max-width: 600px) {
+        font-size: 1rem;
+        line-height: 1.4rem;
     }
 `

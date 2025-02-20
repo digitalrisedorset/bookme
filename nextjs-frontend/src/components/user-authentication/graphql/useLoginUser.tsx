@@ -12,7 +12,7 @@ const SIGNIN_MUTATION = gql`
           email
           name   
           role {
-             isHairdresser
+             isEventHost
           }   
         }
       }

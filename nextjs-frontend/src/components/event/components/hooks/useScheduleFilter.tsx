@@ -9,7 +9,7 @@ export const useScheduleFilter = () => {
 
     const filter: EventScheduledFilterKeys = {}
 
-    if (user === undefined || user?.hairdresser === undefined) {
+    if (user === undefined || user?.eventHost === undefined) {
         return filter
     }
 
@@ -34,7 +34,7 @@ export const useScheduleFilter = () => {
 
     }
 
-    filter['hairdresser'] = { "id": { "equals": user.hairdresser.id } }
+    filter['eventHost'] = { "id": { "equals": user.eventHost.id } }
 
     return filter
 }

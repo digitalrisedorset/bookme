@@ -9,7 +9,7 @@ import {useEventPrice} from "@/components/event/hooks/useEventPrice";
 import {formatMoney} from "@/lib/price";
 import {GroupEventHandler} from "@/components/event/models/GroupEvent";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
-import {HairdresserSelect} from "@/components/event/components/Dashboard/DayEvent/HairdresserSelect";
+import {EventHostSelect} from "@/components/event/components/Dashboard/DayEvent/EventHostSelect";
 import {useEventState} from "@/state/EventState";
 import {useEventDuration} from "@/components/event/hooks/useEventDuration";
 import {useConfig} from "@/components/venue/hooks/useConfig";
@@ -45,12 +45,12 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
                 <p className="title">{getEventTitle(groupEvent)}</p>
             </EventRow>
             <EventRow>
-                <span className="label">{tr('Haircut', activeVenue)}</span>
-                <span className="title">{groupEvent.haircutType}</span>
+                <span className="label">{tr('EventType', activeVenue)}</span>
+                <span className="title">{groupEvent.eventType}</span>
             </EventRow>
             <EventRow>
-                <span className="label">{tr('Hairdresser', activeVenue)}</span>
-                <HairdresserSelect eventGroup={groupEvent} />
+                <span className="label">{tr('EventHost', activeVenue)}</span>
+                <EventHostSelect eventGroup={groupEvent} />
             </EventRow>
             {config.offerShampoo &&<EventRow>
                 <span className="label">Shampoo</span>

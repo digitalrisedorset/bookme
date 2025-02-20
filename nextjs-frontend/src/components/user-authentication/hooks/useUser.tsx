@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import {HaircutType, HaircutTypeGroup, Hairdresser, KeystoneCartItem} from "@/components/event/types/event";
+import {EventType, EventTypeGroup, EventHost, KeystoneCartItem} from "@/components/event/types/event";
 
 const CURRENT_USER_QUERY = gql`
   query {
@@ -8,15 +8,15 @@ const CURRENT_USER_QUERY = gql`
         id
         email
         name  
-        hairdresser {
+        eventHost {
           id
           name
         }
-        haircutType {
+        eventType {
           id
           name
         }
-        haircutTypeGroup {
+        eventTypeGroup {
           id
           name
         }
@@ -25,7 +25,7 @@ const CURRENT_USER_QUERY = gql`
           id
           quantity   
           price
-          haircut {
+          eventType {
             name
           }
           shampoo
@@ -34,14 +34,14 @@ const CURRENT_USER_QUERY = gql`
             day
             startTime 
             endTime             
-            hairdresser {
+            eventHost {
               id            
               name
             }                       
           }      
         }  
         role {
-          isHairdresser
+          isEventHost
         }           
       }
     }
@@ -52,13 +52,13 @@ export interface UserInformation {
     id: string
     email: string
     name: string
-    haircutType?: HaircutType
-    hairdresser?: Pick<Hairdresser, 'id'>
+    eventType?: EventType
+    eventHost?: Pick<EventHost, 'id'>
     weekPreference: string
     cartItems: KeystoneCartItem[]
-    haircutTypeGroup: HaircutTypeGroup
+    eventTypeGroup: EventTypeGroup
     role: {
-        isHairdresser: boolean
+        isEventHost: boolean
     }
 }
 

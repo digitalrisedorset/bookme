@@ -4,23 +4,23 @@ import {Label} from "@/components/global/styles/Form";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
-import {useHaircutTypeGroups} from "@/components/event/hooks/useHaircutTypeGroups";
+import {useEventTypeGroups} from "@/components/event/hooks/useEventTypeGroups";
 import {EventPreferenceFilterType, PREFERENCE_RESET} from "@/components/event/types/event";
 
 export const ResetPreferenceFilter: React.FC = () => {
     const user = useUser()
     const [updateUserPreference] = useWeekPreference()
-    const {data} = useHaircutTypeGroups()
+    const {data} = useEventTypeGroups()
 
     if (user === undefined) return
 
     const resetFilter = async () => {
         const preference: EventPreferenceFilterType = {
             'weekPreference': '',
-            'haircutType': PREFERENCE_RESET
+            'eventType': PREFERENCE_RESET
         }
-        if (data?.venueHaircutTypeGroups.length>1) {
-            preference.haircutTypeGroup = PREFERENCE_RESET
+        if (data?.venueEventTypeGroups.length>1) {
+            preference.eventTypeGroup = PREFERENCE_RESET
         }
 
         await updateUserPreference({

@@ -39,7 +39,7 @@ export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
     async function handleClick(e: React.FormEvent) {
         e.preventDefault(); // stop the form from submitting
         if (id === '') {
-            alert('Select a hairdresser for your appointment')
+            alert('Select a eventHost for your appointment')
         }
 
         await addToCart().catch(console.error);

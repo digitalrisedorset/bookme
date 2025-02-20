@@ -4,7 +4,7 @@ import {useImmer} from "use-immer";
 interface EventInfoState {
     activeEventId: string | undefined,
     shampoo: boolean,
-    haircutId: string
+    eventTypeId: string
 }
 
 interface EventState {
@@ -12,13 +12,13 @@ interface EventState {
     resetActiveEvent: () => void
     toggleActiveEvent: (id: string) => void
     toggleShampooEvent: () => void
-    setHaircutPreference: (id: string) => void
+    setEventTypePreference: (id: string) => void
 }
 
 const intialState: EventInfoState = {
     activeEventId: '',
     shampoo: false,
-    haircutId: ''
+    eventTypeId: ''
 }
 
 const LocalStateContext = createContext<EventState | undefined>(undefined);
@@ -43,8 +43,8 @@ const EventStateProvider: React.FC<EventStateProviderProps> = ({ children }) => 
         setState(draft => { draft.shampoo = !draft.shampoo });
     }
 
-    const setHaircutPreference = (id: string) => {
-        setState(draft => { draft.haircutId = id });
+    const setEventTypePreference = (id: string) => {
+        setState(draft => { draft.eventTypeId = id });
     }
 
     return <LocalStateProvider
@@ -52,7 +52,7 @@ const EventStateProvider: React.FC<EventStateProviderProps> = ({ children }) => 
             resetActiveEvent,
             toggleActiveEvent,
             toggleShampooEvent,
-            setHaircutPreference,
+            setEventTypePreference,
             eventState: state
         }}
     >{children}</LocalStateProvider>

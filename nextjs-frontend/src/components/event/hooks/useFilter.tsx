@@ -1,12 +1,12 @@
 import {getDayTimeEnd} from "@/lib/date";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
-import {useHairdressers} from "@/components/hairdresser/hooks/useHairdressers";
-import {EventFilterKeys, HaircutType, Hairdresser} from "@/components/event/types/event";
+import {useEventHosts} from "@/components/eventHost/hooks/useEventHosts";
+import {EventFilterKeys, EventType, EventHost} from "@/components/event/types/event";
 import {useVenue} from "@/components/venue/hooks/useVenue";
 
 export const useFilter = () => {
     const user = useUser()
-    const {data} = useHairdressers()
+    const {data} = useEventHosts()
     const venue = useVenue()
 
     const filter: EventFilterKeys = {}
@@ -41,23 +41,23 @@ export const useFilter = () => {
         }
     }
 
-    if (user.haircutType !== undefined) {
-        const hairdresserIds = getHairdresserIdsForHaircut(user?.haircutType, data?.hairdressers)
-        filter['hairdresser'] = { "id": { "in": hairdresserIds } }
+    if (user.eventType !== undefined) {
+        const eventHostIds = getEventHostIdsForEventType(user?.eventType, data?.eventHosts)
+        filter['eventHost'] = { "id": { "in": eventHostIds } }
     }
 
     return filter
 }
 
-const getHairdresserIdsForHaircut = (haircutType: HaircutType, hairdressers: Hairdresser[]) => {
-    const isHairdresserDoingHaircut = (item: Hairdresser): boolean => {
-        if (item?.haircutTypes === undefined) return false
+const getEventHostIdsForEventType = (eventType: EventType, eventHosts: EventHost[]) => {
+    const isEventHostDoingEventType = (item: EventHost): boolean => {
+        if (item?.eventTypes === undefined) return false
 
-        const match = item.haircutTypes.filter((haircut: HaircutType) => haircut.id === haircutType?.id)
+        const match = item.eventTypes.filter((eventType: EventType) => eventType.id === eventType?.id)
         return match?.length>0
     }
 
-    return hairdressers?.filter((item: Hairdresser) => isHairdresserDoingHaircut(item)).map((item: Hairdresser) => {
+    return eventHosts?.filter((item: EventHost) => isEventHostDoingEventType(item)).map((item: EventHost) => {
         return item.id
     });
 }

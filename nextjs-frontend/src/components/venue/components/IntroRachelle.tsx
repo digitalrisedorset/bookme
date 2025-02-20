@@ -12,7 +12,7 @@ const IntroRachelle: React.FC = () => {
             <div className="content">
                 <h2>Booking System for Rachelle&apos;s Hairdressing Salon</h2>
                 <Feedback />
-                <p className="general">Select when and which hairdresser you want for your appointment.
+                <p className="general">Select when and which eventHost you want for your appointment.
                     We bring our schedule for you to book in just over 3 clicks
                 </p>
                 <p className="ethos">Whether you are wanting a simple dry cut with hassle free booking

@@ -5,8 +5,8 @@ import {InitFilter} from "@/components/event/components/Dashboard/InitFilter";
 import {ResetPreferenceFilter} from "@/components/event/components/Dashboard/EventPreference/ResetPreferenceFilter";
 import {PreferenceSummary} from "@/components/event/components/Dashboard/EventPreference/PreferenceSummary";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
-import {HaircutTypeFilter} from "@/components/event/components/Dashboard/HaircutTypeFilter";
-import {HaircutTypeGroupFilter} from "@/components/event/components/Dashboard/HaircutTypeGroupFilter";
+import {EventTypeFilter} from "@/components/event/components/Dashboard/EventTypeFilter";
+import {EventTypeGroupFilter} from "@/components/event/components/Dashboard/EventTypeGroupFilter";
 import {EventDashboard} from "@/components/event/components/EventDashboard";
 
 export default function Events() {
@@ -16,12 +16,12 @@ export default function Events() {
 
     return (
         <>
-            {(user.weekPreference !== '' && user.haircutType !== null) &&  (<>
+            {(user.weekPreference !== '' && user.eventType !== null) &&  (<>
                 <ListHeader>
                     <EventFilterStyles>
                         <WeekFilter/>
-                        <HaircutTypeGroupFilter />
-                        <HaircutTypeFilter />
+                        <EventTypeGroupFilter />
+                        <EventTypeFilter />
                         <ResetPreferenceFilter/>
                     </EventFilterStyles>
                     <PreferenceSummary />
@@ -29,7 +29,7 @@ export default function Events() {
                 </ListHeader>
             </>)
             }
-            {(user.weekPreference === '' || user.haircutType === null) &&  (<>
+            {(user.weekPreference === '' || user.eventType === null) &&  (<>
                 <InitFilter />
             </>)
             }

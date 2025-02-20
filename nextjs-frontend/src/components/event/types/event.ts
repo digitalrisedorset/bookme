@@ -12,7 +12,7 @@ export interface EventShare {
 
 export interface KeystoneEvent extends EventShare {
     venue: { name: string }
-    hairdresser: Hairdresser
+    eventHost: EventHost
     orderItem?: {event: { id:string }}
 }
 
@@ -26,15 +26,15 @@ export interface Event {
     venue: {
         name: string
     }
-    haircutType: HaircutType
-    hairdresser: Hairdresser
+    eventType: EventType
+    eventHost: EventHost
 }
 
 export interface KeystoneCartItem {
     id: string
     quantity: number
     price: number
-    haircut: {
+    eventType: {
         name: string
     }
     shampoo: boolean
@@ -46,12 +46,12 @@ export interface DaysType {
     dayLabel: string
 }
 
-export interface HaircutType {
+export interface EventType {
     id: string
     name: string
 }
 
-export interface HaircutTypeGroup {
+export interface EventTypeGroup {
     id: string
     name: string
 }
@@ -69,8 +69,8 @@ export interface DayGroupEvent {
     status: EventStatus
     startTime: string
     venue: Pick<Venue, 'name'>
-    haircutType?: string // Pick<HaircutType, 'id' | 'name'>
-    hairdressers: GroupEventHairdresserMap[] //Pick<Hairdresser, 'id' | 'name'>[]
+    eventType?: string // Pick<EventType, 'id' | 'name'>
+    eventHosts: GroupEventEventHostMap[] //Pick<EventHost, 'id' | 'name'>[]
     orderedEventId: string | null
     cartEvent: KeystoneEvent | null
     eventIds: string[]
@@ -82,21 +82,21 @@ export const EMPTY_GROUP_EVENT = {
     venue: { name: ''},
     status: '',
     startTime: '',
-    hairdressers: [],
+    eventHosts: [],
     orderedEventId: null,
     cartEvent: null,
     eventIds: []
 }
 
-export interface GroupEventHairdresserMap {
+export interface GroupEventEventHostMap {
     eventId: string,
-    hairdresserId: string
+    eventHostId: string
 }
 
-export interface Hairdresser {
+export interface EventHost {
     id: string
     name: string
-    haircutTypes?: HaircutType[]
+    eventTypes?: EventType[]
 }
 
 export const WALKIN = 'walkin'
@@ -113,27 +113,27 @@ export const PURCHASED_EVENT = 'wasordered'
 
 export type EventStatus = 'open' | 'pastevent' | 'walkin' | 'wasordered' | (string & {})
 
-export type EventFilterType = 'haircutType' | 'haircutTypeGroup' | 'hairdresser' | 'weekPreference' | (string & {})
+export type EventFilterType = 'eventType' | 'eventTypeGroup' | 'eventHost' | 'weekPreference' | (string & {})
 
 export const OPTION_SELECTED = 'checked'
 
 export interface EventPreferenceFilterType {
-    haircutType?: string
-    haircutTypeGroup?: string
+    eventType?: string
+    eventTypeGroup?: string
     weekPreference?: string
-    hairdresser?: string
+    eventHost?: string
 }
 
 export interface EventScheduledFilterKeys {
     venue?: { "id": { "equals": string } },
     startTime?: { "gte": string },
     endTime?: { "lte": string },
-    hairdresser?: { "id": { "equals": string } }
+    eventHost?: { "id": { "equals": string } }
 }
 
 export interface EventFilterKeys {
     venue?: { "id": { "equals": string } },
     startTime?: { "gte": string },
     endTime?: { "lte": string },
-    hairdresser?: { "id": { "in": string[] } }
+    eventHost?: { "id": { "in": string[] } }
 }

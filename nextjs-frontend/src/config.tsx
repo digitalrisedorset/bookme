@@ -24,7 +24,7 @@ export interface VenuePreference {
     id?: string,
     code: string,
     route: string,
-    showHairdresserOnEvent: boolean,
+    showEventHostOnEvent: boolean,
     timeBase: 'week' | 'day',
     scheduleWeekSpan: number,
     offerShampoo: boolean,
@@ -82,7 +82,7 @@ export const config: configInfo = {
         blushharry: {
             code: 'blush-harry',
             route: 'blushharry',
-            showHairdresserOnEvent: false,
+            showEventHostOnEvent: false,
             timeBase: 'week',
             scheduleWeekSpan: 4,
             offerShampoo: false,
@@ -125,7 +125,7 @@ export const config: configInfo = {
         doggiemadhouse: {
             code: 'doggie-madhouse',
             route: 'doggiemadhouse',
-            showHairdresserOnEvent: false,
+            showEventHostOnEvent: false,
             timeBase: 'week',
             scheduleWeekSpan: 14,
             offerShampoo: false,
@@ -168,7 +168,7 @@ export const config: configInfo = {
         poolerugby: {
             code: 'poole-rugby',
             route: 'poolerugby',
-            showHairdresserOnEvent: false,
+            showEventHostOnEvent: false,
             timeBase: 'week',
             scheduleWeekSpan: 14,
             offerShampoo: false,
@@ -211,7 +211,7 @@ export const config: configInfo = {
         datemate: {
             code: 'date-mate',
             route: 'datemate',
-            showHairdresserOnEvent: false,
+            showEventHostOnEvent: false,
             timeBase: 'day',
             scheduleWeekSpan: 2,
             offerShampoo: false,
@@ -254,7 +254,7 @@ export const config: configInfo = {
         rachelle: {
             code: 'rachelle-hairdressing',
             route: 'rachelle',
-            showHairdresserOnEvent: true,
+            showEventHostOnEvent: true,
             timeBase: 'week',
             scheduleWeekSpan: 14,
             offerShampoo: true,
@@ -297,7 +297,7 @@ export const config: configInfo = {
         paddington: {
             code: 'paddington-hairdressing',
             route: 'paddington',
-            showHairdresserOnEvent: true,
+            showEventHostOnEvent: true,
             timeBase: 'week',
             scheduleWeekSpan: 14,
             offerShampoo: true,

@@ -15,7 +15,7 @@ export class GroupEventHandler {
             venue: { name: ''},
             status: '',
             startTime: '',
-            hairdressers: [],
+            eventHosts: [],
             orderedEventId: null,
             cartEvent: null,
             eventIds: []
@@ -41,10 +41,10 @@ export class GroupEventHandler {
         this.groupEvent.venue = event.venue
         this.groupEvent.startTime = event.startTime
 
-        this.groupEvent.haircutType = this.user?.haircutType?.name
+        this.groupEvent.eventType = this.user?.eventType?.name
 
-        this.groupEvent.hairdressers.push({
-            hairdresserId: event.hairdresser.id,
+        this.groupEvent.eventHosts.push({
+            eventHostId: event.eventHost.id,
             eventId: event.id
         })
     }

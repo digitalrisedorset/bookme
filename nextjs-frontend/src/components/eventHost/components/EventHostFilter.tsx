@@ -1,37 +1,37 @@
 import {Label} from "@/components/global/styles/Form";
-import {useHairdressers} from "@/components/hairdresser/hooks/useHairdressers";
-import {HairdresserStyle} from "@/components/hairdresser/styles/HairdresserStyle";
+import {useEventHosts} from "@/components/eventHost/hooks/useEventHosts";
+import {EventHostStyle} from "@/components/eventHost/styles/EventHostStyle";
 import {capitalise} from "@/lib/string";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useWeekPreference} from "@/components/user-authentication/graphql/useUserPreference";
 import React from "react";
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
-import {Hairdresser} from "@/components/event/types/event";
+import {EventHost} from "@/components/event/types/event";
 
-export const HairdresserFilter: React.FC = () => {
-    const {data} = useHairdressers()
+export const EventHostFilter: React.FC = () => {
+    const {data} = useEventHosts()
     const user = useUser()
     const [updateUserPreference] = useWeekPreference()
 
     if (user === undefined) return
 
-    const onHairdresserChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const onEventHostChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         await updateUserPreference({
-            variables: getUserPreferenceVariables(user.id, {'hairdresser': e.target.value}),
+            variables: getUserPreferenceVariables(user.id, {'eventHost': e.target.value}),
         })
     };
 
     return (
-        <HairdresserStyle>
+        <EventHostStyle>
             <fieldset>
-                <Label>Hairdresser Filter</Label>
-                <select onChange={onHairdresserChange} className="form-select" value={user?.hairdresser?.id}>
+                <Label>EventHost Filter</Label>
+                <select onChange={onEventHostChange} className="form-select" value={user?.eventHost?.id}>
                     <option value="">-</option>
-                    {data?.hairdressers.map((item: Hairdresser) => {
+                    {data?.eventHosts.map((item: EventHost) => {
                         return (<option key={item.name} value={item.id}>{capitalise(item.name)}</option>)
                     })}
                 </select>
             </fieldset>
-        </HairdresserStyle>
+        </EventHostStyle>
     )
 }

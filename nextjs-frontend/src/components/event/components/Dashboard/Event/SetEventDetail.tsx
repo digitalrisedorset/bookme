@@ -21,7 +21,7 @@ export const SetEventDetail: React.FC<EventProps> = ({eventGroup}: EventProps) =
     const viewDetail = (e: React.FormEvent) => {
         e.preventDefault();
         resetActiveEvent()
-        router.push({pathname: `/set-haircut-detail/${encodeURIComponent(JSON.stringify(eventGroup.eventIds))}`});
+        router.push({pathname: `/set-event-detail/${encodeURIComponent(JSON.stringify(eventGroup.eventIds))}`});
     }
 
     return (

@@ -12,7 +12,7 @@ const IntroPaddington: React.FC = () => {
             <div className="content">
                 <h2>Booking System for the Paddington Hairdressing Salon</h2>
                 <Feedback />
-                <p className="general">Select when and which hairdresser you want for your appointment.
+                <p className="general">Select when and which eventHost you want for your appointment.
                     We bring our schedule for you to book in just over 3 clicks</p>
                 <p className="ethos">Whether you are aiming to get a straight cut with hassle free booking or a very generous time at your preferred place to get your hair done and a pampering time for your head to feel fully refreshed!,
                     we are committed to deliver the best hairdressing experience you are looking for.

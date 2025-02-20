@@ -4,22 +4,22 @@ import {useVenue} from "@/components/venue/hooks/useVenue";
 
 const HAIRCUT_TYPE_GROUP_QUERY = gql`
     query Query($venueId: ID!) {
-      venueHaircutTypeGroups(venueId: $venueId) {
+      venueEventTypeGroups(venueId: $venueId) {
         id
         name
       }
     }
 `;
 
-export const useHaircutTypeGroups = () => {
+export const useEventTypeGroups = () => {
     const venue = useVenue()
 
-    const haircutTypeGroupsData = useQuery(HAIRCUT_TYPE_GROUP_QUERY, {
+    const eventTypeGroupsData = useQuery(HAIRCUT_TYPE_GROUP_QUERY, {
         variables: {
             "venueId": venue?.id
         },
         fetchPolicy: 'no-cache'
     });
 
-    return haircutTypeGroupsData
+    return eventTypeGroupsData
 }

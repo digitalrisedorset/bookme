@@ -12,7 +12,7 @@ const EVENTS_QUERY = gql`
         }
         status
         endTime       
-        hairdresser {
+        eventHost {
           id
           name
         }
@@ -31,17 +31,17 @@ export const useEvents = () => {
 
     /**
      * {
-     *                 "haircutType": {
+     *                 "eventType": {
      *                     "name": {
-     *                         "equals": activeHaircutType
+     *                         "equals": activeEventType
      *                     }
      *                 },
      *                 "day": {
      *                     "equals": activeDay
      *                 },
-     *                 "hairdresser": {
+     *                 "eventHost": {
      *                     "name": {
-     *                         "equals": activeHairdresser
+     *                         "equals": activeEventHost
      *                     }
      *                 }
      *             }

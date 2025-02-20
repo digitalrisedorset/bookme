@@ -7,7 +7,7 @@ const EVENT_QUERY = gql`
         day
         endTime
         startTime
-        hairdresser {
+        eventHost {
           name
         }
         orderItem {

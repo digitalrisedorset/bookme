@@ -2,11 +2,11 @@ import React from "react";
 import {EventRow, ViewEventStyle} from "@/components/global/styles/ItemStyles";
 import {WeekPreference} from "@/components/event/components/Dashboard/EventPreference/WeekFilter";
 import {
-    HaircutTypeGroupPreference
-} from "@/components/event/components/Dashboard/EventPreference/HaircutTypeGroupReference";
+    EventTypeGroupPreference
+} from "@/components/event/components/Dashboard/EventPreference/EventTypeGroupReference";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {getUserPreferenceStep} from "@/lib/user";
-import {HaircutTypePreference} from "@/components/event/components/Dashboard/EventPreference/HaircutTypePreference";
+import {EventTypePreference} from "@/components/event/components/Dashboard/EventPreference/EventTypePreference";
 import {tr} from "@/lib/translate";
 import {useVenueConfigState} from "@/state/VenueConfigState";
 
@@ -22,16 +22,16 @@ export const InitFilter: React.FC = () => {
         <ViewEventStyle>
             <h5>Let&apos;s make this booking easy</h5>
             {preferenceStep==='Week' &&<EventRow>
-                <span className="label">When do you need your haircut?</span>
+                <span className="label">When do you need your eventType?</span>
                 <WeekPreference />
             </EventRow>}
-            {preferenceStep==='HaircutGroup' &&<EventRow>
+            {preferenceStep==='EventTypeGroup' &&<EventRow>
                 <p className="label">Select a category that match your appointment?</p>
-                <HaircutTypeGroupPreference />
+                <EventTypeGroupPreference />
             </EventRow>}
-            {preferenceStep==='HaircutType' &&<EventRow>
-                <p className="label">{tr('What haircut type do you need?', activeVenue)}</p>
-                <HaircutTypePreference />
+            {preferenceStep==='EventType' &&<EventRow>
+                <p className="label">{tr('What eventType type do you need?', activeVenue)}</p>
+                <EventTypePreference />
             </EventRow>}
         </ViewEventStyle>
     )

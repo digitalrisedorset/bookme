@@ -13,7 +13,7 @@ const Header: React.FC = () => {
 
     const handleClick = (e: React.FormEvent) => {
         e.preventDefault(); // stop the form from submitting
-        if (user?.role?.isHairdresser) {
+        if (user?.role?.isEventHost) {
             router.push({pathname: `/schedule`});
         } else {
             router.push({pathname: `/`});

@@ -3,18 +3,18 @@ import gql from "graphql-tag";
 import {useVenue} from "@/components/venue/hooks/useVenue";
 
 const HAIRCUT_TYPE_GROUP_QUERY = gql`
-    query HaircutTypeGroups($where: HaircutTypeGroupWhereInput!, $orderBy: [HaircutTypeGroupOrderByInput!]!) {
-      haircutTypeGroups(where: $where, orderBy: $orderBy) {
+    query EventTypeGroups($where: EventTypeGroupWhereInput!, $orderBy: [EventTypeGroupOrderByInput!]!) {
+      eventTypeGroups(where: $where, orderBy: $orderBy) {
         id
         name
       }
     }
 `;
 
-export const useHaircutTypeGroups = () => {
+export const useEventTypeGroups = () => {
     const venue = useVenue()
 
-    const haircutTypeGroupsData = useQuery(HAIRCUT_TYPE_GROUP_QUERY, {
+    const eventTypeGroupsData = useQuery(HAIRCUT_TYPE_GROUP_QUERY, {
         variables: {
             "orderBy": [
                 {
@@ -32,5 +32,5 @@ export const useHaircutTypeGroups = () => {
         fetchPolicy: 'no-cache'
     });
 
-    return haircutTypeGroupsData
+    return eventTypeGroupsData
 }

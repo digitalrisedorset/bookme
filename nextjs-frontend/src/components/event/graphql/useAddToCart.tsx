@@ -5,8 +5,8 @@ import {useEventState} from "@/state/EventState";
 import {InMemoryCache} from "@apollo/client/cache/inmemory/inMemoryCache";
 
 export const ADD_TO_CART_MUTATION = gql`
-  mutation AddToCart($eventId: ID!, $haircutId: ID!, $shampoo: Int) {
-    addToCart(eventId: $eventId, haircutId: $haircutId, shampoo: $shampoo)
+  mutation AddToCart($eventId: ID!, $eventTypeId: ID!, $shampoo: Int) {
+    addToCart(eventId: $eventId, eventTypeId: $eventTypeId, shampoo: $shampoo)
   }
 `;
 
@@ -27,7 +27,7 @@ export const useAddToCart = (id: string) => {
     const user = useUser()
 
     const result = useMutation(ADD_TO_CART_MUTATION, {
-        variables: { eventId: id, shampoo: (eventState.shampoo === true)?1:0, haircutId: user?.haircutType?.id },
+        variables: { eventId: id, shampoo: (eventState.shampoo === true)?1:0, eventTypeId: user?.eventType?.id },
         update,
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
     });
