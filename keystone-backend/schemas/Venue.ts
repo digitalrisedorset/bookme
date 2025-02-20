@@ -73,12 +73,12 @@ export const Venue = list({
                 listView: { fieldMode: 'hidden' },
             },
         }),
-        hairdressers: relationship({
-            ref: 'Hairdresser.venue',
+        eventHosts: relationship({
+            ref: 'EventHost.venue',
             many: true,
         }),
-        haircutTypeGroups: relationship({
-            ref: 'HaircutTypeGroup.venue',
+        eventTypeGroups: relationship({
+            ref: 'EventTypeGroup.venue',
             many: true,
         }),
     }

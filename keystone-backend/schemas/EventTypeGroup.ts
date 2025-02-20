@@ -2,11 +2,11 @@ import {list} from "@keystone-6/core";
 import {allowAll} from "@keystone-6/core/access";
 import {relationship, text} from "@keystone-6/core/fields";
 
-export const HaircutTypeGroup = list({
+export const EventTypeGroup = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['name', 'haircuts', 'venue'],
+            initialColumns: ['name', 'eventTypes', 'venue'],
         },
     },
     fields: {
@@ -26,13 +26,13 @@ export const HaircutTypeGroup = list({
                 isRequired: true,
             },
         }),
-        haircuts: relationship({
-            ref: 'HaircutType.group',
+        eventTypes: relationship({
+            ref: 'EventType.group',
             many: true,
         }),
-        user: relationship({ ref: 'User.haircutTypeGroup' }),
+        user: relationship({ ref: 'User.eventTypeGroup' }),
         venue: relationship({
-            ref: 'Venue.haircutTypeGroups',
+            ref: 'Venue.eventTypeGroups',
         }),
     }
 })

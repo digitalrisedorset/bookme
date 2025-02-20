@@ -1,14 +1,14 @@
 import {event} from "./event";
-import {haircutType, haircutTypeGroup} from "./haircutType";
+import {eventType, eventTypeGroup} from "./eventType";
 import {outletHoliday, venue} from "./venue";
-import {hairdresser, hairdresserHoliday} from "./hairdresser";
+import {eventHost, eventHostHoliday} from "./eventHost";
 
 const seedData = {
     eventsData: event,
-    haircutType: haircutType,
-    hairdresser: hairdresser,
-    haircutTypeGroup: haircutTypeGroup,
+    eventType: eventType,
+    eventHost: eventHost,
+    eventTypeGroup: eventTypeGroup,
     outletHoliday: outletHoliday,
-    hairdresserHoliday: hairdresserHoliday,
+    eventHostHoliday: eventHostHoliday,
     venue: venue
 }

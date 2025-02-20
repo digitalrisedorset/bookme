@@ -1,22 +1,22 @@
 /* eslint-disable */
 import type { Context } from '.keystone/types'
-import {HaircutTypeGroup} from "../schemas/HaircutTypeGroup";
+import {EventTypeGroup} from "../schemas/EventTypeGroup";
 
-async function venueHaircutTypeGroups(
+async function venueEventTypeGroups(
     root: any,
     { venueId }: { venueId: string },
     context: Context
-): Promise<[HaircutTypeGroup!]> {
+): Promise<[EventTypeGroup!]> {
     // 1. Query the current user see if they are signed in
     const sesh = context.session as Session;
     if (!sesh.itemId) {
         throw new Error('You must be logged in to do this!');
     }
 
-    const haircutTypeGroups = await context.query.HaircutTypeGroup.findMany({
+    const eventTypeGroups = await context.query.EventTypeGroup.findMany({
         where: {
             venue: { id: {"equals": venueId }},
-            haircuts: { some: {} }
+            eventTypes: { some: {} }
         },
         query: 'id name',
         orderBy: [
@@ -27,7 +27,7 @@ async function venueHaircutTypeGroups(
         resolveFields: false,
     });
 
-    return haircutTypeGroups
+    return eventTypeGroups
 }
 
-export default venueHaircutTypeGroups;
+export default venueEventTypeGroups;

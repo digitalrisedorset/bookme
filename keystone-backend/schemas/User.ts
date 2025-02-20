@@ -78,14 +78,14 @@ export const User = list({
             defaultValue: 0,
             isRequired: false,
         }),
-        hairdresser: relationship({
-            ref: 'Hairdresser.user',
+        eventHost: relationship({
+            ref: 'EventHost.user',
         }),
-        haircutType: relationship({
-            ref: 'HaircutType.user',
+        eventType: relationship({
+            ref: 'EventType.user',
         }),
-        haircutTypeGroup: relationship({
-            ref: 'HaircutTypeGroup.user',
+        eventTypeGroup: relationship({
+            ref: 'EventTypeGroup.user',
         }),
         weekPreference: text({
             isFilterable: false,
@@ -146,18 +146,18 @@ export const User = list({
                 return resolvedData;
             }
 
-            if (context.query.HaircutTypeGroup === undefined) {
-                console.log('No haircutTypeGroup exist, we cannot update the user')
+            if (context.query.EventTypeGroup === undefined) {
+                console.log('No eventTypeGroup exist, we cannot update the user')
                 return resolvedData;
             }
 
-            const haircutTypeGroups = await context.query.HaircutTypeGroup.findMany({
+            const eventTypeGroups = await context.query.EventTypeGroup.findMany({
                 where: { venue: { id: { "equals": venue} }},
                 query: 'id'
             });
 
-            if (haircutTypeGroups && haircutTypeGroups.length === 1) {
-                resolvedData.haircutTypeGroup = { connect: { id: haircutTypeGroups[0].id} }
+            if (eventTypeGroups && eventTypeGroups.length === 1) {
+                resolvedData.eventTypeGroup = { connect: { id: eventTypeGroups[0].id} }
             }
 
             return resolvedData;

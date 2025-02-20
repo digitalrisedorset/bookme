@@ -7,10 +7,10 @@ import updateEventAndRemoveOverlappingEvent from "./removeOverlappingEvent";
 
 async function addToCart(
   root: any,
-  { eventId, shampoo, haircutId }: { eventId: string, shampoo: number, haircutId: string },
+  { eventId, shampoo, eventTypeId }: { eventId: string, shampoo: number, eventTypeId: string },
   context: Context
 ): Promise<string> {
-  console.log('addToCart', {eventId, shampoo, haircutId})
+  console.log('addToCart', {eventId, shampoo, eventTypeId})
   // 1. Query the current user see if they are signed in
   const sesh = context.session as Session;
   if (!sesh.itemId) {
@@ -39,14 +39,14 @@ async function addToCart(
     return record
   }
 
-  const price = await calculatePrice(root, {haircutId, shampoo, eventId}, context)
-  const endTime = await calculateEventDuration(root, {haircutId, shampoo, eventId}, context)
+  const price = await calculatePrice(root, {eventTypeId, shampoo, eventId}, context)
+  const endTime = await calculateEventDuration(root, {eventTypeId, shampoo, eventId}, context)
 
   // 4. if it isnt, create a new cart item!
   const record = await context.query.CartItem.createOne({
     data: {
       event: { connect: { id: eventId}},
-      haircut: { connect: { id: haircutId}},
+      eventType: { connect: { id: eventTypeId}},
       shampoo,
       price,
       user: { connect: { id: sesh.itemId }},

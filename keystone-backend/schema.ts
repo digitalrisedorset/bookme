@@ -4,22 +4,23 @@ import type { Lists } from '.keystone/types'
 import {User} from "./schemas/User";
 import {OutletHoliday} from "./schemas/OutletHoliday";
 import {Venue} from "./schemas/Venue";
-import {HaircutType} from "./schemas/HaircutType";
+import {EventType} from "./schemas/EventType";
 import {Event} from "./schemas/Event";
 import {CartItem} from "./schemas/CartItem";
 import addToCart from "./mutations/addToCart";
 import {Order} from "./schemas/Order";
 import {OrderItem} from "./schemas/OrderItem";
 import checkout from "./mutations/checkout";
-import {Hairdresser} from "./schemas/Hairdresser";
+import {EventHost} from "./schemas/EventHost";
 import calculatePrice from "./mutations/calculatePrice";
 import calculateEventDuration from "./mutations/calculateEventDuration"
-import {HaircutTypeGroup} from "./schemas/HaircutTypeGroup";
-import {HaircutTypeDuration} from "./schemas/HaircutTypeDuration";
+import {EventTypeGroup} from "./schemas/EventTypeGroup";
+import {EventTypeDuration} from "./schemas/EventTypeDuration";
 import {Holiday} from "./schemas/Holiday";
 import updateEventAndRemoveOverlappingEvent from "./mutations/removeOverlappingEvent";
 import {Role} from "./schemas/Role";
-import venueHaircutTypeGroups from "./mutations/venueHaircutTypeGroups";
+import venueEventTypeGroups from "./mutations/venueEventTypeGroups";
+import {EventMedia} from "./schemas/EventMedia";
 
 export type Session = {
     itemId: string
@@ -32,10 +33,11 @@ export const lists = {
     CartItem,
     OutletHoliday,
     Event,
-    HaircutType,
-    HaircutTypeGroup,
-    HaircutTypeDuration,
-    Hairdresser,
+    EventMedia,
+    EventType: EventType,
+    EventTypeGroup,
+    EventTypeDuration,
+    EventHost: EventHost,
     Holiday,
     Role,
     Venue,
@@ -53,35 +55,35 @@ export function extendGraphqlSchema (baseSchema: GraphQLSchema) {
           addToCart(
              eventId: ID! 
              shampoo: Int
-             haircutId: ID!            
+             eventTypeId: ID!            
           ): String
           """ Register a payment token and create the associated order"""
           checkout(
             token: String!
           ): Order    
-          """ Remove events from the system that overlaps and have the same hairdresser assigned with an event id """
+          """ Remove events from the system that overlaps and have the same eventHost assigned with an event id """
           updateEventAndRemoveOverlappingEvent(           
             eventId: ID! 
             endTime: String
           ): String    
         }
         type Query {
-          """ Calculate price for a haircut, shampoo and hairdresser seniority"""
+          """ Calculate price for a eventType, shampoo and eventHost seniority"""
           calculatePrice(
-            haircutId: ID! 
+            eventTypeId: ID! 
             shampoo: Int
             eventId: ID! 
           ): Int
-          """ Calculate duration needed for a haircut, shampoo and hairdresser seniority"""
+          """ Calculate duration needed for a eventType, shampoo and eventHost seniority"""
           calculateEventDuration(
-            haircutId: ID! 
+            eventTypeId: ID! 
             shampoo: Int
             eventId: ID! 
           ): String      
-          """ Retrieve all HaircutTypeGroups that have some HaircutType assigned"""
-          venueHaircutTypeGroups(
+          """ Retrieve all EventTypeGroups that have some EventType assigned"""
+          venueEventTypeGroups(
             venueId: ID!           
-          ): [HaircutTypeGroup!]        
+          ): [EventTypeGroup!]        
         }
         `,
         resolvers: {
@@ -93,7 +95,7 @@ export function extendGraphqlSchema (baseSchema: GraphQLSchema) {
             Query: {
                 calculatePrice,
                 calculateEventDuration,
-                venueHaircutTypeGroups
+                venueEventTypeGroups
             }
         },
     })

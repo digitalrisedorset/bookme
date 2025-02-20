@@ -5,10 +5,10 @@ import {getEventEndTime} from "../lib/event";
 
 async function calculateEventDuration(
   root: any,
-  { haircutId, shampoo, eventId }: { haircutId: string, shampoo: number, eventId: string },
+  { eventTypeId, shampoo, eventId }: { eventTypeId: string, shampoo: number, eventId: string },
   context: Context
 ): Promise<string> {
-  console.log('event duration', {haircutId, shampoo, eventId})
+  console.log('event duration', {eventTypeId, shampoo, eventId})
 
   // 1. Query the current user see if they are signed in
   const sesh = context.session as Session;
@@ -16,17 +16,17 @@ async function calculateEventDuration(
     throw new Error('You must be logged in to do this!');
   }
 
-  const haircut = await context.query.HaircutType.findOne({
-    where: { id: haircutId },
+  const eventType = await context.query.EventType.findOne({
+    where: { id: eventTypeId },
     query: 'id duration breakTime'
   });
 
   const event = await context.query.Event.findOne({
     where: { id: eventId },
-    query: 'id startTime hairdresser { level }'
+    query: 'id startTime eventHost { level }'
   });
 
-  return getEventEndTime(haircut.duration, haircut.breakTime, event.startTime, shampoo, event.hairdresser.level);
+  return getEventEndTime(eventType.duration, eventType.breakTime, event.startTime, shampoo, event.eventHost.level);
 }
 
 export default calculateEventDuration;

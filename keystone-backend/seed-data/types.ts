@@ -3,15 +3,15 @@ export type VenueProps = {
     name: string
 }
 
-export type HaircutTypeProps = {
+export type EventTypeProps = {
     code: string
     name: string
-    category: HaircutTypeGroupCode
+    category: EventTypeGroupCode
     duration: number
     price: number
 }
 
-export type HaircutTypeGroupProps = {
+export type EventTypeGroupProps = {
     name: string,
     venue: string
 }
@@ -22,16 +22,16 @@ export type CustomerProps = {
     venue: string
 }
 
-export type HairdresserProps = {
+export type EventHostProps = {
     code: string
     name: string
     email: string
-    level: HaircutTypeCode
-    haircutSpeciality: HaircutTypeGroupCode[]
+    level: EventTypeCode
+    eventTypeSpeciality: EventTypeGroupCode[]
     venue: string
 }
 
-export type HairdresserHolidayProps = {
+export type EventHostHolidayProps = {
     staff: string
     startDate: string
     endDate: string
@@ -49,11 +49,11 @@ export type VenueCode = 'bourne' | 'poole' | 'winton' | 'muscliff' | 'hamworthy'
 
 export type WeekDay = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'
 
-export type HaircutTypeCode = 'apprentice' | 'junior' | 'senior'
+export type EventTypeCode = 'apprentice' | 'junior' | 'senior'
 
-export type HaircutTypeGroupCode = 'children' | 'ladies' | 'treatment' | 'colour'
+export type EventTypeGroupCode = 'children' | 'ladies' | 'treatment' | 'colour'
 
-export type HairdresserCode = 'carlos' | 'linda' | 'paul'
+export type EventHostCode = 'carlos' | 'linda' | 'paul'
 
 export type EventStatus = 'open' | 'complete'
 
@@ -65,6 +65,6 @@ export type EventProps = {
     duration: number,
     breakTime: number,
     status: EventStatus,
-    haircutType: HaircutTypeCode,
-    hairdresser: HairdresserCode
+    eventType: EventTypeCode,
+    eventHost: EventHostCode
 }

@@ -1,8 +1,8 @@
 
-export const getEventPrice = (base_price: number, shampoo: boolean, hairdresserLevel: string): number => {
+export const getEventPrice = (base_price: number, shampoo: boolean, eventHostLevel: string): number => {
     let price = base_price
 
-    switch (hairdresserLevel) {
+    switch (eventHostLevel) {
         case 'apprentice':
             price = base_price * 0.8
             break;

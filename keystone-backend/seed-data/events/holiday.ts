@@ -1,9 +1,9 @@
 import type {KeystoneContext} from "@keystone-6/core/src/types";
 import {isoFormatDMY} from "../../lib/date";
-import {HairdresserHolidayProps, OutletHolidaysProps} from "../types";
+import {EventHostHolidayProps, OutletHolidaysProps} from "../types";
 import {VenueCreator} from "./venue";
-import {HairdresserCreator} from "./hairdresser";
-import { hairdresserHoliday} from "../sample-data/hairdresser";
+import {EventHostCreator} from "./eventHost";
+import { eventHostHoliday} from "../sample-data/eventHost";
 import {outletHoliday} from "../sample-data/venue";
 
 
@@ -15,7 +15,7 @@ export class HolidayValidator {
         this.context = context
     }
 
-    findHolidaysByHairdresserId = async (id: string) => {
+    findHolidaysByEventHostId = async (id: string) => {
         let records = await this.context.query.Holiday.findMany({
             where: { staff: { id: {"equals": id }}, status: {"equals": "approved" } },
             query: 'id startDate endDate',
@@ -33,8 +33,8 @@ export class HolidayValidator {
         return records
     }
 
-    isHairdresserOnHoliday = async (hairdresserId: string, eventDate: string, startTime: string, endTime: string) => {
-        const holidays = await this.findHolidaysByHairdresserId(hairdresserId)
+    isEventHostOnHoliday = async (eventHostId: string, eventDate: string, startTime: string, endTime: string) => {
+        const holidays = await this.findHolidaysByEventHostId(eventHostId)
         return this.isDateOnHoliday(holidays, eventDate, startTime, endTime)
     }
 
@@ -52,8 +52,8 @@ export class HolidayValidator {
             const eventStartDate = new Date(this.concatDateTime(eventDate, startTime))
             const eventEndDate = new Date(this.concatDateTime(eventDate, endTime))
 
-            // if (this.concatDateTime(eventDate, startTime) == '2025-02-18T09:00:00.101Z' && hairdresserId==='4c0a172c-b4a4-4096-9661-ea07c0b8ca42') {
-            //     console.log('found hairdresser holidays conflict', {
+            // if (this.concatDateTime(eventDate, startTime) == '2025-02-18T09:00:00.101Z' && eventHostId==='4c0a172c-b4a4-4096-9661-ea07c0b8ca42') {
+            //     console.log('found eventHost holidays conflict', {
             //         holidayStartDate,
             //         holidayEndDate,
             //         eventStartDate,
@@ -82,17 +82,17 @@ export class HolidayValidator {
     }
 }
 
-export class HolidayHairdresserCreator {
+export class HolidayEventHostCreator {
     private context
 
-    private hairdresserCreator: HairdresserCreator
+    private eventHostCreator: EventHostCreator
 
-    private data: HairdresserHolidayProps[]
+    private data: EventHostHolidayProps[]
 
     constructor(context: KeystoneContext) {
         this.context = context
-        this.data = hairdresserHoliday
-        this.hairdresserCreator = new HairdresserCreator(context)
+        this.data = eventHostHoliday
+        this.eventHostCreator = new EventHostCreator(context)
     }
 
     getHasVenueSomeHolidays = async (id: string) => {
@@ -104,15 +104,15 @@ export class HolidayHairdresserCreator {
         return parseInt(holidays?.length)
     }
 
-    createHairdresserHoliday = async (holidayData: HairdresserHolidayProps) => {
-        const hairdresserInfo = await this.hairdresserCreator.getHairdresserByCode(holidayData.code)
-        const holidayAlreadyIn = await this.getHasVenueSomeHolidays(hairdresserInfo.id)
+    createEventHostHoliday = async (holidayData: EventHostHolidayProps) => {
+        const eventHostInfo = await this.eventHostCreator.getEventHostByCode(holidayData.code)
+        const holidayAlreadyIn = await this.getHasVenueSomeHolidays(eventHostInfo.id)
 
-        if (hairdresserInfo && holidayAlreadyIn === 0) {
-             console.log(`👩 Adding new holiday for hairdresser: ${hairdresserInfo.name}`)
+        if (eventHostInfo && holidayAlreadyIn === 0) {
+             console.log(`👩 Adding new holiday for eventHost: ${eventHostInfo.name}`)
             await this.context.query.Holiday.createOne({
                 data: {
-                    staff: { connect: { id: hairdresserInfo.id}},
+                    staff: { connect: { id: eventHostInfo.id}},
                     startDate: holidayData.startDate,
                     endDate: holidayData.endDate,
                     status: holidayData.status
@@ -122,9 +122,9 @@ export class HolidayHairdresserCreator {
         }
     }
 
-    createAllHairdresserHolidays = async () => {
-        for (const holiday: HairdresserHolidayProps of this.data) {
-            await this.createHairdresserHoliday(holiday)
+    createAllEventHostHolidays = async () => {
+        for (const holiday: EventHostHolidayProps of this.data) {
+            await this.createEventHostHoliday(holiday)
         }
     }
 }

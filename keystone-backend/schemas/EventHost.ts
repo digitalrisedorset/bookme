@@ -2,11 +2,11 @@ import {list} from "@keystone-6/core";
 import {allowAll} from "@keystone-6/core/access";
 import {relationship, text} from "@keystone-6/core/fields";
 
-export const Hairdresser = list({
+export const EventHost = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['name', 'level', 'haircutTypes', 'venue', 'user'],
+            initialColumns: ['name', 'level', 'eventTypes', 'venue', 'user'],
         },
     },
     fields: {
@@ -30,16 +30,16 @@ export const Hairdresser = list({
                 isRequired: true,
             },
         }),
-        haircutTypeDurations: relationship({
-            ref: 'HaircutTypeDuration.hairdresser',
+        eventTypeDurations: relationship({
+            ref: 'EventTypeDuration.eventHost',
             many: true,
         }),
-        haircutTypes: relationship({
-            ref: 'HaircutType.hairdresser',
+        eventTypes: relationship({
+            ref: 'EventType.eventHost',
             many: true,
         }),
         event: relationship({
-            ref: 'Event.hairdresser',
+            ref: 'Event.eventHost',
             many: true,
             ui: {
                 createView: { fieldMode: 'hidden' },
@@ -51,9 +51,9 @@ export const Hairdresser = list({
             ref: 'Holiday.staff',
             many: true,
         }),
-        user: relationship({ ref: 'User.hairdresser' }),
+        user: relationship({ ref: 'User.eventHost' }),
         venue: relationship({
-            ref: 'Venue.hairdressers',
+            ref: 'Venue.eventHosts',
         }),
     },
     hooks: {
@@ -64,17 +64,17 @@ export const Hairdresser = list({
             const venue = resolvedData?.venue?.connect?.id || item?.venue?.connect?.id;
 
             if (context.query.Role === undefined) {
-                console.log('No Role exist, we cannot update the Hairdresser')
+                console.log('No Role exist, we cannot update the EventHost')
                 return resolvedData;
             }
 
             const roles = await context.query.Role.findMany({
-                where: { name: {"equals": "Hairdresser"}},
+                where: { name: {"equals": "EventHost"}},
                 query: 'id'
             });
 
             if (roles?.length === 0) {
-                console.log('No Role was created, we cannot update the Hairdresser')
+                console.log('No Role was created, we cannot update the EventHost')
                 return resolvedData;
             }
 

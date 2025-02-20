@@ -6,7 +6,7 @@ export const event = [
         startTime: '9:00',
         endTime: '14:00',
         status: 'open',
-        hairdresser: 'romeo',
+        eventHost: 'romeo',
         duration: 20,
         breakTime: 5
     },
@@ -16,7 +16,7 @@ export const event = [
         startTime: '15:00',
         endTime: '23:00',
         status: 'open',
-        hairdresser: 'romeo',
+        eventHost: 'romeo',
         duration: 40,
         breakTime: 5
     },
@@ -26,7 +26,7 @@ export const event = [
         startTime: '18:00',
         endTime: '19:00',
         status: 'open',
-        hairdresser: 'romeo',
+        eventHost: 'romeo',
         duration: 40,
         breakTime: 5
     },
@@ -37,7 +37,7 @@ export const event = [
         startTime: '18:00',
         endTime: '19:00',
         status: 'open',
-        hairdresser: 'tom',
+        eventHost: 'tom',
         duration: 60,
         breakTime: 0
     },
@@ -47,7 +47,7 @@ export const event = [
         startTime: '10:00',
         endTime: '12:00',
         status: 'open',
-        hairdresser: 'tom',
+        eventHost: 'tom',
         duration: 120,
         breakTime: 0
     },
@@ -58,7 +58,7 @@ export const event = [
         startTime: '9:00',
         endTime: '14:00',
         status: 'open',
-        hairdresser: 'stephanie',
+        eventHost: 'stephanie',
         duration: 20,
         breakTime: 5
     },
@@ -68,7 +68,7 @@ export const event = [
         startTime: '11:00',
         endTime: '15:00',
         status: 'open',
-        hairdresser: 'stephanie',
+        eventHost: 'stephanie',
         duration: 15,
         breakTime: 5
     },
@@ -78,7 +78,7 @@ export const event = [
         startTime: '17:00',
         endTime: '20:00',
         status: 'open',
-        hairdresser: 'stephanie',
+        eventHost: 'stephanie',
         duration: 30,
         breakTime: 5
     },
@@ -88,7 +88,7 @@ export const event = [
         startTime: '5:00',
         endTime: '10:00',
         status: 'open',
-        hairdresser: 'stephanie',
+        eventHost: 'stephanie',
         duration: 30,
         breakTime: 5
     },
@@ -99,7 +99,7 @@ export const event = [
         startTime: '9:00',
         endTime: '11:00',
         status: 'open',
-        hairdresser: 'antoine',
+        eventHost: 'antoine',
         duration: 30,
         breakTime: 5
     },
@@ -109,7 +109,7 @@ export const event = [
         startTime: '9:00',
         endTime: '11:00',
         status: 'open',
-        hairdresser: 'antoine',
+        eventHost: 'antoine',
         duration: 30,
         breakTime: 15
     },
@@ -119,7 +119,7 @@ export const event = [
         startTime: '9:00',
         endTime: '11:00',
         status: 'open',
-        hairdresser: 'antoine',
+        eventHost: 'antoine',
         duration: 30,
         breakTime: 15
     },
@@ -129,7 +129,7 @@ export const event = [
         startTime: '14:00',
         endTime: '23:00',
         status: 'open',
-        hairdresser: 'antoine',
+        eventHost: 'antoine',
         duration: 30,
         breakTime: 15
     },
@@ -140,7 +140,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'patricia',
+        eventHost: 'patricia',
         duration: 30,
         breakTime: 5
     },
@@ -150,7 +150,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'patricia',
+        eventHost: 'patricia',
         duration: 30,
         breakTime: 15
     },
@@ -160,7 +160,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'patricia',
+        eventHost: 'patricia',
         duration: 30,
         breakTime: 15
     },
@@ -170,7 +170,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'patricia',
+        eventHost: 'patricia',
         duration: 30,
         breakTime: 15
     },
@@ -181,7 +181,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'linda',
+        eventHost: 'linda',
         duration: 30,
         breakTime: 5
     },
@@ -191,7 +191,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'linda',
+        eventHost: 'linda',
         duration: 30,
         breakTime: 5
     },
@@ -201,7 +201,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'linda',
+        eventHost: 'linda',
         duration: 30,
         breakTime: 5
     },
@@ -211,7 +211,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'linda',
+        eventHost: 'linda',
         duration: 30,
         breakTime: 5
     },
@@ -222,7 +222,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'paul',
+        eventHost: 'paul',
         duration: 30,
         breakTime: 5
     },
@@ -232,7 +232,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'paul',
+        eventHost: 'paul',
         duration: 30,
         breakTime: 15
     },
@@ -242,7 +242,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'paul',
+        eventHost: 'paul',
         duration: 30,
         breakTime: 15
     },
@@ -252,7 +252,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'paul',
+        eventHost: 'paul',
         duration: 30,
         breakTime: 15
     },
@@ -263,7 +263,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'charlotte',
+        eventHost: 'charlotte',
         duration: 30,
         breakTime: 5
     },
@@ -273,7 +273,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'charlotte',
+        eventHost: 'charlotte',
         duration: 30,
         breakTime: 15
     },
@@ -283,7 +283,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'charlotte',
+        eventHost: 'charlotte',
         duration: 30,
         breakTime: 15
     },
@@ -293,7 +293,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'charlotte',
+        eventHost: 'charlotte',
         duration: 30,
         breakTime: 15
     },
@@ -304,7 +304,7 @@ export const event = [
         startTime: '18:00',
         endTime: '21:00',
         status: 'open',
-        hairdresser: 'carlos',
+        eventHost: 'carlos',
         duration: 30,
         breakTime: 5
     },
@@ -314,7 +314,7 @@ export const event = [
         startTime: '9:00',
         endTime: '12:00',
         status: 'open',
-        hairdresser: 'carlos',
+        eventHost: 'carlos',
         duration: 30,
         breakTime: 15
     },
@@ -324,7 +324,7 @@ export const event = [
         startTime: '9:00',
         endTime: '12:00',
         status: 'open',
-        hairdresser: 'carole',
+        eventHost: 'carole',
         duration: 15,
         breakTime: 3
     },
@@ -334,7 +334,7 @@ export const event = [
         startTime: '9:00',
         endTime: '16:00',
         status: 'open',
-        hairdresser: 'carole',
+        eventHost: 'carole',
         duration: 15,
         breakTime: 3
     },
@@ -344,7 +344,7 @@ export const event = [
         startTime: '9:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'carole',
+        eventHost: 'carole',
         duration: 15,
         breakTime: 3
     },
@@ -354,7 +354,7 @@ export const event = [
         startTime: '9:00',
         endTime: '19:00',
         status: 'open',
-        hairdresser: 'carole',
+        eventHost: 'carole',
         duration: 15,
         breakTime: 3
     },
@@ -364,7 +364,7 @@ export const event = [
         startTime: '9:00',
         endTime: '19:00',
         status: 'open',
-        hairdresser: 'estelle',
+        eventHost: 'estelle',
         duration: 30,
         breakTime: 5
     },
@@ -374,7 +374,7 @@ export const event = [
         startTime: '9:00',
         endTime: '19:00',
         status: 'open',
-        hairdresser: 'estelle',
+        eventHost: 'estelle',
         duration: 30,
         breakTime: 5
     },
@@ -384,7 +384,7 @@ export const event = [
         startTime: '12:00',
         endTime: '19:00',
         status: 'open',
-        hairdresser: 'michael',
+        eventHost: 'michael',
         duration: 30,
         breakTime: 5
     },
@@ -394,7 +394,7 @@ export const event = [
         startTime: '13:00',
         endTime: '17:00',
         status: 'open',
-        hairdresser: 'michael',
+        eventHost: 'michael',
         duration: 30,
         breakTime: 5
     },
@@ -404,7 +404,7 @@ export const event = [
         startTime: '8:00',
         endTime: '14:00',
         status: 'open',
-        hairdresser: 'laura',
+        eventHost: 'laura',
         duration: 30,
         breakTime: 5
     },
@@ -414,7 +414,7 @@ export const event = [
         startTime: '7:00',
         endTime: '15:00',
         status: 'open',
-        hairdresser: 'laura',
+        eventHost: 'laura',
         duration: 30,
         breakTime: 5
     },

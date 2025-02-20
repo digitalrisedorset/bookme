@@ -21,9 +21,9 @@ export class CustomerCreator {
     }
 
     getCustomerByCode = (code: string): any => {
-        const haircutTypeName = this.findCustomerNameByCode(code)
+        const eventTypeName = this.findCustomerNameByCode(code)
 
-        return this.findCustomerByCustomerName(haircutTypeName)
+        return this.findCustomerByCustomerName(eventTypeName)
     }
 
     findCustomerNameByCode = (code: string): string => {
@@ -35,12 +35,12 @@ export class CustomerCreator {
     }
 
     findCustomerByCode = (code: string): string => {
-        const haircutType = this.data.filter((haircutType) => {
-            if (haircutType.code === code) return haircutType
+        const eventType = this.data.filter((eventType) => {
+            if (eventType.code === code) return eventType
         })
 
-        if (haircutType) {
-            return haircutType[0]
+        if (eventType) {
+            return eventType[0]
         }
     }
 

@@ -6,7 +6,7 @@ export const Event = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['id', 'hairdresser', 'day', 'startTime', 'endTime', 'status'],
+            initialColumns: ['id', 'eventHost', 'day', 'startTime', 'endTime', 'status'],
         },
     },
     fields: {
@@ -56,8 +56,8 @@ export const Event = list({
             isFilterable: true,
             ref: 'Venue.events',
         }),
-        hairdresser: relationship({
-            ref: 'Hairdresser.event',
+        eventHost: relationship({
+            ref: 'EventHost.event',
         }),
         orderItem: relationship({
             ref: 'OrderItem.event',
@@ -67,6 +67,16 @@ export const Event = list({
             defaultValue: ({ context }) => ({
                 connect: { id: context.session.itemId },
             }),
-        })
+        }),
+        pictures: relationship({
+            ref: 'EventMedia.event',
+            many: true,
+            ui: {
+                displayMode: 'cards',
+                cardFields: ['image', 'altText'],
+                inlineCreate: { fields: ['image', 'altText'] },
+                inlineEdit: { fields: ['image', 'altText'] },
+            },
+        }),
     }
 })

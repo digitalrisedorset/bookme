@@ -6,7 +6,7 @@ export const CartItem = list({
     access: allowAll,
     ui: {
         listView: {
-            initialColumns: ['id', 'event', 'haircut', 'shampoo', 'quantity', 'price', 'user'],
+            initialColumns: ['id', 'event', 'eventType', 'shampoo', 'quantity', 'price', 'user'],
         },
     },
     fields: {
@@ -19,7 +19,7 @@ export const CartItem = list({
             isRequired: true,
         }),
         price: integer(),
-        haircut: relationship({ ref: 'HaircutType' }),
+        eventType: relationship({ ref: 'EventType' }),
         event: relationship({ ref: 'Event' }),
         user: relationship({ ref: 'User.cartItems' })
     }

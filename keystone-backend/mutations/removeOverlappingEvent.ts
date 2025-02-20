@@ -15,14 +15,14 @@ async function updateEventAndRemoveOverlappingEvent(
     const event = await context.query.Event.updateOne({
         where: {id: eventId},
         data: {endTime},
-        query: 'id startTime endTime hairdresser { id }'
+        query: 'id startTime endTime eventHost { id }'
     })
 
     const events = await context.query.Event.findMany({
         where: {
             startTime: { "lte": event.endTime },
             endTime: { "gte": event.startTime },
-            hairdresser: { "id": { "equals": event.hairdresser.id} },
+            eventHost: { "id": { "equals": event.eventHost.id} },
             id: {"notIn": [event.id] }
         },
         query: 'id startTime endTime'

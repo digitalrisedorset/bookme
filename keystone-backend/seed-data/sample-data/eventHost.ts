@@ -1,10 +1,10 @@
-export const hairdresser = [
+export const eventHost = [
     // Date Mate
     {
         code: 'romeo',
         name: 'Romeo',
         level: 'senior',
-        haircutSpeciality: ['datemate_valentine'],
+        eventTypeSpeciality: ['datemate_valentine'],
         venue: 'date-mate',
     },
     // Poole Ruby
@@ -12,7 +12,7 @@ export const hairdresser = [
         code: 'tom',
         name: 'Tom',
         level: 'senior',
-        haircutSpeciality: ['poole_rugby_junior'],
+        eventTypeSpeciality: ['poole_rugby_junior'],
         venue: 'poole-rugby',
     },
     // Madisson
@@ -20,28 +20,28 @@ export const hairdresser = [
         code: 'carlos',
         name: 'Carlos',
         level: 'apprentice',
-        haircutSpeciality: ['paddington_children'],
+        eventTypeSpeciality: ['paddington_children'],
         venue: 'paddington-hairdressing',
     },
     {
         code: 'linda',
         name: 'Linda',
         level: 'junior',
-        haircutSpeciality: ['paddington_ladies'],
+        eventTypeSpeciality: ['paddington_ladies'],
         venue: 'paddington-hairdressing',
     },
     {
         code: 'charlotte',
         name: 'Charlotte',
         level: 'senior',
-        haircutSpeciality: ['paddington_colour'],
+        eventTypeSpeciality: ['paddington_colour'],
         venue: 'paddington-hairdressing',
     },
     {
         code: 'paul',
         name: 'Paul',
         level: 'senior',
-        haircutSpeciality: ['paddington_colour', 'paddington_ladies'],
+        eventTypeSpeciality: ['paddington_colour', 'paddington_ladies'],
         venue: 'paddington-hairdressing',
     },
     // Doggie Mad House
@@ -49,21 +49,21 @@ export const hairdresser = [
         code: 'estelle',
         name: 'Estelle',
         level: 'senior',
-        haircutSpeciality: ['doggie_madhouse_grooming', 'doggie_madhouse_single_service'],
+        eventTypeSpeciality: ['doggie_madhouse_grooming', 'doggie_madhouse_single_service'],
         venue: 'doggie-madhouse',
     },
     {
         code: 'michael',
         name: 'Michael',
         level: 'senior',
-        haircutSpeciality: ['doggie_madhouse_grooming'],
+        eventTypeSpeciality: ['doggie_madhouse_grooming'],
         venue: 'doggie-madhouse',
     },
     {
         code: 'laura',
         name: 'Laura',
         level: 'junior',
-        haircutSpeciality: ['doggie_madhouse_single_service'],
+        eventTypeSpeciality: ['doggie_madhouse_single_service'],
         venue: 'doggie-madhouse',
     },
     // Rachelle
@@ -71,39 +71,39 @@ export const hairdresser = [
         code: 'rachelle',
         name: 'Rachelle',
         level: 'senior',
-        haircutSpeciality: ['rachelle_colour', 'rachelle_ladies'],
+        eventTypeSpeciality: ['rachelle_colour', 'rachelle_ladies'],
         venue: 'rachelle-hairdressing',
     },
     {
         code: 'stephanie',
         name: 'Stephanie',
         level: 'senior',
-        haircutSpeciality: ['rachelle_colour', 'rachelle_ladies'],
+        eventTypeSpeciality: ['rachelle_colour', 'rachelle_ladies'],
         venue: 'rachelle-hairdressing',
     },
     {
         code: 'antoine',
         name: 'Antoine',
         level: 'junior',
-        haircutSpeciality: ['rachelle_children', 'rachelle_men', 'rachelle_ladies'],
+        eventTypeSpeciality: ['rachelle_children', 'rachelle_men', 'rachelle_ladies'],
         venue: 'rachelle-hairdressing',
     },
     {
         code: 'patricia',
         name: 'Patricia',
         level: 'apprentice',
-        haircutSpeciality: ['rachelle_children', 'rachelle_men'],
+        eventTypeSpeciality: ['rachelle_children', 'rachelle_men'],
         venue: 'rachelle-hairdressing',
     },
     {
         code: 'carole',
         name: 'Carole',
         level: 'senior',
-        haircutSpeciality: ['blushharry_walkin'],
+        eventTypeSpeciality: ['blushharry_walkin'],
         venue: 'blush-harry'
     }];
 
-export const hairdresserHoliday = [
+export const eventHostHoliday = [
     {
         code: 'carlos',
         startDate: '2025-01-15T13:00:00.101Z',

@@ -1,9 +1,9 @@
 import { checkbox } from "@keystone-6/core/fields";
 
 export const permissionFields = {
-  isHairdresser: checkbox({
+  isEventHost: checkbox({
     defaultValue: false,
-    label: 'Hairdresser can book appointment on behalf of customers',
+    label: 'EventHost can book appointment on behalf of customers',
   }),
   isCustomer: checkbox({
     defaultValue: false,

@@ -1,9 +1,9 @@
 import {getTimeFromISO} from "./date";
 
-export const getEventEndTime = (duration: number, breakTime: number, startTime: string, shampoo: boolean, hairdresserLevel: string): string => {
+export const getEventEndTime = (duration: number, breakTime: number, startTime: string, shampoo: boolean, eventHostLevel: string): string => {
     let time = duration + breakTime
 
-    switch (hairdresserLevel) {
+    switch (eventHostLevel) {
         case 'apprentice':
         case 'junior':
             break;
@@ -16,7 +16,7 @@ export const getEventEndTime = (duration: number, breakTime: number, startTime: 
         time += 10
     }
 
-    //console.log('event duration final', {haircut, shampoo, event})
+    //console.log('event duration final', {eventType, shampoo, event})
     const date = new Date(startTime)
     date.setMinutes (date.getMinutes() + time);
 

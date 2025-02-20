@@ -1,4 +1,4 @@
-export const haircutTypeGroup = [
+export const eventTypeGroup = [
     // Date Mate
     {
         code: 'datemate_valentine',

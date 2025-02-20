@@ -1,4 +1,4 @@
-export const haircutType = [
+export const eventType = [
     // Date Mate
     {
         code: 'datemate_casual_coffee',
@@ -291,14 +291,14 @@ export const haircutType = [
         price: 34
     },
     {
-        code: 'rachelle_men_haircut',
+        code: 'rachelle_men_eventType',
         name: 'Men Haircut',
         category: 'rachelle_men',
         duration: 30,
         price: 25
     },
     {
-        code: 'rachelle_men_haircut_dye',
+        code: 'rachelle_men_eventType_dye',
         name: 'Men Haircut Dye',
         category: 'rachelle_men',
         duration: 50,

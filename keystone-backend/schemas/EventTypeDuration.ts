@@ -2,7 +2,7 @@ import {list} from "@keystone-6/core";
 import {allowAll} from "@keystone-6/core/access";
 import {integer, relationship, text} from "@keystone-6/core/fields";
 
-export const HaircutTypeDuration = list({
+export const EventTypeDuration = list({
     access: allowAll,
     ui: {
         listView: {
@@ -18,9 +18,9 @@ export const HaircutTypeDuration = list({
                 isRequired: true,
             },
         }),
-        haircutType: relationship({
-            ref: 'HaircutType.hairdresserDuration',
+        eventType: relationship({
+            ref: 'EventType.eventHostDuration',
         }),
-        hairdresser: relationship({ ref: 'Hairdresser.haircutTypeDurations' })
+        eventHost: relationship({ ref: 'EventHost.eventTypeDurations' })
     }
 })

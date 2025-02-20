@@ -1,6 +1,6 @@
-replace sample-data/hairdresser by sample-data/hairdresser
+replace sample-data/eventHost by sample-data/eventHost
 then run seed-data script
 
 //this.venueHolidayCreator.createAllOutletHolidays()
-//this.haircutTypeCreator.createAllHaircutTypes()
-//this.hairdresserHolidayCreator.createAllHairdresserHolidays()
+//this.eventTypeCreator.createAllEventTypes()
+//this.eventHostHolidayCreator.createAllEventHostHolidays()

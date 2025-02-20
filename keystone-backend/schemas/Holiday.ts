@@ -36,7 +36,7 @@ export const Holiday = list({
             ],
         }),
         staff: relationship({
-            ref: 'Hairdresser.holidays',
+            ref: 'EventHost.holidays',
             ui: {
                 itemView: { fieldMode: 'read' },
             },

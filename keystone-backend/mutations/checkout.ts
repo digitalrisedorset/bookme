@@ -38,7 +38,7 @@ async function checkout(
               id
               quantity   
               price
-              haircut {
+              eventType {
                 name
               }
               shampoo
@@ -46,7 +46,7 @@ async function checkout(
                 id
                 day
                 startTime              
-                hairdresser {
+                eventHost {
                   id            
                   name
                 }                                  
@@ -76,8 +76,8 @@ async function checkout(
     // 4. Convert the cartItems to OrderItems
     const orderItems = cartItems.map(cartItem => {
         const orderItem = {
-            name: itemName(cartItem), //`${capitalise(cartItem.event.day)} ${cartItem.haircut.name}`,
-            description: itemDescription(cartItem),//`${getFormattedDate(cartItem.event.startTime)} with ${capitalise(cartItem.event.hairdresser.name)} for a ${cartItem.haircut.name}`,
+            name: itemName(cartItem), //`${capitalise(cartItem.event.day)} ${cartItem.eventType.name}`,
+            description: itemDescription(cartItem),//`${getFormattedDate(cartItem.event.startTime)} with ${capitalise(cartItem.event.eventHost.name)} for a ${cartItem.eventType.name}`,
             price: cartItem.price,
             quantity: cartItem.quantity,
             event: { connect: { id: cartItem.event.id }}

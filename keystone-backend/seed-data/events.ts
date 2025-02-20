@@ -1,12 +1,12 @@
 import {EventProps} from "./types";
 import { VenueCreator } from "./events/venue";
-import { HaircutTypeCreator } from "./events/haircutType";
-import { HaircutTypeGroupCreator } from "./events/haircutTypeGroup"
+import { EventTypeCreator } from "./events/eventType";
+import { EventTypeGroupCreator } from "./events/eventTypeGroup"
 import { DateFinder } from "./events/dateFinder";
 import type { KeystoneContext } from "@keystone-6/core/src/types";
-import { HairdresserCreator } from "./events/hairdresser";
+import { EventHostCreator } from "./events/eventHost";
 import {getHour, getMinutes, getTime, getTimeFromMinutes} from "../lib/date";
-import {HolidayHairdresserCreator, HolidayOutletCreator, HolidayValidator} from "./events/holiday";
+import {HolidayEventHostCreator, HolidayOutletCreator, HolidayValidator} from "./events/holiday";
 import {event} from "./sample-data/event";
 import {CustomerCreator} from "./events/customer";
 import {
@@ -21,12 +21,12 @@ import {
 export class EventCreator {
     private venueCreator: VenueCreator
     private venueHolidayCreator: HolidayOutletCreator
-    private haircutTypeCreator: HaircutTypeCreator
-    private haircutTypeGroupCreator: HaircutTypeGroupCreator
-    private hairdresserCreator: HairdresserCreator
+    private eventTypeCreator: EventTypeCreator
+    private eventTypeGroupCreator: EventTypeGroupCreator
+    private eventHostCreator: EventHostCreator
     private dateFinder: DateFinder
     private holidayValidator: HolidayValidator
-    private hairdresserHolidayCreator: HolidayHairdresserCreator
+    private eventHostHolidayCreator: HolidayEventHostCreator
     private customerCreator: CustomerCreator
     private context
     private data: EventProps[]
@@ -36,11 +36,11 @@ export class EventCreator {
         this.data = event
         this.venueCreator = new VenueCreator(context)
         this.venueHolidayCreator = new HolidayOutletCreator(context)
-        this.haircutTypeGroupCreator = new HaircutTypeGroupCreator(context)
+        this.eventTypeGroupCreator = new EventTypeGroupCreator(context)
         this.holidayValidator = new HolidayValidator(context)
-        this.haircutTypeCreator = new HaircutTypeCreator(context)
-        this.hairdresserCreator = new HairdresserCreator(context)
-        this.hairdresserHolidayCreator = new HolidayHairdresserCreator(context)
+        this.eventTypeCreator = new EventTypeCreator(context)
+        this.eventHostCreator = new EventHostCreator(context)
+        this.eventHostHolidayCreator = new HolidayEventHostCreator(context)
         this.customerCreator = new CustomerCreator(context)
         this.dateFinder = new DateFinder()
         switch (step) {
@@ -51,22 +51,22 @@ export class EventCreator {
                 this.venueHolidayCreator.createAllOutletHolidays()
                 break;
             case IMPORT_VENUE_HAIRCUT_GROUP: console.log('Import Venues Haircut Group')
-                this.haircutTypeGroupCreator.createAllHaircutGroupTypes()
+                this.eventTypeGroupCreator.createAllEventGroupTypes()
                 break;
             case IMPORT_HAIRCUT_TYPE: console.log('Import Venues Haircut Types')
-                this.haircutTypeCreator.createAllHaircutTypes()
+                this.eventTypeCreator.createAllEventTypes()
                 break;
-            case IMPORT_VENUE_HAIRDRESSER: console.log('Import Venues Hairdresser')
-                this.hairdresserCreator.createAllHairdresser()
+            case IMPORT_VENUE_HAIRDRESSER: console.log('Import Venues EventHost')
+                this.eventHostCreator.createAllEventHost()
                 break;
-            case IMPORT_VENUE_HAIRDRESSER_HOLIDAY: console.log('Import Hairdresser Holidays')
-                this.hairdresserHolidayCreator.createAllHairdresserHolidays()
+            case IMPORT_VENUE_HAIRDRESSER_HOLIDAY: console.log('Import EventHost Holidays')
+                this.eventHostHolidayCreator.createAllEventHostHolidays()
                 break;
             case IMPORT_CUSTOMER: console.log('Import Venue Customers')
                 this.customerCreator.createAllCustomer()
                 break;
-            case REPAIR_HAIRDRESSER: console.log('Repair Hairdresser without User')
-                this.hairdresserCreator.repairHairdresser()
+            case REPAIR_HAIRDRESSER: console.log('Repair EventHost without User')
+                this.eventHostCreator.repairEventHost()
                 break;
         }
     }
@@ -78,13 +78,13 @@ export class EventCreator {
     /*
     eg: 2025-12-17T07:54:37.760Z
      */
-    createEvent = async (venueId: string, hairdresserId: string, eventDate: string, day: string, startTime: string, endTime: string) => {
-        if (venueId !== undefined && hairdresserId !== undefined) {
+    createEvent = async (venueId: string, eventHostId: string, eventDate: string, day: string, startTime: string, endTime: string) => {
+        if (venueId !== undefined && eventHostId !== undefined) {
             //2025-02-18T09:00:00.101Z
-            const isHairdresserHoliday = await this.holidayValidator.isHairdresserOnHoliday(hairdresserId, eventDate, startTime, endTime)
+            const isEventHostHoliday = await this.holidayValidator.isEventHostOnHoliday(eventHostId, eventDate, startTime, endTime)
             const isVenueHoliday = await this.holidayValidator.isVenueOnHoliday(venueId, eventDate, startTime, endTime)
 
-            if (isHairdresserHoliday || isVenueHoliday) return
+            if (isEventHostHoliday || isVenueHoliday) return
 
             await this.context.query.Event.createOne({
                 data: {
@@ -92,7 +92,7 @@ export class EventCreator {
                     startTime: this.concatDateTime(eventDate, startTime),
                     endTime: this.concatDateTime(eventDate, endTime),
                     venue: { connect: { id: venueId } },
-                    hairdresser: { connect: { id: hairdresserId } }
+                    eventHost: { connect: { id: eventHostId } }
                 },
                 query: 'id',
             })
@@ -117,7 +117,7 @@ export class EventCreator {
 
     createEventForYear = async (event: EventProps) => {
         const venue = await this.venueCreator.getVenueByCode(event.venue)
-        const hairdresser = await this.hairdresserCreator.getHairdresserByCode(event.hairdresser)
+        const eventHost = await this.eventHostCreator.getEventHostByCode(event.eventHost)
 
         const eventDates = this.dateFinder.getDatesByDay(event.day, 2025)
 
@@ -127,12 +127,12 @@ export class EventCreator {
              // end time = 7:23
              let endTimeMinutes = (startTimeMinutes + event.duration + event.breakTime)
 
-             if (hairdresser?.id == '') continue
+             if (eventHost?.id == '') continue
 
              while (endTimeMinutes <= getHour(event.endTime, 17) * 60) {
                 this.createEvent(
                     venue?.id,
-                    hairdresser?.id,
+                    eventHost?.id,
                     eventDates[i],
                     event.day,
                     getTimeFromMinutes(startTimeMinutes),
@@ -155,7 +155,7 @@ export class EventCreator {
 
     createAllEvents = async () => {
         for (const event: EventProps of this.data) {
-            console.log('create event for hairdresser', event.hairdresser)
+            console.log('create event for eventHost', event.eventHost)
             await this.createEventForYear(event)
             //break
         }
