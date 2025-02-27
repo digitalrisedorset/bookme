@@ -29,6 +29,7 @@ export interface VenuePreference {
     scheduleWeekSpan: number,
     offerShampoo: boolean,
     logo: string,
+    showPrice: string,
     intro: ImageResponsiveType,
     order: ImageResponsiveType,
     themeColors: ThemeColors
@@ -58,6 +59,7 @@ export type configInfo = {
         doggiemadhouse: VenuePreference
         poolerugby: VenuePreference
         datemate: VenuePreference
+        digitalrisedorset: VenuePreference
     }
 }
 
@@ -87,6 +89,7 @@ export const config: configInfo = {
             scheduleWeekSpan: 4,
             offerShampoo: false,
             logo: 'book-harry.png',
+            showPrice: true,
             intro: {
                 img: {
                     src: 'harry-barber.png',
@@ -130,6 +133,7 @@ export const config: configInfo = {
             scheduleWeekSpan: 14,
             offerShampoo: false,
             logo: 'book-doggie.png',
+            showPrice: true,
             intro: {
                 img: {
                     src: 'doggie-madhouse.jpg',
@@ -173,6 +177,7 @@ export const config: configInfo = {
             scheduleWeekSpan: 14,
             offerShampoo: false,
             logo: 'book-poolerugby.png',
+            showPrice: false,
             intro: {
                 img: {
                     src: 'homeintro-poolerugby.png',
@@ -216,6 +221,7 @@ export const config: configInfo = {
             scheduleWeekSpan: 2,
             offerShampoo: false,
             logo: 'date-mate-logo.png',
+            showPrice: false,
             intro: {
                 img: {
                     src: 'date-mate-intro.png',
@@ -251,6 +257,50 @@ export const config: configInfo = {
                 buttonColor: 'white'
             }
         },
+        digitalrisedorset: {
+            code: 'digital-rise-dorset',
+            route: 'digitalrisedorset',
+            showEventHostOnEvent: false,
+            timeBase: 'day',
+            scheduleWeekSpan: 4,
+            offerShampoo: false,
+            logo: 'drd-logo.png',
+            showPrice: false,
+            intro: {
+                img: {
+                    src: 'date-mate-intro.png',
+                    width: 375,
+                    height: 150,
+                },
+                largeImg: {
+                    src: 'digitalrisedorset-intro-large.png',
+                    width: 750,
+                    height: 300,
+                },
+                alt: 'Digital Rise Dorset Office in Dorset'
+            },
+            order: {
+                img: {
+                    src: 'orderplaceholder-harry.jpg',
+                    width: 378,
+                    height: 378,
+                },
+                largeImg: {
+                    src: 'orderplaceholder-harry.jpg',
+                    width: 375,
+                    height: 378,
+                },
+                alt: 'View your order at Harry Barber'
+            },
+            themeColors: {
+                red: '#D29979',
+                pastel: '#8ed1fc',
+                headerBgColour: 'lightgrey',
+                navBgColour: 'pastel',
+                buttonBg: 'mediumgrey',
+                buttonColor: 'white'
+            }
+        },
         rachelle: {
             code: 'rachelle-hairdressing',
             route: 'rachelle',
@@ -259,6 +309,7 @@ export const config: configInfo = {
             scheduleWeekSpan: 14,
             offerShampoo: true,
             logo: 'book-purple.png',
+            showPrice: true,
             intro: {
                 img: {
                     src: 'rachelle-beaudry-small.png',
@@ -302,6 +353,7 @@ export const config: configInfo = {
             scheduleWeekSpan: 14,
             offerShampoo: true,
             logo: 'book3.png',
+            showPrice: true,
             intro: {
                 img: {
                     src: 'miaddison.jpg',

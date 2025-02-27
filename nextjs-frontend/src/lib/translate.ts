@@ -20,6 +20,14 @@ export const tr = (text: string, venue: string) => {
             if (text === 'Not a working day') text = 'No event'
             if (text === 'Book') text = 'Call team'
             break;
+        case 'digital-rise-dorset':
+            if (text === 'What eventType type do you need?') text = 'How do you want to meet?'
+            if (text === 'EventType') text = 'Meeting Type'
+            if (text === 'eventType') text = 'Appointment'
+            if (text === 'EventHost') text = 'Appointment Host'
+            if (text === 'Not a working day') text = 'No availability'
+            if (text === 'In Cart!') text = 'Invite Sent'
+            break;
     }
     return text
 }

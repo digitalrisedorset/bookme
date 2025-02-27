@@ -60,10 +60,10 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
                 <span className="label">End Time</span>
                 <span className="title">{getTime(endTime)}</span>
             </EventRow>
-            <EventRow>
+            {config.showPrice && <EventRow>
                 <span className="label">Price</span>
                 <span className="price">{formatMoney(price)}</span>
-            </EventRow>
+            </EventRow>}
             <AddToCart id={eventState.activeEventId || ''}>Book Now</AddToCart>
         </ViewGroupEventStyle>
     )

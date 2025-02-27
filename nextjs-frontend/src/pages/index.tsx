@@ -5,6 +5,7 @@ import IntroBlushHarry from "@/components/venue/components/IntroBlushHarry";
 import IntroDoggieMadhouse from "@/components/venue/components/IntroDoggieMadhouse";
 import IntroDateMate from "@/components/venue/components/IntroDateMate";
 import IntroPooleRugby from "@/components/venue/components/IntroPooleRugby";
+import IntroDigitalRiseDorset from "@/components/venue/components/IntroDigitalRiseDorset";
 
 export default function Home() {
     const config = useConfig()
@@ -17,6 +18,7 @@ export default function Home() {
             {config.route === 'blushharry' &&<IntroBlushHarry />}
             {config.route === 'doggiemadhouse' &&<IntroDoggieMadhouse />}
             {config.route === 'datemate' &&<IntroDateMate />}
+            {config.route === 'digitalrisedorset' &&<IntroDigitalRiseDorset />}
         </>
     );
 }

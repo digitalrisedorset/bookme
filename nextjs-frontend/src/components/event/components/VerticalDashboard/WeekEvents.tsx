@@ -9,7 +9,7 @@ interface ListingProps {
     events: KeystoneEvent[]
 }
 
-export const {WeekEvents: React.FC<ListingProps> = ({events}: ListingProps) => {
+export const WeekEvents: React.FC<ListingProps> = ({events}: ListingProps) => {
     const user = useUser()
 
     if (!user) return null

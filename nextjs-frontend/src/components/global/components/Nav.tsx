@@ -22,7 +22,7 @@ export const Nav: React.FC = () => {
                     <HairddresserNav />
                     <CustomerNav />
                     <SignOut/>
-                    {!user?.role?.isEventHost && <button type="button" onClick={toggleCart}>
+                    {config.showPrice && !user?.role?.isEventHost && <button type="button" onClick={toggleCart}>
                         Cart
                         <CartCount count={user.cartItems.reduce(
                             (tally, cartItem) => tally + cartItem.quantity, 0

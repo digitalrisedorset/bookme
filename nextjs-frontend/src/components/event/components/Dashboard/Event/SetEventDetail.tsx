@@ -6,6 +6,8 @@ import {ViewButton} from "@/components/global/styles/ItemStyles";
 import {getTime} from "@/lib/date";
 import {useEventState} from "@/state/EventState";
 import {groupEventStatus} from "@/lib/groupEvent";
+import {tr} from "@/lib/translate";
+import {useVenueConfigState} from "@/state/VenueConfigState";
 
 interface EventProps {
     eventGroup: DayGroupEvent
@@ -13,6 +15,7 @@ interface EventProps {
 
 export const SetEventDetail: React.FC<EventProps> = ({eventGroup}: EventProps) => {
     const {resetActiveEvent} = useEventState()
+    const {activeVenue} = useVenueConfigState()
     const router = useRouter()
     const user = useUser()
 
@@ -30,7 +33,7 @@ export const SetEventDetail: React.FC<EventProps> = ({eventGroup}: EventProps) =
                 <p>Done!</p>
             </div>
             <div className="in-cart">
-                <p>In Cart!</p>
+                <p>{tr('In Cart!', activeVenue)}</p>
             </div>
             <div className="ordered">
                 <p>Booked!</p>

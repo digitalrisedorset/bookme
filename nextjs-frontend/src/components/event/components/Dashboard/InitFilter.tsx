@@ -22,7 +22,7 @@ export const InitFilter: React.FC = () => {
         <ViewEventStyle>
             <h5>Let&apos;s make this booking easy</h5>
             {preferenceStep==='Week' &&<EventRow>
-                <span className="label">When do you need your eventType?</span>
+                <span className="label">When do you need your {tr('eventType', activeVenue)}?</span>
                 <WeekPreference />
             </EventRow>}
             {preferenceStep==='EventTypeGroup' &&<EventRow>
