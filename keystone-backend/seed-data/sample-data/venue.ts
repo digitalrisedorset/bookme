@@ -1,5 +1,11 @@
 export const venue = [
     {
+        code: 'digital-rise-dorset',
+        name: 'Digital Rise Dorset',
+        orderPrefix: 'DRD',
+        orderPadding: 5
+    },
+    {
         code: 'paddington-hairdressing',
         name: 'Paddington Hairdressing',
         orderPrefix: 'PAD',

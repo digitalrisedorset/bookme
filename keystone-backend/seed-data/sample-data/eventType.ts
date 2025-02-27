@@ -1,4 +1,26 @@
 export const eventType = [
+    // Digital Rise Dorset
+    {
+        code: 'digitalrisedorset_casual',
+        name: 'Casual Meeting',
+        category: 'digitalrisedorset_business',
+        duration: 15,
+        price: 0
+    },
+    {
+        code: 'digitalrisedorset_workday',
+        name: 'Business Meeting',
+        category: 'digitalrisedorset_business',
+        duration: 30,
+        price: 0
+    },
+    {
+        code: 'digitalrisedorset_training',
+        name: 'Training Event',
+        category: 'digitalrisedorset_business',
+        duration: 120,
+        price: 0
+    },
     // Date Mate
     {
         code: 'datemate_casual_coffee',

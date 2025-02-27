@@ -1,4 +1,15 @@
 export const eventTypeGroup = [
+    // Digital Rise Dorset
+    {
+        code: 'digitalrisedorset_business',
+        name: 'Business Meeting',
+        venue: 'digital-rise-dorset',
+    },
+    {
+        code: 'digitalrisedorset_social',
+        name: 'Social Meeting',
+        venue: 'digital-rise-dorset',
+    },
     // Date Mate
     {
         code: 'datemate_valentine',

@@ -57,7 +57,7 @@ export const getTimeFromISO = (time: string) => {
     if (hour.length === 1) {
         hour = "0" + hour.toString();
     }
-    return `${getDateWithoutTime(date)} ${hour}:${min}`
+    return `${hour}:${min}`
 }
 
 export const getFormattedDate = (date: string) => {

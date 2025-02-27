@@ -1,4 +1,10 @@
 export const customer = [
+    // Digital Rise Dorset
+    {
+        code: 'timfudge',
+        name: 'Tim Fudge',
+        venue: 'digital-rise-dorset',
+    },
     // Madisson
     {
         code: 'chantale',

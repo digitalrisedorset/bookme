@@ -1,5 +1,3 @@
-import {getTimeFromISO} from "./date";
-
 export const getEventEndTime = (duration: number, breakTime: number, startTime: string, shampoo: boolean, eventHostLevel: string): string => {
     let time = duration + breakTime
 

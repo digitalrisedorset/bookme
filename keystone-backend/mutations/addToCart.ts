@@ -4,6 +4,12 @@ import type {Session} from "../schema";
 import calculatePrice from "./calculatePrice";
 import calculateEventDuration from "./calculateEventDuration";
 import updateEventAndRemoveOverlappingEvent from "./removeOverlappingEvent";
+import {sendEmail} from "../lib/mail";
+import {getFormattedDate, getTimeFromISO} from "../lib/date";
+import {capitalise} from "../lib/string";
+import freecheckout from "./freecheckout";
+
+const graphql = String.raw;
 
 async function addToCart(
   root: any,
@@ -55,6 +61,10 @@ async function addToCart(
   })
 
   const removeEventIds = await updateEventAndRemoveOverlappingEvent(root, {eventId, endTime}, context)
+
+  if (price === 0) { // send an email confirming the appointment is received
+    await freecheckout(root, context)
+  }
 
   return removeEventIds
 }

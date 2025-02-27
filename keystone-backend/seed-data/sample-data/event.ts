@@ -1,4 +1,55 @@
 export const event = [
+    // Herve
+    {
+        venue: 'digital-rise-dorset',
+        day: 'monday',
+        startTime: '9:00',
+        endTime: '17:30',
+        status: 'open',
+        eventHost: 'herve',
+        duration: 30,
+        breakTime: 5
+    },
+    {
+        venue: 'digital-rise-dorset',
+        day: 'tuesday',
+        startTime: '9:00',
+        endTime: '11:00',
+        status: 'open',
+        eventHost: 'herve',
+        duration: 30,
+        breakTime: 5
+    },
+    {
+        venue: 'digital-rise-dorset',
+        day: 'wednesday',
+        startTime: '9:00',
+        endTime: '17:30',
+        status: 'open',
+        eventHost: 'herve',
+        duration: 30,
+        breakTime: 5
+    },
+    {
+        venue: 'digital-rise-dorset',
+        day: 'thursday',
+        startTime: '9:00',
+        endTime: '17:30',
+        status: 'open',
+        eventHost: 'herve',
+        duration: 30,
+        breakTime: 5
+    },
+    {
+        venue: 'digital-rise-dorset',
+        day: 'friday',
+        startTime: '9:00',
+        endTime: '11:00',
+        status: 'open',
+        eventHost: 'herve',
+        duration: 30,
+        breakTime: 5
+    },
     //Romeo
     {
         venue: 'date-mate',

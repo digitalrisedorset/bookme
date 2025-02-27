@@ -1,4 +1,12 @@
 export const eventHost = [
+    // Digital Rise Dorset
+    {
+        code: 'herve',
+        name: 'Herve',
+        level: 'senior',
+        eventTypeSpeciality: ['digitalrisedorset_business', 'digitalrisedorset_social'],
+        venue: 'digital-rise-dorset',
+    },
     // Date Mate
     {
         code: 'romeo',
