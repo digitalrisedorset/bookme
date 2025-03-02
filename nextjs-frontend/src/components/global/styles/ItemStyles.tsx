@@ -1,5 +1,12 @@
 import styled from 'styled-components';
-import {BOOKED_EVENT, EventStatus, PAST_EVENT, PURCHASED_EVENT, WALKIN_EVENT} from "@/components/event/types/event";
+import {
+    BOOKED_EVENT,
+    EventStatus,
+    PAST_EVENT,
+    PURCHASED_EVENT,
+    UNAVAILABLE_EVENT,
+    WALKIN_EVENT
+} from "@/components/event/types/event";
 
 interface StyleProps {
     required?: boolean;
@@ -145,6 +152,24 @@ export const SingleScheduleEvent = styled.div<EventProps>`
         margin: 0 1rem;
         text-align: center;
 
+        p {
+            position: absolute;
+            transform: skew(-20deg) rotate(-10deg);
+            top: 10px;
+            left: 60px;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+            background: var(--red);
+            font-size:1rem;
+            color: white;
+            padding: 0 5px;
+            z-index: 3;
+        }
+    },
+    .unavailable {
+        visibility: ${(props) => (props.status !== UNAVAILABLE_EVENT) && `hidden`};
+        margin: 0 1rem;
+        text-align: center;
+    
         p {
             position: absolute;
             transform: skew(-20deg) rotate(-10deg);
@@ -484,8 +509,7 @@ export const ViewButton = styled.div<EventProps>`
 
 export const BookButton = styled.div<EventProps>`
     position: relative;
-    width: 300px;
-    margin-left: 30%;
+    margin: 10px;
      .in-cart {
          visibility: ${(props) => props.status !== BOOKED_EVENT && `hidden;`};
          p {
@@ -542,5 +566,9 @@ export const ViewGroupEventStyle= styled.div<EventStatusProps>`
         label {
             padding: 5px;
         }
+    }
+    .actions {
+        display: flex;
+        margin-left: 30%;
     }
 `

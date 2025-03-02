@@ -29,7 +29,7 @@ export interface VenuePreference {
     scheduleWeekSpan: number,
     offerShampoo: boolean,
     logo: string,
-    showPrice: string,
+    showPrice: boolean,
     intro: ImageResponsiveType,
     order: ImageResponsiveType,
     themeColors: ThemeColors
@@ -268,7 +268,7 @@ export const config: configInfo = {
             showPrice: false,
             intro: {
                 img: {
-                    src: 'date-mate-intro.png',
+                    src: 'digitalrisedorset-intro.png',
                     width: 375,
                     height: 150,
                 },

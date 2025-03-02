@@ -101,10 +101,15 @@ export interface EventHost {
 
 export const WALKIN = 'walkin'
 
+export const BUSY = 'unavailable'
+
 export const AVAILABLE = 'open'
 
 export const PAST_EVENT = 'pastevent'
 export const WALKIN_EVENT = 'walkin'
+
+export const UNAVAILABLE_EVENT= 'unavailable'
+
 export const BOOKED_EVENT = 'incart'
 
 export const PREFERENCE_RESET = 'reset'

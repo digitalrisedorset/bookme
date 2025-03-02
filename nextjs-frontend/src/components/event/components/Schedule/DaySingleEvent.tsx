@@ -31,12 +31,15 @@ export const DaySingleEvent: React.FC<ListingProps> = ({event}: ListingProps) =>
         <div className="walk-in">
             <p>Walk In!</p>
         </div>
-        {eventStatus(event) === PURCHASED_EVENT &&<ViewButton>
+        <div className="unavailable">
+            <p>Busy</p>
+        </div>
+        {eventStatus(event) === PURCHASED_EVENT && <ViewButton>
             <button className="view-detail" type="button" onClick={viewDetail}>
                 View
             </button>
         </ViewButton>}
-        {eventStatus(event) === AVAILABLE  && <ViewButton>
+        {eventStatus(event) === AVAILABLE && <ViewButton>
             <button className="view-detail" type="button" onClick={bookEvent}>
                 Book
             </button>

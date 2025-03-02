@@ -34,7 +34,7 @@ export const useScheduleFilter = () => {
 
     }
 
-    filter['eventHost'] = { "id": { "equals": user.eventHost.id } }
+    filter['eventHost'] = { "id": { "equals": user.eventHost?.id as string } }
 
     return filter
 }

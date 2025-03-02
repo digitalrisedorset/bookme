@@ -3,17 +3,17 @@ import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {BookButton} from "@/components/global/styles/ItemStyles";
 import {useRouter} from "next/router";
 import {Loading} from "@/components/global/components/Loading";
-import {useWalkIn} from "@/components/event/graphql/useChangeEventAvailability";
+import {useSetAsBusy} from "@/components/event/graphql/useChangeEventAvailability";
 
-interface WalkInProps {
+interface SetAsBusyProps {
     id: string
     children: React.ReactNode
 }
 
-export const WalkIn: React.FC<WalkInProps> = ({id}: WalkInProps) => {
+export const SetAsBusy: React.FC<SetAsBusyProps> = ({id}: SetAsBusyProps) => {
     const user = useUser()
     const router = useRouter()
-    const [updateEvent, { loading }] = useWalkIn(id)
+    const [updateEvent, { loading }] = useSetAsBusy(id)
 
     if (loading) return <Loading />
     if (!user) return null;
@@ -27,7 +27,7 @@ export const WalkIn: React.FC<WalkInProps> = ({id}: WalkInProps) => {
     return (
         <BookButton>
             <button className="add-to-cart" type="button" onClick={handleClick}>
-                Walk-In 🛒
+                Set Busy
             </button>
         </BookButton>
     );

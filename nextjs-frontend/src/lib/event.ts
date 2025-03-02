@@ -1,7 +1,7 @@
 import {
-    AVAILABLE, EventShare,
+    AVAILABLE, BUSY, EventShare,
     EventStatus, KeystoneEvent,
-    PAST_EVENT, PURCHASED_EVENT,
+    PAST_EVENT, PURCHASED_EVENT, UNAVAILABLE_EVENT,
     WALKIN,
     WALKIN_EVENT
 } from "@/components/event/types/event";
@@ -25,6 +25,10 @@ export const eventStatus = (event: EventShare): EventStatus => {
 
     if (event.status === WALKIN) {
         return WALKIN_EVENT
+    }
+
+    if (event.status === BUSY) {
+        return UNAVAILABLE_EVENT
     }
 
     if (event.orderItem !== null) {

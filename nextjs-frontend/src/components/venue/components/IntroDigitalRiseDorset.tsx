@@ -12,8 +12,8 @@ const IntroDigitalRiseDorset: React.FC = () => {
             <div className="content">
                 <h2>Digital Rise Dorset Schedule</h2>
                 <Feedback />
-                <p className="general">Welcome to Herve's schedule system</p>
-                <p className="ethos">Book him for an business meeting or a casual discussion
+                <p className="general">Welcome to Herve&rsquo;s Calendar</p>
+                <p className="ethos">Book me for a business meeting or a casual discussion
                 </p>
             </div>
             <div className="illustration">
