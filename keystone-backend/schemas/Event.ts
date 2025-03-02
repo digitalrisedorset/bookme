@@ -45,6 +45,7 @@ export const Event = list({
             type: 'enum',
             options: [
                 { label: 'Open', value: 'open' },
+                { label: 'Unavailable', value: 'unavailable' },
                 { label: 'Started', value: 'started' },
                 { label: 'Complete', value: 'complete' },
                 { label: 'Missed', value: 'missed' },

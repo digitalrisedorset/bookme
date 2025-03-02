@@ -43,7 +43,7 @@ export default withAuth<TypeInfo<Session>>(
             extendGraphqlSchema
         },
         ui: {
-           /* isAccessAllowed: ()=> true,*/
+            /*isAccessAllowed: ()=> true,*/
             // only admins can view the AdminUI
             isAccessAllowed: (context) => {
                 return context.session?.data?.isAdmin ?? false
