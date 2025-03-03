@@ -1,11 +1,11 @@
 import {getDayTimeEnd} from "@/lib/date";
-import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useEventHosts} from "@/components/eventHost/hooks/useEventHosts";
 import {EventFilterKeys, EventType, EventHost} from "@/components/event/types/event";
 import {useVenue} from "@/components/venue/hooks/useVenue";
+import {useUserPreferenceState} from "@/state/UserPreference";
 
 export const useFilter = () => {
-    const user = useUser()
+    const {userPreference} = useUserPreferenceState()
     const {data} = useEventHosts()
     const venue = useVenue()
 
@@ -14,11 +14,11 @@ export const useFilter = () => {
     //     "equals": AVAILABLE
     // }
 
-    if (user === undefined) {
+    if (userPreference === undefined) {
         return filter
     }
 
-    if (user.weekPreference === "") {
+    if (userPreference.weekPreference === "") {
         return filter
     }
 
@@ -28,8 +28,8 @@ export const useFilter = () => {
         }
     }
 
-    if (user.weekPreference !== "") {
-        const weekStart = user.weekPreference
+    if (userPreference.weekPreference !== "") {
+        const weekStart = userPreference.weekPreference
         const weekStartDate = new Date(weekStart)
         const endWeek = getDayTimeEnd(new Date(weekStartDate.setDate(weekStartDate.getDate()+7)))
 
@@ -41,19 +41,19 @@ export const useFilter = () => {
         }
     }
 
-    if (user.eventType !== undefined) {
-        const eventHostIds = getEventHostIdsForEventType(user?.eventType, data?.eventHosts)
+    if (userPreference.eventTypeId !== null) {
+        const eventHostIds = getEventHostIdsForEventType(userPreference?.eventTypeId, data?.eventHosts)
         filter['eventHost'] = { "id": { "in": eventHostIds } }
     }
 
     return filter
 }
 
-const getEventHostIdsForEventType = (eventType: EventType, eventHosts: EventHost[]) => {
+const getEventHostIdsForEventType = (eventTypeId: string, eventHosts: EventHost[]) => {
     const isEventHostDoingEventType = (item: EventHost): boolean => {
         if (item?.eventTypes === undefined) return false
 
-        const match = item.eventTypes.filter((eventType: EventType) => eventType.id === eventType?.id)
+        const match = item.eventTypes.filter((eventType: EventType) => eventType.id === eventTypeId)
         return match?.length>0
     }
 

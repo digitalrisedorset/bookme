@@ -6,18 +6,14 @@ import React from "react";
 import {useEventTypeGroups} from "@/components/event/hooks/useEventTypeGroups";
 import {getUserPreferenceVariables} from "@/components/user-authentication/lib/user-preference";
 import {EventTypeGroup} from "@/components/event/types/event";
+import {useUserPreferenceState} from "@/state/UserPreference";
 
 export const EventTypeGroupFilter: React.FC = () => {
     const {data} = useEventTypeGroups()
-    const user = useUser()
-    const [updateUserPreference] = useWeekPreference()
-
-    if (user?.id === undefined) return
+    const {setEventTypeGroup, userPreference} = useUserPreferenceState()
 
     const onEventTypeGroupChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-        await updateUserPreference({
-            variables: getUserPreferenceVariables(user.id, {'eventTypeGroup': e.target.value})
-        })
+        setEventTypeGroup(e.target.value)
     };
 
     if (data?.venueEventTypeGroups.length === 1) return null
@@ -26,7 +22,7 @@ export const EventTypeGroupFilter: React.FC = () => {
         <VenueStyle>
             <fieldset>
                 <Label>Appointment Type</Label>
-                <select onChange={onEventTypeGroupChange} className="form-select" value={user?.eventTypeGroup?.id}>
+                <select onChange={onEventTypeGroupChange} className="form-select" value={userPreference?.eventTypeGroupId}>
                     <option value="">-</option>
                     {data?.venueEventTypeGroups.map((item: EventTypeGroup) => {
                         return (<option key={item.name} value={item.id}>{item.name}</option>)

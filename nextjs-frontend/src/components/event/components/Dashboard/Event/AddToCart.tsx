@@ -34,12 +34,15 @@ export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
         return true
     }
 
-    if (!user) return null;
-
     async function handleClick(e: React.FormEvent) {
         e.preventDefault(); // stop the form from submitting
         if (id === '') {
             alert('Select a eventHost for your appointment')
+        }
+
+        if (user === null) {
+            router.push({pathname: '/signin'})
+            return
         }
 
         await addToCart().catch(console.error);

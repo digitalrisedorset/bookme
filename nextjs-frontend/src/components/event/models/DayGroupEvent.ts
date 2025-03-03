@@ -8,7 +8,7 @@ export class DayGroupEventHandler {
 
     private user: UserInformation
 
-    constructor(time: string, user: UserInformation) {
+    constructor(time: string, user?: UserInformation) {
         this.groupEvent = {
             name: '',
             day: '',

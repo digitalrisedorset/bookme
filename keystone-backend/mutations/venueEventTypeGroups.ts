@@ -7,12 +7,6 @@ async function venueEventTypeGroups(
     { venueId }: { venueId: string },
     context: Context
 ): Promise<[EventTypeGroup!]> {
-    // 1. Query the current user see if they are signed in
-    const sesh = context.session as Session;
-    if (!sesh.itemId) {
-        throw new Error('You must be logged in to do this!');
-    }
-
     const eventTypeGroups = await context.query.EventTypeGroup.findMany({
         where: {
             venue: { id: {"equals": venueId }},

@@ -1,6 +1,7 @@
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
+import {useUserPreferenceState} from "@/state/UserPreference";
 
 const HAIRCUT_TYPE_QUERY = gql`
     query EventTypes($where: EventTypeWhereInput!, $orderBy: [EventTypeOrderByInput!]!) {
@@ -12,14 +13,14 @@ const HAIRCUT_TYPE_QUERY = gql`
 `;
 
 export const useEventTypes = () => {
-    const user = useUser()
+    const {userPreference} = useUserPreferenceState()
 
     const eventTypesData = useQuery(HAIRCUT_TYPE_QUERY, {
         variables: {
             "where": {
                 "group": {
                     "id": {
-                        "equals": user?.eventTypeGroup?.id
+                        "equals": userPreference?.eventTypeGroupId
                     }
                 }
             },

@@ -1,4 +1,4 @@
-import NavStyles from "@/components/global/styles/NavStyles";
+import {NavStyles} from "@/components/global/styles/NavStyles";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useCart} from "@/state/CartState";
 import Link from "next/link";

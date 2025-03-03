@@ -17,9 +17,6 @@ export const SetEventDetail: React.FC<EventProps> = ({eventGroup}: EventProps) =
     const {resetActiveEvent} = useEventState()
     const {activeVenue} = useVenueConfigState()
     const router = useRouter()
-    const user = useUser()
-
-    if (!user) return null
 
     const viewDetail = (e: React.FormEvent) => {
         e.preventDefault();

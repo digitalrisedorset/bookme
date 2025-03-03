@@ -1,13 +1,13 @@
-import {UserInformation} from "@/components/user-authentication/hooks/useUser";
+import {UserPreferenceInfoState} from "@/state/UserPreference";
 
 export type UserPreference = 'EventTypeGroup' | 'EventType' | 'Week' | (string & {})
 
-export const getUserPreferenceStep = (user: UserInformation): UserPreference => {
-    if (user?.eventTypeGroup === null) {
+export const getUserPreferenceStep = (userPreference: UserPreferenceInfoState): UserPreference => {
+    if (userPreference?.eventTypeGroupId === null) {
         return 'EventTypeGroup'
     }
 
-    if (user?.eventType === null) {
+    if (userPreference?.eventTypeId === null) {
         return 'EventType'
     }
 

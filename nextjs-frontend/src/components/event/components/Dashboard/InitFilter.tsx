@@ -4,19 +4,17 @@ import {WeekPreference} from "@/components/event/components/Dashboard/EventPrefe
 import {
     EventTypeGroupPreference
 } from "@/components/event/components/Dashboard/EventPreference/EventTypeGroupReference";
-import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {getUserPreferenceStep} from "@/lib/user";
 import {EventTypePreference} from "@/components/event/components/Dashboard/EventPreference/EventTypePreference";
 import {tr} from "@/lib/translate";
 import {useVenueConfigState} from "@/state/VenueConfigState";
+import {useUserPreferenceState} from "@/state/UserPreference";
 
 export const InitFilter: React.FC = () => {
-    const user = useUser()
+    const {userPreference} = useUserPreferenceState()
     const {activeVenue} = useVenueConfigState()
 
-    if (user === undefined) return
-
-    const preferenceStep = getUserPreferenceStep(user)
+    const preferenceStep = getUserPreferenceStep(userPreference)
 
     return (
         <ViewEventStyle>

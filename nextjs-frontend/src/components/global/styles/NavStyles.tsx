@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {StyleProps} from "@/components/global/styles/Global";
 
-const NavStyles = styled.menu<StyleProps>`
+export const NavStyles = styled.menu<StyleProps>`
     background-color: var(--${(props: StyleProps): string => props.colors?.navBgColour?props.colors?.navBgColour:'#595f39' });
     color: #fff;
     grid-column: 2 / -1;
@@ -53,5 +53,15 @@ const NavStyles = styled.menu<StyleProps>`
     }
 `;
 
-
-export default NavStyles;
+export const CalendarStyles = styled.div`
+    a, button {
+        display: inline-block;
+        font-size: 16px;
+        background-color: var(--mediumgrey);
+        border: none;
+        cursor: pointer;
+        color: white;
+        padding: 8px 12px;
+        text-decoration: none;
+    }
+`

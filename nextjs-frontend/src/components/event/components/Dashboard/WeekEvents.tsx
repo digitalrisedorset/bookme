@@ -14,8 +14,6 @@ interface ListingProps {
 export const WeekEvents: React.FC<ListingProps> = ({events}: ListingProps) => {
     const user = useUser()
 
-    if (!user) return null
-
     return (<WeekEventList>
         {getDays().map((day: DaysType) => {
             const dayEventHandler = new DayEventHandler(day);

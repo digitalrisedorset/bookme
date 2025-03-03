@@ -1,4 +1,5 @@
 export const tr = (text: string, venue: string) => {
+    console.log('venue', venue)
     switch (venue) {
         case 'date-mate':
             if (text === 'What eventType type do you need?') text = 'What date type do you fancy?'
@@ -8,6 +9,7 @@ export const tr = (text: string, venue: string) => {
             if (text === 'Not a working day') text = 'No availability'
             break;
         case 'rachelle-hairdressing':
+        case 'paddington-hairdressing':
             if (text === 'What eventType type do you need?') text = 'What haircut type do you fancy?'
             if (text === 'EventType') text = 'Haircut style'
             if (text === 'EventHost') text = 'Hairdresser'

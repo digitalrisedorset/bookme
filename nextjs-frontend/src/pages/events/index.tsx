@@ -8,15 +8,18 @@ import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {EventTypeFilter} from "@/components/event/components/Dashboard/EventTypeFilter";
 import {EventTypeGroupFilter} from "@/components/event/components/Dashboard/EventTypeGroupFilter";
 import {EventDashboard} from "@/components/event/components/EventDashboard";
+import {useUserPreferenceState} from "@/state/UserPreference";
 
 export default function Events() {
-    const user = useUser()
+    //const user = useUser()
+    const {userPreference} = useUserPreferenceState()
 
-    if (!user) return null
+    //if (!user) return null
+    console.log('userPreference', userPreference)
 
     return (
         <>
-            {(user.weekPreference !== '' && user.eventType !== null) &&  (<>
+            {(userPreference.weekPreference !== '' && userPreference.eventType !== null) &&  (<>
                 <ListHeader>
                     <EventFilterStyles>
                         <WeekFilter/>
@@ -29,7 +32,7 @@ export default function Events() {
                 </ListHeader>
             </>)
             }
-            {(user.weekPreference === '' || user.eventType === null) &&  (<>
+            {(userPreference.weekPreference === '' || userPreference.eventType === '') &&  (<>
                 <InitFilter />
             </>)
             }
