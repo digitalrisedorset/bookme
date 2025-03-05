@@ -10,11 +10,6 @@ async function calculatePrice(
 ): Promise<Int> {
   console.log('calculate price', {eventTypeId, shampoo, eventId})
   // 1. Query the current user see if they are signed in
-  const sesh = context.session as Session;
-  if (!sesh.itemId) {
-    throw new Error('You must be logged in to do this!');
-  }
-
   const eventType = await context.query.EventType.findOne({
     where: { id: eventTypeId },
     query: 'id base_price'
