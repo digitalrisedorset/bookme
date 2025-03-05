@@ -1,5 +1,4 @@
 export const tr = (text: string, venue: string) => {
-    console.log('venue', venue)
     switch (venue) {
         case 'date-mate':
             if (text === 'What eventType type do you need?') text = 'What date type do you fancy?'

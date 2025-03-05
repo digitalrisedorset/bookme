@@ -1,9 +1,10 @@
 import gql from "graphql-tag";
 import {useMutation} from "@apollo/client";
-import {CURRENT_USER_QUERY, useUser} from "@/components/user-authentication/hooks/useUser";
+import {CURRENT_USER_QUERY} from "@/components/user-authentication/hooks/useUser";
 import {useEventState} from "@/state/EventState";
 import {InMemoryCache} from "@apollo/client/cache/inmemory/inMemoryCache";
 import {useUserPreferenceState} from "@/state/UserPreference";
+import {EVENTS_QUERY} from "@/components/event/hooks/useEvents";
 
 export const ADD_TO_CART_MUTATION = gql`
   mutation AddToCart($eventId: ID!, $eventTypeId: ID!, $shampoo: Int) {
@@ -23,14 +24,17 @@ function update(cache: InMemoryCache, payload: { data?: {addToCart: string } }) 
     cache.gc();
 }
 
-export const useAddToCart = (id: string) => {
+export const useAddToCart = () => {
     const {eventState} = useEventState()
     const {userPreference} = useUserPreferenceState()
 
     const result = useMutation(ADD_TO_CART_MUTATION, {
-        variables: { eventId: id, shampoo: (eventState.shampoo === true)?1:0, eventTypeId: userPreference?.eventTypeId },
+        variables: { eventId: eventState.activeEventId, shampoo: (eventState.shampoo === true)?1:0, eventTypeId: userPreference?.eventTypeId },
         update,
-        refetchQueries: [{ query: CURRENT_USER_QUERY }],
+        refetchQueries: [{ query: CURRENT_USER_QUERY }, { query: EVENTS_QUERY}],
+        onCompleted: () => {
+            console.log("Mutation ADD_TO_CART_MUTATION completed, refetching queries...");
+        }
     });
 
     return result;

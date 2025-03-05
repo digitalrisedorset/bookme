@@ -6,8 +6,6 @@ import IntroDoggieMadhouse from "@/components/venue/components/IntroDoggieMadhou
 import IntroDateMate from "@/components/venue/components/IntroDateMate";
 import IntroPooleRugby from "@/components/venue/components/IntroPooleRugby";
 import IntroDigitalRiseDorset from "@/components/venue/components/IntroDigitalRiseDorset";
-import Link from "next/link";
-import {CalendarStyles} from "@/components/global/styles/NavStyles";
 
 export default function Home() {
     const config = useConfig()
@@ -21,9 +19,6 @@ export default function Home() {
             {config.route === 'doggiemadhouse' &&<IntroDoggieMadhouse />}
             {config.route === 'datemate' &&<IntroDateMate />}
             {config.route === 'digitalrisedorset' &&<IntroDigitalRiseDorset />}
-            <CalendarStyles>
-                <Link href="/events">View Availability</Link>
-            </CalendarStyles>
         </>
     );
 }

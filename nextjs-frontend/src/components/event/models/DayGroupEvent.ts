@@ -6,9 +6,9 @@ import {isEventInCart} from "@/lib/cart";
 export class DayGroupEventHandler {
     private groupEvent: DayGroupEvent
 
-    private user: UserInformation
+    private user: UserInformation | undefined
 
-    constructor(time: string, user?: UserInformation) {
+    constructor(time: string, user?: UserInformation | undefined) {
         this.groupEvent = {
             name: '',
             day: '',
@@ -38,7 +38,7 @@ export class DayGroupEventHandler {
             this.groupEvent.orderedEventId = event.id
         }
 
-        if (isEventInCart(this.user?.cartItems, event.id)) {
+        if (this.user && isEventInCart(this.user.cartItems, event.id)) {
             this.groupEvent.cartEvent = event
         }
 

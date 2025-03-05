@@ -1,14 +1,18 @@
-import {DayGroupEvent, KeystoneEvent} from "@/components/event/types/event";
+import {DayGroupEvent, EventType, KeystoneEvent} from "@/components/event/types/event";
 import {getTime} from "@/lib/date";
 import {UserInformation} from "@/components/user-authentication/hooks/useUser";
+import {UserPreferenceInfoState} from "@/state/UserPreference";
 
 export class GroupEventHandler {
     private groupEvent: DayGroupEvent
 
-    private user: UserInformation
+    private userPreference: UserPreferenceInfoState | undefined
 
-    constructor(user: UserInformation) {
-        this.user = user
+    private eventType: EventType
+
+    constructor(userPreference: UserPreferenceInfoState | undefined, eventType: EventType) {
+        this.userPreference = userPreference
+        this.eventType = eventType
         this.groupEvent = {
             name: '',
             day: '',
@@ -31,7 +35,7 @@ export class GroupEventHandler {
     }
 
     addEvent = (event: KeystoneEvent) => {
-        if (this.user === undefined) {
+        if (this.userPreference === undefined) {
             console.warn('The user is not defined in class GroupEventHandler')
             return
         }
@@ -41,7 +45,7 @@ export class GroupEventHandler {
         this.groupEvent.venue = event.venue
         this.groupEvent.startTime = event.startTime
 
-        this.groupEvent.eventType = this.user?.eventType?.name
+        this.groupEvent.eventType = this.eventType?.name
 
         this.groupEvent.eventHosts.push({
             eventHostId: event.eventHost.id,

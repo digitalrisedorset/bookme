@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {DayGroupEvent, EventHost} from "@/components/event/types/event";
 import {useEventState} from "@/state/EventState";
 import {capitalise} from "@/lib/string";
@@ -26,15 +26,6 @@ export const EventHostSelect: React.FC<ListingProps> = ({eventGroup}: ListingPro
         e.preventDefault()
         toggleActiveEvent(e.target.value)
     }
-
-    const updateSelect = () => {
-        if (eventGroup.eventHosts.length === 1) {
-            const firstMap = eventGroup.eventHosts[0]
-            toggleActiveEvent(firstMap.eventId)
-        }
-    }
-
-    updateSelect()
 
     return <SelectStyle>
         {eventGroup.eventHosts.map(({eventHostId, eventId}: { eventHostId: string, eventId: string }) => {

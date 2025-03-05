@@ -31,7 +31,6 @@ export const ResetPassword: React.FC<TokenProps> = ({token}: TokenProps) => {
 
         const res = await resetpassword().catch(console.error);
         resetForm();
-        console.log('resetpassword', res)
         if (res?.data?.redeemUserPasswordResetToken?.message) {
             addErrorMessage(res?.data.redeemUserPasswordResetToken.message)
         } else {

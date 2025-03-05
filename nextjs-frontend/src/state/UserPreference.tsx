@@ -9,31 +9,32 @@ export interface UserPreferenceInfoState {
 
 interface UserPreferenceState {
     userPreference: UserPreferenceInfoState,
-    setPreferenceState: (code: keyof UserPreferenceInfoState, value: string) => void
+    setWeekPreference: (value: string) => void,
+    setEventType: (value: string) => void,
+    setEventTypeGroup: (value: string) => void,
+    resetPreference: () => void
 }
 
 const readUserPreferencee = (): UserPreferenceInfoState => {
-    let weekPreference
+    let weekPreference = ''
     if (typeof localStorage !== 'undefined') {
         weekPreference = localStorage.getItem('weekPreference')
-        if (weekPreference === null) weekPreference = ''
     }
 
-    let eventTypeId
+    let eventTypeId = ''
     if (typeof localStorage !== 'undefined') {
         eventTypeId = localStorage.getItem('eventType')
     }
 
-    let eventTypeGroupId
+    let eventTypeGroupId = ''
     if (typeof localStorage !== 'undefined') {
         eventTypeGroupId = localStorage.getItem('eventTypeGroup')
-        if (eventTypeGroupId !== null) {
-            eventTypeGroupId = JSON.parse(eventTypeGroupId)
-        }
     }
 
     return {
-        weekPreference, eventTypeId: eventTypeId, eventTypeGroupId: eventTypeGroupId
+        weekPreference,
+        eventTypeId: eventTypeId,
+        eventTypeGroupId: eventTypeGroupId
     }
 }
 
@@ -51,21 +52,20 @@ interface UserPreferenceStateProviderProps {
 const UserPreferenceStateProvider: React.FC<UserPreferenceStateProviderProps> = ({ children }) => {
     const [state, setState] = useImmer<UserPreferenceInfoState>(intialState);
 
-    const updateLocalStorage = (keystate:keyof UserPreferenceInfoState, value: string | null) => {
-        //if (value === null) return
+    const updateLocalStorage = (keystate:keyof UserPreferenceInfoState, value: string) => {
         setState(draft => { draft.userPreference[keystate] = value});
         localStorage.setItem('userPreference', JSON.stringify({...state.userPreference, [keystate]: value}))
     }
 
-    const setWeekPreference = (value: string | null) => {
+    const setWeekPreference = (value: string) => {
         updateLocalStorage('weekPreference', value)
     }
 
-    const setEventType = (value: string | null) => {
+    const setEventType = (value: string) => {
         updateLocalStorage('eventTypeId', value)
     }
 
-    const setEventTypeGroup = (value: string | null) => {
+    const setEventTypeGroup = (value: string) => {
         updateLocalStorage('eventTypeGroupId', value)
     }
 

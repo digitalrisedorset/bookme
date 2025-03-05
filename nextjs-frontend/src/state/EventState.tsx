@@ -1,10 +1,9 @@
-import {createContext, ReactNode, useContext} from "react";
+import {createContext, ReactNode, useCallback, useContext, useEffect, useRef} from "react";
 import {useImmer} from "use-immer";
 
 interface EventInfoState {
     activeEventId: string | undefined,
     shampoo: boolean,
-    eventTypeId: string
 }
 
 interface EventState {
@@ -12,13 +11,11 @@ interface EventState {
     resetActiveEvent: () => void
     toggleActiveEvent: (id: string) => void
     toggleShampooEvent: () => void
-    setEventTypePreference: (id: string) => void
 }
 
 const intialState: EventInfoState = {
     activeEventId: '',
     shampoo: false,
-    eventTypeId: ''
 }
 
 const LocalStateContext = createContext<EventState | undefined>(undefined);
@@ -26,33 +23,42 @@ const LocalStateProvider = LocalStateContext.Provider;
 
 interface EventStateProviderProps {
     children: ReactNode;
+    eventGroup?: { eventHosts: { eventId: string }[] };
 }
 
-const EventStateProvider: React.FC<EventStateProviderProps> = ({ children }) => {
+const EventStateProvider: React.FC<EventStateProviderProps> = ({ children, eventGroup }) => {
     const [state, setState] = useImmer<EventInfoState>(intialState);
+    const initialised = useRef(false)
 
-    const toggleActiveEvent = (id: string) => {
+    const toggleActiveEvent = useCallback((id: string) => {
         setState(draft => { draft.activeEventId = id });
-    }
+    }, [setState]);
 
-    const resetActiveEvent = () => {
+    const resetActiveEvent = useCallback(() => {
         setState(draft => { draft.activeEventId = undefined });
-    }
+    },[setState]);
 
-    const toggleShampooEvent = () => {
+    const toggleShampooEvent = useCallback(() => {
         setState(draft => { draft.shampoo = !draft.shampoo });
-    }
+    },[setState]);
 
-    const setEventTypePreference = (id: string) => {
-        setState(draft => { draft.eventTypeId = id });
-    }
+    // 🔥 Initialize activeEventId if only one eventHost exists
+    useEffect(() => {
+        if (initialised.current) return;
+
+        if (eventGroup?.eventHosts?.length === 1 && !state.activeEventId) {
+            setState(draft => {
+                draft.activeEventId = eventGroup.eventHosts[0].eventId;
+            });
+            initialised.current = true
+        }
+    }, [eventGroup?.eventHosts, setState, state.activeEventId]); // Dependencies ensure it runs only when needed
 
     return <LocalStateProvider
         value={{
             resetActiveEvent,
             toggleActiveEvent,
             toggleShampooEvent,
-            setEventTypePreference,
             eventState: state
         }}
     >{children}</LocalStateProvider>

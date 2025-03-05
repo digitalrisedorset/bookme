@@ -1,6 +1,5 @@
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
-import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useUserPreferenceState} from "@/state/UserPreference";
 
 const HAIRCUT_TYPE_QUERY = gql`

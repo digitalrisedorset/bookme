@@ -1,6 +1,6 @@
 import {getDayTimeEnd} from "@/lib/date";
 import {useEventHosts} from "@/components/eventHost/hooks/useEventHosts";
-import {EventFilterKeys, EventType, EventHost} from "@/components/event/types/event";
+import {EventFilterKeys, EventType, EventHost, AVAILABLE} from "@/components/event/types/event";
 import {useVenue} from "@/components/venue/hooks/useVenue";
 import {useUserPreferenceState} from "@/state/UserPreference";
 
@@ -10,9 +10,9 @@ export const useFilter = () => {
     const venue = useVenue()
 
     const filter: EventFilterKeys = {}
-    // filter['status'] = {
-    //     "equals": AVAILABLE
-    // }
+    filter['status'] = {
+        "equals": AVAILABLE
+    }
 
     if (userPreference === undefined) {
         return filter

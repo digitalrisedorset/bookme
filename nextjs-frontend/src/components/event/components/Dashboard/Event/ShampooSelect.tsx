@@ -3,12 +3,10 @@ import {SelectStyle} from "@/components/global/styles/ItemStyles";
 import {useEventState} from "@/state/EventState";
 import {Radio} from "@/components/global/components/Preference/Radio";
 
-
 export const ShampooSelect: React.FC = () => {
     const {eventState,toggleShampooEvent} = useEventState()
 
-    const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log('shampoo selected', e.target.value)
+    const handleSelect = () => {
         toggleShampooEvent()
     }
 

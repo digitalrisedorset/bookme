@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useAddToCart} from "@/components/event/graphql/useAddToCart";
 import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {getEventCartQty} from "@/lib/cart";
@@ -6,20 +6,21 @@ import {BookButton} from "@/components/global/styles/ItemStyles";
 import {useEventState} from "@/state/EventState";
 import {useRouter} from "next/router";
 import {BOOKED_EVENT} from "@/components/event/types/event";
+import {SignInOrRegister} from "@/components/user-authentication/components/SignInOrRegister";
 
 interface AddToCartProps {
-    id: string
     children: React.ReactNode
 }
 
-export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
+export const AddToCart: React.FC<AddToCartProps> = () => {
     const user = useUser()
     const {eventState} = useEventState()
     const router = useRouter()
-    const [addToCart, { loading }] = useAddToCart(id);
+    const [addToCart, { loading }] = useAddToCart();
+    const [useReady, setUserReady] = useState(false)
 
     const isEventInCart = (): string => {
-        if (user && (id!=='') && getEventCartQty(user.cartItems, [id])>0) {
+        if (user && (eventState.activeEventId!=='') && getEventCartQty(user.cartItems, [eventState.activeEventId])>0) {
             return BOOKED_EVENT
         }
 
@@ -36,12 +37,12 @@ export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
 
     async function handleClick(e: React.FormEvent) {
         e.preventDefault(); // stop the form from submitting
-        if (id === '') {
+        if (eventState.activeEventId === '') {
             alert('Select a eventHost for your appointment')
         }
 
         if (user === null) {
-            router.push({pathname: '/signin'})
+            setUserReady(true)
             return
         }
 
@@ -57,6 +58,7 @@ export const AddToCart: React.FC<AddToCartProps> = ({id}: AddToCartProps) => {
             <button className="add-to-cart" disabled={!isEventReady()} type="button" onClick={handleClick}>
                 Book{loading && 'ing'} 🛒
             </button>
+            {!user && useReady && <SignInOrRegister id={eventState.activeEventId} />}
         </BookButton>
     );
 }

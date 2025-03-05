@@ -1,7 +1,6 @@
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
 import {useEventState} from "@/state/EventState";
-import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {useUserPreferenceState} from "@/state/UserPreference";
 
 const EVENT_PRICE_QUERY = gql`

@@ -9,7 +9,7 @@ export class DayEventHandler {
         this.day = day.day
     }
 
-    getDayEvents = (events: KeystoneEvent[], user: UserInformation) => {
+    getDayEvents = (events: KeystoneEvent[], user: UserInformation | undefined) => {
         const dayEvents = events.filter((event: KeystoneEvent) => event.day === this.day)
 
         const groupEventByTime = this.getStartTimeEvents(dayEvents)
@@ -26,7 +26,7 @@ export class DayEventHandler {
         return dayEventList
     }
 
-    getDayGroupEvent = (listEvents: KeystoneEvent[], time: string, user: UserInformation): DayGroupEvent => {
+    getDayGroupEvent = (listEvents: KeystoneEvent[], time: string, user: UserInformation | undefined): DayGroupEvent => {
         const dayGroupEventHandler = new DayGroupEventHandler(time, user)
 
         for (const index in listEvents) {

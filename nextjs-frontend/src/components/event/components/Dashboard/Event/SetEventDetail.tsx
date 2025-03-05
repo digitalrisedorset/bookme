@@ -1,7 +1,6 @@
 import React from "react";
 import {AVAILABLE, BOOKED_EVENT, DayGroupEvent} from "@/components/event/types/event";
 import {useRouter} from "next/router";
-import {useUser} from "@/components/user-authentication/hooks/useUser";
 import {ViewButton} from "@/components/global/styles/ItemStyles";
 import {getTime} from "@/lib/date";
 import {useEventState} from "@/state/EventState";
