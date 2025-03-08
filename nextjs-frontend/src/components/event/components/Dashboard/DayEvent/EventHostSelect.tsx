@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {DayGroupEvent, EventHost} from "@/components/event/types/event";
 import {useEventState} from "@/state/EventState";
 import {capitalise} from "@/lib/string";

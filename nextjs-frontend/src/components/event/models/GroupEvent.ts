@@ -1,6 +1,5 @@
 import {DayGroupEvent, EventType, KeystoneEvent} from "@/components/event/types/event";
 import {getTime} from "@/lib/date";
-import {UserInformation} from "@/components/user-authentication/hooks/useUser";
 import {UserPreferenceInfoState} from "@/state/UserPreference";
 
 export class GroupEventHandler {

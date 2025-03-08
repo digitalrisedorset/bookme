@@ -5,7 +5,7 @@ import { EventTypeGroupCreator } from "./events/eventTypeGroup"
 import { DateFinder } from "./events/dateFinder";
 import type { KeystoneContext } from "@keystone-6/core/src/types";
 import { EventHostCreator } from "./events/eventHost";
-import {getHour, getMinutes, getTime, getTimeFromMinutes} from "../lib/date";
+import {getHour, getMinutes, getTimeFromMinutes} from "../lib/date";
 import {HolidayEventHostCreator, HolidayOutletCreator, HolidayValidator} from "./events/holiday";
 import {event} from "./sample-data/event";
 import {CustomerCreator} from "./events/customer";

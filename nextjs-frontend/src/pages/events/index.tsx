@@ -1,36 +1,17 @@
-import {EventFilterStyles, ListHeader} from "@/components/event/styles/EventFilterStyles";
 import React from "react";
-import {WeekFilter} from "@/components/event/components/Dashboard/WeekFilter";
-import {InitFilter} from "@/components/event/components/Dashboard/InitFilter";
-import {ResetPreferenceFilter} from "@/components/event/components/Dashboard/EventPreference/ResetPreferenceFilter";
-import {PreferenceSummary} from "@/components/event/components/Dashboard/EventPreference/PreferenceSummary";
-import {EventTypeFilter} from "@/components/event/components/Dashboard/EventTypeFilter";
-import {EventTypeGroupFilter} from "@/components/event/components/Dashboard/EventTypeGroupFilter";
-import {EventDashboard} from "@/components/event/components/EventDashboard";
-import {useUserPreferenceState} from "@/state/UserPreference";
+import {useEventTypeGroups} from "@/components/event/hooks/useEventTypeGroups";
+import {Index} from "@/components/event/components/Dashboard/Index";
+import {UserPreferenceStateProvider} from "@/state/UserPreference";
+import {Loading} from "@/components/global/components/Loading";
 
 export default function Events() {
-    const {userPreference} = useUserPreferenceState()
+    const {data, loading} = useEventTypeGroups()
+
+    if (loading) return <Loading />
 
     return (
-        <>
-            {(userPreference.weekPreference !== null && userPreference.eventTypeId !== null) &&  (<>
-                <ListHeader>
-                    <EventFilterStyles>
-                        <WeekFilter/>
-                        <EventTypeGroupFilter />
-                        <EventTypeFilter />
-                        <ResetPreferenceFilter/>
-                    </EventFilterStyles>
-                    <PreferenceSummary />
-                    <EventDashboard />
-                </ListHeader>
-            </>)
-            }
-            {(userPreference.weekPreference === null || userPreference.eventTypeId === null) &&  (<>
-                <InitFilter />
-            </>)
-            }
-        </>
+        <UserPreferenceStateProvider eventTypeGroups={data?.venueEventTypeGroups}>
+            <Index />
+        </UserPreferenceStateProvider>
     )
 }

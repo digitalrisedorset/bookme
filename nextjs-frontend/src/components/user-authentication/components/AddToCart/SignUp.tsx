@@ -9,6 +9,7 @@ import {useAddToCart} from "@/components/event/graphql/useAddToCart";
 import {useForm} from "@/components/global/hooks/useForm";
 import {useSignUpUser} from "@/components/user-authentication/graphql/useSignUp";
 import {Form} from "@/components/global/styles/Form";
+import {Loading} from "@/components/global/components/Loading";
 
 export const SignUp: React.FC = () => {
   const router = useRouter();
@@ -45,6 +46,9 @@ export const SignUp: React.FC = () => {
       router.push({pathname: '/events'});
     }
   }
+
+  if (loading) return <Loading />
+
   return (
     <Form method="POST" onSubmit={handleSubmit}>
       <h2>Sign Up For an Account</h2>

@@ -20,6 +20,10 @@ export const AddToCart: React.FC<AddToCartProps> = () => {
     const [useReady, setUserReady] = useState(false)
 
     const isEventInCart = (): string => {
+        if (eventState.activeEventId === undefined) {
+            return ''
+        }
+
         if (user && (eventState.activeEventId!=='') && getEventCartQty(user.cartItems, [eventState.activeEventId])>0) {
             return BOOKED_EVENT
         }
@@ -58,7 +62,7 @@ export const AddToCart: React.FC<AddToCartProps> = () => {
             <button className="add-to-cart" disabled={!isEventReady()} type="button" onClick={handleClick}>
                 Book{loading && 'ing'} 🛒
             </button>
-            {!user && useReady && <SignInOrRegister id={eventState.activeEventId} />}
+            {!user && useReady && <SignInOrRegister />}
         </BookButton>
     );
 }

@@ -9,10 +9,10 @@ export const useFilter = () => {
     const {data} = useEventHosts()
     const venue = useVenue()
 
-    const filter: EventFilterKeys = {}
-    filter['status'] = {
-        "equals": AVAILABLE
-    }
+    const filter: EventFilterKeys = {
+        status: {
+            "equals": AVAILABLE
+        }}
 
     if (userPreference === undefined) {
         return filter

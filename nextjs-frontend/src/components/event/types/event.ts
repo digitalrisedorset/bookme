@@ -141,4 +141,5 @@ export interface EventFilterKeys {
     startTime?: { "gte": string },
     endTime?: { "lte": string },
     eventHost?: { "id": { "in": string[] } }
+    status: { "equals": string }
 }

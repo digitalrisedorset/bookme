@@ -6,6 +6,7 @@ import {Form} from "@/components/global/styles/Form";
 import {Feedback} from "@/components/global/components/Feedback";
 import {useAddToCart} from "@/components/event/graphql/useAddToCart";
 import React from "react";
+import {Loading} from "@/components/global/components/Loading";
 
 export const Sign: React.FC = () => {
     const [addToCart, { loading }] = useAddToCart();
@@ -31,6 +32,8 @@ export const Sign: React.FC = () => {
             router.push({pathname: '/events'});
         }
     }
+
+    if (loading) return <Loading />
 
     return (
         <Form method="POST" onSubmit={handleSubmit}>

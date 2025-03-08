@@ -11,13 +11,13 @@ import {Loading} from "@/components/global/components/Loading";
 export const PreferenceSummary: React.FC = () => {
     const {activeVenue} = useVenueConfigState()
     const {userPreference} = useUserPreferenceState()
-    const {data, loading} = useEventType()
+    const {eventType, loadingEventType} = useEventType()
 
-    if (loading) return <Loading />
+    if (loadingEventType) return <Loading />
 
     return (
         <PreferenceSummaryStyle>
-            All our {tr('appointment', activeVenue)}s for <strong>{capitalise(data?.eventType?.name)}</strong> in the week starting <strong>{getDate(userPreference.weekPreference)}</strong>
+            All our {tr('appointment', activeVenue)}s for <strong>{capitalise(eventType?.eventType?.name)}</strong> in the week starting <strong>{getDate(userPreference.weekPreference)}</strong>
         </PreferenceSummaryStyle>
     )
 }
