@@ -85,8 +85,6 @@ const UserPreferenceStateProvider: React.FC<UserPreferenceStateProviderProps> = 
     useEffect(() => {
         if (initialized.current || !eventTypeGroups || eventTypeGroups.length === 0) return;
 
-        console.log("groups useEffect", eventTypeGroups);
-
         setEventTypeGroup(eventTypeGroups[0].id);
 
         initialized.current = true;

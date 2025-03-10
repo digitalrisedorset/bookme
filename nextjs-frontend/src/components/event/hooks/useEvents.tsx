@@ -1,6 +1,7 @@
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
 import {useFilter} from "@/components/event/hooks/useFilter";
+import {useEffect} from "react";
 
 export const EVENTS_QUERY = gql`
     query Events($orderBy: [EventOrderByInput!]!, $where: EventWhereInput!, $skip: Int = 0, $take: Int) {
@@ -46,12 +47,20 @@ export const useEvents = () => {
      *                 }
      *             }
      */
-    const eventData = useQuery(EVENTS_QUERY, {
+    const { data, loading, error, refetch } = useQuery(EVENTS_QUERY, {
         variables: {
-            "where": filter,
-            "orderBy": [{"startTime": "asc"}],
-        }
+            where: filter,
+            orderBy: [{ startTime: "asc" }],
+        },
+        fetchPolicy: "network-only", // Ensures fresh data from the server
+        skip: !filter, // Avoids running query if filter is undefined
     });
 
-    return eventData
+    useEffect(() => {
+        if (filter) {
+            refetch();
+        }
+    }, [filter, refetch]); // Triggers refetch when filter changes
+
+    return { data, loading, error };
 }

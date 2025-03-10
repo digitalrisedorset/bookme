@@ -4,7 +4,6 @@ import {CURRENT_USER_QUERY} from "@/components/user-authentication/hooks/useUser
 import {useEventState} from "@/state/EventState";
 import {InMemoryCache} from "@apollo/client/cache/inmemory/inMemoryCache";
 import {useUserPreferenceState} from "@/state/UserPreference";
-import {EVENTS_QUERY} from "@/components/event/hooks/useEvents";
 
 export const ADD_TO_CART_MUTATION = gql`
   mutation AddToCart($eventId: ID!, $eventTypeId: ID!, $shampoo: Int) {
@@ -31,7 +30,7 @@ export const useAddToCart = () => {
     const result = useMutation(ADD_TO_CART_MUTATION, {
         variables: { eventId: eventState.activeEventId, shampoo: (eventState.shampoo === true)?1:0, eventTypeId: userPreference?.eventTypeId },
         update,
-        refetchQueries: [{ query: CURRENT_USER_QUERY }, { query: EVENTS_QUERY}],
+        refetchQueries: [{ query: CURRENT_USER_QUERY }],
         onCompleted: () => {
             console.log("Mutation ADD_TO_CART_MUTATION completed, refetching queries...");
         }

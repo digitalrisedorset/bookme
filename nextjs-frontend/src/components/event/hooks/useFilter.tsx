@@ -3,51 +3,41 @@ import {useEventHosts} from "@/components/eventHost/hooks/useEventHosts";
 import {EventFilterKeys, EventType, EventHost, AVAILABLE} from "@/components/event/types/event";
 import {useVenue} from "@/components/venue/hooks/useVenue";
 import {useUserPreferenceState} from "@/state/UserPreference";
+import { useMemo } from "react";
 
 export const useFilter = () => {
-    const {userPreference} = useUserPreferenceState()
-    const {data} = useEventHosts()
-    const venue = useVenue()
+    const { userPreference } = useUserPreferenceState();
+    const { data } = useEventHosts();
+    const venue = useVenue();
 
-    const filter: EventFilterKeys = {
-        status: {
-            "equals": AVAILABLE
-        }}
+    return useMemo(() => {
+        const filter: EventFilterKeys = {
+            status: { equals: AVAILABLE },
+        };
 
-    if (userPreference === undefined) {
-        return filter
-    }
+        if (!userPreference) return filter;
+        if (!userPreference.weekPreference) return filter;
 
-    if (userPreference.weekPreference === "") {
-        return filter
-    }
+        filter['venue'] = { id: { equals: venue?.id } };
 
-    filter['venue'] = {
-        "id": {
-            "equals": venue?.id
+        if (userPreference.weekPreference !== "") {
+            const weekStart = userPreference.weekPreference;
+            const weekStartDate = new Date(weekStart);
+            const endWeek = getDayTimeEnd(new Date(weekStartDate.setDate(weekStartDate.getDate() + 7)));
+
+            filter['startTime'] = { gte: weekStart };
+            filter['endTime'] = { lte: endWeek };
         }
-    }
 
-    if (userPreference.weekPreference !== "") {
-        const weekStart = userPreference.weekPreference
-        const weekStartDate = new Date(weekStart)
-        const endWeek = getDayTimeEnd(new Date(weekStartDate.setDate(weekStartDate.getDate()+7)))
-
-        filter['startTime'] = {
-            "gte": weekStart
+        if (userPreference.eventTypeId !== null) {
+            const eventHostIds = getEventHostIdsForEventType(userPreference.eventTypeId, data?.eventHosts);
+            filter['eventHost'] = { id: { in: eventHostIds } };
         }
-        filter['endTime'] = {
-            "lte": endWeek
-        }
-    }
 
-    if (userPreference.eventTypeId !== null) {
-        const eventHostIds = getEventHostIdsForEventType(userPreference?.eventTypeId, data?.eventHosts)
-        filter['eventHost'] = { "id": { "in": eventHostIds } }
-    }
+        return filter;
+    }, [userPreference, data, venue]);
+};
 
-    return filter
-}
 
 const getEventHostIdsForEventType = (eventTypeId: string, eventHosts: EventHost[]) => {
     const isEventHostDoingEventType = (item: EventHost): boolean => {
