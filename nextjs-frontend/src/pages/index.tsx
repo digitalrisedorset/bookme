@@ -6,9 +6,14 @@ import IntroDoggieMadhouse from "@/components/venue/components/IntroDoggieMadhou
 import IntroDateMate from "@/components/venue/components/IntroDateMate";
 import IntroPooleRugby from "@/components/venue/components/IntroPooleRugby";
 import IntroDigitalRiseDorset from "@/components/venue/components/IntroDigitalRiseDorset";
+import {Loading} from "@/components/global/components/Loading";
 
 export default function Home() {
     const config = useConfig()
+
+    console.log("Config:", config); // Debugging
+
+    if (config === undefined) return <Loading />
 
     return (
         <>
