@@ -29,6 +29,15 @@ export const tr = (text: string, venue: string) => {
             if (text === 'Not a working day') text = 'No availability'
             if (text === 'In Cart!') text = 'Invite Sent'
             break;
+        case 'qichen-restaurant':
+            if (text === "Let's set your appointment details") text = "Let's organise your party"
+            if (text === 'Appointment') text = 'Party'
+            if (text === 'Appointment') text = 'Party'
+            if (text === 'What eventType type do you need?') text = 'What haircut type do you fancy?'
+            if (text === 'EventType') text = 'Number of guests'
+            if (text === 'EventHost') text = 'Waiter / Waitress'
+            if (text === 'Not a working day') text = 'No availability'
+            break;
     }
     return text
 }

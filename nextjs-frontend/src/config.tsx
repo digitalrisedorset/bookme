@@ -60,6 +60,7 @@ export type configInfo = {
         poolerugby: VenuePreference
         datemate: VenuePreference
         digitalrisedorset: VenuePreference
+        qichen: VenuePreference
     }
 }
 
@@ -299,6 +300,50 @@ export const config: configInfo = {
                 navBgColour: 'pastel',
                 buttonBg: 'mediumgrey',
                 buttonColor: 'white'
+            }
+        },
+        qichen: {
+            code: 'qichen-restaurant',
+            route: 'qichen',
+            showEventHostOnEvent: true,
+            timeBase: 'week',
+            scheduleWeekSpan: 2,
+            offerShampoo: false,
+            logo: 'qichen-logo.png',
+            showPrice: true,
+            intro: {
+                img: {
+                    src: 'gallery-10-300x200.jpg',
+                    width: 300,
+                    height: 200,
+                },
+                largeImg: {
+                    src: 'header-banner-image.jpg',
+                    width: 660,
+                    height: 320,
+                },
+                alt: 'Eating with joy'
+            },
+            order: {
+                img: {
+                    src: 'orderplaceholder1-small.jpg',
+                    width: 300,
+                    height: 300,
+                },
+                largeImg: {
+                    src: 'orderplaceholder1.jpg',
+                    width: 378,
+                    height: 200,
+                },
+                alt: 'Rachelle'
+            },
+            themeColors: {
+                red: '#DF3F00',
+                pastel: 'var(--lightgrey)',
+                headerBgColour: 'lightgrey',
+                navBgColour: 'lightgrey',
+                buttonBg: 'mediumgrey',
+                buttonColor: 'mediumgrey'
             }
         },
         rachelle: {

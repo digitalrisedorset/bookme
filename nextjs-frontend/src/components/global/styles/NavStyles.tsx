@@ -14,6 +14,7 @@ export const NavStyles = styled.menu<StyleProps>`
         position: absolute;
         left: 30%;
         color: white;
+        color: white;
         font-size: 1.7rem;
         background-color: var(--red);
         padding: 10px 20px;

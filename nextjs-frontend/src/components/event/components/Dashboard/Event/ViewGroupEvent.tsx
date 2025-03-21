@@ -35,9 +35,9 @@ export const ViewGroupEvent: React.FC<ViewGroupEventProps> = ({eventIds}: ViewGr
     return (
         <EventStateProvider eventGroup={groupEvent}>
             <ViewGroupEventStyle>
-                <h5>Let&apos;s set your {tr('appointment', activeVenue)} details</h5>
+                <h5>{tr("Let's set your appointment details", activeVenue)}</h5>
                 <EventRow>
-                    <span className="label">Appointment</span>
+                    <span className="label">{tr('Appointment', activeVenue)}</span>
                     <p className="title">{getEventTitle(groupEvent)}</p>
                 </EventRow>
                 <EventRow>

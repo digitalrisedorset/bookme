@@ -7,11 +7,10 @@ import IntroDateMate from "@/components/venue/components/IntroDateMate";
 import IntroPooleRugby from "@/components/venue/components/IntroPooleRugby";
 import IntroDigitalRiseDorset from "@/components/venue/components/IntroDigitalRiseDorset";
 import {Loading} from "@/components/global/components/Loading";
+import IntroQichen from "@/components/venue/components/IntroQichen";
 
 export default function Home() {
     const config = useConfig()
-
-    console.log("Config:", config); // Debugging
 
     if (config === undefined) return <Loading />
 
@@ -22,6 +21,7 @@ export default function Home() {
             {config.route === 'paddington' &&<IntroPaddington />}
             {config.route === 'blushharry' &&<IntroBlushHarry />}
             {config.route === 'doggiemadhouse' &&<IntroDoggieMadhouse />}
+            {config.route === 'qichen' &&<IntroQichen />}
             {config.route === 'datemate' &&<IntroDateMate />}
             {config.route === 'digitalrisedorset' &&<IntroDigitalRiseDorset />}
         </>
