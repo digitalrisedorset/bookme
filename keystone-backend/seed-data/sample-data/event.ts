@@ -1,4 +1,127 @@
 export const event = [
+    // Samantha
+    {
+        venue: 'qichen',
+        day: 'monday',
+        startTime: '18:00',
+        endTime: '22:30',
+        status: 'open',
+        eventHost: 'samantha',
+        duration: 45,
+        breakTime: 5
+    },
+    {
+        venue: 'qichen',
+        day: 'wednesday',
+        startTime: '18:00',
+        endTime: '22:30',
+        status: 'open',
+        eventHost: 'samantha',
+        duration: 45,
+        breakTime: 5
+    },
+    {
+        venue: 'qichen',
+        day: 'saturday',
+        startTime: '18:00',
+        endTime: '22:30',
+        status: 'open',
+        eventHost: 'samantha',
+        duration: 45,
+        breakTime: 5
+    },
+    {
+        venue: 'qichen',
+        day: 'sunday',
+        startTime: '12:00',
+        endTime: '18:00',
+        status: 'open',
+        eventHost: 'samantha',
+        duration: 45,
+        breakTime: 5
+    },
+    // Terry
+    {
+        venue: 'qichen',
+        day: 'monday',
+        startTime: '16:00',
+        endTime: '21:00',
+        status: 'open',
+        eventHost: 'terry',
+        duration: 45,
+        breakTime: 5
+    },
+    {
+        venue: 'qichen',
+        day: 'wednesday',
+        startTime: '16:00',
+        endTime: '20:00',
+        status: 'open',
+        eventHost: 'terry',
+        duration: 45,
+        breakTime: 5
+    },
+    {
+        venue: 'qichen',
+        day: 'saturday',
+        startTime: '16:00',
+        endTime: '20:00',
+        status: 'open',
+        eventHost: 'terry',
+        duration: 45,
+        breakTime: 5
+    },
+    {
+        venue: 'qichen',
+        day: 'sunday',
+        startTime: '12:00',
+        endTime: '18:00',
+        status: 'open',
+        eventHost: 'terry',
+        duration: 45,
+        breakTime: 5
+    },
+    // Caroline
+    {
+        venue: 'qichen',
+        day: 'monday',
+        startTime: '14:00',
+        endTime: '22:00',
+        status: 'open',
+        eventHost: 'caroline',
+        duration: 45,
+        breakTime: 5
+    },
+    {
+        venue: 'qichen',
+        day: 'wednesday',
+        startTime: '14:00',
+        endTime: '22:00',
+        status: 'open',
+        eventHost: 'caroline',
+        duration: 45,
+        breakTime: 5
+    },
+    {
+        venue: 'qichen',
+        day: 'saturday',
+        startTime: '14:00',
+        endTime: '22:00',
+        status: 'open',
+        eventHost: 'caroline',
+        duration: 45,
+        breakTime: 5
+    },
+    {
+        venue: 'qichen',
+        day: 'sunday',
+        startTime: '12:00',
+        endTime: '20:00',
+        status: 'open',
+        eventHost: 'caroline',
+        duration: 45,
+        breakTime: 5
+    },
     // Herve
     {
         venue: 'digital-rise-dorset',

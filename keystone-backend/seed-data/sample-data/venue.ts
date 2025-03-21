@@ -1,5 +1,11 @@
 export const venue = [
     {
+        code: 'qichen',
+        name: 'Qichen',
+        orderPrefix: 'QIC',
+        orderPadding: 5
+    },
+    {
         code: 'digital-rise-dorset',
         name: 'Digital Rise Dorset',
         orderPrefix: 'DRD',

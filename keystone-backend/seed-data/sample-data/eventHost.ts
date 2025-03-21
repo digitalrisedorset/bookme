@@ -1,4 +1,26 @@
 export const eventHost = [
+    // Qichen
+    {
+        code: 'samantha',
+        name: 'Samantha',
+        level: 'senior',
+        eventTypeSpeciality: ['qichen_for_2', 'qichen_for_4', 'qichen_for_6'],
+        venue: 'qichen',
+    },
+    {
+        code: 'terry',
+        name: 'Terry',
+        level: 'senior',
+        eventTypeSpeciality: ['qichen_for_2', 'qichen_for_4', 'qichen_for_6'],
+        venue: 'qichen',
+    },
+    {
+        code: 'caroline',
+        name: 'Caroline',
+        level: 'junior',
+        eventTypeSpeciality: ['qichen_for_2', 'qichen_for_4', 'qichen_for_6'],
+        venue: 'qichen',
+    },
     // Digital Rise Dorset
     {
         code: 'herve',

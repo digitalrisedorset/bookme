@@ -1,4 +1,68 @@
 export const eventType = [
+    // Qichen
+    {
+        code: 'qichen_table_1',
+        name: 'Table 1',
+        category: 'qichen_for_2',
+        duration: 45,
+        price: 0
+    },
+    {
+        code: 'qichen_table_2',
+        name: 'Table 2',
+        category: 'qichen_for_2',
+        duration: 45,
+        price: 0
+    },
+    {
+        code: 'qichen_table_3',
+        name: 'Table 3',
+        category: 'qichen_for_2',
+        duration: 45,
+        price: 0
+    },
+    {
+        code: 'qichen_table_4',
+        name: 'Table 1',
+        category: 'qichen_for_4',
+        duration: 60,
+        price: 0
+    },
+    {
+        code: 'qichen_table_5',
+        name: 'Table 2',
+        category: 'qichen_for_4',
+        duration: 60,
+        price: 0
+    },
+    {
+        code: 'qichen_table_6',
+        name: 'Table 6',
+        category: 'qichen_for_4',
+        duration: 60,
+        price: 0
+    },
+    {
+        code: 'qichen_table_7',
+        name: 'Table 7',
+        category: 'qichen_for_6',
+        duration: 60,
+        price: 0
+    },
+    {
+        code: 'qichen_table_8',
+        name: 'Table 8',
+        category: 'qichen_for_6',
+        duration: 60,
+        price: 0
+    },
+    {
+        code: 'qichen_table_9',
+        name: 'Table 9',
+        category: 'qichen_for_6',
+        duration: 60,
+        price: 0
+    },
     // Digital Rise Dorset
     {
         code: 'digitalrisedorset_casual',

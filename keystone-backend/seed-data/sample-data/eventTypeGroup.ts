@@ -1,4 +1,20 @@
 export const eventTypeGroup = [
+    // Qichen
+    {
+        code: 'qichen_for_2',
+        name: 'Qichen For 2',
+        venue: 'qichen',
+    },
+    {
+        code: 'qichen_for_4',
+        name: 'Qichen For 4',
+        venue: 'qichen',
+    },
+    {
+        code: 'qichen_for_6',
+        name: 'Qichen For 6',
+        venue: 'qichen',
+    },
     // Digital Rise Dorset
     {
         code: 'digitalrisedorset_business',

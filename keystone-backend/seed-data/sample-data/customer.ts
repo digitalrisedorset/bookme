@@ -1,4 +1,10 @@
 export const customer = [
+    // Qichen
+    {
+        code: 'diego',
+        name: 'Diego',
+        venue: 'qichen',
+    },
     // Digital Rise Dorset
     {
         code: 'timfudge',
