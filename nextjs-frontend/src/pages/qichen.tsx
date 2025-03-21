@@ -3,6 +3,7 @@ import {useIsEventHost} from "@/components/user-authentication/hooks/useUserRole
 import {useEffect} from "react";
 import {ACTIVE_VENUE_KEY} from "@/components/venue/types/venue";
 import IntroQichen from "@/components/venue/components/IntroQichen";
+import {initVenue} from "@/lib/venue";
 
 export default function Home() {
     const router = useRouter()
@@ -11,11 +12,7 @@ export default function Home() {
         localStorage.setItem(ACTIVE_VENUE_KEY, 'qichen-restaurant')
     }, []);
 
-    if (useIsEventHost()) {
-        router.push({pathname: `/schedule`});
-    } else {
-        router.push({pathname: `/`});
-    }
+    initVenue(router, useIsEventHost())
 
     return (
         <IntroQichen />
