@@ -12,7 +12,7 @@ const sessionConfig = {
     secret: keystoneconfig.session.cookieSecret,
     secure: true,
     path: '/',
-    sameSite: 'lax',
+    sameSite: 'None', // sameSITE='Lax' is recommended but does not work with widget cross-origin
 };
 
 console.log(`Keystone frontend: ${keystoneconfig.frontend.host}`)

@@ -30,6 +30,11 @@ export const EventHost = list({
                 isRequired: true,
             },
         }),
+        description: text({
+            ui: {
+                displayMode: 'textarea'
+            },
+        }),
         eventTypeDurations: relationship({
             ref: 'EventTypeDuration.eventHost',
             many: true,
@@ -87,8 +92,7 @@ export const EventHost = list({
                     password,
                     venue:  { connect: { id: venue } },
                     role:  { connect: { id: customerRole.id } }
-                },
-                resolveFields: false,
+                }
             });
         },
     }

@@ -1,4 +1,47 @@
 export const eventType = [
+    // Happy Tails
+    {
+        code: 'walk-hamworthy-park',
+        name: 'Walk',
+        category: 'walk',
+        duration: 45,
+        price: 14
+    },
+    {
+        code: 'walk-ham-common',
+        name: 'Walk',
+        category: 'walk',
+        duration: 45,
+        price: 15
+    },
+    {
+        code: 'walk-upton',
+        name: 'Walk',
+        category: 'walk',
+        duration: 45,
+        price: 18
+    },
+    {
+        code: 'agility-training',
+        name: 'Agility Training',
+        category: 'training',
+        duration: 30,
+        price: 20
+    },
+    {
+        code: 'dog-hug',
+        name: 'Dog Hug',
+        category: 'hug',
+        duration: 25,
+        price: 10
+    },
+    {
+        code: 'dog-party',
+        name: 'Dog Party',
+        category: 'party',
+        duration: 180,
+        price: 50
+    },
     // Qichen
     {
         code: 'qichen_table_1',
@@ -104,6 +147,28 @@ export const eventType = [
         code: 'datemate_surprise_adventure',
         name: 'Surprise Adventure',
         category: 'datemate_valentine',
+        duration: 360,
+        price: 100
+    },
+    // Stocking Filler
+    {
+        code: 'stocking_chocolate',
+        name: 'Chocolate',
+        category: 'stocking_celebration',
+        duration: 30,
+        price: 12
+    },
+    {
+        code: 'stocking_bath_bomb',
+        name: 'Bath Bomb',
+        category: 'stocking_celebration',
+        duration: 60,
+        price: 40
+    },
+    {
+        code: 'stocking_socks',
+        name: 'Socks',
+        category: 'stocking_celebration',
         duration: 360,
         price: 100
     },

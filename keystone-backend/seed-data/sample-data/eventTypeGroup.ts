@@ -1,4 +1,35 @@
 export const eventTypeGroup = [
+    // HappyTails
+    {
+        code: 'walk',
+        name: 'Walk',
+        venue: 'happy-tails',
+    },
+    {
+        code: 'training',
+        name: 'Training',
+        venue: 'happy-tails',
+    },
+    {
+        code: 'party',
+        name: 'Party',
+        venue: 'happy-tails',
+    },
+    {
+        code: 'hug',
+        name: 'Hug',
+        venue: 'happy-tails',
+    },
+    {
+        code: 'qichen_for_4',
+        name: 'Qichen For 4',
+        venue: 'qichen',
+    },
+    {
+        code: 'qichen_for_6',
+        name: 'Qichen For 6',
+        venue: 'qichen',
+    },
     // Qichen
     {
         code: 'qichen_for_2',
@@ -25,6 +56,12 @@ export const eventTypeGroup = [
         code: 'digitalrisedorset_social',
         name: 'Social Meeting',
         venue: 'digital-rise-dorset',
+    },
+    // Stocking Filler
+    {
+        code: 'stocking_celebration',
+        name: 'Stocking',
+        venue: 'stocking-filler',
     },
     // Date Mate
     {

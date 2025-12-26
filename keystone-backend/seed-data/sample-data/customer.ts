@@ -28,6 +28,12 @@ export const customer = [
         name: 'Juliette',
         venue: 'date-mate',
     },
+    // Stocking Filler
+    {
+        code: 'beethoven',
+        name: 'Beethoven',
+        venue: 'stocking-filler',
+    },
     // Date Mate
     {
         code: 'chloe',

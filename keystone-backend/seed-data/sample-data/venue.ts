@@ -1,5 +1,11 @@
 export const venue = [
     {
+        code: 'happy-tails',
+        name: 'Happy Tails',
+        orderPrefix: 'HAT',
+        orderPadding: 5
+    },
+    {
         code: 'qichen',
         name: 'Qichen',
         orderPrefix: 'QIC',
@@ -46,6 +52,12 @@ export const venue = [
         name: 'Poole Rugby',
         orderPrefix: 'POO',
         orderPadding: 5
+    },
+    {
+        code: 'stocking-filler',
+        name: 'Stocking Filler',
+        orderPrefix: 'STO',
+        orderPadding: 6
     },
 ];
 

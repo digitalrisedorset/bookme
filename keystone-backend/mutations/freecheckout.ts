@@ -95,9 +95,9 @@ async function freecheckout(
         return summary + `<p>${itemDescription(cartItem)}</p>`
     }, '');
 
-    await sendEmail(user.email, 'Your appointment has been received!', `<h2>Your appointment with ${(user?.venue?.name)}</h2> 
+    /*await sendEmail(user.email, 'Your appointment has been received!', `<h2>Your appointment with ${(user?.venue?.name)}</h2>
      ${orderSummary}            
-    `)
+    `)*/
 
     return order;
 }

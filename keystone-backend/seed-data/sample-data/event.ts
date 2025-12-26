@@ -1,4 +1,25 @@
 export const event = [
+    // Emilie
+    {
+        venue: 'happy-tails',
+        day: 'monday',
+        startTime: '16:00',
+        endTime: '17:00',
+        status: 'open',
+        eventHost: 'emilie',
+        duration: 25,
+        breakTime: 5
+    },
+    {
+        venue: 'happy-tails',
+        day: 'wednesday',
+        startTime: '15:00',
+        endTime: '17:00',
+        status: 'open',
+        eventHost: 'emilie',
+        duration: 25,
+        breakTime: 5
+    },
     // Samantha
     {
         venue: 'qichen',
@@ -590,6 +611,68 @@ export const event = [
         status: 'open',
         eventHost: 'laura',
         duration: 30,
+        breakTime: 5
+    },
+    //Santa
+    {
+        venue: 'stocking-filler',
+        day: 'tuesday',
+        startTime: '9:00',
+        endTime: '14:00',
+        status: 'open',
+        eventHost: 'santa',
+        duration: 20,
+        breakTime: 5
+    },
+    {
+        venue: 'stocking-filler',
+        day: 'friday',
+        startTime: '15:00',
+        endTime: '23:00',
+        status: 'open',
+        eventHost: 'santa',
+        duration: 40,
+        breakTime: 5
+    },
+    {
+        venue: 'stocking-filler',
+        day: 'saturday',
+        startTime: '18:00',
+        endTime: '19:00',
+        status: 'open',
+        eventHost: 'santa',
+        duration: 40,
+        breakTime: 5
+    },
+    // Elf
+    {
+        venue: 'stocking-filler',
+        day: 'tuesday',
+        startTime: '11:00',
+        endTime: '14:00',
+        status: 'open',
+        eventHost: 'elf',
+        duration: 20,
+        breakTime: 5
+    },
+    {
+        venue: 'stocking-filler',
+        day: 'friday',
+        startTime: '15:00',
+        endTime: '18:00',
+        status: 'open',
+        eventHost: 'elf',
+        duration: 40,
+        breakTime: 5
+    },
+    {
+        venue: 'stocking-filler',
+        day: 'saturday',
+        startTime: '18:00',
+        endTime: '19:00',
+        status: 'open',
+        eventHost: 'elf',
+        duration: 40,
         breakTime: 5
     },
 ];

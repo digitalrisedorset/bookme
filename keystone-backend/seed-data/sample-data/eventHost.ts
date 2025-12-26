@@ -1,4 +1,12 @@
 export const eventHost = [
+    // Happy Tails
+    {
+        code: 'emilie',
+        name: 'Emilie',
+        level: 'jumior',
+        eventTypeSpeciality: ['walk', 'training', 'hug', 'party'],
+        venue: 'happy-tails',
+    },
     // Qichen
     {
         code: 'samantha',
@@ -28,6 +36,21 @@ export const eventHost = [
         level: 'senior',
         eventTypeSpeciality: ['digitalrisedorset_business', 'digitalrisedorset_social'],
         venue: 'digital-rise-dorset',
+    },
+    // Stocking Filler
+    {
+        code: 'santa',
+        name: 'Santa',
+        level: 'senior',
+        eventTypeSpeciality: ['stocking_celebration'],
+        venue: 'stocking-filler',
+    },
+    {
+        code: 'elf',
+        name: 'Elf',
+        level: 'senior',
+        eventTypeSpeciality: ['stocking_celebration'],
+        venue: 'stocking-filler',
     },
     // Date Mate
     {

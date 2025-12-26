@@ -2,8 +2,8 @@ import { EventCreator } from './seed-data/events'
 
 export const IMPORT_VENUE = 1
 export const IMPORT_VENUE_HOLIDAY = 2
-export const IMPORT_VENUE_HAIRCUT_GROUP = 3
-export const IMPORT_HAIRCUT_TYPE = 4
+export const IMPORT_VENUE_EVENT_GROUP = 3
+export const IMPORT_EVENT_TYPE = 4
 export const IMPORT_VENUE_HAIRDRESSER = 5 // to run twice
 export const IMPORT_VENUE_HAIRDRESSER_HOLIDAY = 6
 export const IMPORT_CUSTOMER = 7

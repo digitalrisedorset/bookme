@@ -26,6 +26,11 @@ export const EventType = list({
                 isRequired: true,
             },
         }),
+        description: text({
+            ui: {
+                displayMode: 'textarea',
+            },
+        }),
         duration: integer({
             validation: {
                 isRequired: true,

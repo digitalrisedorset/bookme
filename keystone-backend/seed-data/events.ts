@@ -11,9 +11,9 @@ import {event} from "./sample-data/event";
 import {CustomerCreator} from "./events/customer";
 import {
     IMPORT_CUSTOMER,
-    IMPORT_HAIRCUT_TYPE,
+    IMPORT_EVENT_TYPE,
     IMPORT_VENUE,
-    IMPORT_VENUE_HAIRCUT_GROUP,
+    IMPORT_VENUE_EVENT_GROUP,
     IMPORT_VENUE_HAIRDRESSER, IMPORT_VENUE_HAIRDRESSER_HOLIDAY,
     IMPORT_VENUE_HOLIDAY, REPAIR_HAIRDRESSER
 } from "../seed-data";
@@ -50,10 +50,10 @@ export class EventCreator {
             case IMPORT_VENUE_HOLIDAY: console.log('Import Venues Holidays')
                 this.venueHolidayCreator.createAllOutletHolidays()
                 break;
-            case IMPORT_VENUE_HAIRCUT_GROUP: console.log('Import Venues Haircut Group')
+            case IMPORT_VENUE_EVENT_GROUP: console.log('Import Venues Haircut Group')
                 this.eventTypeGroupCreator.createAllEventGroupTypes()
                 break;
-            case IMPORT_HAIRCUT_TYPE: console.log('Import Venues Haircut Types')
+            case IMPORT_EVENT_TYPE: console.log('Import Venues Haircut Types')
                 this.eventTypeCreator.createAllEventTypes()
                 break;
             case IMPORT_VENUE_HAIRDRESSER: console.log('Import Venues EventHost')

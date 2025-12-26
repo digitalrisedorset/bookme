@@ -1,7 +1,8 @@
 import {event} from "./event";
-import {eventType, eventTypeGroup} from "./eventType";
+import {eventType} from "./eventType";
 import {outletHoliday, venue} from "./venue";
 import {eventHost, eventHostHoliday} from "./eventHost";
+import {eventTypeGroup} from "./eventTypeGroup";
 
 const seedData = {
     eventsData: event,
