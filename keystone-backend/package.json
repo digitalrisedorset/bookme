@@ -1,6 +1,6 @@
 {
-  "name": "book-karate-events",
-  "version": "1.0.0",
+  "name": "book-reactedge-demo",
+  "version": "1.0.1",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
