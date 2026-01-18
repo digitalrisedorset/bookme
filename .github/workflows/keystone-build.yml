@@ -1,0 +1,33 @@
+name: Keystone – build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  keystone-build:
+    runs-on: ubuntu-latest
+    environment: reactedge
+
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Install and build Keystone
+        run: |
+          ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} << 'EOF'
+            set -e
+
+            cd /var/www/booking-keystone
+
+            echo "▶ Installing dependencies"
+            npm ci
+
+            echo "▶ Building Keystone"
+            npm run build
+
+            echo "✔ Build completed successfully"
+          EOF
