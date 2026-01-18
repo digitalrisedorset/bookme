@@ -1,0 +1,35 @@
+name: Keystone – start (PM2)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  keystone-start:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Start Keystone with PM2
+        run: |
+          ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} << 'EOF'
+            set -e
+
+            cd /var/www/booking-keystone
+
+            echo "▶ Stopping existing Keystone (if any)"
+            pm2 delete booking-keystone || true
+
+            echo "▶ Starting Keystone"
+            pm2 start npm --name booking-keystone -- run start
+
+            echo "▶ Saving PM2 process list"
+            pm2 save
+
+            echo "✔ Keystone started via PM2"
+          EOF
