@@ -38,7 +38,7 @@ jobs:
         working-directory: docker_bookingsystem
         run: |
           VERSION=$(node -p "require('./vite_project/package.json').version")
-          test -f "www/widget-booking@${VERSION}.iife.js"
+          test -f "./www/widget-booking@${VERSION}.iife.js"
 
       - name: Setup SSH
         run: |
