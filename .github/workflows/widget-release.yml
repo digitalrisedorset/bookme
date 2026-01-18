@@ -40,21 +40,8 @@ jobs:
           VERSION=$(node -p "require('./package.json').version")
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      - name: Debug VERSION and files
-        working-directory: docker_bookingsystem
-        run: |
-          echo "VERSION='${VERSION}'"
-          ls -la www
-
-      - name: Assert working directory layout
-        run: |
-          pwd
-          ls -la
-          ls -la docker_bookingsystem
-          ls -la docker_bookingsystem/vite_project
-
       - name: Verify artifact exists
-        working-directory: docker_bookingsystem/vite_project
+        working-directory: docker_bookingsystem
         run: |      
           test -f "www/widget-booking@${VERSION}.iife.js"
 
@@ -66,7 +53,7 @@ jobs:
           ssh-keyscan -H "${{ secrets.WIDGET_SSH_HOST }}" >> ~/.ssh/known_hosts
 
       - name: Publish artifact
-        working-directory: docker_bookingsystem/vite_project
+        working-directory: docker_bookingsystem
         run: |        
           ssh ${{ secrets.WIDGET_SSH_USER }}@${{ secrets.WIDGET_SSH_HOST }} \
             "mkdir -p /var/www/widgets/booking"
