@@ -53,8 +53,7 @@ jobs:
           ssh-keyscan -H "${{ secrets.WIDGET_SSH_HOST }}" >> ~/.ssh/known_hosts
 
       - name: Publish artifact
-        run: |
-          VERSION=$(node -p "require('./vite_project/package.json').version")
+        run: |        
           ssh ${{ secrets.WIDGET_SSH_USER }}@${{ secrets.WIDGET_SSH_HOST }} \
             "mkdir -p /var/www/widgets/booking"
           scp www/widget-booking@${VERSION}.iife.js \
