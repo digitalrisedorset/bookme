@@ -6,6 +6,7 @@ on:
 jobs:
   keystone-bootstrap:
     runs-on: ubuntu-latest
+    environment: reactedge
 
     steps:
       - name: Checkout repo
