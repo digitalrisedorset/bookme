@@ -1134,6 +1134,20 @@
     fast-deep-equal "^3.1.3"
     graphql "^16.8.1"
 
+"@keystone-6/cloudinary@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.npmjs.org/@keystone-6/cloudinary/-/cloudinary-8.0.0.tgz"
+  integrity sha512-hV2KzC+Eym1aGMFk/f7TmzbND1RaQehyoF4yGDH5SxgC5oBa7sUfg5bjUxpMn9X4nq5DhkoU+ECG/qFTpzgIPA==
+  dependencies:
+    "@babel/runtime" "^7.16.3"
+    "@keystone-ui/button" "^7.0.2"
+    "@keystone-ui/core" "^5.0.2"
+    "@keystone-ui/fields" "^7.2.0"
+    "@keystone-ui/pill" "^7.0.2"
+    "@types/react" "^18.0.9"
+    cloudinary "^2.0.0"
+    react "^18.2.0"
+
 "@keystone-6/core@^6.0.0", "@keystone-6/core@^6.3.1":
   version "6.3.1"
   resolved "https://registry.npmjs.org/@keystone-6/core/-/core-6.3.1.tgz"
@@ -2205,7 +2219,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.8.0 || ^17.0.0 || ^18.0.0", "@types/react@^16.9.0 || ^17.0.0 || ^18.0.0":
+"@types/react@*", "@types/react@^16.8.0 || ^17.0.0 || ^18.0.0", "@types/react@^16.9.0 || ^17.0.0 || ^18.0.0", "@types/react@^18.0.9":
   version "18.3.14"
   resolved "https://registry.npmjs.org/@types/react/-/react-18.3.14.tgz"
   integrity sha512-NzahNKvjNhVjuPBQ+2G7WlxstQ+47kXZNHlUvFakDViuIEfGY926GqhMueQFZ7woG+sPiQKlF36XfrIUVSUfFg==
@@ -2460,6 +2474,13 @@ clipboard-copy@^4.0.1:
   version "4.0.1"
   resolved "https://registry.npmjs.org/clipboard-copy/-/clipboard-copy-4.0.1.tgz"
   integrity sha512-wOlqdqziE/NNTUJsfSgXmBMIrYmfd5V0HCGsR8uAKHcg+h9NENWINcfRjtWGU77wDHC8B8ijV4hMTGYbrKovng==
+
+cloudinary@^2.0.0:
+  version "2.9.0"
+  resolved "https://registry.npmjs.org/cloudinary/-/cloudinary-2.9.0.tgz"
+  integrity sha512-F3iKMOy4y0zy0bi5JBp94SC7HY7i/ImfTPSUV07iJmRzH1Iz8WavFfOlJTR1zvYM/xKGoiGZ3my/zy64In0IQQ==
+  dependencies:
+    lodash "^4.17.21"
 
 color-convert@^2.0.1:
   version "2.0.1"
@@ -3257,6 +3278,11 @@ lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.npmjs.org/lodash.sortby/-/lodash.sortby-4.7.0.tgz"
   integrity sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==
+
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 loglevel@^1.6.8:
   version "1.9.2"

@@ -1,6 +1,6 @@
-import {awsTransporter} from "./awsmail";
-import {getTestMessageUrl} from "nodemailer";
-import {MailResponse} from "./mail/resetpassword";
+// import {awsTransporter} from "./awsmail";
+// import {getTestMessageUrl} from "nodemailer";
+// import {MailResponse} from "./mail/resetpassword";
 
 export function makeANiceEmail(text: string) {
     return `
@@ -20,15 +20,15 @@ export function makeANiceEmail(text: string) {
 }
 
 export const sendEmail = async (to: string, subject: string, message: string) => {
-    const info = (await awsTransporter.sendMail({
-        to,
-        from: "herve@digitalrisedorset.co.uk",
-        subject,
-        html: makeANiceEmail(message),
-    })) as MailResponse;
-
-    if(process.env.MAIL_USER.includes('ethereal.email')) {
-        console.log(`💌 Message Sent!  Preview it at ${getTestMessageUrl(info)}`);
-
-    }
+    // const info = (await awsTransporter.sendMail({
+    //     to,
+    //     from: "herve@digitalrisedorset.co.uk",
+    //     subject,
+    //     html: makeANiceEmail(message),
+    // })) as MailResponse;
+    //
+    // if(process.env.MAIL_USER.includes('ethereal.email')) {
+    //     console.log(`💌 Message Sent!  Preview it at ${getTestMessageUrl(info)}`);
+    //
+    // }
 }
