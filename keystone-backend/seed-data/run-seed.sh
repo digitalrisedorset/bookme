@@ -29,10 +29,18 @@ STEP=$(jq ".sequence[$NEXT_INDEX]" "$SEQUENCE_FILE")
 
 echo "▶ Running seed step $STEP (sequence index $NEXT_INDEX)"
 
+# Safety: ensure port 3000 is free
+if ss -ltn | grep -q ':3000'; then
+  echo "❌ Port 3000 is already in use. Stop Keystone before seeding."
+  exit 1
+fi
+
 LOG_FILE="/tmp/keystone-seed.log"
 
-npx keystone dev --seed-data-step "$STEP" > "$LOG_FILE" 2>&1 &
+npx keystone dev --seed-data-step "$STEP" > "$LOG_FILE" 2>&1
 
+# If we reach here, keystone dev exited successfully
 echo "$NEXT_INDEX" > "$STATE_FILE"
 
 echo "✔ Seed step $STEP completed (index $NEXT_INDEX)"
+
