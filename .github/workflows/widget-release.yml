@@ -43,7 +43,7 @@ jobs:
       - name: Verify artifact exists
         working-directory: docker_bookingsystem/vite_project
         run: |      
-          test -f "www/widget-${WIDGET_NAME}@${VERSION}.iife.js"
+          test -f "www/widget-booking@${VERSION}.iife.js"
 
       - name: Setup SSH
         run: |
