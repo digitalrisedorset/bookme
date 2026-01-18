@@ -55,7 +55,8 @@ export function extendGraphqlSchema (baseSchema: GraphQLSchema) {
           addToCart(
              eventId: ID! 
              shampoo: Int
-             eventTypeId: ID!            
+             eventTypeId: ID! 
+             turnstileToken: String!           
           ): String
           """ Register a payment token and create the associated order"""
           checkout(

@@ -119,7 +119,7 @@ export class EventCreator {
         const venue = await this.venueCreator.getVenueByCode(event.venue)
         const eventHost = await this.eventHostCreator.getEventHostByCode(event.eventHost)
 
-        const eventDates = this.dateFinder.getDatesByDay(event.day, 2025)
+        const eventDates = this.dateFinder.getDatesByDay(event.day, 2026)
 
          for (let i = 0; i < eventDates.length; i++) {
              // start time = 7:00

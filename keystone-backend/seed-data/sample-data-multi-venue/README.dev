@@ -1,0 +1,6 @@
+replace sample-data/eventHost by sample-data/eventHost
+then run seed-data script
+
+//this.venueHolidayCreator.createAllOutletHolidays()
+//this.eventTypeCreator.createAllEventTypes()
+//this.eventHostHolidayCreator.createAllEventHostHolidays()

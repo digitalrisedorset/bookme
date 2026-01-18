@@ -5,13 +5,22 @@ import calculatePrice from "./calculatePrice";
 import calculateEventDuration from "./calculateEventDuration";
 import updateEventAndRemoveOverlappingEvent from "./removeOverlappingEvent";
 import freecheckout from "./freecheckout";
+import {verifyTurnstileToken} from "../lib/verifyTurnstile";
+import {getRequestIp} from "../lib/request";
 
 async function addToCart(
   root: any,
-  { eventId, shampoo, eventTypeId }: { eventId: string, shampoo: number, eventTypeId: string },
+  { eventId, shampoo, eventTypeId, turnstileToken }: { eventId: string, shampoo: number, eventTypeId: string, turnstileToken: string },
   context: Context
 ): Promise<string> {
-  console.log('addToCart', {eventId, shampoo, eventTypeId})
+  const ip = getRequestIp(context.req);
+  const isHuman = await verifyTurnstileToken(turnstileToken, ip);
+
+  console.log('addToCart', {eventId, shampoo, eventTypeId, turnstileToken, ip, isHuman})
+
+  if (!isHuman) {
+    throw new Error("Human verification failed");
+  }
   // 1. Query the current user see if they are signed in
   const sesh = context.session as Session;
   if (!sesh.itemId) {
