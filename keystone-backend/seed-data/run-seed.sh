@@ -32,17 +32,6 @@ echo "▶ Running seed step $STEP (sequence index $NEXT_INDEX)"
 LOG_FILE="/tmp/keystone-seed.log"
 
 npx keystone dev --seed-data-step "$STEP" > "$LOG_FILE" 2>&1 &
-KESTONE_PID=$!
-
-echo "▶ Keystone started (pid $KESTONE_PID), waiting for seed to complete"
-
-until grep -q "Seed data inserted" "$LOG_FILE"; do
-  sleep 1
-done
-
-echo "▶ Seed completed, stopping keystone dev"
-kill "$KESTONE_PID"
-wait "$KESTONE_PID" || true
 
 echo "$NEXT_INDEX" > "$STATE_FILE"
 
