@@ -1,0 +1,38 @@
+name: Keystone – seed data (sequenced, manual)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  keystone-seed:
+    runs-on: ubuntu-latest
+    environment: reactedge
+
+    steps:
+      - name: Setup SSH
+        shell: bash
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Run sequenced seed step
+        shell: bash
+        run: |
+          ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} << 'EOF'
+            set -e
+
+            cd /var/www/booking-keystone
+
+            echo "▶ Stopping Keystone"
+            pm2 stop booking-keystone
+
+            echo "▶ Running sequenced seed step"
+            ./seed-data/run-seed.sh
+
+            echo "▶ Restarting Keystone"
+            pm2 start booking-keystone
+
+            echo "✔ Seed step completed successfully"
+          EOF
