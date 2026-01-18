@@ -41,8 +41,8 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Verify artifact exists
-        run: |
-          VERSION=$(node -p "require('./vite_project/package.json').version")
+        working-directory: docker_bookingsystem/vite_project
+        run: |      
           test -f "www/widget-${WIDGET_NAME}@${VERSION}.iife.js"
 
       - name: Setup SSH
