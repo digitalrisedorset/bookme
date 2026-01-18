@@ -45,9 +45,12 @@ export default withAuth<TypeInfo<Session>>(
         ui: {
             /*isAccessAllowed: ()=> true,*/
             // only admins can view the AdminUI
-            isAccessAllowed: (context) => {
-                return context.session?.data?.isAdmin ?? false
-            },
+            // isAccessAllowed: (context) => {
+            //     return context.session?.data?.isAdmin ?? false
+            // },
+            isAccessAllowed: ({ req }) => {
+                return req.headers.authorization === `Bearer ${process.env.KEYSTONE_SERVICE_TOKEN}`;
+            }
         },
         // you can find out more at https://keystonejs.com/docs/apis/session#session-api
         session: statelessSessions(sessionConfig)
