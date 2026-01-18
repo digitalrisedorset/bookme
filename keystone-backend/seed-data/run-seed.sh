@@ -29,7 +29,13 @@ STEP=$(jq ".sequence[$NEXT_INDEX]" "$SEQUENCE_FILE")
 
 echo "▶ Running seed step $STEP (sequence index $NEXT_INDEX)"
 
-npx keystone dev --seed-data-step "$STEP"
+npx keystone dev --seed-data-step "$STEP" | tee /tmp/seed.log &
+KESTONE_PID=$!
+
+grep -q "Seed data inserted" <(tail -f /tmp/seed.log)
+
+kill "$KESTONE_PID"
+wait "$KESTONE_PID" || true
 
 echo "$NEXT_INDEX" > "$STATE_FILE"
 
