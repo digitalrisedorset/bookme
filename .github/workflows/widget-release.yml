@@ -9,6 +9,7 @@ on:
       widget:
         description: 'Booking widget name (e.g. calendar, hostpicker)'
         required: true
+        default: booking
         type: string
 
 jobs:
@@ -34,8 +35,9 @@ jobs:
         run: npm run build
 
       - name: Verify artifact exists
+        working-directory: docker_bookingsystem
         run: |
-          VERSION=$(node -p "require('./docker_bookingsystem/vite_project/package.json').version")
+          VERSION=$(node -p "require('./vite_project/package.json').version")
           test -f "www/widget-booking@${VERSION}.iife.js"
 
       - name: Setup SSH
