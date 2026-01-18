@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 set -e
 
-REQUESTED_STEP="$1"
-STATE_FILE=".seed-state"
-SEQUENCE_FILE="seed-sequence.json"
+command -v jq >/dev/null 2>&1 || {
+  echo "❌ jq is required but not installed"
+  exit 1
+}
 
-# Load sequence
-SEQUENCE=$(jq -r '.sequence[]' "$SEQUENCE_FILE")
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+STATE_FILE="$SCRIPT_DIR/.seed-state"
+SEQUENCE_FILE="$SCRIPT_DIR/seed-sequence.json"
+
 TOTAL=$(jq '.sequence | length' "$SEQUENCE_FILE")
 
-# Load current index
 CURRENT_INDEX=-1
 if [ -f "$STATE_FILE" ]; then
   CURRENT_INDEX=$(cat "$STATE_FILE")
@@ -22,19 +25,12 @@ if [ "$NEXT_INDEX" -ge "$TOTAL" ]; then
   exit 0
 fi
 
-EXPECTED_STEP=$(jq ".sequence[$NEXT_INDEX]" "$SEQUENCE_FILE")
+STEP=$(jq ".sequence[$NEXT_INDEX]" "$SEQUENCE_FILE")
 
-if [ "$REQUESTED_STEP" -ne "$EXPECTED_STEP" ]; then
-  echo "❌ Invalid seed step"
-  echo "   Current index : $CURRENT_INDEX"
-  echo "   Expected step : $EXPECTED_STEP (sequence index $NEXT_INDEX)"
-  echo "   Requested     : $REQUESTED_STEP"
-  exit 1
-fi
+echo "▶ Running seed step $STEP (sequence index $NEXT_INDEX)"
 
-echo "▶ Running seed step $REQUESTED_STEP (sequence index $NEXT_INDEX)"
-
-npx keystone dev --seed-data-step "$REQUESTED_STEP"
+npx keystone dev --seed-data-step "$STEP"
 
 echo "$NEXT_INDEX" > "$STATE_FILE"
-echo "✔ Seed step completed"
+
+echo "✔ Seed step $STEP completed (index $NEXT_INDEX)"
