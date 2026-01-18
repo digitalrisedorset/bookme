@@ -10,6 +10,7 @@ export async function graphqlRequest<T>(
         credentials: 'include',
         headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${import.meta.env.KEYSTONE_SERVICE_TOKEN}`,
         },
         body: JSON.stringify({ query, variables }),
     });
