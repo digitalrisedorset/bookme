@@ -6,6 +6,7 @@ on:
 jobs:
   keystone-start:
     runs-on: ubuntu-latest
+    environment: reactedge
 
     steps:
       - name: Setup SSH
