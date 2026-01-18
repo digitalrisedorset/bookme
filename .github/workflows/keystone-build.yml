@@ -22,7 +22,9 @@ jobs:
             set -e
 
             cd /var/www/booking-keystone
-
+            echo "▶ Cleaning generated state"
+            rm -rf node_modules .keystone
+  
             echo "▶ Installing dependencies"
             npm ci
 
