@@ -43,4 +43,4 @@ temp
 *.sql
 docker_bookingsystem/docker/nginx_vite/ssl/*.crt
 docker_bookingsystem/docker/nginx_vite/ssl/*.key
-
+README-dev.md
