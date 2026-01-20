@@ -1,40 +1,36 @@
-openssl req -x509 -nodes -newkey rsa:2048 \
--keyout widget.local.key \
--out widget.local.crt \
--days 365 \
--subj "/CN=widget.bookingsystem.co.uk"
+# Booking System Widget
 
+A **decoupled, embeddable booking widget** delivered as a single versioned JavaScript file.  
+It can be embedded into **WordPress, Magento, or static sites** and communicates with a Keystone backend.
 
-<div class="booking-system">
-    <bookingsystem-widget
-            data-load="eager"
-            data-page="request-an-appointment"
-            data-src="https://widget-bookingsystem.reactedge.net/widget-booking-sytem.iife.js"
-    ></bookingsystem-widget>
-</div>
+The widget is designed for **isolation, determinism, and flexible reuse** across different use cases and industries.
 
-<div id="security-gate" class="hidden">
-    <div class="security-veil"></div>
-    <div id="booking-turnstile"></div>
-</div>
+---
 
-https://widget.bookingsystem.co.uk:8448/widget-contact-us.iife.js
-rsync -arvgot docker_bookingsystem/www/ root@18.175.100.27:/var/www/docker_bookingsystem/www/
+## What this repository contains
 
+- Frontend booking widget source
+- Build pipeline producing `widget-*.iife.js`
+- Public embedding contract (custom element + data attributes)
+- Local development setup for the widget
 
-rsync -arvgot --exclude=".git" --exclude="node_modules" --exclude="build" --exclude=".keystone"  keystone-backend root@18.175.100.27:/var/www/keystone/
+---
 
-`server {
-    listen 80;
-    server_name keystone.reactedge.net;
+## What this repository does NOT contain
 
-    location / {
-        proxy_set_header   X-Forwarded-For $remote_addr;
-        proxy_set_header   Host $http_host;
-        proxy_pass         "http://127.0.0.1:3000";
-    }
-}`
+- Backend (Keystone) configuration
+- Server, Nginx, TLS, pm2, or deployment setup
+- CMS theme code (WordPress, Magento)
+- Infrastructure or operations scripts
 
-apt install npm
-npm install -g pm2
+---
 
+## Usage
+
+Embed the widget by including the custom element and pointing it to a **versioned script URL**:
+
+```html
+<bookingsystem-widget
+  data-src="https://widgets.example.com/widget-booking-system@X.Y.Z.iife.js"
+  data-page="request-an-appointment"
+></bookingsystem-widget>

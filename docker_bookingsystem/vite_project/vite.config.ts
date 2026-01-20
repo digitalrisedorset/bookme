@@ -21,6 +21,8 @@ export default defineConfig({
         inlineDynamicImports: true,
         assetFileNames: "widget-booking.[ext]",
       },
-    }
+    },
+    minify: true,
+    sourcemap: true
   }
 });
