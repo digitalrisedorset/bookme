@@ -57,5 +57,7 @@ jobs:
         run: |        
           ssh ${{ secrets.WIDGET_SSH_USER }}@${{ secrets.WIDGET_SSH_HOST }} \
             "mkdir -p /var/www/widgets/booking"
-          scp www/widget-booking@${VERSION}.iife.js \
+          rsync -av \
+            --chown=www-data:www-data \
+            www/widget-booking@${VERSION}.iife.js* \
             ${{ secrets.WIDGET_SSH_USER }}@${{ secrets.WIDGET_SSH_HOST }}:/var/www/widgets/booking/
