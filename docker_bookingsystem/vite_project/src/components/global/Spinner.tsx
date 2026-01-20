@@ -3,21 +3,36 @@ type SpinnerProps = {
     className?: string;
 };
 
-export function Spinner({ size = 40, className }: SpinnerProps) {
+export function Spinner({ size = 40 }: SpinnerProps) {
     return (
-        <span
-            className={className}
-            style={{
-                width: size,
-                height: size,
-                display: "inline-block",
-                backgroundImage: 'url("/loading.svg")',
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-                backgroundSize: "contain",
-            }}
-            role="status"
-            aria-label="Loading"
-        />
+        <div className="widget-loader-wrapper" role="status" aria-label="Loading">
+            <svg
+                width={size}
+                height={size}
+                viewBox="0 0 50 50"
+                aria-label="Loading"
+                role="status"
+            >
+                <circle
+                    cx="25"
+                    cy="25"
+                    r="20"
+                    fill="none"
+                    stroke="#d3cdcd"
+                    strokeWidth="4"
+                    strokeDasharray="31.4 31.4"
+                    strokeLinecap="round"
+                >
+                    <animateTransform
+                        attributeName="transform"
+                        type="rotate"
+                        from="0 25 25"
+                        to="360 25 25"
+                        dur="0.8s"
+                        repeatCount="indefinite"
+                    />
+                </circle>
+            </svg>
+        </div>
     );
 }
