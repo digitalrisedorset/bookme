@@ -41,3 +41,6 @@ secret
 temp
 .next
 *.sql
+docker_bookingsystem/docker/nginx_vite/ssl/*.crt
+docker_bookingsystem/docker/nginx_vite/ssl/*.key
+
