@@ -1,0 +1,24 @@
+{
+  "name": "auth-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Minimal same-origin auth bridge for forwarding session cookies to OAuth",
+  "main": "build/index.js",
+  "scripts": {
+    "start:build": "npx tsc -w",
+    "start:run": "nodemon build/index.js",
+    "start": "concurrently npm:start:*"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/express": "^4.17.21",
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.11",
+    "typescript": "^5.8.3"
+  }
+}
