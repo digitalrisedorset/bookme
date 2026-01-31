@@ -10,7 +10,7 @@ import {getRequestIp} from "../lib/request";
 
 async function addToCart(
   root: any,
-  { eventId, shampoo, eventTypeId, turnstileToken }: { eventId: string, shampoo: number, eventTypeId: string, turnstileToken: string },
+  { eventId, shampoo, eventTypeId, userId, turnstileToken }: { eventId: string, shampoo: number, eventTypeId: string, userId: string, turnstileToken: string },
   context: Context
 ): Promise<string> {
   const ip = getRequestIp(context.req);
@@ -22,20 +22,18 @@ async function addToCart(
     throw new Error("Human verification failed");
   }
   // 1. Query the current user see if they are signed in
-  const sesh = context.session as Session;
-  if (!sesh.itemId) {
+  if (!userId) {
     throw new Error('You must be logged in to do this!');
   }
 
   // 2. Query the current users cart
   const allCartItems = await context.query.CartItem.findMany({
-    where: { user: { id: {"equals": sesh.itemId }}, event: {id: {"equals": eventId } }},
+    where: { user: { id: {"equals": userId }}, event: {id: {"equals": eventId } }},
     query: 'id quantity'
   });
 
   const [existingCartItem] = allCartItems;
   if (existingCartItem) {
-    console.log(allCartItems)
     console.log(
         `There are already ${existingCartItem.quantity}, increment by 1!`
     );
@@ -59,15 +57,15 @@ async function addToCart(
       eventType: { connect: { id: eventTypeId}},
       shampoo,
       price,
-      user: { connect: { id: sesh.itemId }},
+      user: { connect: { id: userId }},
     },
     query: 'id quantity'
   })
 
-  const removeEventIds = await updateEventAndRemoveOverlappingEvent(root, {eventId, endTime}, context)
+  const removeEventIds = await updateEventAndRemoveOverlappingEvent(root, {eventId, endTime, userId}, context)
 
   if (price === 0) { // send an email confirming the appointment is received
-    await freecheckout(root, context)
+    await freecheckout(root, {userId}, context)
   }
 
   return removeEventIds

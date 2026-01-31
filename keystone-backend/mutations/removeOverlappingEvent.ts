@@ -4,11 +4,10 @@ import type {Session} from "../schema";
 
 async function updateEventAndRemoveOverlappingEvent(
     root: any,
-    { eventId, endTime }: { eventId: String, endTime: String },
+    { eventId, endTime, userId }: { eventId: String, endTime: String, userId: String },
     context: Context
 ): Promise<string> {
-    const sesh = context.session as Session;
-    if (!sesh.itemId) {
+    if (!userId) {
         throw new Error('You must be logged in to do this!');
     }
 

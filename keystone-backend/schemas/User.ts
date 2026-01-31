@@ -1,26 +1,16 @@
-import {list} from "@keystone-6/core";
+import {list, graphql} from "@keystone-6/core";
 import {allowAll, denyAll} from "@keystone-6/core/access";
-import {password, text, checkbox, relationship, calendarDay, integer} from "@keystone-6/core/fields";
-import type {Session} from "../schema";
+import {password, text, checkbox, relationship, calendarDay, integer, select} from "@keystone-6/core/fields";
+import addToCart from "../mutations/addToCart";
+import checkout from "../mutations/checkout";
+import updateEventAndRemoveOverlappingEvent from "../mutations/removeOverlappingEvent";
+import calculatePrice from "../mutations/calculatePrice";
+import calculateEventDuration from "../mutations/calculateEventDuration";
+import venueEventTypeGroups from "../mutations/venueEventTypeGroups";
 
-export function isAdminOrSameUser ({ session }: { session?: Session }) {
-    // you need to have a session to do this
-    if (!session) return false
-
-    // admins can do anything
-    if (session.data.isAdmin) return true
-}
-
-export function isAdmin ({ session }: { session?: Session }) {
-    // you need to have a session to do this
-    if (!session) return false
-
-    // admins can do anything
-    if (session.data.isAdmin) return true
-
-    // otherwise, no
-    return false
-}
+const commonPasswords = [
+    "password", "123456", "123456789", "qwerty", "abc123", "password1", "123123"
+];
 
 export const User = list({
     access: allowAll,
@@ -44,23 +34,29 @@ export const User = list({
                 isRequired: true,
             },
         }),
+        provider: select({
+            options: [
+                { label: 'Credentials', value: 'credentials' },
+                { label: 'Google', value: 'google' },
+                { label: 'Apple', value: 'apple' },
+            ],
+            defaultValue: 'credentials',
+        }),
         // the user's password, used as the secret field for authentication
         //   should not be publicly visible
         password: password({
-            access: {
-                read: denyAll, // TODO: is this required?
-                update: isAdminOrSameUser,
-            },
-            validation: {
-                isRequired: true,
-            },
-            ui: {
-                itemView: {
-                    // don't show this field if it isn't relevant
-                    fieldMode: args => (isAdminOrSameUser(args) ? 'edit' : 'hidden'),
-                },
-                listView: {
-                    fieldMode: 'hidden', // TODO: is this required?
+            hooks: {
+                validateInput: async ({ resolvedData, item, addValidationError }) => {
+                    const provider = resolvedData.provider ?? item?.provider ?? null;
+                    const pwd = resolvedData.password ?? item?.password;
+
+                    if (provider === 'credentials') {
+                        if (!pwd) {
+                            addValidationError('Password is required for credential-based users.');
+                        } else if (pwd.length < 8) {
+                            addValidationError('Password must be at least 8 characters long.');
+                        }
+                    }
                 },
             },
         }),
@@ -117,24 +113,7 @@ export const User = list({
             access: allowAll,
         }),
         isAdmin: checkbox({
-            access: {
-                // only the respective user, or an admin can read this field
-                read: isAdminOrSameUser,
-
-                // only admins can create, or update this field
-                create: isAdmin,
-                update: isAdmin,
-            },
             defaultValue: false,
-            ui: {
-                // only admins can edit this field
-                createView: {
-                    fieldMode: args => (isAdmin(args) ? 'edit' : 'hidden'),
-                },
-                itemView: {
-                    fieldMode: args => (isAdmin(args) ? 'edit' : 'read'),
-                },
-            },
         }),
     },
     hooks: {
@@ -164,3 +143,5 @@ export const User = list({
         },
     }
 })
+
+

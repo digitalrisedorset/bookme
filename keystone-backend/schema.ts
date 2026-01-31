@@ -21,6 +21,7 @@ import updateEventAndRemoveOverlappingEvent from "./mutations/removeOverlappingE
 import {Role} from "./schemas/Role";
 import venueEventTypeGroups from "./mutations/venueEventTypeGroups";
 import {EventMedia} from "./schemas/EventMedia";
+import {graphql} from "@keystone-6/core";
 
 export type Session = {
     itemId: string
@@ -46,58 +47,136 @@ export const lists = {
     OrderItem
 } satisfies Lists
 
-export function extendGraphqlSchema (baseSchema: GraphQLSchema) {
-    return mergeSchemas({
-        schemas: [baseSchema],
-        typeDefs: `
-        type Mutation {
-          """ Add an event to the cart of the logged-in user"""
-          addToCart(
-             eventId: ID! 
-             shampoo: Int
-             eventTypeId: ID! 
-             turnstileToken: String!           
-          ): String
-          """ Register a payment token and create the associated order"""
-          checkout(
-            token: String!
-          ): Order    
-          """ Remove events from the system that overlaps and have the same eventHost assigned with an event id """
-          updateEventAndRemoveOverlappingEvent(           
-            eventId: ID! 
-            endTime: String
-          ): String    
-        }
-        type Query {
-          """ Calculate price for a eventType, shampoo and eventHost seniority"""
-          calculatePrice(
-            eventTypeId: ID! 
-            shampoo: Int
-            eventId: ID! 
-          ): Int
-          """ Calculate duration needed for a eventType, shampoo and eventHost seniority"""
-          calculateEventDuration(
-            eventTypeId: ID! 
-            shampoo: Int
-            eventId: ID! 
-          ): String      
-          """ Retrieve all EventTypeGroups that have some EventType assigned"""
-          venueEventTypeGroups(
-            venueId: ID!           
-          ): [EventTypeGroup!]        
-        }
-        `,
-        resolvers: {
-            Mutation: {
-                addToCart,
-                checkout,
-                updateEventAndRemoveOverlappingEvent
+export const extendGraphqlSchema = graphql.extend(base => ({
+    mutation: {
+        upsertUser: graphql.field({
+            type: base.object('User'),
+            args: {
+                email: graphql.arg({type: graphql.nonNull(graphql.String)}),
+                name: graphql.arg({type: graphql.String}),
+                provider: graphql.arg({type: graphql.String}),
             },
-            Query: {
-                calculatePrice,
-                calculateEventDuration,
-                venueEventTypeGroups
+            async resolve(root, {email, name, provider}, context) {
+                const existing = await context.db.User.findOne({where: {email}});
+
+                if (existing) {
+                    return await context.db.User.updateOne({
+                        where: {id: existing.id},
+                        data: {
+                            name,
+                            provider,
+                        },
+                    });
+                }
+
+                return await context.db.User.createOne({
+                    data: {
+                        email,
+                        name,
+                        provider,
+                    },
+                });
             }
-        },
-    })
-}
+        }),
+        addToCart: graphql.field({
+            type: graphql.String,
+            description: 'Add an event to the cart of the logged-in user',
+            args: {
+                eventId: graphql.arg({ type: graphql.nonNull(graphql.ID) }),
+                shampoo: graphql.arg({ type: graphql.Int }),
+                eventTypeId: graphql.arg({ type: graphql.nonNull(graphql.ID) }),
+                userId: graphql.arg({ type: graphql.nonNull(graphql.ID) }),
+                turnstileToken: graphql.arg({
+                    type: graphql.nonNull(graphql.String),
+                }),
+            },
+            async resolve(root, args, context) {
+                return addToCart(root, args, context);
+            },
+        }),
+
+        checkout: graphql.field({
+            type: base.object('Order'),
+            description: 'Register a payment token and create the associated order',
+            args: {
+                token: graphql.arg({
+                    type: graphql.nonNull(graphql.String),
+                }),
+            },
+            async resolve(root, args, context) {
+                return checkout(root, args, context);
+            },
+        }),
+
+        updateEventAndRemoveOverlappingEvent: graphql.field({
+            type: graphql.String,
+            description:
+                'Remove overlapping events assigned to the same event host',
+            args: {
+                eventId: graphql.arg({
+                    type: graphql.nonNull(graphql.ID),
+                }),
+                endTime: graphql.arg({
+                    type: graphql.String,
+                }),
+            },
+            async resolve(root, args, context) {
+                return updateEventAndRemoveOverlappingEvent(root, args, context);
+            },
+        }),
+    },
+
+    query: {
+        calculatePrice: graphql.field({
+            type: graphql.Int,
+            description:
+                'Calculate price for an eventType, shampoo and eventHost seniority',
+            args: {
+                eventTypeId: graphql.arg({
+                    type: graphql.nonNull(graphql.ID),
+                }),
+                shampoo: graphql.arg({ type: graphql.Int }),
+                eventId: graphql.arg({
+                    type: graphql.nonNull(graphql.ID),
+                }),
+            },
+            async resolve(root, args, context) {
+                return calculatePrice(root, args, context);
+            },
+        }),
+
+        calculateEventDuration: graphql.field({
+            type: graphql.String,
+            description:
+                'Calculate duration needed for an eventType, shampoo and eventHost seniority',
+            args: {
+                eventTypeId: graphql.arg({
+                    type: graphql.nonNull(graphql.ID),
+                }),
+                shampoo: graphql.arg({ type: graphql.Int }),
+                eventId: graphql.arg({
+                    type: graphql.nonNull(graphql.ID),
+                }),
+            },
+            async resolve(root, args, context) {
+                return calculateEventDuration(root, args, context);
+            },
+        }),
+
+        venueEventTypeGroups: graphql.field({
+            type: graphql.list(
+                graphql.nonNull(base.object('EventTypeGroup'))
+            ),
+            description:
+                'Retrieve all EventTypeGroups that have some EventType assigned',
+            args: {
+                venueId: graphql.arg({
+                    type: graphql.nonNull(graphql.ID),
+                }),
+            },
+            async resolve(root, args, context) {
+                return venueEventTypeGroups(root, args, context);
+            },
+        }),
+    },
+}));

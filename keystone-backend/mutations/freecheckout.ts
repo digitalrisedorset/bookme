@@ -6,11 +6,11 @@ const graphql = String.raw;
 
 async function freecheckout(
     root: any,
+    { userId }: { userId: string },
     context: Context
 ): Promise<OrderCreateInput> {
     console.log('creating an order')
     // 1. Make sure they are signed in
-    const userId = context.session.itemId;
     if(!userId) {
         throw new Error('Sorry! You must be signed in to create an order!')
     }
