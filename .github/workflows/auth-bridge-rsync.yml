@@ -22,12 +22,12 @@ jobs:
 
       - name: Rsync Auth Bridge to server
         run: |
-          rsync -arvgot --delete \
+          rsync -av \
             --exclude node_modules \
             --exclude .idea \
             --exclude .vscode \
             --exclude .env \
             --exclude .env.* \
-            --exclude README* \
+            --exclude README* \ 
             auth-bridge/ \
             ${{ secrets.WIDGET_SSH_USER }}@${{ secrets.WIDGET_SSH_HOST }}:/var/www/auth-bridge/
