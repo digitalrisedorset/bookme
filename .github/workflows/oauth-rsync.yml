@@ -20,7 +20,7 @@ jobs:
 
           ssh-keyscan -H "${{ secrets.WIDGET_SSH_HOST }}" >> ~/.ssh/known_hosts
 
-      - name: Rsync Keystone backend to server
+      - name: Rsync OAuth to server
         run: |
           rsync -arvgot --delete \
             --exclude="node_modules" \

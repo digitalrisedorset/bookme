@@ -1,4 +1,4 @@
-name: Bootstrap OAuth via rsync
+name: Bootstrap Auth via rsync
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ jobs:
 
           ssh-keyscan -H "${{ secrets.WIDGET_SSH_HOST }}" >> ~/.ssh/known_hosts
 
-      - name: Rsync Keystone backend to server
+      - name: Rsync Auth to server
         run: |
           rsync -arvgot --delete \
             --exclude="node_modules" \
