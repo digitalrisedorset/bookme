@@ -1,0 +1,33 @@
+name: Bootstrap Keystone via rsync
+
+on:
+  workflow_dispatch:
+
+jobs:
+  oauth-bootstrap:
+    runs-on: ubuntu-latest
+    environment: reactedge
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.WIDGET_SSH_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          ssh-keyscan -H "${{ secrets.WIDGET_SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Rsync OAuth to server
+        run: |
+          rsync -arvgot --delete \
+            --exclude="node_modules" \          
+            --exclude=".idea" \
+            --exclude=".vscode" \
+            --exclude=".env" \
+            --exclude=".env.*" \
+            --exclude="README*" \
+            oauth-express/ \
+            ${{ secrets.WIDGET_SSH_USER }}@${{ secrets.WIDGET_SSH_HOST }}:/var/www/oauth-express/
