@@ -1,4 +1,4 @@
-name: Bootstrap Keystone via rsync
+name: Bootstrap Auth via rsync
 
 on:
   workflow_dispatch:
