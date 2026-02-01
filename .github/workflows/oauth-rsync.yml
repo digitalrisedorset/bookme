@@ -1,10 +1,10 @@
-name: Bootstrap OAuth via rsync
+name: Bootstrap Keystone via rsync
 
 on:
   workflow_dispatch:
 
 jobs:
-  oauth-bootstrap:
+  keystone-bootstrap:
     runs-on: ubuntu-latest
     environment: reactedge
 
@@ -20,14 +20,15 @@ jobs:
 
           ssh-keyscan -H "${{ secrets.WIDGET_SSH_HOST }}" >> ~/.ssh/known_hosts
 
-      - name: Rsync OAuth to server
+      - name: Rsync Keystone backend to server
         run: |
           rsync -arvgot --delete \
-            --exclude="node_modules" \     
+            --exclude="node_modules" \
+            --exclude=".keystone" \
             --exclude=".idea" \
             --exclude=".vscode" \
             --exclude=".env" \
             --exclude=".env.*" \
             --exclude="README*" \
             oauth-express/ \
-            ${{ secrets.WIDGET_SSH_USER }}@${{ secrets.WIDGET_SSH_HOST }}:/var/www/oauth-express/
+            ${{ secrets.WIDGET_SSH_USER }}@${{ secrets.WIDGET_SSH_HOST }}:/var/www/booking-keystone/
