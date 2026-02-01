@@ -3,12 +3,19 @@ import { config } from "./config";
 import { pipeline } from 'stream/promises';
 import { Readable } from 'stream';
 import cookieParser from 'cookie-parser';
+//import cors from 'cors';
 
 type OAuthLoginResult = { token: string; user?: unknown }
 
 const app: Application = express();
 app.use(express.json());
 app.use(cookieParser());
+// app.use(cors({
+//     origin: 'https://southerndemo.com',
+//     credentials: true,
+// }));
+//
+// app.options('*', cors());
 
 app.use((req: Request, _res: Response, next: NextFunction) => {
     console.log(
