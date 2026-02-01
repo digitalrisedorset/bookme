@@ -1,9 +1,0 @@
-name: Build & publish keystone
-
-on:
-  push:
-    tags:
-      - "keystone-v*"
-    paths:
-      - "keystone-backend/**"
-      - ".github/workflows/deploy-keystone.yml"
