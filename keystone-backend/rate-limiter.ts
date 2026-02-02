@@ -1,4 +1,4 @@
-import rateLimit from 'express-rate-limit';
+import rateLimit, {ipKeyGenerator} from 'express-rate-limit';
 
 export const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -10,5 +10,5 @@ export const limiter = rateLimit({
         return 100; // ✅ Normal limit for unauthenticated users
     },
     message: "❌ Too many requests, please try again later.",
-    keyGenerator: (req) => req.ip,
+    keyGenerator: (req, res) => ipKeyGenerator(req, res),
 });

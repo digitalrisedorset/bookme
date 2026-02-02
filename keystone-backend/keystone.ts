@@ -62,9 +62,9 @@ export default withAuth<TypeInfo>(
             // isAccessAllowed: (context) => {
             //     return context.session?.data?.isAdmin ?? false
             // },
-            isAccessAllowed: ({ req }) => {
+             isAccessAllowed: ({ req }) => {
                 return req.headers.authorization === `Bearer ${process.env.KEYSTONE_SERVICE_TOKEN}`;
-            }
+             }
         },
         // you can find out more at https://keystonejs.com/docs/apis/session#session-api
         session,
