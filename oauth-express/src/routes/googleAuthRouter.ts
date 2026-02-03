@@ -10,11 +10,6 @@ export const setupGoogleAuthRoutes = (app: Application) => {
 
     const googleHandlerController = new GoogleAuthHandler()
 
-    router.use('/', (req: Request, res: Response, next: NextFunction) => {
-        console.log(`Google Auth request: ${req.url}`)
-        next()
-    })
-
     router.get("/auth", googleHandlerController.authenticate)
 
     router.get("/auth/callback", googleHandlerController.loginCallback)

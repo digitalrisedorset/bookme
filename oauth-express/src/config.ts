@@ -1,5 +1,6 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import {loadEnv} from "./lib/env";
+
+loadEnv();
 
 if (!process.env.JWT_SECRET) {
     throw new Error('JWT_SECRET environment variable is required');
@@ -21,6 +22,10 @@ export type configInfo = {
     },
     jwtSecret: string;
     sessionSecret: string;
+    debug: {
+        enabled?: boolean;
+        traceFilter?: string;
+    }
 }
 
 export const config: configInfo = {
@@ -41,6 +46,10 @@ export const config: configInfo = {
         genericApiPrefix: '/auth',
         googleApiPrefix: '/google',
         credentialsApiPrefix: '/local'
+    },
+    debug: {
+        enabled: process.env.AUTH_DEBUG === '1',
+        traceFilter: process.env.AUTH_TRACE_FILTER,
     },
 }
 

@@ -35,7 +35,8 @@ export type configInfo = {
         companyCode: string,
         offerShampoo: boolean,
         scheduleWeekSpan: number
-    }
+    },
+    ratelimit: number
 }
 
 const config: configInfo = {
@@ -70,7 +71,8 @@ const config: configInfo = {
         companyCode: 'maddison',
         offerShampoo: true,
         scheduleWeekSpan: 14
-    }
+    },
+    ratelimit: (process.env.RATE_LIMIT === undefined)?100:parseInt(process.env.RATE_LIMIT)
 }
 
 export { config as keystoneconfig}

@@ -1,6 +1,7 @@
 import {ErrorWrapper} from "../error-handler";
 import { Request, Response } from "express";
 import {getKeystoneUserById} from "../lib/keystone";
+import {oauthLog} from "../lib/log";
 
 export class GenericAuthHandler {
     errorWrapper = new ErrorWrapper()
@@ -19,6 +20,9 @@ export class GenericAuthHandler {
              const userId = (req.user as { id: string })?.id;
 
              if (!userId) {
+                 oauthLog('verify', req, {
+                     outcome: 'no-session',
+                 });
                  res.status(401).json({error: 'Not logged in'});
              }
 
@@ -32,14 +36,24 @@ export class GenericAuthHandler {
             req.session.touch();      // updates session timestamp
             req.session.save((err) => {
                 if (err) {
-                    console.error('❌ Failed to save session:', err);
+                    oauthLog('verify', req, {
+                        outcome: 'error',
+                        error: err instanceof Error ? err.message : 'unknown',
+                    });
                     res.status(500).json({error: 'Could not save session'});
                 }
+
+                oauthLog('verify', req, {
+                    outcome: 'active-session',
+                });
 
                 res.json({user: updatedUser});
             });
         } catch (err) {
-             console.error('❌ Error refreshing session:', err);
+             oauthLog('verify', req, {
+                 outcome: 'error',
+                 error: err instanceof Error ? err.message : 'unknown',
+             });
              res.status(500).json({ error: 'Internal error' });
         }
     }

@@ -9,7 +9,7 @@
     "start:run": "nodemon build/index.js",
     "start": "concurrently npm:start:*",
     "build": "tsc",
-    "start:prod": "node build/index.js"
+    "prod": "node build/index.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.7",

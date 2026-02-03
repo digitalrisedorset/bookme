@@ -3,6 +3,7 @@ import {ErrorWrapper} from "../error-handler";
 import passport from "passport";
 import { Request, Response, NextFunction } from "express";
 import { issueJwt } from "../lib/jwt";
+import {oauthLog} from "../lib/log";
 
 export class GoogleAuthHandler implements OAuthControllerInterface {
     errorWrapper = new ErrorWrapper()
@@ -14,10 +15,17 @@ export class GoogleAuthHandler implements OAuthControllerInterface {
     loginCallback = (req: Request, res: Response, next: NextFunction) => {
         passport.authenticate('google', (err: unknown, user: any) => {
             if (err || !user) {
+                oauthLog('verify', req, {
+                    outcome: 'rejected',
+                });
                 return res.redirect('/')
             }
 
             const token = issueJwt(user)
+
+            oauthLog('issue', req, {
+                outcome: 'issued',
+            });
 
             const redirectUrl = `${process.env.FRONTEND_HOST}/auth-callback?token=${token}`;
             res.redirect(redirectUrl);

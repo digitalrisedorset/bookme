@@ -11,11 +11,6 @@ export const setupGenericAuthRoutes = (app: Application) => {
 
     const genericHandlerController = new GenericAuthHandler()
 
-    router.use('/', (req: Request, res: Response, next: NextFunction) => {
-        console.log(`Generic Auth request: ${req.url}`)
-        next()
-    })
-
     router.use(verifyJwt)
 
     router.post("/logout", genericHandlerController.logout)

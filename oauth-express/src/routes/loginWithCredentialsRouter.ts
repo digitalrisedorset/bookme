@@ -10,11 +10,6 @@ export const setupLoginWithCredentialsRoutes = (app: Application) => {
 
     const credentialsLoginHandlerController = new LoginWithCredentialsHandler()
 
-    router.use('/', (req: Request, res: Response, next: NextFunction) => {
-        console.log(`Login With Credentials request: ${req.url}`)
-        next()
-    })
-
     router.post("/auth", credentialsLoginHandlerController.authenticate)
 
     router.options('*', options);

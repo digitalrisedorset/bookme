@@ -7,7 +7,8 @@ import {insertSeedData} from './seed-data'
 import { withAuth, session } from './auth'
 import {limiter} from "./rate-limiter";
 
-console.log(`Keystone frontend: ${keystoneconfig.frontend.host}`)
+console.log(`Keystone frontend: ${keystoneconfig.frontend.host}, backend: ${keystoneconfig.backend.host}`)
+console.log(`rate limit ${keystoneconfig.ratelimit}`)
 console.log(`database ${getDatabaseConnection()}`)
 
 export default withAuth<TypeInfo>(
