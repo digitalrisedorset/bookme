@@ -1,7 +1,5 @@
 import express, {Application, NextFunction, Request, Response} from "express";
 import { config } from "./config";
-import { pipeline } from 'stream/promises';
-import { Readable } from 'stream';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import {authBridgeLog} from "./lib/log";
@@ -29,15 +27,8 @@ app.post(`${config.route.prefix}/refresh-session`, async (req: Request, res: Res
     const trace = (req as any).authTraceId ?? 'none';
 
     try {
-        authBridgeLog('request', req, {
-            action: 'refresh-session',
-            test: 'dummy',
-            token: token,
-            tokenPresent: Boolean(token)
-        });
-
         const oauthRes = await fetch(
-            `${process.env.OAUTH_HOST}/auth/refresh-session`,
+            `${config.oauthUrl}/auth/refresh-session`,
             {
                 method: "POST",
                 headers: token
@@ -95,19 +86,21 @@ const redirectRoutes = [
 
 redirectRoutes.forEach((path) => {
     app.get(`${config.route.prefix}${path}`, (req, res) => {
-        res.redirect(`${process.env.OAUTH_HOST}/auth${path}`);
+        res.redirect(`${config.oauthUrl}/auth${path}`);
     });
 });
 
 app.get(`${config.route.prefix}/google`, (req, res) => {
-    authBridgeLog('request', req, {
-        action: 'google',
-        outcome: 'google-redirect'
-    });
     const qs = new URLSearchParams(req.query as any).toString();
 
+    authBridgeLog('request', req, {
+        action: 'google',
+        outcome: 'google-redirect',
+        queryString: qs
+    });
+
     res.redirect(
-        `${process.env.OAUTH_HOST}/google/auth${qs ? `?${qs}` : ''}`
+        `${config.oauthUrl}/google/auth${qs ? `?${qs}` : ''}`
     );
 });
 
@@ -158,7 +151,7 @@ passthroughRoutes.forEach((path) => {
 app.post(`${config.route.prefix}/login`, async (req, res) => {
     try {
         const oauthRes = await fetch(
-            `${process.env.OAUTH_HOST}/local/auth`,
+            `${config.oauthUrl}/local/auth`,
             {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
@@ -202,5 +195,5 @@ app.post(`${config.route.prefix}/login`, async (req, res) => {
 });
 
 app.listen(config.port, () => {
-    console.log(`auth-bridge listening on ${config.port}`);
+    console.log('[BOOT] Loaded configuration:', JSON.stringify(config, null, 2));
 });

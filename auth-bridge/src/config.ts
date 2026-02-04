@@ -1,14 +1,8 @@
-import {isProduction, loadEnv} from "./lib/env";
+import dotenv from 'dotenv';
+dotenv.config();
 
-loadEnv();
-
-if (!isProduction()) {
-    if (process.env.COOKIE_DOMAIN && !process.env.COOKIE_DOMAIN.startsWith('.')) {
-        console.warn(
-            `[auth] Dev COOKIE_DOMAIN "${process.env.COOKIE_DOMAIN}" is not a parent domain. ` +
-            `Cross-subdomain cookies will not work.`
-        );
-    }
+function isProduction() {
+    return process.env.APP_ENV === 'live'
 }
 
 export interface AuthCookieConfig {
@@ -23,6 +17,7 @@ export interface AuthCookieConfig {
 export type configInfo = {
     port: number;
     frontendUrl: string;
+    oauthUrl: string;
     route: {
         prefix: string;
     },
@@ -38,6 +33,7 @@ export type configInfo = {
 export const config: configInfo = {
     port: (process.env.PORT === undefined)? 3002: Number(process.env.PORT),
     frontendUrl: (process.env.FRONTEND_HOST === undefined)?'http://localhost:5173':process.env.FRONTEND_HOST,
+    oauthUrl: (process.env.OAUTH_HOST === undefined)?'http://localhost:3002':process.env.OAUTH_HOST,
         /**
      * Routes access
      */
