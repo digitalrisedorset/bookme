@@ -1,4 +1,5 @@
 import {Profile} from "passport-google-oauth20";
+import {config} from "../config"
 
 export interface KeystoneUser {
     id: string;
@@ -15,7 +16,7 @@ type KeystoneUpdateUserResponse = {
 }
 
 export const createOrUpdateUser = async (profile: Profile) => {
-    const url = process.env.KEYSTONE_GRAPHQL_URL;
+    const url = config.keystone.graphqlUrl;
     if (!url) {
         throw new Error('❌ KEYSTONE_GRAPHQL_URL is not defined in the environment.');
     }
@@ -24,7 +25,7 @@ export const createOrUpdateUser = async (profile: Profile) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.KEYSTONE_SERVICE_TOKEN}`
+            'Authorization': `Bearer ${config.keystone.serviceToken}`
         },
         body: JSON.stringify({
             query: `
@@ -58,11 +59,11 @@ type KeystoneUserResponse = {
 }
 
 export const getKeystoneUserById = async (id: string) => {
-    const keystoneRes = await fetch(`${process.env.KEYSTONE_GRAPHQL_URL}`, {
+    const keystoneRes = await fetch(`${config.keystone.graphqlUrl}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.KEYSTONE_SERVICE_TOKEN}`
+            'Authorization': `Bearer ${config.keystone.serviceToken}`
         },
         body: JSON.stringify({
             query: `
@@ -96,11 +97,11 @@ type AuthentifiedKeystoneUserResponse = {
 }
 
 export async function fetchKeystoneUserByEmailAndPassword(email: string, password: string) {
-    const res = await fetch(`${process.env.KEYSTONE_GRAPHQL_URL}`, {
+    const res = await fetch(`${config.keystone.graphqlUrl}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.KEYSTONE_SERVICE_TOKEN}`,
+            Authorization: `Bearer ${config.keystone.serviceToken}`,
         },
         body: JSON.stringify({
             query: `

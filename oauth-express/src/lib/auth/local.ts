@@ -21,11 +21,10 @@ export const initLocalStrategy = (passport: PassportStatic) => {
                 }
                 return done(null, user);
             } catch (err) {
-                oauthLog('strategy', null as any, {
+                const cause = err instanceof Error ? err.message : String(err);
+                oauthLog('strategy', null, {
                     stage: 'keystone-error',
-                    error: err?.message,
-                    cause: err?.cause,
-                    code: err?.code,
+                    cause
                 });
                 return done(err);
             }

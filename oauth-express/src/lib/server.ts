@@ -2,7 +2,6 @@ import express, {Application, NextFunction} from 'express'
 import { config } from "../config";
 import { ErrorWrapper } from "../error-handler";
 import {initialiseApp} from "./initilisers";
-import {oauthLog} from "./log";
 
 export const startServer = async () => {
     const app: Application = express()
@@ -13,7 +12,7 @@ export const startServer = async () => {
 
     try {
         app.listen(port, () => {
-            console.log(`Server running on port ${port}`)
+            console.log('[BOOT] Loaded configuration:', JSON.stringify(config, null, 2));
         })
     } catch (error: unknown) {
         errorWrapper.handle(error)

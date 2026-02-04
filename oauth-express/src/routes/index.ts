@@ -6,6 +6,7 @@ import {setupLoginWithCredentialsRoutes} from "./loginWithCredentialsRouter";
 import {oauthLog} from "../lib/log";
 
 export default (app: Application) => {
+    console.log('[OAUTH] Entry reached');
     setupGenericAuthRoutes(app)
     setupLoginWithCredentialsRoutes(app)
     setupGoogleAuthRoutes(app)
