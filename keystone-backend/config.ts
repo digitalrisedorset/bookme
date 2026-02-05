@@ -36,7 +36,8 @@ export type configInfo = {
         offerShampoo: boolean,
         scheduleWeekSpan: number
     },
-    ratelimit: number
+    ratelimit: number,
+    defaultVenue: string
 }
 
 const config: configInfo = {
@@ -72,7 +73,8 @@ const config: configInfo = {
         offerShampoo: true,
         scheduleWeekSpan: 14
     },
-    ratelimit: (process.env.RATE_LIMIT === undefined)?100:parseInt(process.env.RATE_LIMIT)
+    ratelimit: (process.env.RATE_LIMIT === undefined)?100:parseInt(process.env.RATE_LIMIT),
+    defaultVenue: process.env.DEFAULT_VENUE
 }
 
 export { config as keystoneconfig}

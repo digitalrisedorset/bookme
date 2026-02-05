@@ -10,17 +10,13 @@ import {getRequestIp} from "../lib/request";
 
 async function addToCart(
   root: any,
-  { eventId, shampoo, eventTypeId, userId, turnstileToken }: { eventId: string, shampoo: number, eventTypeId: string, userId: string, turnstileToken: string },
+  { eventId, shampoo, eventTypeId, userId }: { eventId: string, shampoo: number, eventTypeId: string, userId: string },
   context: Context
 ): Promise<string> {
   const ip = getRequestIp(context.req);
-  const isHuman = await verifyTurnstileToken(turnstileToken, ip);
 
-  console.log('addToCart', {eventId, shampoo, eventTypeId, turnstileToken, ip, isHuman})
+  console.log('addToCart', {eventId, shampoo, eventTypeId, ip})
 
-  if (!isHuman) {
-    throw new Error("Human verification failed");
-  }
   // 1. Query the current user see if they are signed in
   if (!userId) {
     throw new Error('You must be logged in to do this!');

@@ -1,12 +1,8 @@
-import {list, graphql} from "@keystone-6/core";
-import {allowAll, denyAll} from "@keystone-6/core/access";
+import {list} from "@keystone-6/core";
+import {allowAll} from "@keystone-6/core/access";
 import {password, text, checkbox, relationship, calendarDay, integer, select} from "@keystone-6/core/fields";
-import addToCart from "../mutations/addToCart";
-import checkout from "../mutations/checkout";
-import updateEventAndRemoveOverlappingEvent from "../mutations/removeOverlappingEvent";
-import calculatePrice from "../mutations/calculatePrice";
-import calculateEventDuration from "../mutations/calculateEventDuration";
-import venueEventTypeGroups from "../mutations/venueEventTypeGroups";
+import {keystoneconfig} from '../config'
+import {findVenueByCode, findVenueByName} from "../lib/venue";
 
 const commonPasswords = [
     "password", "123456", "123456789", "qwerty", "abc123", "password1", "123123"
@@ -118,11 +114,11 @@ export const User = list({
     },
     hooks: {
         resolveInput: async ({ item, resolvedData, context }) => {
-            const venue = resolvedData?.venue?.connect?.id || item?.venueId;
+            let venue = resolvedData?.venue?.connect?.id || item?.venueId;
 
             if (venue === null) {
-                console.log('No venue exist for the the user')
-                return resolvedData;
+                venue = findVenueByCode(context, keystoneconfig.defaultVenue)
+                resolvedData['venue'] = { connect: { id: venue.id} }
             }
 
             if (context.query.EventTypeGroup === undefined) {

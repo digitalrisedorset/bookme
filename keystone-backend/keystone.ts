@@ -60,9 +60,9 @@ export default withAuth<TypeInfo>(
         ui: {
             //isAccessAllowed: ()=> true,
             // only admins can view the AdminUI
-            // isAccessAllowed: (context) => {
-            //     return context.session?.data?.isAdmin ?? false
-            // },
+            //isAccessAllowed: (context) => {
+                //return context.session?.data?.isAdmin ?? false
+            //},
              isAccessAllowed: ({ req }) => {
                 return req.headers.authorization === `Bearer ${process.env.KEYSTONE_SERVICE_TOKEN}`;
              }

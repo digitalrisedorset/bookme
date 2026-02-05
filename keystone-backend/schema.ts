@@ -22,6 +22,8 @@ import {Role} from "./schemas/Role";
 import venueEventTypeGroups from "./mutations/venueEventTypeGroups";
 import {EventMedia} from "./schemas/EventMedia";
 import {graphql} from "@keystone-6/core";
+import {findVenueByCode, findVenueByName} from "./lib/venue";
+import {keystoneconfig} from "./config";
 
 export type Session = {
     itemId: string
@@ -69,11 +71,19 @@ export const extendGraphqlSchema = graphql.extend(base => ({
                     });
                 }
 
+                const venue = await findVenueByCode(context, keystoneconfig.defaultVenue)
+                if (!venue) {
+                    throw new Error(`Invalid or unknown venue: ${keystoneconfig.defaultVenue}`);
+                }
+
                 return await context.db.User.createOne({
                     data: {
                         email,
                         name,
                         provider,
+                        venue: {
+                            connect: { id: venue?.id },
+                        },
                     },
                 });
             }
@@ -85,10 +95,7 @@ export const extendGraphqlSchema = graphql.extend(base => ({
                 eventId: graphql.arg({ type: graphql.nonNull(graphql.ID) }),
                 shampoo: graphql.arg({ type: graphql.Int }),
                 eventTypeId: graphql.arg({ type: graphql.nonNull(graphql.ID) }),
-                userId: graphql.arg({ type: graphql.nonNull(graphql.ID) }),
-                turnstileToken: graphql.arg({
-                    type: graphql.nonNull(graphql.String),
-                }),
+                userId: graphql.arg({ type: graphql.nonNull(graphql.ID) })
             },
             async resolve(root, args, context) {
                 return addToCart(root, args, context);
