@@ -194,6 +194,43 @@ app.post(`${config.route.prefix}/login`, async (req, res) => {
     }
 });
 
+app.post(`${config.route.security}/verify-human`, async (req, res) => {
+    const { token } = req.body;
+
+    authBridgeLog('request', req, {
+        action: 'security',
+        token
+    });
+
+    const response = await fetch(
+        'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                secret: config.security.cloudflare.siteKey,
+                response: token
+            }),
+        }
+    );
+
+    const result = await response.json();
+
+    authBridgeLog('request', req, {
+        action: 'security',
+        result
+    });
+
+    if (!result.success) {
+        return res.status(403).json({ ok: false });
+    }
+
+    // ✅ Cloudflare confirmed this browser passed
+    return res.json({ ok: true });
+});
+
 app.listen(config.port, () => {
     console.log('[BOOT] Loaded configuration:', JSON.stringify(config, null, 2));
 });

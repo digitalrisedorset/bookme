@@ -20,13 +20,19 @@ export type configInfo = {
     oauthUrl: string;
     route: {
         prefix: string;
+        security: string;
     },
     debug: {
         enabled?: boolean;
         traceFilter?: string;
     },
     auth: {
-        cookie: AuthCookieConfig
+        cookie: AuthCookieConfig;
+    },
+    security: {
+        cloudflare: {
+            siteKey: string;
+        }
     }
 }
 
@@ -38,7 +44,8 @@ export const config: configInfo = {
      * Routes access
      */
     route: {
-        prefix: '/auth'
+        prefix: '/auth',
+        security: '/security'
     },
     debug: {
         enabled: process.env.AUTH_DEBUG === '1',
@@ -62,6 +69,11 @@ export const config: configInfo = {
                 path: '/',
             },
     },
+    security: {
+        cloudflare: {
+            siteKey: process.env.CLOUDFLARE_TURNSTILE_SECRET?? '',
+        }
+    }
 }
 
 
