@@ -2,15 +2,16 @@ import {PassportStatic} from 'passport';
 import { Strategy as GoogleStrategy, Profile } from 'passport-google-oauth20';
 import dotenv from 'dotenv';
 import {createOrUpdateUser, KeystoneUser} from "../keystone";
+import {config} from "../../config";
 
 dotenv.config();
 
 export const initGoogleStrategy = (passport: PassportStatic) => {
     passport.use(new GoogleStrategy(
         {
-            clientID: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-            callbackURL: '/google/auth/callback',
+            clientID: config.googleClientId,
+            clientSecret: config.googleClientSecret,
+            callbackURL: `${config.bridgeUrl}/google/auth/callback`,
         },
         async (_accessToken, _refreshToken, profile: Profile, done) => {
             try {

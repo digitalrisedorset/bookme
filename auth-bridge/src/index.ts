@@ -8,6 +8,7 @@ import {clearAuthCookie, setAuthCookie} from "./auth/cookiePolicy";
 type OAuthLoginResult = { token: string; user?: unknown }
 
 const app: Application = express();
+app.set('trust proxy', true);
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
