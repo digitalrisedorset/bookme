@@ -28,7 +28,7 @@ export class GoogleAuthHandler implements OAuthControllerInterface {
                 outcome: 'issued',
             });
 
-            const redirectUrl = `${config.frontendUrl}/auth-callback?token=${token}`;
+            const redirectUrl = `${config.frontendUrl}/auth/auth-callback?token=${token}`;
             res.redirect(redirectUrl);
         })(req, res, next)
     }

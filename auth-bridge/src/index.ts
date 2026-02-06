@@ -80,17 +80,13 @@ app.post(`${config.route.prefix}/refresh-session`, async (req: Request, res: Res
     }
 });
 
-const redirectRoutes = [
-    '/login',
-    '/google/callback',
-];
-
-redirectRoutes.forEach((path) => {
-    app.get(`${config.route.prefix}${path}`, (req, res) => {
-        res.redirect(`${config.oauthUrl}/auth${path}`);
-    });
+app.get(`${config.route.prefix}/login`, (_req, res) => {
+    res.redirect(`${config.oauthUrl}/auth/login`);
 });
 
+/*
+* First API call made by the frontend to initiate Google Authentication process
+**/
 app.get(`${config.route.prefix}/google`, (req, res) => {
     const qs = new URLSearchParams(req.query as any).toString();
 

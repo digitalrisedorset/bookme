@@ -11,7 +11,7 @@ export const initGoogleStrategy = (passport: PassportStatic) => {
         {
             clientID: config.googleClientId,
             clientSecret: config.googleClientSecret,
-            callbackURL: `${config.bridgeUrl}/google/auth/callback`,
+            callbackURL: '/google/auth/callback',
         },
         async (_accessToken, _refreshToken, profile: Profile, done) => {
             try {

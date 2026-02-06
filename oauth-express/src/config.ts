@@ -14,7 +14,6 @@ export type configInfo = {
         serviceToken: string;
     },
     frontendUrl: string;
-    bridgeUrl: string;
     route: {
         genericApiPrefix: string;
         googleApiPrefix: string;
@@ -31,7 +30,6 @@ export type configInfo = {
 export const config: configInfo = {
     port: (process.env.PORT === undefined)? 3002: Number(process.env.PORT),
     frontendUrl: (process.env.FRONTEND_HOST === undefined)?'http://localhost:3001':process.env.FRONTEND_HOST,
-    bridgeUrl: (process.env.BRIDGE_HOST === undefined)?'http://localhost:3001':process.env.BRIDGE_HOST,
     googleClientId: (process.env.GOOGLE_CLIENT_ID === undefined)? 'client63839394': process.env.GOOGLE_CLIENT_ID,
     googleClientSecret: (process.env.GOOGLE_CLIENT_SECRET === undefined)? 'client63839394_secret': process.env.GOOGLE_CLIENT_SECRET,
     jwtSecret: process.env.JWT_SECRET!,
