@@ -28,6 +28,7 @@ export type configInfo = {
     },
     auth: {
         cookie: AuthCookieConfig;
+        returnSlug: string
     },
     security: {
         cloudflare: {
@@ -68,6 +69,7 @@ export const config: configInfo = {
                 maxAge: 7 * 24 * 60 * 60 * 1000,
                 path: '/',
             },
+        returnSlug: process.env.RETURN_TO?? ''
     },
     security: {
         cloudflare: {

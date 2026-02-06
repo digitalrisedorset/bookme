@@ -127,7 +127,7 @@ app.get(`${config.route.prefix}/auth-callback`, (req, res) => {
         outcome: 'cookie-set',
     });
 
-    res.redirect(returnTo || config.frontendUrl);
+    res.redirect(returnTo || `${config.frontendUrl}/${config.auth.returnSlug}`);
 });
 
 const passthroughRoutes = [
